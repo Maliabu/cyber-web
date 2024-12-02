@@ -38,11 +38,6 @@ import TimerCountDown from '../resources/timer'
 export default function HomePage(){
     return(
         <div>
-            <div className="px-8 py-4 flex flex-row border gap-20">
-                <h5>Shedule an <br/> Interview with our mentors</h5>
-                <span className="p-4 rounded-md bg-secondary bg-gradient-to-b">Dont Know why you should take these classes? Let Us help you!</span>
-                <Button className="float-right"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
-            </div>
       <div className=" p-16 items-center">
         <div className="float-right">
             <TimerCountDown/>
@@ -73,6 +68,7 @@ export default function HomePage(){
               </Select>
             </div>
           </div>
+          <Button className="my-4">Sign Up My Account!</Button>
         </form>
         <a
             className="flex h-full my-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
@@ -92,9 +88,13 @@ export default function HomePage(){
         </a>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" className="hidden">Cancel</Button>
-        <Button>Sign Me Up!</Button>
+        <p>Or Sign Up with Google</p>
+        <Button variant="outline"> Google</Button>
       </CardFooter>
+    </Card>
+    <Card className="border flex justify-between rounded-2 p-6 mt-2">
+        <p>Articles by WarrenMu</p>
+        <Button variant="outline"> Go to blog</Button>
     </Card>
     </div>
       <div className="pb-16">
@@ -128,7 +128,7 @@ export default function HomePage(){
     >
     <div className="px-16 pt-16">
     <h1 className="display-1">What's Next in Cyber Security</h1>
-    <div className="flex flex-row">
+    <div className="flex flex-row mt-4">
         <p className="bg-secondary p-2 rounded">Hacking</p><p className="mx-6 bg-secondary p-2 rounded">Cyber Security</p>
         <p className="bg-secondary p-2 rounded">Training</p><p className="mx-6 bg-secondary p-2 rounded">assessment</p>
     </div>
@@ -173,13 +173,6 @@ export default function HomePage(){
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-
-    <div className="px-8 py-6 gap-20 flex flex-row border justify-end">
-                <span className="w-full text-end">
-                <h5>Subscribe</h5>
-                    Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</span>
-                <Button className="float-right"><Heart width={16} height={16}/> Subscribe</Button>
-            </div>
     </div>
     )
 }

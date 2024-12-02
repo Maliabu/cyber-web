@@ -13,7 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { NotebookPen, Search } from "lucide-react";
+import { Calendar, ChevronDown, NotebookPen, Search } from "lucide-react";
  
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -24,30 +24,30 @@ const components: { title: string; href: string; description: string }[] = [
   },
   {
     title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    href: "/offers",
     description:
       "For sighted users to preview content available behind a link.",
   },
   {
     title: "Progress",
-    href: "/docs/primitives/progress",
+    href: "/offers",
     description:
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
   },
   {
     title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
+    href: "/offers",
     description: "Visually or semantically separates content.",
   },
   {
     title: "Tabs",
-    href: "/docs/primitives/tabs",
+    href: "/offers",
     description:
       "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
   },
   {
     title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    href: "/offers",
     description:
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
@@ -72,20 +72,20 @@ export default function Menu() {
       </NavigationMenuTrigger>
       <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[300px] lg:w-[300px]">
-              <ListItem href="/docs" title="Introduction">
+              <ListItem href="/offers" title="Introduction">
                 Re-usable components built using Radix UI and Tailwind CSS.
               </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
+              <ListItem href="/offers" title="Installation">
                 How to install dependencies and structure your app.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
+              <ListItem href="/offers" title="Typography">
                 Styles for headings, paragraphs, lists...etc
               </ListItem>
             </ul>
           </NavigationMenuContent>
       </NavigationMenuItem>
       </NavigationMenuList></NavigationMenu>
-      <NavigationMenu className="bg-secondary p-2 rounded-sm">
+      <NavigationMenu className=" rounded-sm">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Get Started with our Blog</NavigationMenuTrigger>
@@ -95,7 +95,7 @@ export default function Menu() {
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
+                    href="/blog"
                   >
                     <Image
             aria-hidden
@@ -114,13 +114,13 @@ export default function Menu() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Introduction">
+              <ListItem href="/blog" title="Introduction">
                 Re-usable components built using Radix UI and Tailwind CSS.
               </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
+              <ListItem href="/blog" title="Installation">
                 How to install dependencies and structure your app.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
+              <ListItem href="/blog" title="Typography">
                 Styles for headings, paragraphs, lists...etc
               </ListItem>
             </ul>
@@ -152,8 +152,13 @@ export default function Menu() {
       </NavigationMenuList>
     </NavigationMenu>
     <Search height={16} width={16}>search</Search>
-    <Button><NotebookPen width={16} height={16}/> Register</Button>
+    <Button><ChevronDown width={16} height={16}/> Register</Button>
       </main>
+      <div className="px-8 py-4 flex flex-row justify-between border">
+                <h5>Shedule an <br/> Interview with our mentors</h5>
+                <p className="p-2 rounded-md bg-secondary bg-gradient-to-b">Dont Know why you should take these classes? Let Us help you!</p>
+                <Button className="float-right"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
+            </div>
     </div>
   );
 }

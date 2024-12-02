@@ -5,11 +5,19 @@ import {
   NavigationMenu,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu"
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
 
 export default function Footer() {
   return (
       <footer className="grid justify-center">
-        <div className="grid flex flex-row gap-20 px-12 justify-center">
+      <div className="px-8 py-6 gap-20 flex flex-row border justify-between">
+                  <span className="w-fulh">
+                  <h5>Subscribe</h5>
+                      Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</span>
+                  <Button className="float-right"><Heart width={16} height={16}/> Subscribe</Button>
+              </div>
+        <div className="grid flex flex-row gap-10 px-12 justify-center">
         <div className="row-start-3">
           Could be Helpful: Links
           <NavigationMenu>
@@ -118,7 +126,7 @@ export default function Footer() {
             </NavigationMenu>
         </div>
         </div>
-        <div className=" justify-items-center p-16">
+        <div className=" p-16">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -164,14 +172,19 @@ export default function Footer() {
           />
           twitter
         </a></div>
-        <div className="p-8 grid flex flex-row border border-top">
+        <div className="p-8 grid flex flex-row justify-between border border-top">
           <div className="row-start-4">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>
-          <div className="row-start-4 justify-end">
+          <div className="row-start-4">
+          <div className="flex d-flex">
+          <p>News</p>
+          <p className="mx-6">Events</p>
+          <p>Blog</p>
+          <p className="mx-6">Contact Us</p>
           <p>Privacy Policy | T&Cs</p>
           </div>
-        </div>
+        </div></div>
       </footer>
   );
 }
