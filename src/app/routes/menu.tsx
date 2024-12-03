@@ -56,7 +56,7 @@ const components: { title: string; href: string; description: string }[] = [
 export default function Menu() {
   return (
     <div className="grid font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-row gap-20 p-6 items-center">
+      <main className="flex flex-row justify-between gap-20 px-8 py-4 items-center">
       <Image
             aria-hidden
             src="/next.svg"

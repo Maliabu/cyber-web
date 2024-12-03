@@ -23,13 +23,13 @@ export default function Blog(){
         <>
         <Menu/>
         <div className="p-16">
-        <div className="float-right -mt-12">
-      <Card className="w-[350px]">
+        <div className="float-right -mt-12 -mx-6">
+      <Card className="w-[300px]">
       <CardHeader>
-        <CardTitle>Popular Topics</CardTitle>
+        <CardTitle>Recommended Articles</CardTitle>
       </CardHeader>
       <CardContent>
-        <a className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+        <a className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -91,7 +91,7 @@ export default function Blog(){
             </NavigationMenuLink>
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
-      <div className="p-16 border rounded-xl mt-4"><Image
+      <div className="p-16 border rounded-xl mt-4 w-3/4"><Image
                 aria-hidden
                 src="/next.svg"
                 alt="File icon"
@@ -103,7 +103,9 @@ export default function Blog(){
       <h6 className="text-wrap lh-1 mt-16">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <h6 className="text-wrap lh-1 mt-6">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <h6 className="text-wrap lh-1 mt-6">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
-      <Button variant="outline" className="mt-8">0 | <ThumbsUp width={16} height={16}/></Button><Button variant="outline" className="mt-8 mx-2"><ThumbsDown width={16} height={16}/> | 0</Button>
+      <div className="flex flex-row mt-16">
+      <Button variant="outline" className="">0 | <ThumbsUp width={14} height={14}/></Button><Button variant="outline" className="mx-2"><ThumbsDown width={14} height={14}/> | 0</Button>
+      </div>
         <form>
           <div className="grid w-1/2 mt-4 items-center gap-4">
             <div className="flex flex-col-4 space-y-1.5">
@@ -111,7 +113,7 @@ export default function Blog(){
             </div>
           </div>
         </form>
-        <div className="p-8 w-1/2 mt-8 bg-secondary rounded-md">
+        <div className="p-8 w-1/2 mt-18 bg-secondary rounded-md hidden">
         <p className=" flex flex-row">COMMENTS <ChevronDown width={20} height={20} className="p-1 mx-8"/></p>
         </div>
       </div>
