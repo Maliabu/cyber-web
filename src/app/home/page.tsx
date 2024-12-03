@@ -71,7 +71,7 @@ export default function HomePage(){
           <Button className="my-4">Sign Up My Account!</Button>
         </form>
         <a
-            className="flex h-full my-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+            className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden

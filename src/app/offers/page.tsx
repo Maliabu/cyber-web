@@ -166,7 +166,7 @@ export default function Services(){
                 <p>Outline 2</p>
                 <p>Outline 3</p>
                 <p>Outline 4</p></div>
-            <Button>Learn More</Button>
+            <Button>Enroll</Button>
             <Button variant="secondary" className="mx-4">Mentor</Button>
                 </CardContent>
               </Card>
