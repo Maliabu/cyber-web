@@ -22,13 +22,13 @@ export default function Footer() {
           Could be Helpful: Links
           <NavigationMenu>
             <ul>
-          <ListItem href="/docs" title="Blog">
+          <ListItem href="/blog" title="Blog">
                 Cyber Security Best Practices
               </ListItem>
-              <ListItem href="/docs/installation" title="Blog">
+              <ListItem href="/docs/blog" title="Blog">
                 News and Trending
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Blog">
+              <ListItem href="/blog" title="Blog">
                 Event Recaps
               </ListItem> </ul>
             </NavigationMenu>
@@ -36,13 +36,13 @@ export default function Footer() {
             Try these here:</h6>
           <NavigationMenu>
             <ul>
-          <ListItem href="/docs" title="Class">
+          <ListItem href="/offers" title="Class">
                 Cyber Security Training
               </ListItem>
-              <ListItem href="/docs/installation" title="Service">
+              <ListItem href="/offers" title="Service">
                 Vulnerability Assessment
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Offer">
+              <ListItem href="/offers" title="Offer">
                 Hacking Services
               </ListItem> </ul>
             </NavigationMenu>
@@ -51,13 +51,13 @@ export default function Footer() {
           Recommended
           <NavigationMenu>
             <ul>
-          <ListItem href="/docs" title="Introduction">
+          <ListItem href="/offers" title="Introduction">
                 Re-usable components built using Radix UI and Tailwind CSS.
               </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
+              <ListItem href="/offers" title="Installation">
                 How to install dependencies and structure your app.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
+              <ListItem href="/offers" title="Typography">
                 Styles for headings, paragraphs, lists...etc
               </ListItem> </ul>
             </NavigationMenu>
