@@ -113,7 +113,7 @@ export default function Blog(){
             </div>
           </div>
         </form>
-        <div className="p-8 w-1/2 mt-18 bg-secondary rounded-md hidden">
+        <div className="p-8 w-1/2 mt-18 bg-secondary rounded-md">
         <p className=" flex flex-row">COMMENTS <ChevronDown width={20} height={20} className="p-1 mx-8"/></p>
         </div>
       </div>
