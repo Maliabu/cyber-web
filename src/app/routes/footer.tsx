@@ -22,13 +22,13 @@ export default function Footer() {
           Could be Helpful: Links
           <NavigationMenu>
             <ul>
-          <ListItem href="/docs" title="Blog">
+          <ListItem href="/blog" title="Blog">
                 Cyber Security Best Practices
               </ListItem>
-              <ListItem href="/docs/installation" title="Blog">
+              <ListItem href="/docs/blog" title="Blog">
                 News and Trending
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Blog">
+              <ListItem href="/blog" title="Blog">
                 Event Recaps
               </ListItem> </ul>
             </NavigationMenu>
