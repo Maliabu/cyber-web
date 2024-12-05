@@ -25,6 +25,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { db } from "@/drizzle/db"
+import { usersTable } from "@/drizzle/schema"
 
 const invoices = [
     {
@@ -47,7 +49,8 @@ const invoices = [
     }
 ]
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const dashboardUsers  =  await db.query.usersTable.findMany()
   return (
     <div className="px-8 py-4">
         <div>
@@ -62,7 +65,9 @@ export default function AdminPage() {
       </TabsList>
       <TabsContent value="dashboard">
         <div className="p-6 w-full grid grid-cols-4 gap-4">
-            <div className="p-8 border rounded-2xl"><h3>0</h3><p>Users</p></div>
+            <div className="p-8 border rounded-2xl">
+              <h3>
+              { dashboardUsers.length}</h3><p>Users</p></div>
             <div className="p-8 border rounded-2xl"><h3>0</h3><p>Mentors</p></div>
             <div className="p-8 border rounded-2xl"><h3>0</h3><p>Schedules</p></div>
             <div className="p-8 border rounded-2xl"><h3>0</h3><p>Enrollments</p></div>

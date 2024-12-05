@@ -1,0 +1,1 @@
+ALTER TABLE "schedules_table" ADD COLUMN "timezone" text NOT NULL;
