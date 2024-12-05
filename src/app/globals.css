@@ -7,16 +7,16 @@ body {
 }
 
 @layer base {
-  :root {
+  .light {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --primary: 20 80% 50%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
+    --secondary: 20 80.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
@@ -24,6 +24,7 @@ body {
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
+    --darker: 244 10% 5%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
@@ -34,14 +35,14 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
-  .dark {
+  :root {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --primary: 10 70% 50%;
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
@@ -77,9 +78,19 @@ h1.display-1{
   line-height: 50px !important;
 }
 h5{
-  font-size: 23px !important;
-  font-weight: bolder !important;
+  font-size: 22px !important;
+  font-weight: bold !important;
   line-height: 23px !important;
+}
+h6{
+  font-size: 25px !important;
+  font-weight: bolder !important;
+  line-height: 20px !important;
+}
+.logo-text{
+  font-size: 15px !important;
+  font-weight: 600px !important;
+  line-height: 14px !important;
 }
 h3{
   font-size: 30px !important;
@@ -87,11 +98,18 @@ h3{
   line-height: 25px !important;
 }
 p{
-  font-size: 14px !important;
+  font-size: 16px !important;
+  font-weight: 350 !important;
+}
+button{
+  font-size: 15px !important;
   font-weight: 550 !important;
+  /* border: 1px solid rgb(244, 99, 50) !important; */
+  border-radius: 5px !important;
+  color: white !important;
 }
 span{
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-weight: 500 !important;
 }
 .bolder{
@@ -102,9 +120,30 @@ h6{
   font-weight: 400 !important;
 }
 a{
-  font-size: 14px !important;
+  font-size: 15px !important;
   font-weight: 600 !important;
+  color: rgb(244, 99, 50) !important;
 }
 .max-w-sm{
   max-width: 80% !important;
+}
+.backdrop{
+  backdrop-filter: blur(30px) !important;
+}
+.back-image{
+  background-image: url("images/blue.png") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  overflow-x: hidden !important;
+}
+.bg-darker{
+  background-color: rgb(12, 12, 12) !important;
+}
+.nav-item{
+  font-size: 16px !important;
+  font-weight: 550 !important;
+}
+.bg-light{
+  /* color: black !important; */
+  background-color: rgba(28, 28, 28, 0.556);
 }

@@ -1,7 +1,7 @@
 import * as React from "react"
 import Image from "next/image";
 import Link from "next/link"
- 
+import Logo from '../images/logo.png'
 import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
@@ -56,18 +56,21 @@ const components: { title: string; href: string; description: string }[] = [
 export default function Menu() {
   return (
     <div className="grid font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-row justify-between gap-20 px-8 py-4 items-center">
-      <Image
+      <main className="flex flex-row justify-between gap-4 px-8 py-4 items-center">
+        <div className="flex flex-row w-3/4">
+          <Image
             aria-hidden
-            src="/next.svg"
-            alt="File icon"
-            width={100}
-            height={100}
+            src={Logo}
+            alt="logo"
+            width={40}
+            height={35}
           />
+          <h6 className="mx-4 logo-text">WAREN'S <br/>CYBERSECURITY <br/>LTD</h6>
+          </div>
       <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-      <NavigationMenuTrigger className="border">
+      <NavigationMenuTrigger className="border hidden">
         Popular classes
       </NavigationMenuTrigger>
       <NavigationMenuContent>
@@ -151,14 +154,16 @@ export default function Menu() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-    <Search height={16} width={16}>search</Search>
+    <Search height={25} width={25}>search</Search>
     <Button><ChevronDown width={16} height={16}/> Register</Button>
       </main>
-      <div className="px-8 py-4 flex flex-row justify-between border">
-                <h5>Shedule an <br/> Interview with our mentors</h5>
-                <p className="p-2 rounded-md bg-secondary bg-gradient-to-b">Dont Know why you should take these classes? Let Us help you!</p>
+      <div className="">
+        <div className="px-8 py-4 flex flex-row justify-between">
+                <h5 className="hidden">Shedule an <br/> Interview with our mentors</h5>
+                <p className="p-2 rounded-md bg-gradient-to-b hidden">Dont Know why you should take these classes? Let Us help you!</p>
                 <Button className="float-right"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
-            </div>
+          </div>
+        </div>
     </div>
   );
 }

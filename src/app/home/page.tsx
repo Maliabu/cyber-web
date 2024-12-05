@@ -37,8 +37,9 @@ import TimerCountDown from '../resources/timer'
 
 export default function HomePage(){
     return(
-        <div>
-      <div className=" p-16 items-center">
+      <div className="back-image">
+      <div className=" p-20 items-center">
+        <div className="">
         <div className="float-right">
             <TimerCountDown/>
       <Card className="w-[350px]">
@@ -75,7 +76,7 @@ export default function HomePage(){
             href="/">
             <Image
                 aria-hidden
-                src="/file.svg"
+                src="/cyber.png"
                 alt="File icon"
                 width={16}
                 height={16}/>
@@ -92,7 +93,7 @@ export default function HomePage(){
         <Button variant="outline"> Google</Button>
       </CardFooter>
     </Card>
-    <Card className="border flex justify-between rounded-2 p-6 mt-2">
+    <Card className="border flex justify-between back-image rounded-2 p-6 mt-2">
         <p>Articles by WarrenMu</p>
         <Button variant="outline"> Go to blog</Button>
     </Card>
@@ -112,13 +113,14 @@ export default function HomePage(){
             </NavigationMenuLink>
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
-      <h1 className="display-1">Learn Cyber Security</h1>
+      <h1 className="display-1 py-16">Learn Cyber Security</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <h6>It's also about preventing unauthorised access <br/>to the vast amounts of personal information <br/>we store on these devices, and online.</h6>
       </div>
       <Button><BookHeart width={16} height={16}/> Take a look at our courses</Button>
-      <Button variant="outline" className="mx-6">Why ours are the best <ArrowRight width={16} height={16}/> </Button>
+      <Button variant="outline" className="mx-6 bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button>
+    </div>
     </div>
       <Carousel
       opts={{

@@ -5,9 +5,12 @@ import Footer from "./routes/footer";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
+    <div className="">
       <Menu/>
       <HomePage/>
       <Footer/>
-    </div>)
+    </div>
+    </div>
+  )
 }
