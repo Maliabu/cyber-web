@@ -83,6 +83,7 @@ export const enrollmentsTable = pgTable('enrollments_table', {
 
 export const schedulesTable = pgTable('schedules_table', {
   id: serial('id').primaryKey(),
+  timezone: text('timezone').notNull(),
   userId: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),

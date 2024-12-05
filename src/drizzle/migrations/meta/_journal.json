@@ -15,6 +15,13 @@
       "when": 1733234075451,
       "tag": "0001_warm_phalanx",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1733432752651,
+      "tag": "0002_typical_junta",
+      "breakpoints": true
     }
   ]
 }
