@@ -11,7 +11,7 @@ import { Heart } from "lucide-react";
 export default function Footer() {
   return (
       <footer className="grid justify-center">
-      <div className="px-8 py-6 gap-20 flex flex-row border justify-between">
+      <div className="px-8 py-6 gap-20 back-image flex flex-row border justify-between">
                   <span className="w-fulh">
                   <h5>Subscribe</h5>
                       Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</span>
@@ -172,7 +172,7 @@ export default function Footer() {
           />
           twitter
         </a></div>
-        <div className="p-8 grid flex flex-row justify-between border border-top">
+        <div className="px-8 py-4 grid flex flex-row justify-between border border-top">
           <div className="row-start-4">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>

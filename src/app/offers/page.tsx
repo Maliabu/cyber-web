@@ -110,9 +110,9 @@ export default function Services(){
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
       <div className="p-16 bg-primary rounded-xl mt-4">
-      <h1 className="display-1 text-secondary">Our Cyber Classes</h1>
-      <p className="py-6 text-secondary">The easy way!</p>
-      <h6 className="text-wrap lh-1 text-secondary">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h1 className="display-1">Our Cyber Classes</h1>
+      <p className="py-6">The easy way!</p>
+      <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <Button variant="outline" className="mt-8"><BookHeart width={16} height={16}/> Take a look at our courses</Button>
       </div>
       <Carousel
@@ -128,7 +128,7 @@ export default function Services(){
         <p className="bg-secondary p-2 rounded">Training</p><p className="mx-6 bg-secondary p-2 rounded">assessment</p>
     </div>
     </div>
-      <CarouselContent className="p-8">
+      <CarouselContent className="p-8 back-image">
         {Array.from({ length: 4 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
             <div className="p-1">
