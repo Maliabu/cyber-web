@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/table"
 import { db } from "@/drizzle/db"
 import { usersTable } from "@/drizzle/schema"
+import { BookCheck, GraduationCap, LayoutDashboardIcon, Play, User, Users } from "lucide-react"
 
 const invoices = [
     {
@@ -48,23 +49,36 @@ const invoices = [
       paymentMethod: "Bank Transfer",
     }
 ]
+import Logo from '../images/logo.png'
+import Image from "next/image";
 
 export default async function AdminPage() {
   const dashboardUsers  =  await db.query.usersTable.findMany()
   return (
-    <div className="px-8 py-4">
-        <div>
-    <Tabs defaultValue="account" className="mt-6">
-      <TabsList className="flex flex-row justify-between">
-      <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="user">Users</TabsTrigger>
-        <TabsTrigger value="password">Events</TabsTrigger>
-        <TabsTrigger value="password">Articles</TabsTrigger>
-        <TabsTrigger value="password">Courses</TabsTrigger>
+    <div className="px-8 py-4 font-[family-name:var(--font-futura)]">
+      <div className="flex flex-row">
+      <div className="p-8 bg-secondary rounded-lg items-center">
+        <a href="/" className="items-center">
+            <Image
+                aria-hidden
+                src={Logo}
+                alt="File icon"
+                width={30}
+                height={30}/>
+        WASCL</a>
+      </div>
+        <div className="w-full ml-4 rounded-lg border">
+    <Tabs defaultValue="dashboard" className="m-6">
+      <TabsList className="bg-secondary">
+      <TabsTrigger value="dashboard"><LayoutDashboardIcon className="mx-2 w-4 h-4"/> Dashboard</TabsTrigger>
+        <TabsTrigger value="user"><Users className="mx-2 w-4 h-4"/> Users</TabsTrigger>
+        <TabsTrigger value="events"><Play className="mx-2 w-4 h-4"/> Events</TabsTrigger>
+        <TabsTrigger value="articles"><BookCheck className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
+        <TabsTrigger value="courses"><GraduationCap className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
+        <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard">
-        <div className="p-6 w-full grid grid-cols-4 gap-4">
+        <div className="py-6 w-full grid grid-cols-4 gap-4">
             <div className="p-8 border rounded-2xl">
               <h3>
               { dashboardUsers.length}</h3><p>Users</p></div>
@@ -72,19 +86,19 @@ export default async function AdminPage() {
             <div className="p-8 border rounded-2xl"><h3>0</h3><p>Schedules</p></div>
             <div className="p-8 border rounded-2xl"><h3>0</h3><p>Enrollments</p></div>
         </div>
-        <div className="px-6">
+        <div className="py-">
             <div className=" border rounded-2xl p-6">
-            <h5>Enrollments</h5></div>
+            <h5>Statistics Analysis</h5></div>
         </div>
-        <div className="p-6 w-full grid grid-cols-2 gap-4">
-            <div className="p-8 border rounded-2xl"><h3>0</h3><p>Users</p></div>
-            <div className="p-8 border rounded-2xl"><h3>0</h3><p>Mentors</p></div>
+        <div className="py-6 w-full grid grid-cols-2 gap-4">
+            <div className="p-8 border rounded-2xl"><h3>0</h3><p>Courses</p></div>
+            <div className="p-8 border rounded-2xl"><h3>0</h3><p>Events</p></div>
         </div>
       </TabsContent>
       <TabsContent value="account">
         <div className="flex flex-row">
         <div className="flex flex-col p-8">
-            <Button>Account Details</Button>
+            <div>Account Details</div>
         </div>
         <div className="p-8">
         <h5>Welcome Admin</h5>
@@ -106,7 +120,7 @@ export default async function AdminPage() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save changes</Button>
+            <Button className="text-white">Save changes</Button>
           </CardFooter>
         </Card>
         </div>
@@ -120,6 +134,7 @@ export default async function AdminPage() {
                     <TabsTrigger value="mentors"><p>Mentors</p></TabsTrigger>
                     <TabsTrigger value="subscriptions"><p>Subscriptions</p></TabsTrigger>
                     <TabsTrigger value="enrollments"><p>Enrollments</p></TabsTrigger>
+                    <TabsTrigger value="schedules"><p>Schedules</p></TabsTrigger>
                 </TabsList>
                 <TabsContent value="users">
                     <div className="flex flex-row">
@@ -151,13 +166,21 @@ export default async function AdminPage() {
                 </TableFooter>
                 </Table>
                 </div>
-                <Button>Add New User</Button>
+                <Button className="text-white">Add New User</Button>
                 </TabsContent>
             </Tabs>
         </div>
       </TabsContent>
     </Tabs>
         </div>
+        </div>
+        <div className="px-8 py-4 grid flex flex-row justify-between border-t mt-4">
+          <div className="row-start-4">
+          <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
+          </div>
+          <div className="row-start-4">
+          <p>Privacy Policy | T&Cs</p>
+        </div></div>
     </div>
   )
 }

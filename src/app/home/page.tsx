@@ -34,15 +34,17 @@ import {
 } from "@/components/ui/carousel"
 import Image from "next/image";
 import TimerCountDown from '../resources/timer'
+import Logo from '../images/logo.png'
+import { Badge } from "@/components/ui/badge";
 
 export default function HomePage(){
     return(
-      <div className="back-image">
-      <div className=" p-20 items-center">
-        <div className="">
+      <div className="font-[family-name:var(--font-futura)]">
+      <div className=" items-center">
+        <div className="backdrop p-16">
         <div className="float-right">
             <TimerCountDown/>
-      <Card className="w-[350px]">
+      <Card className="w-[350px] dark bg-gradient-to-r from-slate-800 to-slate-900">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
@@ -69,95 +71,89 @@ export default function HomePage(){
               </Select>
             </div>
           </div>
-          <Button className="my-4">Sign Up My Account!</Button>
+          <Button className="my-4 text-white">Sign Up My Account!</Button>
         </form>
         <a
-            className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+            className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md p-6 outline focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
-                src="/cyber.png"
+                src={Logo}
                 alt="File icon"
                 width={16}
                 height={16}/>
             <div className="mb-2 mt-4 text-lg font-medium">
                 shadcn/ui
             </div>
-            <p className="text-sm leading-tight text-muted-foreground">
+            <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
         </a>
       </CardContent>
       <CardFooter className="flex justify-between">
         <p>Or Sign Up with Google</p>
-        <Button variant="outline"> Google</Button>
+        <Button variant="outline" className="bg-light"> Google</Button>
       </CardFooter>
     </Card>
-    <Card className="border flex justify-between back-image rounded-2 p-6 mt-2">
-        <p>Articles by WarrenMu</p>
-        <Button variant="outline"> Go to blog</Button>
-    </Card>
+    <div className="border flex flex-row justify-between bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg p-6 mt-2 w-[350px]">
+        <p className="text-white">See more Articles by WarrenMu and other Mentors</p>
+        <a href="/blog" className="bg-light p-2 rounded-md w-1/2 h-1/2"> Go to blog</a>
+    </div>
     </div>
       <div className="pb-16">
-      <NavigationMenu className="border-bottom">
-    <NavigationMenuList>
-      <NavigationMenuItem>
-      <Link href="/" legacyBehavior passHref className="page-link">
-            <NavigationMenuLink>
-              Home
-            </NavigationMenuLink>
-          </Link>
-            <NavigationMenuLink className=" page-link">
+            <div>
+              <p>Home</p>
+            </div>
                 <div className="flex flex-row">
                 <ChevronRight width={15} height={15} className="pt-1"/> Get Started</div>
-            </NavigationMenuLink>
-    </NavigationMenuItem>
-    </NavigationMenuList></NavigationMenu>
       <h1 className="display-1 py-16">Learn Cyber Security</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
-      <h6>It's also about preventing unauthorised access <br/>to the vast amounts of personal information <br/>we store on these devices, and online.</h6>
       </div>
-      <Button><BookHeart width={16} height={16}/> Take a look at our courses</Button>
+      <Button className="text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button>
       <Button variant="outline" className="mx-6 bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button>
     </div>
     </div>
+    <div className="p-20">
       <Carousel
       opts={{
         align: "start",
       }}
       className="w-full max-w-sm"
     >
-    <div className="px-16 pt-16">
-    <h1 className="display-1">What's Next in Cyber Security</h1>
-    <div className="flex flex-row mt-4">
-        <p className="bg-secondary p-2 rounded">Hacking</p><p className="mx-6 bg-secondary p-2 rounded">Cyber Security</p>
-        <p className="bg-secondary p-2 rounded">Training</p><p className="mx-6 bg-secondary p-2 rounded">assessment</p>
+    <h1 className="display-1">Our Services</h1>
+    <div className="flex flex-row my-8">
+    <Badge variant="outline">Hacking</Badge>
+    <Badge variant="outline" className="mx-2">Cyber Security</Badge>
+    <Badge variant="outline">Training</Badge>
+    <Badge variant="outline" className="mx-2">Assessment</Badge>
     </div>
-    </div>
-      <CarouselContent className="p-16">
-        {Array.from({ length: 2 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+    <h3>From the best of our authors and Mentors, articles you can read!</h3>
+    <Button className="text-white my-4">More Articles</Button>
+    <h3>Join our growing community of great hackers and readers, writers and coders!</h3>
+      <CarouselContent className="py-8">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
             <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square p-4">
+              <Card className="w-full">
+                <CardContent className="flex p-4">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/">
                     <Image
                     aria-hidden
-                    src="/file.svg"
+                    src={Logo}
                     alt="File icon"
-                    width={16}
-                    height={16}/>
+                    width={100}
+                    height={100}/>
                     <div className="mb-2 mt-4 text-lg font-medium">
                       shadcn/ui
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
+                    <p className="text-sm text-card-foreground">
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
@@ -175,6 +171,7 @@ export default function HomePage(){
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
+    </div>
     </div>
     )
 }
