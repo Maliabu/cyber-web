@@ -40,7 +40,7 @@ import { Badge } from "@/components/ui/badge";
 export default function HomePage(){
     return(
       <div className="font-[family-name:var(--font-futura)]">
-      <div className=" items-center">
+      <div className=" items-center bg-gradient-to-r from-slate-800 to-sky-600 text-white">
         <div className="backdrop p-16">
         <div className="float-right">
             <TimerCountDown/>
@@ -130,7 +130,7 @@ export default function HomePage(){
     </div>
     <h3>From the best of our authors and Mentors, articles you can read!</h3>
     <Button className="text-white my-4">More Articles</Button>
-    <h3>Join our growing community of great hackers and readers, writers and coders!</h3>
+    <p>Join our growing community of great hackers and readers, writers and coders!</p>
       <CarouselContent className="py-8">
         {Array.from({ length: 4 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">

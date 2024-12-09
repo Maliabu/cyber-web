@@ -30,7 +30,7 @@ export default function About(){
     return(
         <>
         <Menu/>
-        <div className=" p-16 items-center font-[family-name:var(--font-futura)]">
+        <div className=" p-16 items-center font-[family-name:var(--font-futura)] bg-gradient-to-r from-slate-800 to-sky-600 text-white">
         <div className="float-right">
           <div className="grid justify-items-center py-8">
           <h1 className="display-1">70+</h1></div>
@@ -40,7 +40,7 @@ export default function About(){
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card>
-    <div className="border flex flex-row justify-between rounded-lg p-6 mt-2 w-[350px]">
+    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-6 mt-2 w-[350px]">
         <p className="">You can Leave a Message</p>
         <Button className="bg-light p-2 rounded-md w-1/2 h-1/2 items-center"><MessageCircle/> Message</Button>
     </div>
@@ -72,18 +72,18 @@ export default function About(){
       className="w-full max-w-sm">
     <div className="">
     </div>
-      <CarouselContent className="p-8">
+      <CarouselContent className="p-8 background-none">
         {Array.from({ length: 3 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
-              <Card>
+              <Card className="dark">
                 <CardContent className="flex aspect-square p-4">
           <NavigationMenu>
-          <ul className="">
+          <ul className="background-none">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/">
                     <Image
                     aria-hidden
@@ -125,7 +125,7 @@ export default function About(){
         {Array.from({ length: 3 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
-              <Card>
+              <Card className="dark">
                 <CardContent className="flex aspect-square p-4">
           <NavigationMenu>
           <ul className="">
