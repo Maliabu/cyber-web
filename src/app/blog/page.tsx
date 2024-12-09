@@ -22,14 +22,14 @@ export default function Blog(){
     return(
         <>
         <Menu/>
-        <div className="p-16">
+        <div className="p-16 font-[family-name:var(--font-futura)]">
         <div className="float-right -mt-12 -mx-6">
-      <Card className="w-[300px]">
+      <Card className="w-[300px] border-none">
       <CardHeader>
-        <CardTitle>Recommended Articles</CardTitle>
+        <h3>Recommended Articles</h3>
       </CardHeader>
-      <CardContent>
-        <a className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+      <CardContent className="scroll-y-blog">
+        <a className="flex h-auto w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -40,11 +40,11 @@ export default function Blog(){
             <div className="mb-2 mt-4 text-lg font-medium">
                 shadcn/ui
             </div>
-            <p className="text-sm leading-tight text-muted-foreground">
+            <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
         </a>
-        <a className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+        <a className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -55,11 +55,11 @@ export default function Blog(){
             <div className="mb-2 mt-4 text-lg font-medium">
                 shadcn/ui
             </div>
-            <p className="text-sm leading-tight text-muted-foreground">
+            <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
         </a>
-        <a className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+        <a className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -70,11 +70,14 @@ export default function Blog(){
             <div className="mb-2 mt-4 text-lg font-medium">
                 shadcn/ui
             </div>
-            <p className="text-sm leading-tight text-muted-foreground">
+            <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
         </a>
       </CardContent>
+    </Card>
+    <Card className="p-4 border-none mt-4">
+      <h5>Comments</h5>
     </Card>
     </div>
       <NavigationMenu>
@@ -85,10 +88,8 @@ export default function Blog(){
               Home
             </NavigationMenuLink>
           </Link>
-            <NavigationMenuLink className=" page-link">
                 <div className="flex flex-row">
                 <ChevronRight width={15} height={15} className="pt-1"/> Blog</div>
-            </NavigationMenuLink>
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
       <div className="p-16 border rounded-xl mt-4 w-3/4"><Image
@@ -113,9 +114,6 @@ export default function Blog(){
             </div>
           </div>
         </form>
-        <div className="p-8 w-1/2 mt-18 bg-secondary rounded-md">
-        <p className=" flex flex-row">COMMENTS <ChevronDown width={20} height={20} className="p-1 mx-8"/></p>
-        </div>
       </div>
         </div>
         <Footer/>

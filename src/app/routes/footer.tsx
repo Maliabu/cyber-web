@@ -10,14 +10,14 @@ import { Heart } from "lucide-react";
 
 export default function Footer() {
   return (
-      <footer className="grid justify-center">
-      <div className="px-8 py-6 gap-20 back-image flex flex-row border justify-between">
+      <footer className="grid justify-center dark bg-gradient-to-r from-slate-800 to-slate-900 text-white font-[family-name:var(--font-futura)]">
+      <div className="px-8 py-6 gap-20 flex flex-row border-t justify-between">
                   <span className="w-fulh">
                   <h5>Subscribe</h5>
                       Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</span>
-                  <Button className="float-right"><Heart width={16} height={16}/> Subscribe</Button>
+                  <Button className="float-right text-white"><Heart width={16} height={16}/> Subscribe</Button>
               </div>
-        <div className="grid flex flex-row gap-10 px-12 justify-center">
+        <div className="grid flex flex-row gap-10 px-24 justify-center">
         <div className="row-start-3">
           Could be Helpful: Links
           <NavigationMenu>
@@ -64,12 +64,12 @@ export default function Footer() {
         </div>
         <div className="row-start-3">
           Articles
-          <NavigationMenu>
+          <NavigationMenu className="border-b">
           <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
                     <Image
@@ -82,7 +82,7 @@ export default function Footer() {
                     <div className="mb-2 mt-4 text-lg font-medium">
                       shadcn/ui
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
+                    <p className="text-sm leading-tight text-card-foreground">
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
@@ -94,12 +94,12 @@ export default function Footer() {
               </ListItem>
             </ul>
             </NavigationMenu>
-            <NavigationMenu>
+            <NavigationMenu className="border-b">
           <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
                     <Image
@@ -112,7 +112,7 @@ export default function Footer() {
                     <div className="mb-2 mt-4 text-lg font-medium">
                       shadcn/ui
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
+                    <p className="text-sm leading-tight text-card-foreground">
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
@@ -205,7 +205,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="line-clamp-2 text-sm leading-snug text-card-foreground">
             {children}
           </p>
         </a>

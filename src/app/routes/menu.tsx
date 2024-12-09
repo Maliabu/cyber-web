@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link"
 import Logo from '../images/logo.png'
 import { cn } from "@/lib/utils"
+import { Input } from "@/components/ui/input"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
 import { Calendar, ChevronDown, NotebookPen, Search } from "lucide-react";
+import Blog from '../images/link.jpeg'
  
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -55,66 +57,33 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function Menu() {
   return (
-    <div className="grid font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-row justify-between gap-4 px-8 py-4 items-center">
-        <div className="flex flex-row w-3/4">
+    <div className="grid font-[family-name:var(--font-futura)]">
+      <main className="flex flex-row justify-between gap-4 px-8 py-4 items-center text-dark">
+      <div className="flex flex-row">
           <Image
             aria-hidden
             src={Logo}
             alt="logo"
-            width={40}
-            height={35}
+            width={30}
+            height={20}
           />
-          <h6 className="mx-4 logo-text">WAREN'S <br/>CYBERSECURITY <br/>LTD</h6>
+          <h1 className="m-2 logo-text">WASCL</h1>
           </div>
-      <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-      <NavigationMenuTrigger className="border hidden">
-        Popular classes
-      </NavigationMenuTrigger>
-      <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[300px] lg:w-[300px]">
-              <ListItem href="/offers" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/offers" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/offers" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-      </NavigationMenuItem>
-      </NavigationMenuList></NavigationMenu>
       <NavigationMenu className=" rounded-sm">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Get Started with our Blog</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="">Get Started with our Blog</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] z-40">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/blog"
-                  >
                     <Image
             aria-hidden
-            src="/file.svg"
+            src={Blog}
             alt="File icon"
-            width={16}
-            height={16}
+            width={300}
+            height={300}
           />
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </a>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/blog" title="Introduction">
@@ -130,7 +99,7 @@ export default function Menu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="">What we offer</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
@@ -146,22 +115,34 @@ export default function Menu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
+          <a href="/events" className="nav-a">Our Events</a>
+          </NavigationMenuItem>
+        <NavigationMenuItem>
+          <a href="/news" className="mx-8 nav-a">News</a>
+          </NavigationMenuItem>
+        <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Learn more about us
+            <NavigationMenuLink className="nav-a">
+            <p>Contact Us</p>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-    <Search height={25} width={25}>search</Search>
-    <Button><ChevronDown width={16} height={16}/> Register</Button>
+    <Button className="text-white bg-gradient-to-r from-red-500 to-red-800"><ChevronDown width={16} height={16}/> Register</Button>
       </main>
-      <div className="">
-        <div className="px-8 py-4 flex flex-row justify-between">
-                <h5 className="hidden">Shedule an <br/> Interview with our mentors</h5>
-                <p className="p-2 rounded-md bg-gradient-to-b hidden">Dont Know why you should take these classes? Let Us help you!</p>
-                <Button className="float-right"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
+      <div>
+        <div className="px-8 py-4 flex flex-row justify-between border-b">
+          <div className="flex flex-row w-1/2">
+          <h5 className="w-1/2">Schedule an interview with our mentors!</h5>
+            <Button className="text-white bg-gradient-to-r from-red-500 to-red-800"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
+            </div>
+                <div className="relative">
+                  <div className="absolute top-2.5 h-2 w-2 text-card-foreground">
+                  <Search className="h-3 w-3 mt-1" />
+                  </div>
+                  <Input id="search" type="search" placeholder="Search..." className="w-full rounded-lg pl-8 background-none" />
+                </div>
           </div>
         </div>
     </div>
@@ -184,7 +165,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="line-clamp-2 text-sm leading-snug text-card-foreground">
             {children}
           </p>
         </a>
