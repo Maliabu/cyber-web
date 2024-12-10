@@ -8,6 +8,7 @@ export const usersTable = pgTable('users_table', {
   token: text('token').notNull().unique(),
   username: varchar('username').notNull().unique(),
   profilePicture: varchar('course_image'),
+  userType: text('type').notNull(),
 });
 
 export const currencyTable = pgTable('currency_table', {

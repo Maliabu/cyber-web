@@ -22,6 +22,13 @@
       "when": 1733432752651,
       "tag": "0002_typical_junta",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1733839378856,
+      "tag": "0003_solid_wiccan",
+      "breakpoints": true
     }
   ]
 }
