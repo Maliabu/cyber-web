@@ -1,11 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import {
   Tabs,
@@ -15,21 +10,21 @@ import {
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
 import { BookCheck, GraduationCap, LayoutDashboardIcon, Lock, Play, User, Users } from "lucide-react"
-import AddUser from "./addUser"
-import Logo from '../images/logo.png'
+import AddUser from "../users/page"
+import Logo from '@/app/images/logo.png'
 import Image from "next/image";
-import AddPage from "./addPage"
-import { redirect } from "next/navigation"
+import AddPage from "../addPage"
+import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar"
 
 export default async function AdminPage() {
-  let token
-  if(typeof window !== 'undefined'){
-    // now access your localStorage
-  token = localStorage.getItem("token")
-  }
-  if(token === "" || token === undefined || token === null ){
-    redirect("/admin/auth")
-  }
+  // let token
+  // if(typeof window !== 'undefined'){
+  //   // now access your localStorage
+  // token = localStorage.getItem("token")
+  // }
+  // if(token === "" || token === undefined || token === null ){
+  //   redirect("/admin")
+  // }
   const users  =  await db.query.usersTable.findMany()
   const events = await db.query.EventsTable.findMany()
   const articles = await db.query.articlesTable.findMany()
@@ -89,8 +84,8 @@ export default async function AdminPage() {
                   {
                     events.length > 0 ? (
                       <div className="flex flex-row admin">
-                        {events.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...event}></UserCard>
+                        {users.map(user => (
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -106,8 +101,8 @@ export default async function AdminPage() {
                   {
                     courses.length > 0 ? (
                       <div className="flex flex-row admin">
-                        {courses.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        {users.map(user => (
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -123,8 +118,8 @@ export default async function AdminPage() {
                   {
                     articles.length > 0 ? (
                       <div className="flex flex-row admin">
-                        {articles.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        {users.map(user => (
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -149,9 +144,9 @@ export default async function AdminPage() {
                 <TabsContent value="users">
                   {
                     users.length > 0 ? (
-                      <div className="flex flex-row admin">
+                      <div className="flex flex-col admin">
                         {users.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -166,9 +161,9 @@ export default async function AdminPage() {
                 <TabsContent value="mentors">
                   {
                     users.length > 0 ? (
-                      <div className="flex flex-row admin">
+                      <div className=" admin">
                         {users.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                          <UserCard {...user} />
                         ))}
                       </div>
                     ) : (
@@ -184,8 +179,8 @@ export default async function AdminPage() {
                   {
                     subscriptions.length > 0 ? (
                       <div className="flex flex-row admin">
-                        {subscriptions.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        {users.map(user => (
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -201,8 +196,8 @@ export default async function AdminPage() {
                   {
                     enrollments.length > 0 ? (
                       <div className="flex flex-row admin">
-                        {enrollments.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...enrollments}></UserCard>
+                        {users.map(user => (
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -219,7 +214,7 @@ export default async function AdminPage() {
                     users.length > 0 ? (
                       <div className="flex flex-row admin">
                         {users.map(user => (
-                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -250,10 +245,11 @@ export default async function AdminPage() {
 
 // define custom props for userCard component
 type UsercardProps = {
-  id: string
+  id: number
   isActive: boolean
   name: string
   username: string
+  profilePicture: string | null
 }
 
 // one time usercard component with custom prop type
@@ -261,19 +257,20 @@ function UserCard({
   id, 
   isActive,
   name,
-  username
+  username,
+  profilePicture
 }: UsercardProps){
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          {name}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        {username}
-      </CardContent>
-      <CardFooter>{id}</CardFooter>
+    <Card className="w-3/4 flex flex-row justify-between p-3 mt-1 background-none">
+      <div className="w-10 h-10 mt-2">
+      <Avatar>
+        <AvatarImage src='' className="rounded-full"/>
+        <AvatarFallback className="rounded-full bg-muted py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
+      </Avatar>
+      </div>
+      <p className="mt-2">{name}</p>
+      <p className="mt-2">{username}</p>
+      <p className="mt-2">{id}</p>
     </Card>
   )
 }

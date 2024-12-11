@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { addUsers } from "@/server/fetch.actions"
 import { addUserSchema } from "@/schema/addUserForm"
-import { token, username } from "../services/services"
+import { token, username } from "../../services/services"
 
 
 export default function AddUser() {
@@ -42,19 +42,17 @@ export default function AddUser() {
 
     let name = form.getValues("name")
     form.setValue("token", token())
-    name.length > 0?form.setValue("username", username(name)[0]+username(name)[1]):form.setValue("username", "")
+    name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
      
     async function onSubmit(values: z.infer<typeof addUserSchema>) {
         //create obj
-        console.log(values)
+        document.getElementById("submit")?.innerHTML?"Processing...":"Add User"
         const data = await addUsers(values)
         if(data?.error){
           form.setError("root", {
             "message": "user not added"
           })
         }
-        form.reset(values)
-        location.reload()
     }
 
   return (
@@ -179,9 +177,12 @@ export default function AddUser() {
                 </div>
             </div>
           </div>
-          <Button className="my-4 text-white" type="submit">Sign Up User</Button>
+          <Button id="submit" className="my-4 text-white" type="submit">Sign Up User</Button>
           {form.formState.errors.root && (
-            <div className="bg-light p-2 rounded-me">{form.formState.errors.root.message}</div>
+            <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+          )}
+          {form.formState.isSubmitSuccessful && (
+            <div className="bg-light p-2 rounded-md"> User added successfully </div>
           )}
         </form>
         </Form>

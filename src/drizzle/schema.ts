@@ -1,4 +1,9 @@
-import { integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+
+const createdAt = timestamp('created_at').notNull().defaultNow()
+const updatedAt = timestamp('updated_at')
+  .notNull()
+  .$onUpdate(() => new Date())
 
 export const usersTable = pgTable('users_table', {
   id: serial('id').primaryKey(),
@@ -9,11 +14,9 @@ export const usersTable = pgTable('users_table', {
   username: varchar('username').notNull().unique(),
   profilePicture: varchar('profile_picture'),
   userType: text('type').notNull(),
-  isActive: integer("is_active").default(0),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt,
+  updatedAt,
 });
 
 export const currencyTable = pgTable('currency_table', {
@@ -22,10 +25,8 @@ export const currencyTable = pgTable('currency_table', {
   currency: text('currency_name'),
   country: text('name').notNull(),
   country_code: text('country_code').notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  createdAt,
+  updatedAt,
 });
 
 export const courseTable = pgTable('course_table', {
@@ -39,11 +40,9 @@ export const courseTable = pgTable('course_table', {
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   startDate: timestamp('start_date').notNull(),
   duration: integer('course_duration'),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
   pricing: integer('pricing'),
+  createdAt,
+  updatedAt,
 });
 
 export const articlesTable = pgTable('articles_table', {
@@ -55,10 +54,8 @@ export const articlesTable = pgTable('articles_table', {
   writer: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+    createdAt,
+    updatedAt,
 });
 
 export const EventsTable = pgTable('events_table', {
@@ -69,10 +66,8 @@ export const EventsTable = pgTable('events_table', {
   image: varchar('course_image'),
   startDate: timestamp('start_date'),
   duration: integer('course_duration'),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  createdAt,
+  updatedAt,
 });
 
 export const enrollmentsTable = pgTable('enrollments_table', {
@@ -81,10 +76,8 @@ export const enrollmentsTable = pgTable('enrollments_table', {
   userId: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+    createdAt,
+    updatedAt,
 });
 
 export const schedulesTable = pgTable('schedules_table', {
@@ -93,10 +86,8 @@ export const schedulesTable = pgTable('schedules_table', {
   userId: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+    createdAt,
+    updatedAt,
 });
 
 export const subscriptionsTable = pgTable('subscriptions_table', {
@@ -104,10 +95,8 @@ export const subscriptionsTable = pgTable('subscriptions_table', {
   userId: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+    createdAt,
+    updatedAt,
 });
 
 export const commentsTable = pgTable('comments_table', {
@@ -117,10 +106,8 @@ export const commentsTable = pgTable('comments_table', {
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   comment: varchar('comment'),
   article: integer('article_id').notNull().references(() => articlesTable.id),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  createdAt,
+  updatedAt,
 });
 
 export const replyTable = pgTable('reply_table', {
@@ -130,10 +117,8 @@ export const replyTable = pgTable('reply_table', {
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   reply: varchar('comment'),
   article: integer('article_id').notNull().references(() => articlesTable.id),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  createdAt,
+  updatedAt,
 });
 
 export const votesTable = pgTable('votes_table', {
@@ -143,10 +128,8 @@ export const votesTable = pgTable('votes_table', {
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   vote: integer('vote'),
   article: integer('article_id').notNull().references(() => articlesTable.id),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  createdAt,
+  updatedAt,
 });
 
 export type InsertUser = typeof usersTable.$inferInsert;

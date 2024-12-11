@@ -6,7 +6,7 @@ import LoginAdmin from "./loginAdmin"
 
 export default async function Login(){
     let token
-    if(typeof window !== 'undefined'){
+    if(typeof window !== undefined){
       // now access your localStorage
     token = localStorage.getItem("token")
     }
