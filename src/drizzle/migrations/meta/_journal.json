@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1733231819853,
-      "tag": "0000_glossy_talos",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1733234075451,
-      "tag": "0001_warm_phalanx",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1733432752651,
-      "tag": "0002_typical_junta",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1733839378856,
-      "tag": "0003_solid_wiccan",
+      "when": 1733907900884,
+      "tag": "0000_tan_umar",
       "breakpoints": true
     }
   ]

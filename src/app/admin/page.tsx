@@ -7,39 +7,37 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import { db } from "@/drizzle/db"
-import { usersTable } from "@/drizzle/schema"
-import { BookCheck, Delete, GraduationCap, LayoutDashboardIcon, Lock, Play, User, Users } from "lucide-react"
+import { BookCheck, GraduationCap, LayoutDashboardIcon, Lock, Play, User, Users } from "lucide-react"
 import AddUser from "./addUser"
 import Logo from '../images/logo.png'
 import Image from "next/image";
+import AddPage from "./addPage"
+import { redirect } from "next/navigation"
 
 export default async function AdminPage() {
-  console.log()
+  let token
+  if(typeof window !== 'undefined'){
+    // now access your localStorage
+  token = localStorage.getItem("token")
+  }
+  if(token === "" || token === undefined || token === null ){
+    redirect("/admin/auth")
+  }
   const users  =  await db.query.usersTable.findMany()
   const events = await db.query.EventsTable.findMany()
   const articles = await db.query.articlesTable.findMany()
   const schedules = await db.query.schedulesTable.findMany()
   const enrollments = await db.query.enrollmentsTable.findMany()
   const courses = await db.query.courseTable.findMany()
+  const subscriptions = await db.query.subscriptionsTable.findMany()
+
   return (
     <div className="justify-stretch font-[family-name:var(--font-futura)]">
     <div className="px-8 py-4">
@@ -87,37 +85,57 @@ export default async function AdminPage() {
             <div className="p-8 border rounded-2xl"><h3>{articles.length}</h3><p>Articles</p></div>
         </div>
       </TabsContent>
-      <TabsContent value="account">
-        <div className="flex flex-row">
-        <div className="flex flex-col p-8">
-            <div>Account Details</div>
-        </div>
-        <div className="p-8">
-        <h5>Welcome Admin</h5>
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle>Account</CardTitle>
-            <CardDescription>
-              Make changes to your account here. Click save when you're done.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button className="text-white">Save changes</Button>
-          </CardFooter>
-        </Card>
-        </div>
-        </div>
-      </TabsContent>
+      <TabsContent value="events">
+                  {
+                    events.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {events.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...event}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Event"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{events.length} Total Events</p>
+                </div>
+                </TabsContent>
+                <TabsContent value="courses">
+                  {
+                    courses.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {courses.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Course"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{courses.length} Total Courses</p>
+                </div>
+                </TabsContent>
+                <TabsContent value="articles">
+                  {
+                    articles.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {articles.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Article"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{articles.length} Total Articles</p>
+                </div>
+                </TabsContent>
       <TabsContent value="user">
         <div>
             <Tabs defaultValue="users">
@@ -129,33 +147,88 @@ export default async function AdminPage() {
                     <TabsTrigger value="schedules"><p>Schedules</p></TabsTrigger>
                 </TabsList>
                 <TabsContent value="users">
-                    <div className="flex flex-row admin">
-                <Table>
-                <TableCaption>{users.length} Total users</TableCaption>
-                <TableHeader>
-                    <TableRow>
-                    <TableHead className="w-[100px]">Picture</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Username</TableHead>
-                    <TableHead>Delete</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {users.map((user) => (
-                    <TableRow key={user.username}>
-                        <TableCell className="text-right">{user.profilePicture}</TableCell>
-                        <TableCell className="font-medium">{user.name}</TableCell>
-                        <TableCell>{user.email}</TableCell>
-                        <TableCell>{user.username}</TableCell>
-                        <TableCell><Delete/></TableCell>
-                    </TableRow>
-                    ))}
-                </TableBody>
-                </Table>
-                </div>
-                <div className="p-4">
+                  {
+                    users.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {users.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"User"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
                 <AddUser/>
+                <p>{users.length} Total users</p>
+                </div>
+                </TabsContent>
+                <TabsContent value="mentors">
+                  {
+                    users.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {users.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Mentor"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{users.length} Total Mentors</p>
+                </div>
+                </TabsContent>
+                <TabsContent value="subscriptions">
+                  {
+                    subscriptions.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {subscriptions.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Subscription"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{subscriptions.length} Total Subscriptions</p>
+                </div>
+                </TabsContent>
+                <TabsContent value="enrollments">
+                  {
+                    enrollments.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {enrollments.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...enrollments}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Enrollment"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{enrollments.length} Total Enrollments</p>
+                </div>
+                </TabsContent>
+                <TabsContent value="schedules">
+                  {
+                    users.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {users.map(user => (
+                          <UserCard id={""} isActive={false} name={""} username={""} {...users}></UserCard>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Schedule"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddUser/>
+                <p>{users.length} Total Schedules</p>
                 </div>
                 </TabsContent>
             </Tabs>
@@ -172,5 +245,35 @@ export default async function AdminPage() {
           <p>Privacy Policy | T&Cs</p>
         </div></footer>
     </div></div>
+  )
+}
+
+// define custom props for userCard component
+type UsercardProps = {
+  id: string
+  isActive: boolean
+  name: string
+  username: string
+}
+
+// one time usercard component with custom prop type
+function UserCard({
+  id, 
+  isActive,
+  name,
+  username
+}: UsercardProps){
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          {name}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        {username}
+      </CardContent>
+      <CardFooter>{id}</CardFooter>
+    </Card>
   )
 }
