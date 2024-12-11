@@ -132,16 +132,16 @@ export default function Menu() {
     <Button className="text-white bg-gradient-to-r from-red-500 to-red-800"><ChevronDown width={16} height={16}/> Register</Button>
       </main>
       <div>
-        <div className="px-8 py-4 flex flex-row justify-between border-b">
+        <div className="px-8 py-4 flex flex-row justify-between border-b border-t">
           <div className="flex flex-row w-1/2">
           <h5 className="w-1/2">Schedule an interview with our mentors!</h5>
             <Button className="text-white bg-gradient-to-r from-red-500 to-red-800"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
             </div>
                 <div className="relative">
-                  <div className="absolute top-2.5 h-2 w-2 text-card-foreground">
+                  <div className="absolute left-4 top-2.5 h-2 w-2 text-card-foreground">
                   <Search className="h-3 w-3 mt-1" />
                   </div>
-                  <Input id="search" type="search" placeholder="Search..." className="w-full rounded-lg pl-8 background-none" />
+                  <Input id="search" type="search" placeholder="Search..." className="w-full rounded-lg pl-8" />
                 </div>
           </div>
         </div>

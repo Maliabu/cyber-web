@@ -1,3 +1,15 @@
+CREATE TABLE IF NOT EXISTS "events_table" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"title" text NOT NULL,
+	"content" text NOT NULL,
+	"link" varchar,
+	"course_image" varchar,
+	"start_date" timestamp,
+	"course_duration" integer,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "articles_table" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
@@ -61,6 +73,7 @@ CREATE TABLE IF NOT EXISTS "reply_table" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "schedules_table" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"timezone" text NOT NULL,
 	"user_id" integer NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL
@@ -73,6 +86,23 @@ CREATE TABLE IF NOT EXISTS "subscriptions_table" (
 	"updated_at" timestamp NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "users_table" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" text NOT NULL,
+	"password" varchar NOT NULL,
+	"email" text NOT NULL,
+	"token" text NOT NULL,
+	"username" varchar NOT NULL,
+	"profile_picture" varchar,
+	"type" text NOT NULL,
+	"is_active" integer DEFAULT 0,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL,
+	CONSTRAINT "users_table_email_unique" UNIQUE("email"),
+	CONSTRAINT "users_table_token_unique" UNIQUE("token"),
+	CONSTRAINT "users_table_username_unique" UNIQUE("username")
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "votes_table" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
@@ -82,17 +112,6 @@ CREATE TABLE IF NOT EXISTS "votes_table" (
 	"updated_at" timestamp NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "posts_table" RENAME TO "events_table";--> statement-breakpoint
-ALTER TABLE "events_table" DROP CONSTRAINT "posts_table_user_id_users_table_id_fk";
---> statement-breakpoint
-ALTER TABLE "events_table" DROP CONSTRAINT "posts_table_article_id_posts_table_id_fk";
---> statement-breakpoint
-ALTER TABLE "events_table" ADD COLUMN "title" text NOT NULL;--> statement-breakpoint
-ALTER TABLE "events_table" ADD COLUMN "content" text NOT NULL;--> statement-breakpoint
-ALTER TABLE "events_table" ADD COLUMN "link" varchar;--> statement-breakpoint
-ALTER TABLE "events_table" ADD COLUMN "course_image" varchar;--> statement-breakpoint
-ALTER TABLE "events_table" ADD COLUMN "start_date" timestamp;--> statement-breakpoint
-ALTER TABLE "events_table" ADD COLUMN "course_duration" integer;--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "articles_table" ADD CONSTRAINT "articles_table_user_id_users_table_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users_table"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
@@ -164,7 +183,3 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
---> statement-breakpoint
-ALTER TABLE "events_table" DROP COLUMN IF EXISTS "user_id";--> statement-breakpoint
-ALTER TABLE "events_table" DROP COLUMN IF EXISTS "vote";--> statement-breakpoint
-ALTER TABLE "events_table" DROP COLUMN IF EXISTS "article_id";

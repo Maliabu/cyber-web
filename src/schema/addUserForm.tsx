@@ -1,0 +1,35 @@
+import { z } from "zod";
+
+export const addUserSchema = z.object({
+    name: z.string({required_error: "Please enter your full name.",}).min(2, {
+        message: "Please enter both names separated by a space bar"
+    }).max(50),
+    password: z.string({required_error: "Please enter a password.",}).min(2, {
+        message: "Password must be atleast 8 characters"
+    }).max(50),
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
+    token: z.string().min(15, {message: "missing token"}),
+    username: z.string().min(2, {message: "missing username"}),
+    profilePicture: z.string(),
+    userType: z.string({required_error: "Please select the type of user.",}),
+    confirmPassword: z.string({required_error: "Please confirm your password.",}),
+}).superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "The passwords did not match",
+        path: ['confirmPassword']
+      });
+    }
+  });
+
+export const loginUserSchema = z.object({
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }),
+    password: z.string({required_error: "Please enter a password.",}).min(2, {
+        message: "Password must be atleast 8 characters"
+    }).max(50),
+})

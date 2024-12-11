@@ -100,7 +100,7 @@ export default function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button>
       </div>
       </div>
-      <div className=" p-16 back-classes">
+      <div className=" p-16 back-classes font-[family-name:var(--font-futura)]">
       <Carousel
       opts={{
         align: "start",

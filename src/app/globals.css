@@ -47,8 +47,8 @@ body {
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 0 3.7% 15.9%;
+    --muted-foreground: 0 0% 98%;
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
@@ -78,8 +78,9 @@ h1.display-1{
   line-height: 50px !important;
 }
 h5{
-  font-size: 22px !important;
+  font-size: 23px !important;
   line-height: 23px !important;
+  font-weight: bolder !important;
 }
 h6{
   font-size: 25px !important;
@@ -102,7 +103,7 @@ button{
   font-weight: 550 !important;
   /* border: 1px solid rgb(244, 99, 50) !important; */
   border-radius: 5px !important;
-  color: rgb(12, 12, 12) !important;
+  color: rgb(9, 9, 9) !important;
 }
 span{
   font-size: 16px !important;
@@ -170,4 +171,8 @@ a{
 }
 .nav-a{
   color: black !important;
+}
+.admin{
+  overflow-x: hidden !important;
+  max-height: 55vh !important;
 }

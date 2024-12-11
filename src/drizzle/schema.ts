@@ -7,7 +7,13 @@ export const usersTable = pgTable('users_table', {
   email: text('email').notNull().unique(),
   token: text('token').notNull().unique(),
   username: varchar('username').notNull().unique(),
-  profilePicture: varchar('course_image'),
+  profilePicture: varchar('profile_picture'),
+  userType: text('type').notNull(),
+  isActive: integer("is_active").default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at')
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
 
 export const currencyTable = pgTable('currency_table', {
