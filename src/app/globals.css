@@ -103,7 +103,7 @@ button{
   font-weight: 550 !important;
   /* border: 1px solid rgb(244, 99, 50) !important; */
   border-radius: 5px !important;
-  color: rgb(9, 9, 9) !important;
+  color: rgb(158, 157, 157) !important;
 }
 span{
   font-size: 16px !important;
@@ -178,7 +178,7 @@ a{
 }
 .tabs{
   overflow-x: hidden !important;
-  max-height: 70vh !important;
+  max-height: 75vh !important;
 }
 p.desc{
   font-size: 13px !important;
