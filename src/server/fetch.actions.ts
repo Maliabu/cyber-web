@@ -4,8 +4,8 @@ import { db } from "@/drizzle/db";
 import { usersTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addUserSchema, loginUserSchema } from "@/schema/addUserForm";
-import { redirect } from "next/navigation";
+import { addUserSchema, loginUserSchema } from '@/schema/formSchemas'
+import { eq } from "drizzle-orm";
 
 
 export async function addUsers(unsafeData: z.infer<typeof addUserSchema>) : 
@@ -18,30 +18,47 @@ Promise<{error: boolean | undefined}> {
 
    await db.insert(usersTable).values({...data})
 
-   redirect("/admin")
+   return {error: false}
+//    redirect("/admin/dashboard")
 }
 
-export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>) : 
-Promise<{error: boolean | undefined}> {
+export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
    const {success, data} = loginUserSchema.safeParse(unsafeData)
 
    if (!success){
-    return {error: true}
+    return ["error"]
    }
 
-   await db.query.usersTable.findFirst({
-    with: {
-        email: data.email,
-        password: data.password,
-    }
-   })
+   //goal is to get token
+   let token = ''
+   let encrPass = ''
+   let initVector = ''
+   let usertype = ''
+   let email = ''
+   let username = ''
+   let name = ''
 
-   redirect("/admin")
+   let checkEmail = await db.query.usersTable.findFirst({
+    where: eq(usersTable.email, data.email)
+   })
+   if(checkEmail && checkEmail.isActive === true){
+    encrPass = checkEmail.password
+    initVector = checkEmail.decInit
+    token = checkEmail.token
+    usertype = checkEmail.userType
+    email = checkEmail.email
+    username = checkEmail.username
+    name = checkEmail.name
+   }
+   return [token, encrPass, initVector, usertype, email, username, name]
 }
 
 export async function users():
 Promise<any>{
     await db.query.usersTable.findMany()
+    .then((res) => {
+        return res
+    })
     
 }
 

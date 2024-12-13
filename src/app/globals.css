@@ -167,7 +167,7 @@ a{
 .background-none{
   background: none !important;
   border: none !important;
-  color: aliceblue !important;
+  color: rgb(11, 11, 11) !important;
 }
 .nav-a{
   color: black !important;
@@ -175,4 +175,14 @@ a{
 .admin{
   overflow-x: hidden !important;
   max-height: 55vh !important;
+}
+.tabs{
+  overflow-x: hidden !important;
+  max-height: 70vh !important;
+}
+p.desc{
+  font-size: 13px !important;
+  line-height: 13px !important;
+  color: gray !important;
+  cursor: pointer;
 }

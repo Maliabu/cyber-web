@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS "course_table" (
 	"user_id" integer NOT NULL,
 	"start_date" timestamp NOT NULL,
 	"course_duration" integer,
+	"pricing" integer,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp NOT NULL,
-	"pricing" integer
+	"updated_at" timestamp NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "currency_table" (
@@ -95,7 +95,8 @@ CREATE TABLE IF NOT EXISTS "users_table" (
 	"username" varchar NOT NULL,
 	"profile_picture" varchar,
 	"type" text NOT NULL,
-	"is_active" integer DEFAULT 0,
+	"is_active" boolean DEFAULT true NOT NULL,
+	"decInitVector" varchar,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	CONSTRAINT "users_table_email_unique" UNIQUE("email"),
