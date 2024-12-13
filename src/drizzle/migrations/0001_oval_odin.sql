@@ -1,1 +1,0 @@
-ALTER TABLE "users_table" ADD COLUMN "is_active" boolean DEFAULT true NOT NULL;

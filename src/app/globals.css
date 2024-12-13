@@ -176,3 +176,13 @@ a{
   overflow-x: hidden !important;
   max-height: 55vh !important;
 }
+.tabs{
+  overflow-x: hidden !important;
+  max-height: 70vh !important;
+}
+p.desc{
+  font-size: 13px !important;
+  line-height: 13px !important;
+  color: gray !important;
+  cursor: pointer;
+}

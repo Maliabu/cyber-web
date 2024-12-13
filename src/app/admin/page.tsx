@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
   Card,
 } from "@/components/ui/card"
@@ -10,22 +9,25 @@ import {
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
 import { BookCheck, GraduationCap, LayoutDashboardIcon, Lock, Play, User, Users } from "lucide-react"
-import AddUser from "../users/page"
+import AddUser from "./users/page"
 import Logo from '@/app/images/logo.png'
 import Image from "next/image";
-import AddPage from "../addPage"
+import AddPage from "./addPage"
 import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar"
+import { Chart } from "./chart"
+import { eq } from "drizzle-orm"
+import { usersTable } from "@/drizzle/schema"
+import LogoutAdmin from "./auth/logoutAdmin"
+import { tokenise } from "../services/services"
+import Admin from "./auth/admin"
+import AddEvent from "./events/page"
+import Events from "./events/events"
 
 export default async function AdminPage() {
-  // let token
-  // if(typeof window !== 'undefined'){
-  //   // now access your localStorage
-  // token = localStorage.getItem("token")
-  // }
-  // if(token === "" || token === undefined || token === null ){
-  //   redirect("/admin")
-  // }
   const users  =  await db.query.usersTable.findMany()
+  const mentors  =  await db.query.usersTable.findMany({
+    where: eq(usersTable.userType, "mentor")
+  })
   const events = await db.query.EventsTable.findMany()
   const articles = await db.query.articlesTable.findMany()
   const schedules = await db.query.schedulesTable.findMany()
@@ -49,10 +51,11 @@ export default async function AdminPage() {
         <p className="logo-text mt-2">WASCL</p>
         </div>
         <div className="self-center mt-96">
-        <Button className="text-white"><Lock/></Button></div>
+          <LogoutAdmin/>
+        </div>
       </div>
         <div className="w-full h-full ml-4 rounded-lg border">
-    <Tabs defaultValue="dashboard" className="m-6 tabs">
+    <Tabs defaultValue="dashboard" className="m-6">
       <TabsList>
       <TabsTrigger value="dashboard"><LayoutDashboardIcon className="mx-2 w-4 h-4"/> Dashboard</TabsTrigger>
         <TabsTrigger value="user"><Users className="mx-2 w-4 h-4"/> Users</TabsTrigger>
@@ -61,18 +64,20 @@ export default async function AdminPage() {
         <TabsTrigger value="courses"><GraduationCap className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
         <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
       </TabsList>
-      <TabsContent value="dashboard">
+      <TabsContent value="dashboard" className="tabs">
         <div className="py-6 w-full grid grid-cols-4 gap-4">
             <div className="p-8 border rounded-2xl">
               <h3>
               { users.length}</h3><p>Users</p></div>
-            <div className="p-8 border rounded-2xl"><h3>{0}</h3><p>Mentors</p></div>
+            <div className="p-8 border rounded-2xl"><h3>{mentors.length}</h3><p>Mentors</p></div>
             <div className="p-8 border rounded-2xl"><h3>{schedules.length}</h3><p>Schedules</p></div>
             <div className="p-8 border rounded-2xl"><h3>{enrollments.length}</h3><p>Enrollments</p></div>
         </div>
-        <div className="py-">
+        <div>
             <div className=" border rounded-2xl p-6">
-            <h5>Statistics Analysis</h5></div>
+            <h5>Statistics Analysis</h5>
+              <Chart/>
+            </div>
         </div>
         <div className="py-6 w-full grid grid-cols-3 gap-4">
             <div className="p-8 border rounded-2xl"><h3>{courses.length}</h3><p>Courses</p></div>
@@ -80,23 +85,14 @@ export default async function AdminPage() {
             <div className="p-8 border rounded-2xl"><h3>{articles.length}</h3><p>Articles</p></div>
         </div>
       </TabsContent>
+      <TabsContent value="account" className="tabs">
+        <div>
+          <Admin/>
+        </div>
+      </TabsContent>
       <TabsContent value="events">
-                  {
-                    events.length > 0 ? (
-                      <div className="flex flex-row admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
-                        ))}
-                      </div>
-                    ) : (
-                      <AddPage page={"Event"} />
-                    )
-                  }
-                <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
-                <p>{events.length} Total Events</p>
-                </div>
-                </TabsContent>
+        <Events/>
+      </TabsContent>
                 <TabsContent value="courses">
                   {
                     courses.length > 0 ? (
@@ -110,7 +106,7 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
+                <AddEvent/>
                 <p>{courses.length} Total Courses</p>
                 </div>
                 </TabsContent>
@@ -160,10 +156,10 @@ export default async function AdminPage() {
                 </TabsContent>
                 <TabsContent value="mentors">
                   {
-                    users.length > 0 ? (
+                    mentors.length > 0 ? (
                       <div className=" admin">
-                        {users.map(user => (
-                          <UserCard {...user} />
+                        {mentors.map(user => (
+                          <UserCard {...user} key={user.id} />
                         ))}
                       </div>
                     ) : (
@@ -172,7 +168,7 @@ export default async function AdminPage() {
                   }
                 <div className="p-4 flex flex-row justify-between">
                 <AddUser/>
-                <p>{users.length} Total Mentors</p>
+                <p>{mentors.length} Total Mentors</p>
                 </div>
                 </TabsContent>
                 <TabsContent value="subscriptions">
@@ -251,7 +247,6 @@ type UsercardProps = {
   username: string
   profilePicture: string | null
 }
-
 // one time usercard component with custom prop type
 function UserCard({
   id, 
@@ -261,16 +256,22 @@ function UserCard({
   profilePicture
 }: UsercardProps){
   return (
-    <Card className="w-3/4 flex flex-row justify-between p-3 mt-1 background-none">
+    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 background-none">
       <div className="w-10 h-10 mt-2">
       <Avatar>
         <AvatarImage src='' className="rounded-full"/>
         <AvatarFallback className="rounded-full bg-muted py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
       </Avatar>
       </div>
-      <p className="mt-2">{name}</p>
-      <p className="mt-2">{username}</p>
-      <p className="mt-2">{id}</p>
+      <div className="items-start">
+        <p className="desc">Name</p>
+      <p className="mt-2">{name}</p></div>
+      <div>
+      <p className="desc">username</p>
+      <p className="mt-2">{username}</p></div>
+      <div>
+      <p className="desc">id</p>
+      <p className="mt-2">{id}</p></div>
     </Card>
   )
 }

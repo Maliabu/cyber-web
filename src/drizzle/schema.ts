@@ -13,8 +13,9 @@ export const usersTable = pgTable('users_table', {
   token: text('token').notNull().unique(),
   username: varchar('username').notNull().unique(),
   profilePicture: varchar('profile_picture'),
-  userType: text('type').notNull(),
+  userType: text('type').notNull().default("user"),
   isActive: boolean("is_active").notNull().default(true),
+  decInit: varchar('decInitVector').notNull(),
   createdAt,
   updatedAt,
 });

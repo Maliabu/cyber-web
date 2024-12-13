@@ -16,12 +16,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useForm } from "react-hook-form"
-import z, { object } from 'zod'
+import z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { addUsers } from "@/server/fetch.actions"
-import { addUserSchema } from "@/schema/addUserForm"
-import { token, username } from "../../services/services"
+import { addUserSchema } from '@/schema/formSchemas'
+import { handleEncryption, token, username } from "../../services/services"
 
 
 export default function AddUser() {
@@ -36,7 +36,9 @@ export default function AddUser() {
           userType: "",
           profilePicture: "",
           password: "",
-          confirmPassword: ""
+          confirmPassword: "",
+          decInit: "",
+          encrPass: "",
       },
     })
 
@@ -44,14 +46,29 @@ export default function AddUser() {
     form.setValue("token", token())
     name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
      
-    async function onSubmit(values: z.infer<typeof addUserSchema>) {
+    async function onSubmit(values: z.infer<typeof addUserSchema>) {  
+      if(values.encrPass !== "" && values.encrPass === values.confirmPassword){
+        // encrypt password
+        const encr = handleEncryption(values.encrPass)
+        values.password = (await encr).encryptedData
+        values.decInit = (await encr).initVector
+      }
         //create obj
-        document.getElementById("submit")?.innerHTML?"Processing...":"Add User"
+        const app = document.getElementById('submit');
+        const text = 'processing';
+        if(app !== null){
+          app.innerHTML = text;
+        }
         const data = await addUsers(values)
         if(data?.error){
           form.setError("root", {
             "message": "user not added"
           })
+        } else {
+          if(app !== null){
+            app.innerHTML = "Successful";
+          }
+          window.location.reload()
         }
     }
 
@@ -133,7 +150,7 @@ export default function AddUser() {
                 <div className="flex flex-col space-y-1.5">
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="encrPass"
                     render={({ field }) => (
                         <FormItem>
                         <FormLabel>Password</FormLabel>
@@ -182,25 +199,10 @@ export default function AddUser() {
             <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
           )}
           {form.formState.isSubmitSuccessful && (
-            <div className="bg-light p-2 rounded-md"> User added successfully </div>
+            <div className="bg-light p-2 text-center rounded-md"> User added successfully </div>
           )}
         </form>
         </Form>
-            {/* <div className="mt-3 h-[120px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data}>
-                  <Bar
-                    dataKey="goal"
-                    style={
-                      {
-                        fill: "hsl(var(--foreground))",
-                        opacity: 0.9,
-                      } as React.CSSProperties
-                    }
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div> */}
           </div>
           <DrawerFooter>
             <DrawerClose asChild>

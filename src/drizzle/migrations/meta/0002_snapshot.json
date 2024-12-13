@@ -1,6 +1,6 @@
 {
-  "id": "9a41f5f9-9fa4-4ce4-b0fe-011bb989b16e",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "9b285c7f-6283-457c-a9f6-d5e6ba677caf",
+  "prevId": "0e6aa658-793c-4d1c-951b-5b225535d53e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -683,7 +683,8 @@
           "name": "type",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'user'"
         },
         "is_active": {
           "name": "is_active",
@@ -696,7 +697,7 @@
           "name": "decInitVector",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",

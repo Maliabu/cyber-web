@@ -95,6 +95,8 @@ CREATE TABLE IF NOT EXISTS "users_table" (
 	"username" varchar NOT NULL,
 	"profile_picture" varchar,
 	"type" text NOT NULL,
+	"is_active" boolean DEFAULT true NOT NULL,
+	"decInitVector" varchar,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	CONSTRAINT "users_table_email_unique" UNIQUE("email"),

@@ -1,25 +1,8 @@
 import Image from "next/image"
 import Logo from '@/app/images/logo.png'
-import { db } from "@/drizzle/db"
-import { redirect } from "next/navigation"
 import LoginAdmin from "./loginAdmin"
 
 export default async function Login(){
-    let token
-    if(typeof window !== undefined){
-      // now access your localStorage
-    token = localStorage.getItem("token")
-    }
-    const user = await db.query.usersTable.findFirst(
-        {
-            with: {
-                token: token
-            }
-        }
-    )
-    if(user){
-        redirect("/admin")
-    }
     return(
     <div className=" font-[family-name:var(--font-futura)]">
             <div className="grid justify-center mt-16">
