@@ -7,15 +7,29 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { auth } from "@clerk/nextjs/server";
 
-export default function Footer() {
+export default async function Footer() {
+  const userId = await auth()
   return (
       <footer className="grid justify-center dark bg-gradient-to-r from-slate-800 to-slate-900 text-white font-[family-name:var(--font-futura)]">
       <div className="px-8 py-6 gap-20 flex flex-row border-t justify-between">
                   <span className="w-fulh">
                   <h5>Subscribe</h5>
                       Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</span>
-                  <Button className="float-right text-white"><Heart width={16} height={16}/> Subscribe</Button>
+                      <div>
+                      {userId.userId === null?
+                      <div>
+                      <form>
+                      <div className="mb-2">
+                      <Input id="email" placeholder="Email address" />
+                      </div>
+                      </form>
+                <Button className="text-white"><Heart width={16} height={16}/> Subscribe</Button></div>
+                : 
+          <Button className="text-white"><Heart width={16} height={16}/> Subscribe</Button>}
+                  </div>
               </div>
         <div className="grid flex flex-row gap-10 px-24 justify-center">
         <div className="row-start-3">
@@ -129,14 +143,15 @@ export default function Footer() {
         <div className=" p-16">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://www.instagram.com/beera_safe256/profilecard/?igsh=cTB2b2FuNXM0NjRv"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <img
             aria-hidden
             src="/instagram.svg"
             alt="instagram icon"
+            className="text-white"
             width={16}
             height={16}
           />
@@ -144,22 +159,7 @@ export default function Footer() {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/facebook.svg"
-            alt="facebook icon"
-            width={16}
-            height={16}
-          />
-          facebook
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://x.com/beera_safe?t=_tgINtbfE8Ju0II3GGEtgw&s=09"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -20,7 +20,7 @@ const futuraBook = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "wascl",
+  title: "Beera Safe",
   description: "learn cyber security",
 };
 

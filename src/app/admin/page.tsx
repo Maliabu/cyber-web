@@ -8,9 +8,9 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
-import { Book, BookCheck, BugPlay, Calendar, CalendarCheck2, GraduationCap, LayoutDashboardIcon, Lock, Paperclip, Play, User, Users, Users2Icon, UsersIcon } from "lucide-react"
+import { Book, BookCheck, BugPlay, Calendar, CalendarCheck2, GraduationCap, GraduationCapIcon, LayoutDashboardIcon, Lock, Paperclip, Play, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "./users/page"
-import Logo from '@/app/images/logo.png'
+import Logo from '@/app/images/logo1.png'
 import Image from "next/image";
 import AddPage from "./addPage"
 import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar"
@@ -18,10 +18,8 @@ import { Chart } from "./chart"
 import { eq } from "drizzle-orm"
 import { usersTable } from "@/drizzle/schema"
 import LogoutAdmin from "./auth/logoutAdmin"
-import { tokenise } from "../services/services"
 import Admin from "./auth/admin"
-import AddEvent from "./events/page"
-import Events from "./events/events"
+import AddEvents from "./events/page"
 
 export default async function AdminPage() {
   const users  =  await db.query.usersTable.findMany()
@@ -36,32 +34,31 @@ export default async function AdminPage() {
   const subscriptions = await db.query.subscriptionsTable.findMany()
 
   return (
-    <div className="justify-stretch text-white bg-gradient-to-r from-slate-800 to-gray-900 font-[family-name:var(--font-futura)]">
+    <div className="justify-stretch text-white bg-gradient-to-r from-gray-900 to-gray-900 font-[family-name:var(--font-futura)]">
     <div className="px-8 py-4">
       <main className="flex flex-row">
-      <div className="flex flex-col justify-between rounded-lg">
+      <div className="flex flex-col justify-between rounded-lg backdrop p-4">
         <div className="self-center">
         <a href="/">
             <Image
                 aria-hidden
                 src={Logo}
                 alt="File icon"
-                width={30}
-                height={30}/></a>
-        <p className="logo-text mt-2">WASCL</p>
+                width={100}
+                height={100}/></a>
         </div>
         <div className="self-center mt-96">
           <LogoutAdmin/>
         </div>
       </div>
-        <div className="w-full h-full ml-4 rounded-lg bg-gradient-to-r from-gray-900 to-slate-800 shadow-lg">
+        <div className="w-full h-full ml-4 rounded-lg backdrop ">
     <Tabs defaultValue="dashboard" className="m-6 dark">
       <TabsList>
       <TabsTrigger value="dashboard"><LayoutDashboardIcon className="mx-2 w-4 h-4"/> Dashboard</TabsTrigger>
         <TabsTrigger value="user"><Users className="mx-2 w-4 h-4"/> Users</TabsTrigger>
-        <TabsTrigger value="events"><Play className="mx-2 w-4 h-4"/> Events</TabsTrigger>
-        <TabsTrigger value="articles"><BookCheck className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
-        <TabsTrigger value="courses"><GraduationCap className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
+        <TabsTrigger value="events"><CalendarCheck2 className="mx-2 w-4 h-4"/> Events</TabsTrigger>
+        <TabsTrigger value="articles"><Paperclip className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
+        <TabsTrigger value="courses"><BugPlay className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
         <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard" className="tabs">
@@ -81,7 +78,7 @@ export default async function AdminPage() {
               <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 border rounded-2xl shadow-lg">
+            <div className="p-8 border rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -89,12 +86,12 @@ export default async function AdminPage() {
               <Calendar className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 border rounded-2xl shadow-lg">
+            <div className="p-8 border rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
               { enrollments.length}</h1><p className="desc mt-4">Enrollments</p></div>
-              <Book className="w-10 h-10 text-primary"/>
+              <GraduationCapIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
         </div>
@@ -136,7 +133,7 @@ export default async function AdminPage() {
         </div>
       </TabsContent>
       <TabsContent value="events">
-        <Events/>
+        <AddEvents/>
       </TabsContent>
                 <TabsContent value="courses">
                   {
@@ -151,7 +148,6 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
-                <AddEvent/>
                 <p>{courses.length} Total Courses</p>
                 </div>
                 </TabsContent>
@@ -301,7 +297,7 @@ function UserCard({
   profilePicture
 }: UsercardProps){
   return (
-    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 dark shadow-lg">
+    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 dark ">
       <div className="w-10 h-10 mt-2">
       <Avatar>
         <AvatarImage src='' className="rounded-full"/>

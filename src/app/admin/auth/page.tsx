@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Logo from '@/app/images/logo.png'
+import Logo from '@/app/images/logo1.png'
 import LoginAdmin from "./loginAdmin"
 
 export default async function Login(){
@@ -10,8 +10,8 @@ export default async function Login(){
                     <Image
                     alt="logo"
                     src={Logo}
-                    width={30}
-                    height={35}
+                    width={100}
+                    height={100}
                     />
                     <h5 className="p-4">Admin Login Panel</h5>
                 </div>

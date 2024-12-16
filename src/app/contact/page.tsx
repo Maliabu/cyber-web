@@ -25,8 +25,15 @@ import {
     CarouselPrevious,
   } from "@/components/ui/carousel"
   import Logo from '../images/logo.png'
+  import Whatsapp from '../images/whatsapp.png'
+import { auth } from "@clerk/nextjs/server";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
-export default function About(){
+export default async function About(){
+
+  const userId = await auth()
+
     return(
         <>
         <Menu/>
@@ -34,16 +41,43 @@ export default function About(){
         <div className="float-right">
           <div className="grid justify-items-center py-8">
           <h1 className="display-1">70+</h1></div>
+          <a href="/">
       <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
-    </Card>
+    </Card></a>
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-6 mt-2 w-[350px]">
-        <p className="">You can Leave a Message</p>
-        <Button className="bg-light p-2 rounded-md w-1/2 h-1/2 items-center"><MessageCircle/> Message</Button>
+        <p className="w-1/4">You can Leave a Message</p>
+        {userId.userId !== null?<form>
+      <div className="grid w-full items-center gap-4">
+        <div className="flex flex-col space-y-1.5 dark">
+          <Input type="text" placeholder="Message" />
+        </div>
+      </div>
+      <Button className="my-4 text-white bg-primary">Send</Button>
+    </form>
+      : <form>
+      <div className="grid w-full items-center gap-4">
+        <div className="flex flex-col space-y-1.5 dark">
+          <Input id="email" type="email" placeholder="Email address" />
+          <Input type="text" placeholder="Message" />
+        </div>
+      </div>
+      <Button className="my-4 text-white bg-primary">Send</Button>
+    </form>}
     </div>
+    <a href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
+    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[350px]">
+        <p className="w-1/4">Join our whatsapp community</p>
+        <Image
+        src={Whatsapp}
+        alt="whatsapp logo"
+        height={70}
+        width={70}
+        />
+    </div></a>
     </div>
       <div className="pb-16">
       <NavigationMenu>
@@ -161,7 +195,8 @@ export default function About(){
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-      <Button className="text-white"><Group width={16} height={16}/> Go to the Blog</Button>
+    <a href="/blog">
+      <Button className="text-white"><Group width={16} height={16}/> Go to the Blog</Button></a>
       <Button className="mx-4 text-white"><PersonStanding width={16} height={16}/> Become a Mentor</Button>
        </div>
         <Footer/>

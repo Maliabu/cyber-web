@@ -62,7 +62,7 @@ export const articlesTable = pgTable('articles_table', {
 export const EventsTable = pgTable('events_table', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
-  descritption: text('content').notNull(),
+  description: text('content').notNull(),
   link: varchar('link'),
   image: varchar('course_image'),
   startDate: timestamp('start_date'),

@@ -15,11 +15,11 @@ body {
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 10 80% 50%;
+    --primary: 201 98% 41%;
     --primary-foreground: 0 0% 98%;
     --secondary: 20 80.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
+    --muted: 240 90.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
@@ -43,7 +43,7 @@ body {
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 10 70% 50%;
+    --primary: 201 98% 41%;
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
@@ -101,7 +101,7 @@ p{
 button{
   font-size: 15px !important;
   font-weight: 550 !important;
-  /* border: 1px solid rgb(244, 99, 50) !important; */
+  /* border: 1px solid rgb(2, 165, 250) !important; */
   border-radius: 5px !important;
   color: rgb(158, 157, 157) !important;
 }
@@ -115,7 +115,7 @@ h6{
 }
 a{
   font-size: 15px !important;
-  color: rgb(266, 64, 54) !important;
+  color: rgb(2, 165, 250) !important;
 }
 .max-w-sm{
   max-width: 80% !important;
@@ -147,8 +147,8 @@ a{
   font-weight: 550 !important;
 }
 .bg-light{
-  color: rgb(266, 64, 54) !important;
-  border: 1px solid rgb(266, 64, 54);
+  color: rgb(2, 165, 250) !important;
+  border: 1px solid rgb(2,165, 250);
 }
 .text-white{
   color: aliceblue !important;

@@ -9,7 +9,7 @@ export default function LogoutAdmin(){
         setTimeout(() => {
             let message = document.getElementById("submit1")
             if(message !== null){
-                message.innerHTML = '<LoaderIcon animate/>'
+                message.innerHTML = 'logging out...'
             }
         })
         window.localStorage.setItem("token", '')

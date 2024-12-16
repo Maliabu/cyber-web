@@ -1,7 +1,7 @@
 import * as React from "react"
 import Image from "next/image";
 import Link from "next/link"
-import Logo from '../images/logo.png'
+import Logo from '../images/logo1.png'
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import {
@@ -11,11 +11,12 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
 import { Calendar, ChevronDown, NotebookPen, Search } from "lucide-react";
 import Blog from '../images/link.jpeg'
+import { UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
  
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -55,20 +56,29 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export default function Menu() {
+export default async function Menu() {
+
+  const userId = await auth()
+
+  function display(){
+    if(userId.userId !== null){
+      return <UserButton/>
+    } else {
+      return <a href="/sign-in"><Button className="text-white">Sign In</Button></a>
+    }
+  }
+
   return (
     <div className="grid font-[family-name:var(--font-futura)]">
       <main className="flex flex-row justify-between gap-4 px-8 py-4 items-center text-dark">
-      <div className="flex flex-row">
+        <a href="/">
           <Image
             aria-hidden
             src={Logo}
             alt="logo"
-            width={30}
-            height={20}
-          />
-          <h1 className="m-2 logo-text">WASCL</h1>
-          </div>
+            width={130}
+            height={130}
+          /></a>
       <NavigationMenu className=" rounded-sm">
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -115,10 +125,7 @@ export default function Menu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <a href="/events" className="nav-a">Our Events</a>
-          </NavigationMenuItem>
-        <NavigationMenuItem>
-          <a href="/news" className="mx-8 nav-a">News</a>
+          <a href="/events" className="nav-a mx-6">News & Events</a>
           </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
@@ -129,13 +136,13 @@ export default function Menu() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-    <Button className="text-white bg-gradient-to-r from-red-500 to-red-800"><ChevronDown width={16} height={16}/> Register</Button>
+    {display()}
       </main>
       <div>
         <div className="px-8 py-4 flex flex-row justify-between border-b border-t">
           <div className="flex flex-row w-1/2">
           <h5 className="w-1/2">Schedule an interview with our mentors!</h5>
-            <Button className="text-white bg-gradient-to-r from-red-500 to-red-800"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
+            <Button className="bg-primary text-white"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
             </div>
                 <div className="relative">
                   <div className="absolute left-4 top-2.5 h-2 w-2 text-card-foreground">

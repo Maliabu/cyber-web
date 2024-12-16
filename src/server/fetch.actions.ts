@@ -1,10 +1,10 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { usersTable } from "@/drizzle/schema";
+import { EventsTable, usersTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addUserSchema, loginUserSchema } from '@/schema/formSchemas'
+import { addEventSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 
 
@@ -51,6 +51,19 @@ export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
     name = checkEmail.name
    }
    return [token, encrPass, initVector, usertype, email, username, name]
+}
+
+export async function addEvents(unsafeData: z.infer<typeof addEventSchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = addEventSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+
+   await db.insert(EventsTable).values({...data})
+
+   return {error: false}
 }
 
 export async function users():

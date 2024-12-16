@@ -1,4 +1,4 @@
-import { Book, BookCheckIcon, Calendar, Edit, GraduationCap, Play, User2Icon, UserCircle, UserIcon } from "lucide-react";
+import { Book, BookCheckIcon, BugPlay, Calendar, CalendarCheck2, Edit, GraduationCap, Paperclip, Play, User2Icon, UserCircle, UserIcon } from "lucide-react";
 
 type PageState = "User" | "Event" | "Mentor" | "Schedule" | "Enrollment" | "Subscription" | "Article" | "Course"
 type AddPageProps = {
@@ -29,12 +29,12 @@ function getPageicon(pageState: PageState){
         case "Enrollment":
             return GraduationCap
         case "Article":
-            return Book
+            return Paperclip
         case "Event":
-            return BookCheckIcon
+            return CalendarCheck2
         case "Subscription":
             return Edit
         case "Course":
-            return Play
+            return BugPlay
     }
 }
