@@ -10,7 +10,7 @@ type EventcardProps = {
     link: string | null
   }
   // one time usercard component with custom prop type
-  export function EventCard({
+  export function CourseCard({
     title,
     description,
     startDate,

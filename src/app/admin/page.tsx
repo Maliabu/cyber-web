@@ -8,7 +8,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
-import { Book, BookCheck, BugPlay, Calendar, CalendarCheck2, GraduationCap, GraduationCapIcon, LayoutDashboardIcon, Lock, Paperclip, Play, User, Users, Users2Icon, UsersIcon } from "lucide-react"
+import { BugPlay, Calendar, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Lock, Paperclip, Play, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "./users/page"
 import Logo from '@/app/images/logo1.png'
 import Image from "next/image";
@@ -21,6 +21,7 @@ import LogoutAdmin from "./auth/logoutAdmin"
 import Admin from "./auth/admin"
 import AddEvents from "./events/page"
 import { EventCard } from "./events/eventCard"
+import AddCourse from "./courses/page"
 
 export default async function AdminPage() {
   const users  =  await db.query.usersTable.findMany()
@@ -163,6 +164,7 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
+                  <AddCourse/>
                 <p>{courses.length} Total Courses</p>
                 </div>
                 </TabsContent>

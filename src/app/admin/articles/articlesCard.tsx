@@ -10,7 +10,7 @@ type EventcardProps = {
     link: string | null
   }
   // one time usercard component with custom prop type
-  export function EventCard({
+  export function ArticlesCard({
     title,
     description,
     startDate,
@@ -18,6 +18,7 @@ type EventcardProps = {
     link
   }: EventcardProps){
     const path = '/events/'+image
+    console.log(path)
     return (
       <Card className=" grid grid-cols-4 gap-4 p-6 mt-1 dark ">
         <div className="w-10 h-10">

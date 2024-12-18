@@ -1,10 +1,10 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { EventsTable, usersTable } from "@/drizzle/schema";
+import { EventsTable, courseTable, usersTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addEventSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
+import { addCourseSchema, addEventSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
@@ -99,6 +99,22 @@ Promise<{error: boolean | undefined}> {
    uploadEventFile(formData)
 
    await db.insert(EventsTable).values({...data})
+
+   return {error: false}
+}
+
+export async function addCourse(unsafeData: z.infer<typeof addCourseSchema>, formData: FormData) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = addCourseSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+
+   uploadEventFile(formData)
+   //mostly spell check n no of arguments in payload
+   // add currencies
+   await db.insert(courseTable).values({...data})
 
    return {error: false}
 }

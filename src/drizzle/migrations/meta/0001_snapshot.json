@@ -1,6 +1,6 @@
 {
-  "id": "95f32afd-cfdb-4806-a1ca-7bf31833174a",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "4faacc24-e354-4a74-952b-cb41e73de8c3",
+  "prevId": "95f32afd-cfdb-4806-a1ca-7bf31833174a",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -275,7 +275,7 @@
           "name": "end_date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "currency_id": {
           "name": "currency_id",
@@ -287,7 +287,7 @@
           "name": "amount",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
