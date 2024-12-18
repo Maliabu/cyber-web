@@ -8,9 +8,9 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
-import { BookCheck, GraduationCap, LayoutDashboardIcon, Lock, Play, User, Users } from "lucide-react"
+import { BugPlay, Calendar, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Lock, Paperclip, Play, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "./users/page"
-import Logo from '@/app/images/logo.png'
+import Logo from '@/app/images/logo1.png'
 import Image from "next/image";
 import AddPage from "./addPage"
 import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar"
@@ -18,10 +18,10 @@ import { Chart } from "./chart"
 import { eq } from "drizzle-orm"
 import { usersTable } from "@/drizzle/schema"
 import LogoutAdmin from "./auth/logoutAdmin"
-import { tokenise } from "../services/services"
 import Admin from "./auth/admin"
-import AddEvent from "./events/page"
-import Events from "./events/events"
+import AddEvents from "./events/page"
+import { EventCard } from "./events/eventCard"
+import AddCourse from "./courses/page"
 
 export default async function AdminPage() {
   const users  =  await db.query.usersTable.findMany()
@@ -39,50 +39,94 @@ export default async function AdminPage() {
     <div className="justify-stretch font-[family-name:var(--font-futura)]">
     <div className="px-8 py-4">
       <main className="flex flex-row">
-      <div className="flex flex-col justify-between rounded-lg">
+      <div className="flex flex-col justify-between rounded-lg bg-muted p-4">
         <div className="self-center">
         <a href="/">
             <Image
                 aria-hidden
                 src={Logo}
                 alt="File icon"
-                width={30}
-                height={30}/></a>
-        <p className="logo-text mt-2">WASCL</p>
+                width={100}
+                height={100}/></a>
         </div>
         <div className="self-center mt-96">
           <LogoutAdmin/>
         </div>
       </div>
-        <div className="w-full h-full ml-4 rounded-lg border">
-    <Tabs defaultValue="dashboard" className="m-6">
+        <div className="w-full h-full ml-2 rounded-lg ">
+    <Tabs defaultValue="dashboard" className="">
       <TabsList>
       <TabsTrigger value="dashboard"><LayoutDashboardIcon className="mx-2 w-4 h-4"/> Dashboard</TabsTrigger>
         <TabsTrigger value="user"><Users className="mx-2 w-4 h-4"/> Users</TabsTrigger>
-        <TabsTrigger value="events"><Play className="mx-2 w-4 h-4"/> Events</TabsTrigger>
-        <TabsTrigger value="articles"><BookCheck className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
-        <TabsTrigger value="courses"><GraduationCap className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
+        <TabsTrigger value="events"><CalendarCheck2 className="mx-2 w-4 h-4"/> Events</TabsTrigger>
+        <TabsTrigger value="articles"><Paperclip className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
+        <TabsTrigger value="courses"><BugPlay className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
         <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard" className="tabs">
         <div className="py-6 w-full grid grid-cols-4 gap-4">
-            <div className="p-8 border rounded-2xl">
-              <h3>
-              { users.length}</h3><p>Users</p></div>
-            <div className="p-8 border rounded-2xl"><h3>{mentors.length}</h3><p>Mentors</p></div>
-            <div className="p-8 border rounded-2xl"><h3>{schedules.length}</h3><p>Schedules</p></div>
-            <div className="p-8 border rounded-2xl"><h3>{enrollments.length}</h3><p>Enrollments</p></div>
+            <div className="p-8 bg-muted rounded-2xl">
+              <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { users.length}</h1><p className="desc mt-4">Users</p></div>
+              <UsersIcon className="w-10 h-10 text-primary"/>
+              </div></div>
+            <div className="p-8 bg-muted rounded-2xl">
+            <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { mentors.length}</h1><p className="desc mt-4">Mentors</p></div>
+              <Users2Icon className="w-10 h-10 text-primary"/>
+              </div>
+            </div>
+            <div className="p-8 bg-muted rounded-2xl ">
+            <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { schedules.length}</h1><p className="desc mt-4">Schedules</p></div>
+              <Calendar className="w-10 h-10 text-primary"/>
+              </div>
+            </div>
+            <div className="p-8 bg-muted rounded-2xl ">
+            <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { enrollments.length}</h1><p className="desc mt-4">Enrollments</p></div>
+              <GraduationCapIcon className="w-10 h-10 text-primary"/>
+              </div>
+            </div>
         </div>
         <div>
-            <div className=" border rounded-2xl p-6">
+            <div className=" rounded-2xl p-6 bg-muted">
             <h5>Statistics Analysis</h5>
               <Chart/>
             </div>
         </div>
         <div className="py-6 w-full grid grid-cols-3 gap-4">
-            <div className="p-8 border rounded-2xl"><h3>{courses.length}</h3><p>Courses</p></div>
-            <div className="p-8 border rounded-2xl"><h3>{events.length}</h3><p>Events</p></div>
-            <div className="p-8 border rounded-2xl"><h3>{articles.length}</h3><p>Articles</p></div>
+            <div className="p-8 bg-muted rounded-2xl">
+            <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { courses.length}</h1><p className="desc mt-4">Courses</p></div>
+              <BugPlay className="w-10 h-10 text-primary"/>
+              </div>
+            </div>
+            <div className="p-8 bg-muted rounded-2xl">
+            <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { events.length}</h1><p className="desc mt-4">Events</p></div>
+              <CalendarCheck2 className="w-10 h-10 text-primary"/>
+              </div>
+            </div>
+            <div className="p-8 bg-muted rounded-2xl">
+            <div className="flex flex-row justify-between">
+                <div>
+              <h1 className="display-1">
+              { articles.length}</h1><p className="desc mt-4">Articles</p></div>
+              <Paperclip className="w-10 h-10 text-primary"/>
+              </div></div>
         </div>
       </TabsContent>
       <TabsContent value="account" className="tabs">
@@ -91,7 +135,21 @@ export default async function AdminPage() {
         </div>
       </TabsContent>
       <TabsContent value="events">
-        <Events/>
+                  {
+                    events.length > 0 ? (
+                      <div className="flex flex-col admin">
+                        {events.map(event => (
+                          <EventCard key={event.id} {...event}/>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Event"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddEvents/>
+                <p>{articles.length} Total Events</p>
+                </div>
       </TabsContent>
                 <TabsContent value="courses">
                   {
@@ -106,7 +164,7 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
-                <AddEvent/>
+                  <AddCourse/>
                 <p>{courses.length} Total Courses</p>
                 </div>
                 </TabsContent>
@@ -166,8 +224,7 @@ export default async function AdminPage() {
                       <AddPage page={"Mentor"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
+                <div className="p-4 flex flex-row justify-end">
                 <p>{mentors.length} Total Mentors</p>
                 </div>
                 </TabsContent>
@@ -228,7 +285,7 @@ export default async function AdminPage() {
     </Tabs>
         </div>
         </main>
-        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between border-t">
+        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between bg-muted-t">
           <div className="row-start-4">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>
@@ -255,11 +312,12 @@ function UserCard({
   username,
   profilePicture
 }: UsercardProps){
+  const path = "/profilePictures/"+profilePicture
   return (
-    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 background-none">
+    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 dark ">
       <div className="w-10 h-10 mt-2">
       <Avatar>
-        <AvatarImage src='' className="rounded-full"/>
+        <AvatarImage src={path} className="rounded-full w-10 h-10"/>
         <AvatarFallback className="rounded-full bg-muted py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
       </Avatar>
       </div>

@@ -1,6 +1,6 @@
 import { ClerkProvider, SignIn as Signin } from "@clerk/nextjs"
 import Image from "next/image"
-import Logo from '@/app/images/logo.png'
+import Logo from '@/app/images/logo1.png'
 
 export default function SignIn(){
     return(
@@ -9,12 +9,10 @@ export default function SignIn(){
                 <Image
                 alt="logo"
                 src={Logo}
-                width={30}
-                height={35}
+                width={100}
+                className="mb-2"
+                height={100}
                 />
-                <div>
-                    <h5 className="p-4">Admin Login Panel</h5>
-                </div>
                 <Signin />
             </div>
         </ClerkProvider>

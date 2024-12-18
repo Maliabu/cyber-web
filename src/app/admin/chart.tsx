@@ -57,14 +57,14 @@ export function Chart() {
 
   return (
           <div className="p-4 pb-0">
-            <div className="mt-3 h-[120px]">
+            <div className="mt-3 h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data}>
                   <Bar
                     dataKey="goal"
                     style={
                       {
-                        fill: "hsl(var(--foreground))",
+                        fill: "hsl(var(--primary))",
                         opacity: 0.9,
                       } as React.CSSProperties
                     }

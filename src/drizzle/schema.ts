@@ -33,15 +33,16 @@ export const currencyTable = pgTable('currency_table', {
 export const courseTable = pgTable('course_table', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
-  descritption: text('content').notNull(),
+  description: text('description').notNull(),
   courseOutline: text('outline'),
   image: varchar('course_image'),
   mentor: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   startDate: timestamp('start_date').notNull(),
-  duration: integer('course_duration'),
-  pricing: integer('pricing'),
+  endDate: timestamp('end_date').notNull(),
+  currency: integer("currency_id").notNull().references(() => currencyTable.id, {onDelete: 'cascade'}),
+  amount: integer('amount').notNull(),
   createdAt,
   updatedAt,
 });
@@ -62,11 +63,11 @@ export const articlesTable = pgTable('articles_table', {
 export const EventsTable = pgTable('events_table', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
-  descritption: text('content').notNull(),
+  description: text('description').notNull(),
   link: varchar('link'),
-  image: varchar('course_image'),
+  image: varchar('event_image').notNull(),
   startDate: timestamp('start_date'),
-  duration: integer('course_duration'),
+  endDate: timestamp('end_date'),
   createdAt,
   updatedAt,
 });

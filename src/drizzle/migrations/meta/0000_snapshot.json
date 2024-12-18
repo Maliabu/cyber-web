@@ -1,5 +1,5 @@
 {
-  "id": "9a41f5f9-9fa4-4ce4-b0fe-011bb989b16e",
+  "id": "95f32afd-cfdb-4806-a1ca-7bf31833174a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -20,8 +20,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "content": {
-          "name": "content",
+        "description": {
+          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -32,11 +32,11 @@
           "primaryKey": false,
           "notNull": false
         },
-        "course_image": {
-          "name": "course_image",
+        "event_image": {
+          "name": "event_image",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "start_date": {
           "name": "start_date",
@@ -44,9 +44,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "course_duration": {
-          "name": "course_duration",
-          "type": "integer",
+        "end_date": {
+          "name": "end_date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
@@ -241,8 +241,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "content": {
-          "name": "content",
+        "description": {
+          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -271,14 +271,20 @@
           "primaryKey": false,
           "notNull": true
         },
-        "course_duration": {
-          "name": "course_duration",
-          "type": "integer",
+        "end_date": {
+          "name": "end_date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
-        "pricing": {
-          "name": "pricing",
+        "currency_id": {
+          "name": "currency_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -305,6 +311,19 @@
           "tableTo": "users_table",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "course_table_currency_id_currency_table_id_fk": {
+          "name": "course_table_currency_id_currency_table_id_fk",
+          "tableFrom": "course_table",
+          "tableTo": "currency_table",
+          "columnsFrom": [
+            "currency_id"
           ],
           "columnsTo": [
             "id"
@@ -683,7 +702,8 @@
           "name": "type",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'user'"
         },
         "is_active": {
           "name": "is_active",
@@ -696,7 +716,7 @@
           "name": "decInitVector",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",

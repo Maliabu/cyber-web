@@ -8,27 +8,37 @@ import { useForm } from "react-hook-form"
 import z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { addEvents } from "@/server/fetch.actions"
-import { addEventSchema } from '@/schema/formSchemas'
+import { addCourse } from "@/server/fetch.actions"
+import { addCourseSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
 import { DatePicker } from "../datePicker"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { mentors } from "./helpers"
 
-export default function AddEvents() {
+export default function AddCourse() {
+    const [mentor, setMentor] = React.useState([{}])
 
-    const form = useForm<z.infer<typeof addEventSchema>>({
-      resolver: zodResolver(addEventSchema),
+    React.useEffect(() => {
+        mentors().then((res) => setMentor(res))
+    })
+
+    const form = useForm<z.infer<typeof addCourseSchema>>({
+      resolver: zodResolver(addCourseSchema),
         defaultValues: {
           title: "",
           description: "",
-          link: "",
+          courseOutline: "",
           image: "",
+          mentor: 0,
           startDate: new Date(),
           endDate: new Date(),
+          currency: 0,
+          amount: 0,
           image1: ''
       },
     })
 
-    async function onSubmit(values: z.infer<typeof addEventSchema>) {
+    async function onSubmit(values: z.infer<typeof addCourseSchema>) {
         //create obj
         const app = document.getElementById('submit');
         const text = 'processing';
@@ -40,10 +50,10 @@ export default function AddEvents() {
         const formData = new FormData()
         formData.append("file", values.image1)
 
-        const data = await addEvents(values, formData)
+        const data = await addCourse(values, formData)
         if(data?.error){
           form.setError("root", {
-            "message": "event not added"
+            "message": "Course not added"
           })
         } else {
           if(app !== null){
@@ -66,7 +76,7 @@ export default function AddEvents() {
                   name="title"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>Title *</FormLabel>
                       <FormControl>
                           <Input 
                           type="text" 
@@ -83,7 +93,7 @@ export default function AddEvents() {
                   name="description"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel>Description *</FormLabel>
                       <FormControl>
                           <Input type="text" placeholder="Description" {...field} />
                       </FormControl>
@@ -95,12 +105,38 @@ export default function AddEvents() {
               <div className="flex flex-col mt-6 space-y-1.5">
               <FormField
                   control={form.control}
-                  name="link"
+                  name="courseOutline"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Link</FormLabel>
+                      <FormLabel>Course Outline</FormLabel>
                       <FormControl>
                           <Input type="text" placeholder="Link" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+              <div className="flex flex-col mt-6 space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="mentor"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Mentor</FormLabel>
+                      <FormControl>
+                          <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
+                              <SelectTrigger id="mentor">
+                              <SelectValue placeholder="Mentor"/>
+                              </SelectTrigger>
+                              <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
+                                {
+                                    mentor.map(user => (
+                                        <SelectItem value=""></SelectItem>
+                                    ))
+                                }
+                              </SelectContent>
+                          </Select>
                       </FormControl>
                       <FormMessage />
                       </FormItem>
@@ -159,14 +195,29 @@ export default function AddEvents() {
                   )}
                   />
               </div>
+              <div className="flex flex-col mt-6 space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="amount"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Amount *</FormLabel>
+                      <FormControl>
+                          <Input type="number" placeholder="Link" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
           </div>
         </div>
-        <Button id="submit" className="my-4 text-white" type="submit">Add Event</Button>
+        <Button id="submit" className="my-4 text-white" type="submit">Add Course</Button>
         {form.formState.errors.root && (
           <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Event added successfully </div>
+          <div className="bg-light p-2 text-center rounded-md"> Course added successfully </div>
         )}
       </form>
       </Form>
@@ -175,7 +226,7 @@ export default function AddEvents() {
 
   return (
     <div className="font-[family-name:var(--font-futura)]">
-      <ReusableDrawer page="Event" form={formBuild()}/>
+      <ReusableDrawer page="Course" form={formBuild()}/>
     </div>
   )
 }

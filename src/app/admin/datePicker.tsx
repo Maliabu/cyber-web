@@ -13,8 +13,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function DatePicker() {
+// will disturb on dialogs, drawers etc
+//popover component has a primitive portal tag that should
+// be removed to solve the issue
+export function DatePicker(field: any) {
   const [date, setDate] = React.useState<Date>()
+  console.log(field)
 
   return (
     <Popover>
@@ -22,20 +26,21 @@ export function DatePicker() {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground"
+            "w-[280px] justify-start text-left text-dark",
+            !field.field.value
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          <CalendarIcon className="mr-2 h-4 w-4 text-dark" />
+          {field.field.value ? format(field.field.value, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={field.field.value}
+          onSelect={field.field.onChange}
           initialFocus
+          className="text-dark"
         />
       </PopoverContent>
     </Popover>

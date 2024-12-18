@@ -17,6 +17,7 @@ export const addUserSchema = z.object({
     encrPass: z.string({required_error: "Please enter a password.",}).min(2, {
         message: "Password must be atleast 8 characters"
     }).max(50),
+    image: z.any()
 }).superRefine(({ confirmPassword, encrPass }, ctx) => {
     if (confirmPassword !== encrPass) {
       ctx.addIssue({
@@ -44,5 +45,33 @@ export const addEventSchema = z.object({
     link: z.string(),
     image: z.string(),
     startDate: z.date({required_error: "Please enter a date.",}),
-    duration: z.number(),
+    endDate: z.date({required_error: "Please enter a date.",}),
+    image1: z.any(),
+})
+
+export const addCourseSchema = z.object({
+    title: z.string({required_error: "Please enter a title.",}).min(2, {
+        message: "title should be atleast a character"
+    }).max(50),
+    description: z.string({required_error: "Please enter a description.",}),
+    courseOutline: z.string(),
+    image: z.string(),
+    mentor: z.number({required_error: "Please provide a mentor.",}).positive(),
+    startDate: z.date({required_error: "Please enter a date.",}),
+    endDate: z.date({required_error: "Please enter a date.",}),
+    currency: z.number({required_error: "Please enter a currency.",}).positive(),
+    amount: z.number({required_error: "Please enter a pricing for this course.",}).positive(),
+    image1: z.any(),
+})
+
+export const addArticleSchema = z.object({
+    title: z.string({required_error: "Please enter a title.",}).min(2, {
+        message: "title should be atleast a character"
+    }).max(50),
+    description: z.string({required_error: "Please enter a description.",}),
+    link: z.string(),
+    image: z.string(),
+    startDate: z.date({required_error: "Please enter a date.",}),
+    endDate: z.date({required_error: "Please enter a date.",}),
+    image1: z.any(),
 })

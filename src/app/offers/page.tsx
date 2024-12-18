@@ -45,41 +45,6 @@ export default function Services(){
         <div className=" p-16 items-center font-[family-name:var(--font-futura)]">
         <div className=" z-0 absolute -right-0">
             <TimerCountDown/>
-      <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Hacking For You!</CardTitle>
-        <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder="Name of your project" />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">Preferred Framework</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <Button className="my-6 text-white">Sign Up My Account!</Button>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <p>or continue with google</p>
-        <Button className="bg-light">Sign up with Google</Button>
-      </CardFooter>
-    </Card>
     </div>
       <NavigationMenu>
     <NavigationMenuList>
@@ -97,7 +62,8 @@ export default function Services(){
       <h1 className="display-1">Our Cyber Classes</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
-      <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button>
+      <a href="/offers#courses">
+      <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></a>
       </div>
       </div>
       <div className=" p-16 back-classes font-[family-name:var(--font-futura)]">
@@ -107,7 +73,7 @@ export default function Services(){
       }}
       className="w-full"
     >
-    <div className="p-8">
+    <div className="p-8" id="courses">
     <h3 className="display-1">Our Classes</h3>
     <div className="flex flex-row mt-4">
     <Badge variant="outline">Hacking</Badge>
@@ -125,7 +91,7 @@ export default function Services(){
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
-                <Badge variant="outline" className="float-right p-2 -m-14">Starting Soon</Badge>
+                <Badge variant="outline" className="float-right text-white p-2 -m-14">Starting Soon</Badge>
                     <Image
                     aria-hidden
                     src={Logo}
@@ -133,7 +99,7 @@ export default function Services(){
                     width={60}
                     height={60}/>
                     <div className="py-4">
-                        <h3>Cyber Security in a Nutshell!</h3></div>
+                        <h3 className="text-white">Cyber Security in a Nutshell!</h3></div>
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 outline-none border focus:shadow-sm my-4"

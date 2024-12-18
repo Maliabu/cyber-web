@@ -13,7 +13,7 @@ import { addEventSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
 import { DatePicker } from "../datePicker"
 
-export default function AddEvents() {
+export default function AddArticle() {
 
     const form = useForm<z.infer<typeof addEventSchema>>({
       resolver: zodResolver(addEventSchema),

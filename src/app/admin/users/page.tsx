@@ -3,16 +3,6 @@
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useForm } from "react-hook-form"
@@ -22,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { addUsers } from "@/server/fetch.actions"
 import { addUserSchema } from '@/schema/formSchemas'
 import { handleEncryption, token, username } from "../../services/services"
-
+import { ReusableDrawer } from "../reusableDrawer"
 
 export default function AddUser() {
 
@@ -34,17 +24,20 @@ export default function AddUser() {
           token: "",
           username: "",
           userType: "",
-          profilePicture: "",
+          profilePicture: '',
           password: "",
           confirmPassword: "",
           decInit: "",
           encrPass: "",
+          image: ''
       },
     })
 
     let name = form.getValues("name")
     form.setValue("token", token())
     name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
+
+    console.log(form.getValues())
      
     async function onSubmit(values: z.infer<typeof addUserSchema>) {  
       if(values.encrPass !== "" && values.encrPass === values.confirmPassword){
@@ -53,13 +46,18 @@ export default function AddUser() {
         values.password = (await encr).encryptedData
         values.decInit = (await encr).initVector
       }
+      values.image?values.profilePicture = values.image.name:null
         //create obj
         const app = document.getElementById('submit');
         const text = 'processing';
         if(app !== null){
           app.innerHTML = text;
         }
-        const data = await addUsers(values)
+
+        const formData = new FormData()
+        formData.append("file", values.image)
+
+        const data = await addUsers(values, formData)
         if(data?.error){
           form.setError("root", {
             "message": "user not added"
@@ -72,146 +70,135 @@ export default function AddUser() {
         }
     }
 
+    function formBuild(){
+      return(
+      <div className="p-4 pb-0">
+      <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-2 w-full items-center gap-4">
+          <div>
+              <div className="flex flex-col space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                          <Input 
+                          type="text" 
+                          placeholder="Full name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+              <div className="flex flex-col mt-6 space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                          <Input type="email" placeholder="Email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+              <div className="flex flex-col space-y-1.5 mt-6">
+              <FormField
+                  control={form.control}
+                  name="userType"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>User Type</FormLabel>
+                      <FormControl>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <SelectTrigger id="userType">
+                              <SelectValue placeholder="User"/>
+                              </SelectTrigger>
+                              <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
+                              <SelectItem value="user">Normal User</SelectItem>
+                              <SelectItem value="admin">Admin User</SelectItem>
+                              <SelectItem value="mentor">Mentor</SelectItem>
+                              </SelectContent>
+                          </Select>
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+          </div>
+          <div>
+              <div className="flex flex-col space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="encrPass"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                          <Input type="password" placeholder="Password" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div><div className="flex flex-col mt-6 space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                          <Input type="password" placeholder="Confirm Password" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+              <div className="flex flex-col space-y-1.5 mt-6">
+              <FormField
+                  control={form.control}
+                  name="image"
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                      <FormItem>
+                      <FormLabel>Profile Picture</FormLabel>
+                      <FormControl
+                      >
+                          <Input type="file" {...fieldProps} onChange={(event) =>
+                    onChange(event.target.files && event.target.files[0])
+                  }/>
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+          </div>
+        </div>
+        <Button id="submit" className="my-4 text-white" type="submit">Sign Up User</Button>
+        {form.formState.errors.root && (
+          <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+        )}
+        {form.formState.isSubmitSuccessful && (
+          <div className="bg-light p-2 text-center rounded-md"> User added successfully </div>
+        )}
+      </form>
+      </Form>
+        </div>)
+    }
+
   return (
     <div className="font-[family-name:var(--font-futura)]">
-    <Drawer>
-      <DrawerTrigger asChild>
-        <Button className="text-white">Add New User</Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-full max-w-sm p-16 font-[family-name:var(--font-futura)]">
-          <DrawerHeader>
-            <DrawerTitle>Add New User</DrawerTitle>
-            <DrawerDescription>Add a New User to the table</DrawerDescription>
-          </DrawerHeader>
-          <div className="p-4 pb-0">
-        <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 w-full items-center gap-4">
-            <div>
-                <div className="flex flex-col space-y-1.5">
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                            <Input 
-                            type="text" 
-                            placeholder="Full name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                </div>
-                <div className="flex flex-col mt-6 space-y-1.5">
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                            <Input type="email" placeholder="Email" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                </div>
-                <div className="flex flex-col space-y-1.5 mt-6">
-                <FormField
-                    control={form.control}
-                    name="userType"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>User Type</FormLabel>
-                        <FormControl>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <SelectTrigger id="userType">
-                                <SelectValue placeholder="User"/>
-                                </SelectTrigger>
-                                <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
-                                <SelectItem value="user">Normal User</SelectItem>
-                                <SelectItem value="admin">Admin User</SelectItem>
-                                <SelectItem value="mentor">Mentor</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                </div>
-            </div>
-            <div>
-                <div className="flex flex-col space-y-1.5">
-                <FormField
-                    control={form.control}
-                    name="encrPass"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                            <Input type="password" placeholder="Password" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                </div><div className="flex flex-col mt-6 space-y-1.5">
-                <FormField
-                    control={form.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <FormControl>
-                            <Input type="password" placeholder="Confirm Password" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                </div>
-                <div className="flex flex-col space-y-1.5 mt-6">
-                <FormField
-                    control={form.control}
-                    name="profilePicture"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Profile Picture</FormLabel>
-                        <FormControl
-                        >
-                            <Input type="file" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                </div>
-            </div>
-          </div>
-          <Button id="submit" className="my-4 text-white" type="submit">Sign Up User</Button>
-          {form.formState.errors.root && (
-            <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
-          )}
-          {form.formState.isSubmitSuccessful && (
-            <div className="bg-light p-2 text-center rounded-md"> User added successfully </div>
-          )}
-        </form>
-        </Form>
-          </div>
-          <DrawerFooter>
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </div>
-      </DrawerContent>
-    </Drawer>
+      <ReusableDrawer page="User" form={formBuild()}/>
     </div>
   )
 }

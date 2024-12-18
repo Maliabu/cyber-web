@@ -5,22 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1734079308691,
-      "tag": "0000_small_captain_flint",
+      "when": 1734541960653,
+      "tag": "0000_motionless_serpent_society",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1734081508948,
-      "tag": "0001_majestic_stranger",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1734089774134,
-      "tag": "0002_brown_wiccan",
+      "when": 1734556054612,
+      "tag": "0001_naive_bloodaxe",
       "breakpoints": true
     }
   ]
