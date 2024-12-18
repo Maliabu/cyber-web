@@ -42,6 +42,21 @@ export async function uploadFile(formData: FormData) {
     revalidatePath("/");
 }
 
+export async function uploadEventFile(formData: FormData) {
+    const file = formData.get("file") as unknown as File;
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+
+    try {
+        await fs.writeFile(`./public/events/${file.name}`, buffer);
+    }
+    catch{
+        await fs.mkdir('./public/events')
+        await fs.writeFile(`./public/events/${file.name}`, buffer);
+    }
+    revalidatePath("/");
+}
+
 export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
    const {success, data} = loginUserSchema.safeParse(unsafeData)
 
@@ -73,13 +88,15 @@ export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
    return [token, encrPass, initVector, usertype, email, username, name]
 }
 
-export async function addEvents(unsafeData: z.infer<typeof addEventSchema>) : 
+export async function addEvents(unsafeData: z.infer<typeof addEventSchema>, formData: FormData) : 
 Promise<{error: boolean | undefined}> {
    const {success, data} = addEventSchema.safeParse(unsafeData)
 
    if (!success){
     return {error: true}
    }
+
+   uploadEventFile(formData)
 
    await db.insert(EventsTable).values({...data})
 

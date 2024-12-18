@@ -136,7 +136,7 @@ export default async function AdminPage() {
       <TabsContent value="events">
                   {
                     events.length > 0 ? (
-                      <div className="flex flex-row admin">
+                      <div className="flex flex-col admin">
                         {events.map(event => (
                           <EventCard key={event.id} {...event}/>
                         ))}
@@ -222,8 +222,7 @@ export default async function AdminPage() {
                       <AddPage page={"Mentor"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
+                <div className="p-4 flex flex-row justify-end">
                 <p>{mentors.length} Total Mentors</p>
                 </div>
                 </TabsContent>
@@ -311,11 +310,12 @@ function UserCard({
   username,
   profilePicture
 }: UsercardProps){
+  const path = "/profilePictures/"+profilePicture
   return (
     <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 dark ">
       <div className="w-10 h-10 mt-2">
       <Avatar>
-        <AvatarImage src='' className="rounded-full"/>
+        <AvatarImage src={path} className="rounded-full w-10 h-10"/>
         <AvatarFallback className="rounded-full bg-muted py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
       </Avatar>
       </div>

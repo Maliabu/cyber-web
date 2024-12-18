@@ -23,10 +23,10 @@ export default function AddEvents() {
           link: "",
           image: "",
           startDate: new Date(),
-          duration: 0,
+          endDate: new Date(),
+          image1: ''
       },
     })
-    console.log(form.getValues())
 
     async function onSubmit(values: z.infer<typeof addEventSchema>) {
         //create obj
@@ -35,7 +35,12 @@ export default function AddEvents() {
         if(app !== null){
           app.innerHTML = text;
         }
-        const data = await addEvents(values)
+        values.image1?values.image=values.image1.name:null
+
+        const formData = new FormData()
+        formData.append("file", values.image1)
+
+        const data = await addEvents(values, formData)
         if(data?.error){
           form.setError("root", {
             "message": "event not added"
@@ -105,15 +110,31 @@ export default function AddEvents() {
           </div>
           <div>
               <div className="flex flex-col space-y-1.5 mt-6">
+              <p className="desc">Start Date</p>
               <FormField
                   control={form.control}
-                  name="image"
+                  name="startDate"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Image</FormLabel>
                       <FormControl
                       >
-                          <Input type="file" {...field} />
+                          <DatePicker field={field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+              <div className="flex flex-col space-y-1.5 mt-6">
+              <p className="desc">End Date</p>
+              <FormField
+                  control={form.control}
+                  name="endDate"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormControl
+                      >
+                          <DatePicker field={field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>
@@ -123,11 +144,15 @@ export default function AddEvents() {
               <div className="flex flex-col mt-6 space-y-1.5">
               <FormField
                   control={form.control}
-                  name="startDate"
-                  render={({ field }) => (
+                  name="image1"
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
-                      <FormControl>
-                          <DatePicker {...field} />
+                      <FormLabel>Image</FormLabel>
+                      <FormControl
+                      >
+                          <Input type="file" {...fieldProps} onChange={(event) =>
+                    onChange(event.target.files && event.target.files[0])
+                  }/>
                       </FormControl>
                       <FormMessage />
                       </FormItem>

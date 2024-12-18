@@ -1,1 +1,0 @@
-ALTER TABLE "events_table" ALTER COLUMN "course_image" SET NOT NULL;

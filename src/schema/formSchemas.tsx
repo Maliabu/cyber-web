@@ -10,13 +10,14 @@ export const addUserSchema = z.object({
     }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
     token: z.string().min(15, {message: "missing token"}),
     username: z.string().min(2, {message: "missing username"}),
-    profilePicture: typeof window === 'undefined' ? z.any() : z.instanceof(FileList),
+    profilePicture: z.string(),
     userType: z.string({required_error: "Please select the type of user.",}),
     confirmPassword: z.string({required_error: "Please confirm your password.",}),
     decInit: z.string(),
     encrPass: z.string({required_error: "Please enter a password.",}).min(2, {
         message: "Password must be atleast 8 characters"
     }).max(50),
+    image: z.any()
 }).superRefine(({ confirmPassword, encrPass }, ctx) => {
     if (confirmPassword !== encrPass) {
       ctx.addIssue({
@@ -44,5 +45,6 @@ export const addEventSchema = z.object({
     link: z.string(),
     image: z.string(),
     startDate: z.date({required_error: "Please enter a date.",}),
-    duration: z.number(),
+    endDate: z.date({required_error: "Please enter a date.",}),
+    image1: z.any(),
 })

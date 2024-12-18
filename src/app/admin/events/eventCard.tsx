@@ -17,10 +17,12 @@ type EventcardProps = {
     image,
     link
   }: EventcardProps){
+    const path = '/events/'+image
+    console.log(path)
     return (
-      <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 dark ">
-        <div className="w-10 h-10 mt-2">
-            <Image src={image} width={80} height={80} alt="event image"/>
+      <Card className=" grid grid-cols-4 gap-4 p-6 mt-1 dark ">
+        <div className="w-10 h-10">
+            <Image src={path} width={80} height={80} alt="event image"/>
         </div>
         <div className="items-start">
           <p className="desc">Title</p>

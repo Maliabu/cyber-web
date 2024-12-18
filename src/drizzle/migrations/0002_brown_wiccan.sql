@@ -1,1 +1,0 @@
-ALTER TABLE "users_table" ALTER COLUMN "decInitVector" SET NOT NULL;

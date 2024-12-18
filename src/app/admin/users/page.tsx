@@ -29,6 +29,7 @@ export default function AddUser() {
           confirmPassword: "",
           decInit: "",
           encrPass: "",
+          image: ''
       },
     })
 
@@ -36,7 +37,7 @@ export default function AddUser() {
     form.setValue("token", token())
     name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
 
-    const file = form.register("profilePicture")
+    console.log(form.getValues())
      
     async function onSubmit(values: z.infer<typeof addUserSchema>) {  
       if(values.encrPass !== "" && values.encrPass === values.confirmPassword){
@@ -45,6 +46,7 @@ export default function AddUser() {
         values.password = (await encr).encryptedData
         values.decInit = (await encr).initVector
       }
+      values.image?values.profilePicture = values.image.name:null
         //create obj
         const app = document.getElementById('submit');
         const text = 'processing';
@@ -53,7 +55,7 @@ export default function AddUser() {
         }
 
         const formData = new FormData()
-        formData.append("file", values.profilePicture)
+        formData.append("file", values.image)
 
         const data = await addUsers(values, formData)
         if(data?.error){
@@ -165,15 +167,15 @@ export default function AddUser() {
               <div className="flex flex-col space-y-1.5 mt-6">
               <FormField
                   control={form.control}
-                  name="profilePicture"
-                  render={({ field }) => (
+                  name="image"
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Profile Picture</FormLabel>
                       <FormControl
                       >
-                          <Input type="file" {...file} onChange={(event) => {
-    field.onChange(event.target?.files?.[0] ?? undefined);
-  }}/>
+                          <Input type="file" {...fieldProps} onChange={(event) =>
+                    onChange(event.target.files && event.target.files[0])
+                  }/>
                       </FormControl>
                       <FormMessage />
                       </FormItem>

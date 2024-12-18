@@ -1,5 +1,5 @@
 {
-  "id": "9a41f5f9-9fa4-4ce4-b0fe-011bb989b16e",
+  "id": "126b8f64-b975-4631-8756-2ede0fcd69e0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -20,8 +20,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "content": {
-          "name": "content",
+        "description": {
+          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -32,11 +32,11 @@
           "primaryKey": false,
           "notNull": false
         },
-        "course_image": {
-          "name": "course_image",
+        "event_image": {
+          "name": "event_image",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "start_date": {
           "name": "start_date",
@@ -44,9 +44,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "course_duration": {
-          "name": "course_duration",
-          "type": "integer",
+        "end_date": {
+          "name": "end_date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
@@ -683,7 +683,8 @@
           "name": "type",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'user'"
         },
         "is_active": {
           "name": "is_active",
@@ -696,7 +697,7 @@
           "name": "decInitVector",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",

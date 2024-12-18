@@ -18,27 +18,27 @@ import {
 // be removed to solve the issue
 export function DatePicker(field: any) {
   const [date, setDate] = React.useState<Date>()
+  console.log(field)
 
   return (
     <Popover>
-        <p className="desc">Start Date</p>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
           className={cn(
             "w-[280px] justify-start text-left text-dark",
-            !date
+            !field.field.value
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4 text-dark" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {field.field.value ? format(field.field.value, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={field.onChange}
+          selected={field.field.value}
+          onSelect={field.field.onChange}
           initialFocus
           className="text-dark"
         />

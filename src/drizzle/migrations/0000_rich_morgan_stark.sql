@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS "events_table" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
-	"content" text NOT NULL,
+	"description" text NOT NULL,
 	"link" varchar,
-	"course_image" varchar,
+	"event_image" varchar NOT NULL,
 	"start_date" timestamp,
-	"course_duration" integer,
+	"end_date" timestamp,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL
 );
@@ -94,9 +94,9 @@ CREATE TABLE IF NOT EXISTS "users_table" (
 	"token" text NOT NULL,
 	"username" varchar NOT NULL,
 	"profile_picture" varchar,
-	"type" text NOT NULL,
+	"type" text DEFAULT 'user' NOT NULL,
 	"is_active" boolean DEFAULT true NOT NULL,
-	"decInitVector" varchar,
+	"decInitVector" varchar NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	CONSTRAINT "users_table_email_unique" UNIQUE("email"),
