@@ -20,6 +20,7 @@ import { usersTable } from "@/drizzle/schema"
 import LogoutAdmin from "./auth/logoutAdmin"
 import Admin from "./auth/admin"
 import AddEvents from "./events/page"
+import { EventCard } from "./events/eventCard"
 
 export default async function AdminPage() {
   const users  =  await db.query.usersTable.findMany()
@@ -34,10 +35,10 @@ export default async function AdminPage() {
   const subscriptions = await db.query.subscriptionsTable.findMany()
 
   return (
-    <div className="justify-stretch text-white bg-gradient-to-r from-gray-900 to-gray-900 font-[family-name:var(--font-futura)]">
+    <div className="justify-stretch font-[family-name:var(--font-futura)]">
     <div className="px-8 py-4">
       <main className="flex flex-row">
-      <div className="flex flex-col justify-between rounded-lg backdrop p-4">
+      <div className="flex flex-col justify-between rounded-lg bg-muted p-4">
         <div className="self-center">
         <a href="/">
             <Image
@@ -51,8 +52,8 @@ export default async function AdminPage() {
           <LogoutAdmin/>
         </div>
       </div>
-        <div className="w-full h-full ml-4 rounded-lg backdrop ">
-    <Tabs defaultValue="dashboard" className="m-6 dark">
+        <div className="w-full h-full ml-2 rounded-lg ">
+    <Tabs defaultValue="dashboard" className="">
       <TabsList>
       <TabsTrigger value="dashboard"><LayoutDashboardIcon className="mx-2 w-4 h-4"/> Dashboard</TabsTrigger>
         <TabsTrigger value="user"><Users className="mx-2 w-4 h-4"/> Users</TabsTrigger>
@@ -63,14 +64,14 @@ export default async function AdminPage() {
       </TabsList>
       <TabsContent value="dashboard" className="tabs">
         <div className="py-6 w-full grid grid-cols-4 gap-4">
-            <div className="p-8 border rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
               <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
               { users.length}</h1><p className="desc mt-4">Users</p></div>
               <UsersIcon className="w-10 h-10 text-primary"/>
               </div></div>
-            <div className="p-8 border rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -78,7 +79,7 @@ export default async function AdminPage() {
               <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 border rounded-2xl ">
+            <div className="p-8 bg-muted rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -86,7 +87,7 @@ export default async function AdminPage() {
               <Calendar className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 border rounded-2xl ">
+            <div className="p-8 bg-muted rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -96,13 +97,13 @@ export default async function AdminPage() {
             </div>
         </div>
         <div>
-            <div className=" rounded-2xl p-6">
+            <div className=" rounded-2xl p-6 bg-muted">
             <h5>Statistics Analysis</h5>
               <Chart/>
             </div>
         </div>
         <div className="py-6 w-full grid grid-cols-3 gap-4">
-            <div className="p-8 border rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -110,7 +111,7 @@ export default async function AdminPage() {
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 border rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -118,7 +119,7 @@ export default async function AdminPage() {
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 border rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -133,7 +134,21 @@ export default async function AdminPage() {
         </div>
       </TabsContent>
       <TabsContent value="events">
-        <AddEvents/>
+                  {
+                    events.length > 0 ? (
+                      <div className="flex flex-row admin">
+                        {events.map(event => (
+                          <EventCard key={event.id} {...event}/>
+                        ))}
+                      </div>
+                    ) : (
+                      <AddPage page={"Event"} />
+                    )
+                  }
+                <div className="p-4 flex flex-row justify-between">
+                <AddEvents/>
+                <p>{articles.length} Total Events</p>
+                </div>
       </TabsContent>
                 <TabsContent value="courses">
                   {
@@ -269,7 +284,7 @@ export default async function AdminPage() {
     </Tabs>
         </div>
         </main>
-        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between border-t">
+        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between bg-muted-t">
           <div className="row-start-4">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>

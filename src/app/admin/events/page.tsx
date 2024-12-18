@@ -26,6 +26,7 @@ export default function AddEvents() {
           duration: 0,
       },
     })
+    console.log(form.getValues())
 
     async function onSubmit(values: z.infer<typeof addEventSchema>) {
         //create obj
@@ -125,9 +126,8 @@ export default function AddEvents() {
                   name="startDate"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>StartDate</FormLabel>
                       <FormControl>
-                          <DatePicker />
+                          <DatePicker {...field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>

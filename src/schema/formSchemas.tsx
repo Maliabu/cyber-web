@@ -10,7 +10,7 @@ export const addUserSchema = z.object({
     }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
     token: z.string().min(15, {message: "missing token"}),
     username: z.string().min(2, {message: "missing username"}),
-    profilePicture: z.string(),
+    profilePicture: typeof window === 'undefined' ? z.any() : z.instanceof(FileList),
     userType: z.string({required_error: "Please select the type of user.",}),
     confirmPassword: z.string({required_error: "Please confirm your password.",}),
     decInit: z.string(),

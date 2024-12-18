@@ -16,6 +16,6 @@ export default function LogoutAdmin(){
         redirect("/admin/auth")
     }
     return(
-        <Button id="submit1" onClick={() => logout()} className="text-white"><LockOpenIcon/> Logout</Button>
+        <Button id="submit1" onClick={() => logout()} className="text-white">Logout</Button>
     )
 }

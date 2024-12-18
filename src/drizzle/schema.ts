@@ -64,7 +64,7 @@ export const EventsTable = pgTable('events_table', {
   title: text('title').notNull(),
   description: text('content').notNull(),
   link: varchar('link'),
-  image: varchar('course_image'),
+  image: varchar('course_image').notNull(),
   startDate: timestamp('start_date'),
   duration: integer('course_duration'),
   createdAt,

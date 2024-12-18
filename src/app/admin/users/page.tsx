@@ -24,7 +24,7 @@ export default function AddUser() {
           token: "",
           username: "",
           userType: "",
-          profilePicture: "",
+          profilePicture: '',
           password: "",
           confirmPassword: "",
           decInit: "",
@@ -35,6 +35,8 @@ export default function AddUser() {
     let name = form.getValues("name")
     form.setValue("token", token())
     name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
+
+    const file = form.register("profilePicture")
      
     async function onSubmit(values: z.infer<typeof addUserSchema>) {  
       if(values.encrPass !== "" && values.encrPass === values.confirmPassword){
@@ -49,7 +51,11 @@ export default function AddUser() {
         if(app !== null){
           app.innerHTML = text;
         }
-        const data = await addUsers(values)
+
+        const formData = new FormData()
+        formData.append("file", values.profilePicture)
+
+        const data = await addUsers(values, formData)
         if(data?.error){
           form.setError("root", {
             "message": "user not added"
@@ -165,7 +171,9 @@ export default function AddUser() {
                       <FormLabel>Profile Picture</FormLabel>
                       <FormControl
                       >
-                          <Input type="file" {...field} />
+                          <Input type="file" {...file} onChange={(event) => {
+    field.onChange(event.target?.files?.[0] ?? undefined);
+  }}/>
                       </FormControl>
                       <FormMessage />
                       </FormItem>

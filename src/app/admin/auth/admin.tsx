@@ -4,6 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { UserCircle } from "lucide-react";
 
 export default function Admin(){
+    console.log(tokenise())
     return(
         <div className="flex flex-row p-16">
         <div className="w-1/2 grid justify-items-center">

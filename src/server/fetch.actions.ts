@@ -6,9 +6,12 @@ import "use-server"
 import { z } from "zod";
 import { addEventSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
+import { File } from "node:buffer";
+import { promises as fs } from "node:fs";
 
 
-export async function addUsers(unsafeData: z.infer<typeof addUserSchema>) : 
+export async function addUsers(unsafeData: z.infer<typeof addUserSchema>, formData: FormData) : 
 Promise<{error: boolean | undefined}> {
    const {success, data} = addUserSchema.safeParse(unsafeData)
 
@@ -16,10 +19,27 @@ Promise<{error: boolean | undefined}> {
     return {error: true}
    }
 
+   uploadFile(formData)
+
    await db.insert(usersTable).values({...data})
 
    return {error: false}
 //    redirect("/admin/dashboard")
+}
+
+export async function uploadFile(formData: FormData) {
+    const file = formData.get("file") as unknown as File;
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+
+    try {
+        await fs.writeFile(`./public/profilePictures/${file.name}`, buffer);
+    }
+    catch{
+        await fs.mkdir('./public/profilePictures')
+        await fs.writeFile(`./public/profilePictures/${file.name}`, buffer);
+    }
+    revalidatePath("/");
 }
 
 export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
@@ -103,4 +123,8 @@ Promise<any>{
 export async function subscriptions():
 Promise<any>{
     await db.query.subscriptionsTable.findMany()
+}
+
+function then(arg0: () => any) {
+    throw new Error("Function not implemented.");
 }

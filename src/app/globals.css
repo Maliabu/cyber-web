@@ -19,7 +19,7 @@ body {
     --primary-foreground: 0 0% 98%;
     --secondary: 20 80.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 90.8% 95.9%;
+    --muted: 240 10.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
@@ -103,7 +103,7 @@ button{
   font-weight: 550 !important;
   /* border: 1px solid rgb(2, 165, 250) !important; */
   border-radius: 5px !important;
-  color: rgb(158, 157, 157) !important;
+  color: rgb(126, 126, 126) !important;
 }
 span{
   font-size: 16px !important;
@@ -183,6 +183,6 @@ a{
 p.desc{
   font-size: 13px !important;
   line-height: 13px !important;
-  color: gray !important;
+  color: rgb(97, 96, 96) !important;
   cursor: pointer;
 }
