@@ -37,18 +37,18 @@ export default async function About(){
     return(
         <>
         <Menu/>
-        <div className=" p-16 items-center font-[family-name:var(--font-futura)] bg-gradient-to-r from-slate-800 to-sky-600 text-white">
-        <div className="float-right">
+        <div className="p-8 sm:p-16 items-center font-[family-name:var(--font-futura)] bg-gradient-to-r from-slate-800 to-sky-600 text-white">
+        <div className="sm:float-right">
           <div className="grid justify-items-center py-8">
           <h1 className="display-1">70+</h1></div>
           <a href="/">
-      <Card className="w-[350px]">
+      <Card className="sm:w-[350px] w-[320px]">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card></a>
-    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-6 mt-2 w-[350px]">
+    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
         {userId.userId !== null?<form>
       <div className="grid w-full items-center gap-4">
@@ -69,7 +69,7 @@ export default async function About(){
     </form>}
     </div>
     <a href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
-    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[350px]">
+    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">Join our whatsapp community</p>
         <Image
         src={Whatsapp}
@@ -106,7 +106,7 @@ export default async function About(){
       className="w-full max-w-sm">
     <div className="">
     </div>
-      <CarouselContent className="p-8 background-none">
+      <CarouselContent className="sm:p-8 p-6 background-none">
         {Array.from({ length: 3 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
@@ -147,7 +147,6 @@ export default async function About(){
       <CarouselNext />
     </Carousel>
     <h3 className="display-1 mt-6">Now Meet Our Mentors</h3>
-      <p className="pt-4">The easy way!</p>
       <Carousel
       opts={{
         align: "start",
@@ -155,7 +154,7 @@ export default async function About(){
       className="w-full max-w-sm">
     <div className="">
     </div>
-      <CarouselContent className="p-8">
+      <CarouselContent className="sm:p-8 p-6">
         {Array.from({ length: 3 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
@@ -197,7 +196,7 @@ export default async function About(){
     </Carousel>
     <a href="/blog">
       <Button className="text-white"><Group width={16} height={16}/> Go to the Blog</Button></a>
-      <Button className="mx-4 text-white"><PersonStanding width={16} height={16}/> Become a Mentor</Button>
+      <Button className="sm:mx-4 sm:mt-0 mt-3 text-white"><PersonStanding width={16} height={16}/> Become a Mentor</Button>
        </div>
         <Footer/>
         </>

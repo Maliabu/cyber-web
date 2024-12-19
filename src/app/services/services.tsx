@@ -1,6 +1,7 @@
 "use client"
 import local from "next/font/local";
 import { redirect } from "next/navigation";
+import { any } from "prop-types";
 
 export function username(name: string){
     return name.split(" ").concat(String(Math.floor((Math.random() * 10) + 1)))
@@ -23,11 +24,11 @@ export const togglePasswordVisibility = ()=>{
 }
 
 export function tokenise(){
-    let name,email,username
+    let name = '',email = '',username = ''
     if(window !== null){
-        name = localStorage.getItem("name")
-        username = localStorage.getItem("username")
-        email = localStorage.getItem("email")
+        name = localStorage.getItem("name") || ''
+        username = localStorage.getItem("username") || ''
+        email = localStorage.getItem("email") || ''
     }
     return [name, username, email]
 }

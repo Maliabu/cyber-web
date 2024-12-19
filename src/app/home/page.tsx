@@ -27,8 +27,8 @@ export default async function HomePage(){
     return(
       <div className="font-[family-name:var(--font-futura)]">
       <div className=" items-center bg-gradient-to-r from-slate-800 to-sky-600 text-white">
-        <div className="backdrop p-16">
-        <div className="float-right">
+        <div className="backdrop sm:p-16 p-6">
+        <div className="sm:float-right">
             <TimerCountDown userid={userId.userId}/>
     <div className="flex flex-row justify-between bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg p-6 mt-2 w-[350px]">
         <p className="text-white">See more Articles by WarrenMu and other Mentors</p>
@@ -36,12 +36,12 @@ export default async function HomePage(){
     </div>
     </div>
       <div className="pb-16">
-            <div>
+            <div className="mt-2">
               <p>Home</p>
             </div>
                 <div className="flex flex-row">
                 <ChevronRight width={15} height={15} className="pt-1"/> Get Started</div>
-      <h1 className="display-1 py-16">Learn Cyber Security</h1>
+      <h1 className="display-1 py-8">Learn Cyber Security</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
@@ -49,10 +49,10 @@ export default async function HomePage(){
       <Button className="text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button>
       </a>
       <a href="/contact">
-      <Button variant="outline" className="mx-6 bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
+      <Button variant="outline" className="sm:mx-6 sm:mt-0 mt-2 bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
     </div>
     </div>
-    <div className="p-20">
+    <div className="sm:p-20 p-6">
       <Carousel
       opts={{
         align: "start",
@@ -66,7 +66,7 @@ export default async function HomePage(){
     <Badge variant="outline">Training</Badge>
     <Badge variant="outline" className="mx-2">Assessment</Badge>
     </div>
-    <h3>From the best of our authors and Mentors, articles you can read!</h3>
+    <h3 className="text-2xl font-bold leading-6">From the best of our authors and Mentors, articles you can read!</h3>
     <a href="/blog">
     <Button className="text-white my-4">More Articles</Button></a>
     <p>Join our growing community of great hackers and readers, writers and coders!</p>

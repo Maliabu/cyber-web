@@ -22,8 +22,16 @@ import Admin from "./auth/admin"
 import AddEvents from "./events/page"
 import { EventCard } from "./events/eventCard"
 import AddCourse from "./courses/page"
+import { CourseCard } from "./courses/courseCard"
+import { ArticlesCard } from "./articles/articlesCard"
+import AddArticle from "./articles/page"
+import { tokenise } from "../services/services"
+import { redirect } from "next/navigation"
+import { EnrollCard } from "./enrollment/enrollCard"
+import Enroll from "./enrollment/page"
 
 export default async function AdminPage() {
+  
   const users  =  await db.query.usersTable.findMany()
   const mentors  =  await db.query.usersTable.findMany({
     where: eq(usersTable.userType, "mentor")
@@ -34,6 +42,7 @@ export default async function AdminPage() {
   const enrollments = await db.query.enrollmentsTable.findMany()
   const courses = await db.query.courseTable.findMany()
   const subscriptions = await db.query.subscriptionsTable.findMany()
+  const currency = await db.query.currencyTable.findMany()
 
   return (
     <div className="justify-stretch font-[family-name:var(--font-futura)]">
@@ -154,9 +163,9 @@ export default async function AdminPage() {
                 <TabsContent value="courses">
                   {
                     courses.length > 0 ? (
-                      <div className="flex flex-row admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
+                      <div className="flex flex-col admin">
+                        {courses.map(course => (
+                          <CourseCard key={course.id} {...course}/>
                         ))}
                       </div>
                     ) : (
@@ -164,16 +173,16 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
-                  <AddCourse/>
+                  <AddCourse currency={currency} mentors={mentors}/>
                 <p>{courses.length} Total Courses</p>
                 </div>
                 </TabsContent>
                 <TabsContent value="articles">
                   {
                     articles.length > 0 ? (
-                      <div className="flex flex-row admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
+                      <div className="flex flex-col admin">
+                        {articles.map(article => (
+                          <ArticlesCard key={article.id} {...article}/>
                         ))}
                       </div>
                     ) : (
@@ -181,7 +190,7 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
+                <AddArticle/>
                 <p>{articles.length} Total Articles</p>
                 </div>
                 </TabsContent>
@@ -231,7 +240,7 @@ export default async function AdminPage() {
                 <TabsContent value="subscriptions">
                   {
                     subscriptions.length > 0 ? (
-                      <div className="flex flex-row admin">
+                      <div className="admin">
                         {users.map(user => (
                           <UserCard key={user.id} {...user}/>
                         ))}
@@ -240,17 +249,16 @@ export default async function AdminPage() {
                       <AddPage page={"Subscription"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
+                <div className="p-4 flex flex-row justify-end">
                 <p>{subscriptions.length} Total Subscriptions</p>
                 </div>
                 </TabsContent>
                 <TabsContent value="enrollments">
                   {
                     enrollments.length > 0 ? (
-                      <div className="flex flex-row admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
+                      <div className="admin">
+                        {enrollments.map(enrollment => (
+                          <EnrollCard key={enrollment.id} {...enrollment}/>
                         ))}
                       </div>
                     ) : (
@@ -258,16 +266,16 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
+                <Enroll courses={courses} users={users}/>
                 <p>{enrollments.length} Total Enrollments</p>
                 </div>
                 </TabsContent>
                 <TabsContent value="schedules">
                   {
-                    users.length > 0 ? (
-                      <div className="flex flex-row admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
+                    schedules.length > 0 ? (
+                      <div className="admin">
+                        {schedules.map(schedule => (
+                          <UserCard key={schedule.id} {...schedule}/>
                         ))}
                       </div>
                     ) : (
@@ -276,7 +284,7 @@ export default async function AdminPage() {
                   }
                 <div className="p-4 flex flex-row justify-between">
                 <AddUser/>
-                <p>{users.length} Total Schedules</p>
+                <p>{schedules.length} Total Schedules</p>
                 </div>
                 </TabsContent>
             </Tabs>

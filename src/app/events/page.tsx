@@ -8,10 +8,10 @@ export default function Events(){
     return <div>
         <Menu/>
         <div>
-            <div id="events" className="p-16 grid font-[family-name:var(--font-futura)]">
+            <div id="events" className="sm:p-16 p-8 grid font-[family-name:var(--font-futura)]">
                 <h1 className="display-1">Events</h1>
                 <h5 className="py-6">Check out whats happening</h5>
-                <div className="grid grid-cols-2 gap-4 admin">
+                <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 sm:admin">
                     <div className="grid cols-3 gap-4">
                         <Card className="w-full">
                         <CardContent className="flex p-4">

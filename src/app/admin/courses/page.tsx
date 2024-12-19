@@ -13,14 +13,8 @@ import { addCourseSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
 import { DatePicker } from "../datePicker"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { mentors } from "./helpers"
 
-export default function AddCourse() {
-    const [mentor, setMentor] = React.useState([{}])
-
-    React.useEffect(() => {
-        mentors().then((res) => setMentor(res))
-    })
+export default function AddCourse(props: { mentors: any[] , currency: any[]}) {
 
     const form = useForm<z.infer<typeof addCourseSchema>>({
       resolver: zodResolver(addCourseSchema),
@@ -34,13 +28,16 @@ export default function AddCourse() {
           endDate: new Date(),
           currency: 0,
           amount: 0,
-          image1: ''
+          image1: '',
+          currency1: "",
+          mentor1: ""
       },
     })
 
     async function onSubmit(values: z.infer<typeof addCourseSchema>) {
         //create obj
-        const app = document.getElementById('submit');
+        console.log("CLICKED")
+        const app = document.getElementById('submit2');
         const text = 'processing';
         if(app !== null){
           app.innerHTML = text;
@@ -64,6 +61,7 @@ export default function AddCourse() {
     }
 
     function formBuild(){
+
       return(
       <div className="p-4 pb-0">
       <Form {...form}>
@@ -76,7 +74,7 @@ export default function AddCourse() {
                   name="title"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Title *</FormLabel>
+                      <FormLabel>Title</FormLabel>
                       <FormControl>
                           <Input 
                           type="text" 
@@ -93,7 +91,7 @@ export default function AddCourse() {
                   name="description"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Description *</FormLabel>
+                      <FormLabel>Description</FormLabel>
                       <FormControl>
                           <Input type="text" placeholder="Description" {...field} />
                       </FormControl>
@@ -110,7 +108,7 @@ export default function AddCourse() {
                       <FormItem>
                       <FormLabel>Course Outline</FormLabel>
                       <FormControl>
-                          <Input type="text" placeholder="Link" {...field} />
+                          <Input type="text" placeholder="Course Outline separated by commas" {...field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>
@@ -120,20 +118,20 @@ export default function AddCourse() {
               <div className="flex flex-col mt-6 space-y-1.5">
               <FormField
                   control={form.control}
-                  name="mentor"
+                  name="mentor1"
                   render={({ field }) => (
                       <FormItem>
                       <FormLabel>Mentor</FormLabel>
                       <FormControl>
                           <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
-                              <SelectTrigger id="mentor">
+                              <SelectTrigger id="mentor1">
                               <SelectValue placeholder="Mentor"/>
                               </SelectTrigger>
                               <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
                                 {
-                                    mentor.map(user => (
-                                        <SelectItem value=""></SelectItem>
-                                    ))
+                                  props.mentors.map((mentor) => (
+                                    <SelectItem key={mentor.id} value={mentor.name}>{mentor.name}</SelectItem>
+                                  ))
                                 }
                               </SelectContent>
                           </Select>
@@ -195,7 +193,34 @@ export default function AddCourse() {
                   )}
                   />
               </div>
-              <div className="flex flex-col mt-6 space-y-1.5">
+              <div className="flex flex-row">
+              <div className="flex flex-col mt-6 space-y-1.5 w-1/4 mr-2">
+              <FormField
+                  control={form.control}
+                  name="currency1"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Currency</FormLabel>
+                      <FormControl>
+                          <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
+                              <SelectTrigger id="currency1">
+                              <SelectValue placeholder="*"/>
+                              </SelectTrigger>
+                              <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
+                                {
+                                  props.currency.map((currency) => (
+                                    <SelectItem key={currency.id} value={currency.currency}>{currency.currency}</SelectItem>
+                                  ))
+                                }
+                              </SelectContent>
+                          </Select>
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+              </div>
+              <div className="flex flex-col mt-6 space-y-1.5 w-3/4">
               <FormField
                   control={form.control}
                   name="amount"
@@ -203,16 +228,19 @@ export default function AddCourse() {
                       <FormItem>
                       <FormLabel>Amount *</FormLabel>
                       <FormControl>
-                          <Input type="number" placeholder="Link" {...field} />
+                          <Input 
+                          type="number"
+                          placeholder="00.00" {...field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>
                   )}
                   />
               </div>
+            </div>
           </div>
         </div>
-        <Button id="submit" className="my-4 text-white" type="submit">Add Course</Button>
+        <Button id="submit2" className="my-4 text-white" type="submit">Add Course</Button>
         {form.formState.errors.root && (
           <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}

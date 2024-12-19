@@ -70,7 +70,7 @@ export default function TimerCountDown(userId){
         <h6>Next Class In: </h6>
         <h5 className="mx-4">{result}</h5>
         </div>
-      <Card className="w-[350px] dark bg-gradient-to-r from-slate-800 to-slate-900">
+      <Card className="sm:w-[350px] w-[320px] dark bg-gradient-to-r from-slate-800 to-slate-900">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>

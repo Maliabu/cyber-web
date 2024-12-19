@@ -42,8 +42,8 @@ export default function Services(){
     return(
         <>
         <Menu/>
-        <div className=" p-16 items-center font-[family-name:var(--font-futura)]">
-        <div className=" z-0 absolute -right-0">
+        <div className="sm:p-16 p-6 items-center font-[family-name:var(--font-futura)]">
+        <div className=" sm:z-0 sm:absolute sm:-right-0">
             <TimerCountDown/>
     </div>
       <NavigationMenu>
@@ -51,7 +51,7 @@ export default function Services(){
       <NavigationMenuItem>
       <Link href="/" legacyBehavior passHref className="page-link">
             <NavigationMenuLink>
-              <p>Back to HomePage</p>
+              <p className="sm:mt-0 mt-3">Back to HomePage</p>
             </NavigationMenuLink>
           </Link>
                 <div className="flex flex-row">
@@ -66,14 +66,14 @@ export default function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></a>
       </div>
       </div>
-      <div className=" p-16 back-classes font-[family-name:var(--font-futura)]">
+      <div className="p-10 sm:p-16 back-classes font-[family-name:var(--font-futura)]">
       <Carousel
       opts={{
         align: "start",
       }}
       className="w-full"
     >
-    <div className="p-8" id="courses">
+    <div className="sm:p-8" id="courses">
     <h3 className="display-1">Our Classes</h3>
     <div className="flex flex-row mt-4">
     <Badge variant="outline">Hacking</Badge>
@@ -82,16 +82,16 @@ export default function Services(){
     <Badge variant="outline" className="mx-2">Assessment</Badge>
     </div>
     </div>
-      <CarouselContent className="p-8">
+      <CarouselContent className="sm:p-8 p-6 sm:mt-0 mt-8">
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
             <div className="p-1">
               <Card className="background-none rounded-2xl backdrop">
-                <CardContent className="aspect-square p-16">
+                <CardContent className="aspect-square sm:p-16">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
-                <Badge variant="outline" className="float-right text-white p-2 -m-14">Starting Soon</Badge>
+                <Badge variant="outline" className="float-right text-white p-2 sm:-m-14 -m-4">Starting Soon</Badge>
                     <Image
                     aria-hidden
                     src={Logo}
@@ -117,7 +117,7 @@ export default function Services(){
             </ul>
             </NavigationMenu>
             <Button className="text-white">Enroll for course</Button>
-            <Button className="mx-4 bg-light">Mentor</Button>
+            <Button className="sm:mx-4 bg-light sm:mt-0 mt-2">Mentor</Button>
                 </CardContent>
               </Card>
             </div>

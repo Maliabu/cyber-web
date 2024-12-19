@@ -14,7 +14,7 @@ export default function AddPage({page}:
     return <div className="grid p-20 justify-items-center">
     <PageIcon className="size-20 m-4 text-muted"/>
     <h5 className="p-2">Add {page}</h5>
-    <p>You currently have no {page} in your database, use the button below to add users</p>
+    <p>You currently have no {page} in your database</p>
   </div>
 }
 

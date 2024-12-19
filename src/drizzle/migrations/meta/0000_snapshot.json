@@ -1,5 +1,5 @@
 {
-  "id": "95f32afd-cfdb-4806-a1ca-7bf31833174a",
+  "id": "d3a68dd4-fdd0-4f22-96c0-6d3cc763c56d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -106,9 +106,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "writer": {
+          "name": "writer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -127,21 +127,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "articles_table_user_id_users_table_id_fk": {
-          "name": "articles_table_user_id_users_table_id_fk",
-          "tableFrom": "articles_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -259,8 +245,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_id": {
-          "name": "user_id",
+        "mentor_id": {
+          "name": "mentor_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -275,7 +261,7 @@
           "name": "end_date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "currency_id": {
           "name": "currency_id",
@@ -287,7 +273,7 @@
           "name": "amount",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -305,12 +291,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "course_table_user_id_users_table_id_fk": {
-          "name": "course_table_user_id_users_table_id_fk",
+        "course_table_mentor_id_users_table_id_fk": {
+          "name": "course_table_mentor_id_users_table_id_fk",
           "tableFrom": "course_table",
           "tableTo": "users_table",
           "columnsFrom": [
-            "user_id"
+            "mentor_id"
           ],
           "columnsTo": [
             "id"

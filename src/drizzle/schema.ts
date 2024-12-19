@@ -36,7 +36,7 @@ export const courseTable = pgTable('course_table', {
   description: text('description').notNull(),
   courseOutline: text('outline'),
   image: varchar('course_image'),
-  mentor: integer('user_id')
+  mentor: integer('mentor_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   startDate: timestamp('start_date').notNull(),
@@ -50,12 +50,10 @@ export const courseTable = pgTable('course_table', {
 export const articlesTable = pgTable('articles_table', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
-  descritption: text('content').notNull(),
+  content: text('content').notNull(),
   link: varchar('link'),
   image: varchar('article_image'),
-  writer: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  writer: text('writer').notNull(),
     createdAt,
     updatedAt,
 });
@@ -74,7 +72,7 @@ export const EventsTable = pgTable('events_table', {
 
 export const enrollmentsTable = pgTable('enrollments_table', {
   id: serial('id').primaryKey(),
-  course: integer('course').notNull().references(() => courseTable.id, { onDelete: 'cascade'}),
+  courseId: integer('course_id').notNull().references(() => courseTable.id, { onDelete: 'cascade'}),
   userId: integer('user_id')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),

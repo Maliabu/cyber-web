@@ -13,10 +13,13 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { Calendar, ChevronDown, NotebookPen, Search } from "lucide-react";
+import { Calendar, ChevronDown, MenuIcon, NotebookPen, Search } from "lucide-react";
 import Blog from '../images/link.jpeg'
 import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Separator } from "@radix-ui/react-select";
  
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -62,24 +65,22 @@ export default async function Menu() {
 
   function display(){
     if(userId.userId !== null){
-      return <UserButton/>
+      return <div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /></div>
     } else {
       return <a href="/sign-in"><Button className="text-white">Sign In</Button></a>
     }
   }
 
   return (
-    <div className="grid font-[family-name:var(--font-futura)]">
-      <main className="flex flex-row justify-between gap-4 px-8 py-4 items-center text-dark">
+    <div className=" font-[family-name:var(--font-futura)]">
+      <main className="hidden sm:flex sm:flex-row justify-between px-8 py-2 items-center text-dark">
         <a href="/">
           <Image
-            aria-hidden
+            className="w-[130px]"
             src={Logo}
             alt="logo"
-            width={130}
-            height={130}
           /></a>
-      <NavigationMenu className=" rounded-sm">
+      <NavigationMenu className="rounded-sm">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="">Get Started with our Blog</NavigationMenuTrigger>
@@ -138,17 +139,53 @@ export default async function Menu() {
     </NavigationMenu>
     {display()}
       </main>
+    <div className="sm:hidden flex flex-row p-4 justify-between">
+      <a href="/">
+          <Image
+            className="w-[120px]"
+            src={Logo}
+            alt="logo"
+          /></a>
+          <div className="flex flex-row">
+            <Sheet>
+      <SheetTrigger asChild>
+      <MenuIcon className="size-8 mt-1 mr-2"/>
+      </SheetTrigger>
+      <SheetContent className="h-[300px] rounded-lg">
+        <SheetHeader>
+          <SheetTitle></SheetTitle>
+          <SheetDescription></SheetDescription>
+        </SheetHeader>
+        <div className="grid grid-cols-1 gap-4 py-4">
+          <a href="/" className="text-dark hover:text-blue">
+          <p>Home</p></a>
+          <a href="/blog" className="text-dark my-2 hover:text-blue">
+          <p>Blog</p></a>
+          <a href="/offers" className="text-dark hover:text-blue">
+          <p>Services</p></a>
+          <a href="/contact" className="text-dark my-2 hover:text-blue">
+          <p>Community</p></a>
+          <a href="/events" className="text-dark hover:text-blue">
+          <p>News & Events</p></a>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+    {display()}</div></div>
       <div>
-        <div className="px-8 py-4 flex flex-row justify-between border-b border-t">
-          <div className="flex flex-row w-1/2">
-          <h5 className="w-1/2">Schedule an interview with our mentors!</h5>
-            <Button className="bg-primary text-white"><Calendar width={16} height={16}/> Schedule an Interview Asap</Button>
+        <div className="sm:px-8 sm:py-4 flex flex-col sm:flex-row p-6 sm:justify-between border-b border-t">
+          <div className="grid grid-cols-1 sm:grid-cols-3">
+          <h5 className="text-2xl font-bold leading-5">Schedule an interview with our mentors!</h5>
+            <Button size="lg" className="bg-primary text-white mt-4 sm:mt-0"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
             </div>
-                <div className="relative">
-                  <div className="absolute left-4 top-2.5 h-2 w-2 text-card-foreground">
-                  <Search className="h-3 w-3 mt-1" />
+                <div className="relative mt-6 sm:mt-0">
+                  <div className="absolute left-3 right-2 top-2.5 h-3 w-3 text-card-foreground">
+                  <Search className="h-3 w-3 mt-1 size-6" />
                   </div>
-                  <Input id="search" type="search" placeholder="Search..." className="w-full rounded-lg pl-8" />
+                  <Input id="search" type="search" placeholder="searching for...?" className="w-full rounded-lg pl-8" />
                 </div>
           </div>
         </div>

@@ -20,10 +20,10 @@ import Image from "next/image";
 
 export default function Blog(){
     return(
-        <>
+        <div className="grid w-full">
         <Menu/>
-        <div className="p-16 font-[family-name:var(--font-futura)]">
-        <div className="float-right -mt-12 -mx-6">
+        <div className="sm:p-16 p-6 font-[family-name:var(--font-futura)]">
+        <div className="sm:float-right sm:-mt-12 sm:-mx-6">
       <Card className="w-[300px] border-none">
       <CardHeader>
         <h3>Recommended Articles</h3>
@@ -92,7 +92,7 @@ export default function Blog(){
                 <ChevronRight width={15} height={15} className="pt-1"/> Blog</div>
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
-      <div className="p-16 border rounded-xl mt-4 w-3/4"><Image
+      <div className="sm:p-16 p-6 border rounded-xl mt-4 sm:w-3/4"><Image
                 aria-hidden
                 src="/next.svg"
                 alt="File icon"
@@ -117,6 +117,6 @@ export default function Blog(){
       </div>
         </div>
         <Footer/>
-        </>
+        </div>
     )
 }

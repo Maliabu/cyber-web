@@ -13,11 +13,10 @@ import { auth } from "@clerk/nextjs/server";
 export default async function Footer() {
   const userId = await auth()
   return (
-      <footer className="grid justify-center dark bg-gradient-to-r from-slate-800 to-slate-900 text-white font-[family-name:var(--font-futura)]">
-      <div className="px-8 py-6 gap-20 flex flex-row border-t justify-between">
-                  <span className="w-fulh">
-                  <h5>Subscribe</h5>
-                      Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</span>
+      <footer className="justify-center dark bg-gradient-to-r from-slate-800 to-slate-900 text-white font-[family-name:var(--font-futura)]">
+      <div className="px-8 py-6 border-t">
+                  <span className="w-full">
+                      <p className="my-2">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></span>
                       <div>
                       {userId.userId === null?
                       <div>
@@ -31,8 +30,8 @@ export default async function Footer() {
           <Button className="text-white"><Heart width={16} height={16}/> Subscribe</Button>}
                   </div>
               </div>
-        <div className="grid flex flex-row gap-10 px-24 justify-center">
-        <div className="row-start-3">
+        <div className=" flex sm:flex-row flex-col gap-10 sm:px-24 p-12 justify-center">
+        <div className="sm:row-start-3">
           Could be Helpful: Links
           <NavigationMenu>
             <ul>
@@ -61,7 +60,7 @@ export default async function Footer() {
               </ListItem> </ul>
             </NavigationMenu>
         </div>
-        <div className="row-start-3">
+        <div className="sm:row-start-3">
           Recommended
           <NavigationMenu>
             <ul>
@@ -76,7 +75,7 @@ export default async function Footer() {
               </ListItem> </ul>
             </NavigationMenu>
         </div>
-        <div className="row-start-3">
+        <div className="sm:row-start-3">
           Articles
           <NavigationMenu className="border-b">
           <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -172,11 +171,11 @@ export default async function Footer() {
           />
           twitter
         </a></div>
-        <div className="px-8 py-4 grid flex flex-row justify-between border border-top">
-          <div className="row-start-4">
+        <div className="sm:px-8 sm:py-4 p-6 flex sm:flex-row flex-col sm:justify-between border border-top">
+          <div className="">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>
-          <div className="row-start-4">
+          <div className="">
           <div className="flex d-flex">
           <p>News</p>
           <p className="mx-6">Events</p>
