@@ -13,15 +13,12 @@ type ArticlecardProps = {
   }
   // one time usercard component with custom prop type
   export function ArticlesCard({
-    id,
     title,
-    content,
     writer,
     image,
     link
   }: ArticlecardProps){
     const path = '/events/'+image
-    console.log(path)
     return (
       <div className="flex flex-row justify-between">
       <Card className="w-5/6 grid grid-cols-4 gap-4 p-6 mt-1 dark ">

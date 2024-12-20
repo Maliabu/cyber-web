@@ -1,10 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Minus, Plus } from "lucide-react"
 import { Bar, BarChart, ResponsiveContainer } from "recharts"
-
-import { Button } from "@/components/ui/button"
 
 const data = [
   {
@@ -49,11 +46,6 @@ const data = [
 ]
 
 export function Chart() {
-  const [goal, setGoal] = React.useState(350)
-
-  function onClick(adjustment: number) {
-    setGoal(Math.max(200, Math.min(400, goal + adjustment)))
-  }
 
   return (
           <div className="p-4 pb-0">

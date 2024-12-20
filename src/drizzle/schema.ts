@@ -23,7 +23,7 @@ export const usersTable = pgTable('users_table', {
 export const currencyTable = pgTable('currency_table', {
   id: serial('id').primaryKey(),
   code: text('currency_code').notNull(),
-  currency: text('currency_name'),
+  currency: text('currency_name').notNull(),
   country: text('name').notNull(),
   country_code: text('country_code').notNull(),
   createdAt,

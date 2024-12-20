@@ -3,19 +3,16 @@
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Textarea } from '@/components/ui/textarea'
-import { addArticles, addEnrollment } from "@/server/fetch.actions"
+import { addEnrollment } from "@/server/fetch.actions"
 import { addEnrollmentSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
-import { tokenise } from "@/app/services/services"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-export default function Enroll(props: { courses: any[] , users: any[]}) {
+export default function Enroll(props: { courses: {id: number, title: string}[] , users: {id: number, name: string}[]}) {
 
     const form = useForm<z.infer<typeof addEnrollmentSchema>>({
       resolver: zodResolver(addEnrollmentSchema),

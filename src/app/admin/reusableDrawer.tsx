@@ -2,12 +2,11 @@
 
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
-import { string } from "prop-types"
 
 //reusable drawer
 type ReusableDrawerProps = {
     page: string
-    form: any
+    form: React.JSX.Element
   }
   
   export function ReusableDrawer({

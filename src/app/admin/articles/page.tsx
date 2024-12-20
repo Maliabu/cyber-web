@@ -13,6 +13,8 @@ import { addArticles } from "@/server/fetch.actions"
 import { addArticleSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
 import { tokenise } from "@/app/services/services"
+// import { useRouter } from "next/navigation"
+
 
 export default function AddArticle() {
 
@@ -50,7 +52,7 @@ export default function AddArticle() {
           if(app !== null){
             app.innerHTML = "Successful";
           }
-          window.location.reload()
+          // useRouter().refresh()
         }
     }
 
@@ -98,7 +100,7 @@ export default function AddArticle() {
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                  render={({ field: { onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl

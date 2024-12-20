@@ -103,7 +103,7 @@ export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
    let username = ''
    let name = ''
 
-   let checkEmail = await db.query.usersTable.findFirst({
+   const checkEmail = await db.query.usersTable.findFirst({
     where: eq(usersTable.email, data.email)
    })
    if(checkEmail && checkEmail.isActive === true){
@@ -150,8 +150,8 @@ Promise<{error: boolean | undefined}> {
    const mentorId = await db.query.usersTable.findMany({
     where: eq(usersTable.name, data.mentor1)
    })
-   let currencyid = currencyId.map(currency=>currency.id)
-   let mentorid = mentorId.map(mentor=>mentor.id)
+   const currencyid = currencyId.map(currency=>currency.id)
+   const mentorid = mentorId.map(mentor=>mentor.id)
    data.currency = currencyid[0]
    data.mentor = mentorid[0]
 
@@ -188,55 +188,12 @@ Promise<{error: boolean | undefined}> {
    const userId = await db.query.usersTable.findMany({
     where: eq(usersTable.name, data.user1)
    })
-   let courseid = courseId.map(course=>course.id)
-   let userid = userId.map(user=>user.id)
+   const courseid = courseId.map(course=>course.id)
+   const userid = userId.map(user=>user.id)
    data.courseId = courseid[0]
    data.userId = userid[0]
 
    await db.insert(enrollmentsTable).values({...data})
 
    return {error: false}
-}
-
-export async function users():
-Promise<any>{
-    await db.query.usersTable.findMany()
-    .then((res) => {
-        return res
-    })
-    
-}
-
-export async function events():
-Promise<any>{
-    await db.query.EventsTable.findMany()
-}
-
-export async function courses():
-Promise<any>{
-    await db.query.courseTable.findMany()
-}
-
-export async function articles():
-Promise<any>{
-    await db.query.articlesTable.findMany()
-}
-
-export async function enrollments():
-Promise<any>{
-    await db.query.enrollmentsTable.findMany()
-}
-
-export async function schedules():
-Promise<any>{
-    await db.query.schedulesTable.findMany()
-}
-
-export async function subscriptions():
-Promise<any>{
-    await db.query.subscriptionsTable.findMany()
-}
-
-function then(arg0: () => any) {
-    throw new Error("Function not implemented.");
 }

@@ -1,7 +1,5 @@
 "use client"
-import local from "next/font/local";
 import { redirect } from "next/navigation";
-import { any } from "prop-types";
 
 export function username(name: string){
     return name.split(" ").concat(String(Math.floor((Math.random() * 10) + 1)))
@@ -108,6 +106,7 @@ export const decryptData = async (
       // Decode and return the decrypted data
       return new TextDecoder().decode(decodedData);
     } catch (error) {
+      console.log(error)
       return JSON.stringify({ payload: null });
     }
 };

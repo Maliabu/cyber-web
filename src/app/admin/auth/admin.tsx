@@ -1,6 +1,5 @@
 "use client"
 import { tokenise } from "@/app/services/services";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { UserCircle } from "lucide-react";
 
 export default function Admin(){

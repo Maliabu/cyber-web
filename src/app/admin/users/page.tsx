@@ -33,7 +33,7 @@ export default function AddUser() {
       },
     })
 
-    let name = form.getValues("name")
+    const name = form.getValues("name")
     form.setValue("token", token())
     name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
      
@@ -166,7 +166,7 @@ export default function AddUser() {
               <FormField
                   control={form.control}
                   name="image"
-                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                  render={({ field: { onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Profile Picture</FormLabel>
                       <FormControl

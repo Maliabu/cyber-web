@@ -30,13 +30,13 @@ export default function LoginAdmin(){
           app.innerHTML = text;
         }
           const data = await loginUser(values)
-          let first = data[0]
-          let second = data[1]
-          let third = data[2]
-          let forth = data[3]
-          let name = data[6]
-          let email = data[4]
-          let username = data[5]
+          const first = data[0]
+          const second = data[1]
+          const third = data[2]
+          const forth = data[3]
+          const name = data[6]
+          const email = data[4]
+          const username = data[5]
 
         // decrypt password n compare
         const dec = handleDecryption(second, third)

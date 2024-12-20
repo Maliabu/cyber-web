@@ -5,7 +5,7 @@ import {
     NavigationMenuLink
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookHeart, Calendar, ChevronRight, HeartHandshakeIcon, LucideUsersRound, ShieldCheckIcon, TrafficConeIcon } from "lucide-react";
+import { ArrowRight, Calendar, ChevronRight, HeartHandshakeIcon, ShieldCheckIcon, TrafficConeIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -46,7 +46,7 @@ export default async function HomePage(){
                 <ChevronRight width={15} height={15} className="pt-1"/> Get Started</div>
       <h1 className="display-1 py-8">Learn Cyber Security</h1>
       <p className="py-6">The easy way!</p>
-      <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap lh-1">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
       <div className="sm:px-16 sm:pt-16 p-6">
       <a href="/contact">

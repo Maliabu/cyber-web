@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { auth } from "@clerk/nextjs/server";
+import Link from "next/link";
 
 export default async function Footer() {
   const userId = await auth()
@@ -81,7 +82,7 @@ export default async function Footer() {
           <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
@@ -99,7 +100,7 @@ export default async function Footer() {
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/docs" title="Introduction">
@@ -111,7 +112,7 @@ export default async function Footer() {
           <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
@@ -129,7 +130,7 @@ export default async function Footer() {
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/docs" title="Introduction">
@@ -140,13 +141,13 @@ export default async function Footer() {
         </div>
         </div>
         <div className=" p-16">
-        <a
+        <Link
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
           href="https://www.instagram.com/beera_safe256/profilecard/?igsh=cTB2b2FuNXM0NjRv"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
+          <Image
             aria-hidden
             src="/instagram.svg"
             alt="instagram icon"
@@ -155,8 +156,8 @@ export default async function Footer() {
             height={16}
           />
           Instagram
-        </a>
-        <a
+        </Link>
+        <Link
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
           href="https://x.com/beera_safe?t=_tgINtbfE8Ju0II3GGEtgw&s=09"
           target="_blank"
@@ -170,7 +171,7 @@ export default async function Footer() {
             height={16}
           />
           twitter
-        </a></div>
+        </Link></div>
         <div className="sm:px-8 sm:py-4 p-6 flex sm:flex-row flex-col sm:justify-between border border-top">
           <div className="">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
@@ -195,7 +196,7 @@ const ListItem = React.forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -207,7 +208,7 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-card-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   )

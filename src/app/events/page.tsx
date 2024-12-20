@@ -2,11 +2,10 @@ import Menu from "../routes/menu";
 import Footer from "../routes/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import Logo from '../images/logo.png'
 import { db } from "@/drizzle/db";
-import { Badge } from "@/components/ui/badge";
 import { getMyDay, getMyMonth } from "../services/success";
 import BlogBottomAd from "../home/blogAd";
+import Link from "next/link";
 
 export default async function Events(){
     const events = await db.query.EventsTable.findMany()
@@ -22,7 +21,7 @@ export default async function Events(){
                             <div className="p-4 bg-white rounded-lg">
                         <Card className="w-full background-none" key={event.id}>
                         <CardContent>
-                        <p className="p-2 my-4 desc border rounded-md"> {getMyDay(event.startDate.getDay())}, {getMyMonth(event.startDate.getMonth())} {event.startDate.getDate()}, {event.startDate.getFullYear()}</p>
+                        <p className="p-2 my-4 desc border rounded-md"> {event.startDate !== null?getMyDay(event.startDate.getDay()):null}, {event.startDate !== null?getMyMonth(event.startDate.getMonth()):null} {event.startDate !== null?event.startDate.getDate():null}, {event.startDate !== null?event.startDate.getFullYear():null}</p>
                         <div className="relative h-28 w-64">
                     <Image
                     aria-hidden
@@ -36,8 +35,8 @@ export default async function Events(){
                     <p className="text-sm text-card-foreground">
                       {event.description}
                     </p>
-                    <p className="p-2 my-4 desc"> Ends: {getMyDay(event.endDate.getDay())}, {getMyMonth(event.endDate.getMonth())} {event.endDate.getDate()}, {event.endDate.getFullYear()}</p>
-                    <a href={event.link}>For more info</a>
+                    <p className="p-2 my-4 desc"> Ends: {event.endDate !== null?getMyDay(event.endDate.getDay()):null}, {event.endDate !== null?getMyMonth(event.endDate.getMonth()):null} {event.endDate !== null?event.endDate.getDate():null}, {event.endDate !== null?event.endDate.getFullYear():null}</p>
+                    <Link href={event.link !== null?event.link:"/"}>For more info</Link>
                 </CardContent>
               </Card>
               </div>

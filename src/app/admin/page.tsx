@@ -8,7 +8,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
-import { BugPlay, Calendar, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Lock, Paperclip, Play, User, Users, Users2Icon, UsersIcon } from "lucide-react"
+import { BugPlay, Calendar, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Paperclip, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "./users/page"
 import Logo from '@/app/images/logo1.png'
 import Image from "next/image";
@@ -25,8 +25,6 @@ import AddCourse from "./courses/page"
 import { CourseCard } from "./courses/courseCard"
 import { ArticlesCard } from "./articles/articlesCard"
 import AddArticle from "./articles/page"
-import { tokenise } from "../services/services"
-import { redirect } from "next/navigation"
 import { EnrollCard } from "./enrollment/enrollCard"
 import Enroll from "./enrollment/page"
 
@@ -274,8 +272,8 @@ export default async function AdminPage() {
                   {
                     schedules.length > 0 ? (
                       <div className="admin">
-                        {schedules.map(schedule => (
-                          <UserCard key={schedule.id} {...schedule}/>
+                        {users.map(user => (
+                          <UserCard key={user.id} {...user}/>
                         ))}
                       </div>
                     ) : (
@@ -315,7 +313,6 @@ type UsercardProps = {
 // one time usercard component with custom prop type
 function UserCard({
   id, 
-  isActive,
   name,
   username,
   profilePicture

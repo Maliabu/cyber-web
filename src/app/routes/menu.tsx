@@ -13,11 +13,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { Calendar, ChevronDown, MenuIcon, NotebookPen, Search } from "lucide-react";
-import Blog from '../images/link.jpeg'
+import { MenuIcon, Search } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator"
  
@@ -57,8 +55,8 @@ export default async function Menu() {
       return <div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /></div>
     } else {
       return <div>
-        <a href="/sign-in"><Button className="text-white">Sign In</Button></a>
-        <a href="/sign-up"><Button className="bg-light ml-2">Sign Up</Button></a>
+        <Link href="/sign-in"><Button className="text-white">Sign In</Button></Link>
+        <Link href="/sign-up"><Button className="bg-light ml-2">Sign Up</Button></Link>
       </div>
     }
   }
@@ -66,12 +64,12 @@ export default async function Menu() {
   return (
     <div className="sm:p-0">
       <main className="hidden sm:flex sm:flex-row justify-between px-8 items-center text-dark">
-        <a href="/">
+        <Link href="/">
           <Image
             className="w-[120px]"
             src={Logo}
             alt="logo"
-          /></a>
+          /></Link>
       <NavigationMenu className="rounded-sm">
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -99,13 +97,13 @@ export default async function Menu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <a href="/events" className="nav-a mx-6">
+          <Link href="/events" className="nav-a mx-6">
           <div className="flex h-5 items-center space-x-4 text-sm">
         <div>Events</div>
         <Separator orientation="vertical" />
         <div>News</div>
       </div>
-          </a>
+          </Link>
           </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
@@ -123,12 +121,12 @@ export default async function Menu() {
     {display()}
       </main>
     <div className="sm:hidden flex flex-row px-6 py-4 justify-between">
-      <a href="/">
+      <Link href="/">
           <Image
             className="w-[120px]"
             src={Logo}
             alt="logo"
-          /></a>
+          /></Link>
           <div className="flex flex-row">
             <Sheet>
       <SheetTrigger asChild>
@@ -140,16 +138,16 @@ export default async function Menu() {
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <div className="grid grid-cols-1 gap-4 py-4">
-          <a href="/" className="text-dark hover:text-blue">
-          <p>Home</p></a>
-          <a href="/blog" className="text-dark my-2 hover:text-blue">
-          <p>Blog</p></a>
-          <a href="/offers" className="text-dark hover:text-blue">
-          <p>Services</p></a>
-          <a href="/contact" className="text-dark my-2 hover:text-blue">
-          <p>Community</p></a>
-          <a href="/events" className="text-dark hover:text-blue">
-          <p>News & Events</p></a>
+          <Link href="/" className="text-dark hover:text-blue">
+          <p>Home</p></Link>
+          <Link href="/blog" className="text-dark my-2 hover:text-blue">
+          <p>Blog</p></Link>
+          <Link href="/offers" className="text-dark hover:text-blue">
+          <p>Services</p></Link>
+          <Link href="/contact" className="text-dark my-2 hover:text-blue">
+          <p>Community</p></Link>
+          <Link href="/events" className="text-dark hover:text-blue">
+          <p>News & Events</p></Link>
           {display()}
         </div>
         <SheetFooter>
@@ -179,8 +177,9 @@ const ListItem = React.forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
           ref={ref}
+          href=""
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
@@ -191,7 +190,7 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-card-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   )

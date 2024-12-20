@@ -1,4 +1,4 @@
-import { Book, BookCheckIcon, BugPlay, Calendar, CalendarCheck2, Edit, GraduationCap, Paperclip, Play, User2Icon, UserCircle, UserIcon } from "lucide-react";
+import { BugPlay, Calendar, CalendarCheck2, Edit, GraduationCap, Paperclip, UserCircle, UserIcon } from "lucide-react";
 
 type PageState = "User" | "Event" | "Mentor" | "Schedule" | "Enrollment" | "Subscription" | "Article" | "Course"
 type AddPageProps = {

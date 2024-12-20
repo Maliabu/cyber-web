@@ -1,6 +1,6 @@
 'use client';
 // render on client
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {
     Card,
   CardDescription,
@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Logo from '../images/logo.png'
+import Link from "next/link";
 
 export default function TimerCountDown(userId){
     const [result, setResult] = useState("00d 00h 00m 00s")
@@ -77,7 +78,7 @@ export default function TimerCountDown(userId){
       </CardHeader>
       <CardContent>
       {nextClass()}
-        <a
+        <Link
             className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md p-6 outline focus:shadow-md"
             href="/">
             <Image
@@ -92,7 +93,7 @@ export default function TimerCountDown(userId){
             <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
-        </a>
+        </Link>
       </CardContent>
       <CardFooter>
         {userId.userid !== null?
@@ -100,8 +101,8 @@ export default function TimerCountDown(userId){
         :
         <div className="flex justify-between sm:w-[350px] w-[320px]">
         <p>Or Sign Up with Google</p>
-        <a href="/sign-up">
-        <Button variant="outline" className="bg-light"> Google</Button></a></div>
+        <Link href="/sign-up">
+        <Button variant="outline" className="bg-light"> Google</Button></Link></div>
         }
       </CardFooter>
     </Card>
