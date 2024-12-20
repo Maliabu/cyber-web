@@ -1,6 +1,6 @@
 'use client';
 // render on client
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Card,
   CardDescription,
@@ -37,7 +37,7 @@ export default function TimerCountDown(userId){
         
     // Output the result in an element with id="demo"
     setResult(days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ")
+          + minutes + "m " + seconds + "s ")
         
     // If the count down is over, write some text 
     if (distance < 0) {
@@ -61,16 +61,16 @@ export default function TimerCountDown(userId){
         { return <form>
           <Button className="my-4 text-white bg-primary">Sign Me Up</Button>
         </form>}
-        else {return <p className="p-4 rounded-md border border-destructive text-white">Next class coming soon. please keep updated</p>}
+        else {return <p className="p-4 rounded-md border ">Next class coming soon. please keep updated</p>}
       
     }
     return(
         <div>
-        <div className="flex d-flex pb-4 items-center">
+        <div className="flex pb-4 items-center sm:-mr-8">
         <h6>Next Class In: </h6>
         <h5 className="mx-4">{result}</h5>
         </div>
-      <Card className="w-[350px] dark bg-gradient-to-r from-slate-800 to-slate-900">
+      <Card className="sm:w-[350px] w-[320px] dark ">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
@@ -98,7 +98,7 @@ export default function TimerCountDown(userId){
         {userId.userid !== null?
         null
         :
-        <div className="flex justify-between w-[350px]">
+        <div className="flex justify-between sm:w-[350px] w-[320px]">
         <p>Or Sign Up with Google</p>
         <a href="/sign-up">
         <Button variant="outline" className="bg-light"> Google</Button></a></div>

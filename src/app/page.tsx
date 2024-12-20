@@ -9,7 +9,7 @@ import {
 export default function Home() {
   return (
     <ClerkProvider>
-    <div className="font-[family-name:var(--font-futura)]">
+    <div className="container mx-auto">
       <Menu/>
       <HomePage/>
       <Footer/>

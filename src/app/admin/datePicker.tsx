@@ -17,8 +17,6 @@ import {
 //popover component has a primitive portal tag that should
 // be removed to solve the issue
 export function DatePicker(field: any) {
-  const [date, setDate] = React.useState<Date>()
-  console.log(field)
 
   return (
     <Popover>

@@ -8,27 +8,27 @@ import { useForm } from "react-hook-form"
 import z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { addEvents } from "@/server/fetch.actions"
-import { addEventSchema } from '@/schema/formSchemas'
+import { Textarea } from '@/components/ui/textarea'
+import { addArticles } from "@/server/fetch.actions"
+import { addArticleSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
-import { DatePicker } from "../datePicker"
+import { tokenise } from "@/app/services/services"
 
 export default function AddArticle() {
 
-    const form = useForm<z.infer<typeof addEventSchema>>({
-      resolver: zodResolver(addEventSchema),
+    const form = useForm<z.infer<typeof addArticleSchema>>({
+      resolver: zodResolver(addArticleSchema),
         defaultValues: {
           title: "",
-          description: "",
+          content: "",
           link: "",
+          writer: '',
           image: "",
-          startDate: new Date(),
-          endDate: new Date(),
           image1: ''
       },
     })
 
-    async function onSubmit(values: z.infer<typeof addEventSchema>) {
+    async function onSubmit(values: z.infer<typeof addArticleSchema>) {
         //create obj
         const app = document.getElementById('submit');
         const text = 'processing';
@@ -36,14 +36,15 @@ export default function AddArticle() {
           app.innerHTML = text;
         }
         values.image1?values.image=values.image1.name:null
+        values.writer = tokenise()[1]
 
         const formData = new FormData()
         formData.append("file", values.image1)
 
-        const data = await addEvents(values, formData)
+        const data = await addArticles(values, formData)
         if(data?.error){
           form.setError("root", {
-            "message": "event not added"
+            "message": "Article not added"
           })
         } else {
           if(app !== null){
@@ -55,12 +56,13 @@ export default function AddArticle() {
 
     function formBuild(){
       return(
-      <div className="p-4 pb-0">
+      <div className="p-4 pb-0 admin">
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 w-full items-center gap-4">
           <div>
-              <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-row">
+              <div className="flex flex-col w-1/2 space-y-1.5">
               <FormField
                   control={form.control}
                   name="title"
@@ -77,22 +79,7 @@ export default function AddArticle() {
                   )}
                   />
               </div>
-              <div className="flex flex-col mt-6 space-y-1.5">
-              <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                      <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                          <Input type="text" placeholder="Description" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                      </FormItem>
-                  )}
-                  />
-              </div>
-              <div className="flex flex-col mt-6 space-y-1.5">
+              <div className="flex flex-col w-1/2 ml-2 space-y-1.5">
               <FormField
                   control={form.control}
                   name="link"
@@ -106,42 +93,8 @@ export default function AddArticle() {
                       </FormItem>
                   )}
                   />
-              </div>
-          </div>
-          <div>
-              <div className="flex flex-col space-y-1.5 mt-6">
-              <p className="desc">Start Date</p>
-              <FormField
-                  control={form.control}
-                  name="startDate"
-                  render={({ field }) => (
-                      <FormItem>
-                      <FormControl
-                      >
-                          <DatePicker field={field} />
-                      </FormControl>
-                      <FormMessage />
-                      </FormItem>
-                  )}
-                  />
-              </div>
-              <div className="flex flex-col space-y-1.5 mt-6">
-              <p className="desc">End Date</p>
-              <FormField
-                  control={form.control}
-                  name="endDate"
-                  render={({ field }) => (
-                      <FormItem>
-                      <FormControl
-                      >
-                          <DatePicker field={field} />
-                      </FormControl>
-                      <FormMessage />
-                      </FormItem>
-                  )}
-                  />
-              </div>
-              <div className="flex flex-col mt-6 space-y-1.5">
+              </div></div>
+              <div className="flex flex-col mt-2 space-y-1.5">
               <FormField
                   control={form.control}
                   name="image1"
@@ -159,14 +112,33 @@ export default function AddArticle() {
                   )}
                   />
               </div>
+              <div className="flex flex-col mt-2 space-y-1.5">
+              <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Content</FormLabel>
+                      <FormControl>
+                      <Textarea
+                  placeholder="Write your article, editing will happen automatically at submission..."
+                  {...field}
+                />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
+                  />
+                  <p className="desc">Your username will be attached to this article as <a>{tokenise()[1]}</a></p>
+              </div>
           </div>
         </div>
-        <Button id="submit" className="my-4 text-white" type="submit">Add Event</Button>
+        <Button id="submit" className="my-4 text-white" type="submit">Add Article</Button>
         {form.formState.errors.root && (
           <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Event added successfully </div>
+          <div className="bg-light p-2 text-center rounded-md"> Article added successfully </div>
         )}
       </form>
       </Form>
@@ -175,7 +147,7 @@ export default function AddArticle() {
 
   return (
     <div className="font-[family-name:var(--font-futura)]">
-      <ReusableDrawer page="Event" form={formBuild()}/>
+      <ReusableDrawer page="Article" form={formBuild()}/>
     </div>
   )
 }

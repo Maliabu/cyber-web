@@ -1,6 +1,6 @@
 {
-  "id": "4faacc24-e354-4a74-952b-cb41e73de8c3",
-  "prevId": "95f32afd-cfdb-4806-a1ca-7bf31833174a",
+  "id": "e1fd052d-d115-4c2e-bc54-8a5aa181cce8",
+  "prevId": "d3a68dd4-fdd0-4f22-96c0-6d3cc763c56d",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -106,9 +106,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "writer": {
+          "name": "writer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -127,21 +127,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "articles_table_user_id_users_table_id_fk": {
-          "name": "articles_table_user_id_users_table_id_fk",
-          "tableFrom": "articles_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -259,8 +245,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_id": {
-          "name": "user_id",
+        "mentor_id": {
+          "name": "mentor_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -305,12 +291,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "course_table_user_id_users_table_id_fk": {
-          "name": "course_table_user_id_users_table_id_fk",
+        "course_table_mentor_id_users_table_id_fk": {
+          "name": "course_table_mentor_id_users_table_id_fk",
           "tableFrom": "course_table",
           "tableTo": "users_table",
           "columnsFrom": [
-            "user_id"
+            "mentor_id"
           ],
           "columnsTo": [
             "id"
@@ -404,8 +390,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "course": {
-          "name": "course",
+        "course_id": {
+          "name": "course_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -432,12 +418,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "enrollments_table_course_course_table_id_fk": {
-          "name": "enrollments_table_course_course_table_id_fk",
+        "enrollments_table_course_id_course_table_id_fk": {
+          "name": "enrollments_table_course_id_course_table_id_fk",
           "tableFrom": "enrollments_table",
           "tableTo": "course_table",
           "columnsFrom": [
-            "course"
+            "course_id"
           ],
           "columnsTo": [
             "id"

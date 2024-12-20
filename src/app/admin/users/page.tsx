@@ -36,8 +36,6 @@ export default function AddUser() {
     let name = form.getValues("name")
     form.setValue("token", token())
     name.length > 0?form.setValue("username", username(name)[0]+String(Math.floor((Math.random() * 100) + 1))+username(name)[1]):form.setValue("username", "")
-
-    console.log(form.getValues())
      
     async function onSubmit(values: z.infer<typeof addUserSchema>) {  
       if(values.encrPass !== "" && values.encrPass === values.confirmPassword){

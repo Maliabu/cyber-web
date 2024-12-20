@@ -49,6 +49,7 @@ export const addEventSchema = z.object({
     image1: z.any(),
 })
 
+//remember to coerce numbers else form doesnot submit
 export const addCourseSchema = z.object({
     title: z.string({required_error: "Please enter a title.",}).min(2, {
         message: "title should be atleast a character"
@@ -56,22 +57,30 @@ export const addCourseSchema = z.object({
     description: z.string({required_error: "Please enter a description.",}),
     courseOutline: z.string(),
     image: z.string(),
-    mentor: z.number({required_error: "Please provide a mentor.",}).positive(),
+    mentor: z.coerce.number({required_error: "Please provide a mentor.",}),
     startDate: z.date({required_error: "Please enter a date.",}),
     endDate: z.date({required_error: "Please enter a date.",}),
-    currency: z.number({required_error: "Please enter a currency.",}).positive(),
-    amount: z.number({required_error: "Please enter a pricing for this course.",}).positive(),
+    currency: z.coerce.number({required_error: "Please enter a currency.",}),
+    amount: z.coerce.number({required_error: "Please enter a pricing for this course.",}),
     image1: z.any(),
+    currency1: z.string(),
+    mentor1: z.string(),
 })
 
 export const addArticleSchema = z.object({
     title: z.string({required_error: "Please enter a title.",}).min(2, {
         message: "title should be atleast a character"
     }).max(50),
-    description: z.string({required_error: "Please enter a description.",}),
+    content: z.string({required_error: "Please enter a description.",}),
     link: z.string(),
+    writer: z.string({required_error: "Please enter your name.",}),
     image: z.string(),
-    startDate: z.date({required_error: "Please enter a date.",}),
-    endDate: z.date({required_error: "Please enter a date.",}),
     image1: z.any(),
+})
+
+export const addEnrollmentSchema = z.object({
+    courseId: z.coerce.number({required_error: "Please provide a mentor.",}),
+    userId: z.coerce.number({required_error: "Please provide a mentor.",}),
+    course1: z.string(),
+    user1: z.string(),
 })
