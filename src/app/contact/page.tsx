@@ -29,6 +29,7 @@ import {
 import { auth } from "@clerk/nextjs/server";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import BlogBottomAd from "../home/blogAd";
 
 export default async function About(){
 
@@ -37,10 +38,11 @@ export default async function About(){
     return(
         <>
         <Menu/>
-        <div className="p-8 sm:p-16 items-center bg-gradient-to-r from-slate-800 to-sky-600 text-white">
-        <div className="sm:float-right">
+        <div className=" sm:p-0 items-center">
+        <div className="sm:float-right sm:p-8 p-6">
           <div className="grid justify-items-center py-8">
-          <h1 className="display-1">70+</h1></div>
+          <h1 className="display-1 hidden sm:block text-white">70+</h1>
+          <h1 className="display-1 sm:hidden">70+</h1></div>
           <a href="/">
       <Card className="sm:w-[350px] w-[320px]">
       <CardHeader>
@@ -48,7 +50,7 @@ export default async function About(){
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card></a>
-    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
+    <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
         {userId.userId !== null?<form>
       <div className="grid w-full items-center gap-4">
@@ -70,16 +72,16 @@ export default async function About(){
     </div>
     <a href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
-        <p className="w-1/4">Join our whatsapp community</p>
+        <p className="w-1/4 text-white sm:m-6">Join our whatsapp community</p>
         <Image
         src={Whatsapp}
         alt="whatsapp logo"
         height={70}
-        width={70}
+        width={90}
         />
     </div></a>
     </div>
-      <div className="pb-16">
+      <div className="sm:p-16 p-6 bg-darker text-white">
       <NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem>
@@ -96,21 +98,24 @@ export default async function About(){
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1 sm:w-[400px]">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
-      <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button>
-      <h3 className="display-1 mt-12">What Our Mentees have to say</h3>
-      <p className="pt-6">The easy way!</p>
+      <div className="sm:p-16 p-6">
+        <a href="#subscribe">
+        <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button></a>
+      </div>
+      <div className="sm:px-16 px-6">
+      <h3 className="text-4xl leading-6 mt-12">Meet Our Mentees</h3>
+      </div>
+      <div className="sm:px-8 p-6">
       <Carousel
       opts={{
         align: "start",
       }}
-      className="w-full max-w-sm">
-    <div className="">
-    </div>
+      className="w-full sm:px-16 bg-muted">
       <CarouselContent className="sm:p-8 p-6 background-none">
         {Array.from({ length: 3 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
-              <Card className="dark">
+              <Card className="background-none">
                 <CardContent className="flex aspect-square p-4">
           <NavigationMenu>
           <ul className="background-none">
@@ -143,22 +148,24 @@ export default async function About(){
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="ml-6"/>
+      <CarouselNext className="mr-6"/>
     </Carousel>
-    <h3 className="display-1 mt-6">Now Meet Our Mentors</h3>
+    </div>
+      <div className="sm:px-16 p-6">
+      <h3 className="text-4xl leading-8 sm:mt-12">Now Meet Our Mentors</h3>
+      </div>
+      <div className="p-6">
       <Carousel
       opts={{
         align: "start",
       }}
-      className="w-full max-w-sm">
-    <div className="">
-    </div>
+      className="w-full sm:px-14 bg-muted">
       <CarouselContent className="sm:p-8 p-6">
         {Array.from({ length: 3 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
-              <Card className="dark">
+              <Card className="background-none">
                 <CardContent className="flex aspect-square p-4">
           <NavigationMenu>
           <ul className="">
@@ -191,14 +198,14 @@ export default async function About(){
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="ml-6"/>
+      <CarouselNext className="mr-6"/>
     </Carousel>
-    <a href="/blog">
-      <Button className="text-white"><Group width={16} height={16}/> Go to the Blog</Button></a>
-      <Button className="sm:mx-4 sm:mt-0 mt-3 text-white"><PersonStanding width={16} height={16}/> Become a Mentor</Button>
+    </div>
        </div>
-        <Footer/>
+       <BlogBottomAd/>
+       <div id="subscribe">
+       <Footer/></div>
         </>
     )
 }

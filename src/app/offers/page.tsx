@@ -7,7 +7,7 @@ import {
   NavigationMenuLink
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { BookHeart, ChevronRight, Home, HomeIcon, House, HouseIcon } from "lucide-react";
+import { BookHeart, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -15,35 +15,251 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import {
   CardContent,
   Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter
 } from "@/components/ui/card"
 import Image from "next/image";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import TimerCountDown from "../resources/timer";
 import { Badge } from "@/components/ui/badge"
-import Logo from '../images/logo.png'
+import { Separator } from "@/components/ui/separator";
+import Training from '../images/training.jpeg'
+import Consultancy from '../images/consultancy.jpeg'
+import Revenue from '../images/revenue.jpeg'
+import Pentesting from '../images/pentesting.jpeg'
+import BlogBottomAd from "../home/blogAd";
+import { db } from "@/drizzle/db";
+import { getMyDay, getMyMonth } from "../services/success";
+import { SQLWrapper, eq } from "drizzle-orm";
+import { usersTable } from "@/drizzle/schema";
 
-export default function Services(){
+export default async function Services(){
+  const courses = await db.query.courseTable.findMany()
+  let path = "/courses/"
+  async function mentor(id: number | SQLWrapper){
+    let mentor = await db.query.usersTable.findMany({
+      where: eq(usersTable.id, id)
+    })
+    return mentor
+  }
     return(
         <>
         <Menu/>
-        <div className="sm:p-16 p-6 items-center">
-        <div className=" sm:z-0 sm:absolute sm:-right-0">
+        <div className="p-6 grid justify-items-center">
+        <div className="hidden sm:flex h-5 items-center space-x-4 text-sm ml-4">
+        <div>Cybersecurity Training</div>
+        <Separator orientation="vertical" />
+        <div>Penetration Testing Services</div>
+        <Separator orientation="vertical" />
+        <div>Consultancy and Managed Security Services</div>
+        <Separator orientation="vertical" />
+        <div>Revenue-Generating Activities</div>
+      </div>
+      <Separator orientation="horizontal" className="mt-4"/>
+        </div>
+        <div className="grid justify-items-center p-6">
+        <div className="text-5xl leading-10">Each of our services made for you!</div>
+        <p className="my-2">Check our most affordable services</p>
+        <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
+        </div>
+    <div className="sm:px-16 p-6">
+      <Carousel
+      opts={{
+        align: "start",
+      }}
+      className="w-full sm:mt-8 bg-muted rounded-lg"
+    >
+      <CarouselContent className="py-8">
+          <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
+            <div>
+              <Card className="w-full p-0 rounded-2xl">
+                <CardContent className="flex p-4">
+          <NavigationMenu>
+          <ul className="">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <a
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
+                    href="/offers#courses">
+                      <div className="grid justify-items-center">
+                        <Image
+                        src={Training}
+                        alt="training"
+                        className="object-cover h-48 rounded-t-lg"
+                        />
+                    </div>
+                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
+                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      Cyber Security Training</div>
+                    <p className="text-sm text-card-foreground mt-4">
+                    For: Students, IT professionals, and organizations
+                    </p>
+                    <div>
+                      <p className="desc py-4">Modules</p>
+                      <div className="text-dark">
+                        <ul className="w-[200px]">
+                        <li className="leading-4">Basic Cybersecurity Awareness</li>
+                        <li className="leading-4 mt-2">Intermediate Ethical Hacking Course</li>
+                        <li className="leading-4 mt-2">Advanced Cybersecurity Certification</li>
+                        <li className="leading-4 mt-2">Corporate Training Workshops</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <Button className="text-white mt-4">See our Modules</Button>
+                    </div>
+                  </a>
+                </NavigationMenuLink>
+              </li>
+            </ul>
+            </NavigationMenu>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+          <CarouselItem key="consultancy" className="md:basis-1/2 lg:basis-1/3">
+            <div>
+              <Card className="w-full p-0">
+                <CardContent className="flex p-4">
+          <NavigationMenu>
+          <ul className="">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <a
+                    className="flex h-full w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
+                    href="/">
+                    <div className="grid justify-items-center">
+                      <Image
+                      src={Consultancy}
+                      alt="training"
+                      className="object-cover h-48 rounded-t-lg"
+                      />
+                  </div>
+                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
+                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      Consultancy and Managed Security Services</div>
+                    <p className="text-sm text-card-foreground mt-4">
+                    For: Organizations without dedicated security teams.
+                    </p>
+                    <div>
+                      <p className="desc py-4">Packages</p>
+                      <div className="text-dark">
+                        <ul className="w-[200px]">
+                        <li className="leading-4">Security Policy Creation</li>
+                        <li className="leading-4 mt-2">Incident Response Planning</li>
+                        <li className="leading-4 mt-2">Managed Security Operations Center (SOC)</li>
+                        </ul>
+                      </div>
+                      </div>
+                    <Button className="text-white mt-4">Request a package</Button>
+                    </div>
+                  </a>
+                </NavigationMenuLink>
+              </li>
+            </ul>
+            </NavigationMenu>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+          <CarouselItem key="pentesting" className="md:basis-1/2 lg:basis-1/3">
+            <div>
+              <Card className="w-full p-0">
+                <CardContent className="flex p-4">
+          <NavigationMenu>
+          <ul className="">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <a
+                    className="flex w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
+                    href="/">
+                    <div className="grid justify-items-center">
+                      <Image
+                      src={Pentesting}
+                      alt="training"
+                      className="object-cover h-48 rounded-t-lg"
+                      />
+                  </div>
+                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
+                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      Penetration Testing Services</div>
+                    <p className="text-sm text-card-foreground mt-4">
+                    For: SMBs, international tech startups, financial institutions, and e-commerce businesses.
+                    </p>
+                    <div>
+                      <p className="desc py-4">Packages</p>
+                      <div className="text-dark">
+                        <ul className="w-[200px]">
+                        <li className="leading-4">Web Application Pentesting</li>
+                        <li className="leading-4 mt-2">Network Vulnerability Assessment</li>
+                        <li className="leading-4 mt-2">Mobile Application Security Testing</li>
+                        <li className="leading-4 mt-2">Red Team/Blue Team Exercises</li>
+                        </ul>
+                      </div>
+                      </div>
+                    <Button className="text-white mt-4">Request a package</Button>
+                    </div>
+                  </a>
+                </NavigationMenuLink>
+              </li>
+            </ul>
+            </NavigationMenu>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+          <CarouselItem key="revenue" className="md:basis-1/2 lg:basis-1/3">
+            <div>
+              <Card className="w-full p-0">
+                <CardContent className="flex p-4">
+          <NavigationMenu>
+          <ul className="">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <a
+                    className="flex w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
+                    href="/">
+                    <div className="grid justify-items-center">
+                      <Image
+                      src={Revenue}
+                      alt="training"
+                      className="object-cover h-48 rounded-t-lg"
+                      />
+                  </div>
+                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
+                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      Revenue-Generating Activities</div>
+                    <p className="text-sm text-card-foreground mt-4">
+                    Remote Partners: Freelancers for international projects (use platforms like Upwork).
+                    </p>
+                    <div>
+                      <p className="desc py-4">Packages</p>
+                      <div className="text-dark">
+                        <ul className="w-[200px]">
+                        <li className="leading-4">Bug Bounty Management</li>
+                        <li className="leading-4 mt-2">Software Development</li>
+                        <li className="leading-4 mt-2">Content Creation</li>
+                        </ul>
+                      </div>
+                      </div>
+                    <Button className="text-white mt-4">Request a pakcage</Button>
+                    </div>
+                  </a>
+                </NavigationMenuLink>
+              </li>
+            </ul>
+            </NavigationMenu>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+      </CarouselContent>
+      <CarouselPrevious className="ml-6"/>
+      <CarouselNext className="mr-6"/>
+    </Carousel>
+    </div>
+        <div className="sm:p-16 p-6 items-center bg-darker text-white">
+        <div className="sm:float-right">
             <TimerCountDown/>
     </div>
       <NavigationMenu>
@@ -66,7 +282,7 @@ export default function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></a>
       </div>
       </div>
-      <div className="p-10 sm:p-8 back-image">
+      <div className="p-10 sm:p-12 bg-muted">
       <Carousel
       opts={{
         align: "start",
@@ -74,51 +290,47 @@ export default function Services(){
       className="w-full"
     >
     <div className="sm:p-8" id="courses">
-    <div className="flex flex-row mt-4">
-    <Badge variant="outline">Hacking</Badge>
-    <Badge variant="outline" className="mx-2">Cyber Security</Badge>
-    <Badge variant="outline">Training</Badge>
-    <Badge variant="outline" className="mx-2">Assessment</Badge>
+        <div className=" grid justify-items-center">
+        <div className="hidden sm:flex h-5 items-center space-x-4 text-sm ml-4">
+        <div>Basic Cybersecurity Awareness</div>
+        <Separator orientation="vertical" />
+        <div>Intermediate Ethical Hacking Course</div>
+        <Separator orientation="vertical" />
+        <div>Advanced Cybersecurity Certification</div>
+        <Separator orientation="vertical" />
+        <div>Corporate Training Workshops</div>
+      </div>
+        </div>
     </div>
-    </div>
-      <CarouselContent className="sm:p-8 p-6 sm:mt-0 mt-8">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
-            <div className="p-1">
-              <Card className="background-none text-white rounded-2xl backdrop">
-                <CardContent className="aspect-square sm:p-16">
+      <CarouselContent className="sm:p-8 sm:mt-0 mt-8">
+        {courses.map(async course => (
+          <CarouselItem key={course.id} className="md:basis-1/2 lg:basis-1/2">
+            <div className="bg-white rounded-2xl">
+            <Badge variant="outline" className="p-2 m-4">Starting {getMyDay(course.startDate.getDay())}, {getMyMonth(course.startDate.getMonth())} {course.startDate.getDate()}, {course.startDate.getFullYear()}</Badge>
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
-                <Badge variant="outline" className="float-right p-2 sm:-m-14 -m-4">Starting Soon</Badge>
+                <div className="relative h-48 w-96">
                     <Image
                     aria-hidden
-                    src={Logo}
-                    alt="File icon"
-                    width={60}
-                    height={60}/>
-                    <div className="py-4">
-                        <h3 className="">Cyber Security in a Nutshell!</h3></div>
-                <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 outline-none border focus:shadow-sm my-4"
-                    href="/">
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </a>
-                </NavigationMenuLink>
+                    src={path+course.image}
+                    alt="course image"
+                    fill
+                    className="object-cover"/></div>
               </li>
             </ul>
             </NavigationMenu>
-            <Button className="text-white">Enroll for course</Button>
-            <Button className="sm:mx-4 bg-light sm:mt-0 mt-2">Mentor</Button>
-                </CardContent>
-              </Card>
+            <div className="p-8">
+                    <div className="py-4">
+                        <h3 className="text-4xl leading-8">{course.title}</h3></div>
+                    <p className="mt-4">
+                      {course.description}
+                    </p>
+                    <div className="mb-2 my-4 text-sm font-bold">
+                      Ends: {getMyDay(course.endDate.getDay())}, {getMyMonth(course.endDate.getMonth())} {course.endDate.getDate()}, {course.endDate.getFullYear()}
+                    </div>
+                    <Button className="text-white">Enroll</Button></div>
+            <p className="mt-4 desc p-3 self-center border-t">Mentor: {(await mentor(course.mentor)).map(mentors => mentors.name)}</p>
             </div>
           </CarouselItem>
         ))}
@@ -127,6 +339,7 @@ export default function Services(){
       <CarouselNext />
     </Carousel>
     </div>
+    <BlogBottomAd/>
         <Footer/>
         </>
     )

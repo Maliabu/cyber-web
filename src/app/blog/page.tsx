@@ -20,7 +20,7 @@ import Image from "next/image";
 
 export default function Blog(){
     return(
-        <div className="grid w-full">
+        <div className="">
         <Menu/>
         <div className="sm:px-16 p-6">
         <div className="sm:float-right sm:-mt-12 sm:-mx-6">
@@ -76,7 +76,7 @@ export default function Blog(){
         </a>
       </CardContent>
     </Card>
-    <Card className="p-4 border-none mt-4">
+    <Card className="p-4 border-none mt-4 w-[300px]">
       <h5>Comments</h5>
     </Card>
     </div>
@@ -92,14 +92,15 @@ export default function Blog(){
                 <ChevronRight width={15} height={15} className="pt-1"/> Blog</div>
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
-      <div className="sm:p-16 p-6 border rounded-xl mt-4 sm:w-3/4"><Image
+      <div className="sm:p-16 rounded-xl mt-4 sm:w-3/4">
+      <Image
                 aria-hidden
                 src="/next.svg"
                 alt="File icon"
-                width={500}
-                height={500}/>
+                width={300}
+                height={300}/>
       <h1 className="display-1">The role of cyber security in the moder day</h1>
-      <span className="mt-6 float-right mx-12"> WED 3 DEC, 2024 14:00:00 EAT</span>
+      <span className="mt-6 sm:float-right sm:mx-12"> WED 3 DEC, 2024 14:00:00 EAT</span>
       <p className="py-6">By WarrenMu</p>
       <h6 className="text-wrap lh-1 mt-16">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <h6 className="text-wrap lh-1 mt-6">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>

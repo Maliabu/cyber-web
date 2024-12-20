@@ -14,12 +14,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import Image from "next/image";
 import TimerCountDown from '../resources/timer'
-import Training from '../images/training.jpeg'
-import Consultancy from '../images/consultancy.jpeg'
-import { Badge } from "@/components/ui/badge";
 import { auth } from "@clerk/nextjs/server";
+import BlogBottomAd from "./blogAd";
 
 export default async function HomePage(){
 
@@ -52,11 +49,8 @@ export default async function HomePage(){
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
       <div className="sm:px-16 sm:pt-16 p-6">
-      <a href="offers">
-      <Button className="text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button>
-      </a>
       <a href="/contact">
-      <Button variant="outline" className="sm:mx-6 sm:mt-0 mt-2 bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
+      <Button variant="outline" className=" bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
     </div></div>
     </div>
     <div className="sm:p-16 bg-muted p-6">
@@ -67,9 +61,12 @@ export default async function HomePage(){
       className="w-full"
     >
     <h1 className="text-5xl leading-10">More to us and our offers for you!</h1>
-    <p className="my-2">Check our our services</p>
-    <Button className="text-white mt-4">Our services</Button>
-    <Button className="bg-light mt-4 mx-2">Our classes and Courses</Button>
+    <p className="my-2">Check our most affordable services</p>
+    <a href="/offers">
+    <Button className="text-white mt-4">See all our services</Button></a>
+    <a href="/offers#courses">
+    <Button className="bg-light mt-4 mx-2">Our Classes, Trainings and Courses</Button>
+    </a>
       <CarouselContent className="py-8">
           <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
             <div>
@@ -81,7 +78,7 @@ export default async function HomePage(){
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
-                    href="/">
+                    href="/offers#courses">
                       <div className="grid justify-items-center px-16 pt-16">
                         <TrafficConeIcon className="size-20"/>
                     </div>
@@ -112,7 +109,7 @@ export default async function HomePage(){
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
-                    href="/">
+                    href="/offers">
                       <div className="grid justify-items-center px-16 pt-16">
                         <HeartHandshakeIcon className="size-20"/>
                     </div>
@@ -143,7 +140,7 @@ export default async function HomePage(){
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
-                    href="/">
+                    href="/offers">
                       <div className="grid justify-items-center px-16 pt-16">
                         <ShieldCheckIcon className="size-20"/>
                     </div>
@@ -165,17 +162,11 @@ export default async function HomePage(){
             </div>
           </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="ml-6"/>
+      <CarouselNext className="mr-6"/>
     </Carousel>
     </div>
-    <div className="grid justify-items-center sm:p-20 p-6">
-        <h5 className="text-5xl leading-10 text-center sm:w-[750px] sm:py-5">For the best reads on cyber security, Blog with us!</h5>
-        From the best of our authors. Visit our blog!
-        <a href="/blog" className="mt-4">
-          <Button className="text-white my-4 sm:m-0 sm:w-[700px]">More Articles</Button>
-        </a>
-    </div>
+    <BlogBottomAd/>
     </div>
     )
 }

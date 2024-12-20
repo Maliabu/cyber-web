@@ -1,6 +1,6 @@
 'use client';
 // render on client
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Card,
   CardDescription,
@@ -37,7 +37,7 @@ export default function TimerCountDown(userId){
         
     // Output the result in an element with id="demo"
     setResult(days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ")
+          + minutes + "m " + seconds + "s ")
         
     // If the count down is over, write some text 
     if (distance < 0) {

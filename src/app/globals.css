@@ -132,8 +132,8 @@ a{
   color: rgb(255, 255, 255) !important;
 }
 .back-schedule{
-  background: -webkit-linear-gradient(left,rgba(255, 255, 255, 0.767),rgba(255, 255, 255, 0.261), url("images/box.jpeg")) !important;
-  background-size: contain !important;
+  background-image: url("images/box.jpeg") !important;
+  background-size: 20% !important;
   background-repeat: no-repeat !important;
   background-position: right;
   overflow-x: hidden !important;
@@ -169,6 +169,7 @@ a{
   border: none !important;
   color: rgb(11, 11, 11) !important;
   padding: 0px !important;
+  box-shadow: none !important;
 }
 .nav-a{
   color: black !important;
@@ -199,4 +200,7 @@ p.desc{
 .rounded-lg.border.bg-card.text-card-foreground.shadow-sm.w-full.p-0{
   border: none !important;
   box-shadow: none !important;
+}
+.w-100{
+  width: 34rem !important;
 }
