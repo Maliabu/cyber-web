@@ -7,14 +7,13 @@ import {
     NavigationMenuList,
     NavigationMenuLink
   } from "@/components/ui/navigation-menu"
-import { ChevronDown, ChevronRight, ThumbsDown, ThumbsUp } from "lucide-react"
+import { ChevronRight, ThumbsDown, ThumbsUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
   CardContent,
   Card,
   CardHeader,
-  CardTitle
 } from "@/components/ui/card"
 import Image from "next/image";
 
@@ -29,7 +28,7 @@ export default function Blog(){
         <h3>Recommended Articles</h3>
       </CardHeader>
       <CardContent className="scroll-y-blog">
-        <a className="flex h-auto w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
+        <Link className="flex h-auto w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -43,8 +42,8 @@ export default function Blog(){
             <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
-        </a>
-        <a className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
+        </Link>
+        <Link className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -58,8 +57,8 @@ export default function Blog(){
             <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
-        </a>
-        <a className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
+        </Link>
+        <Link className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden
@@ -73,7 +72,7 @@ export default function Blog(){
             <p className="text-sm leading-tight text-card-foreground">
                 Beautifully designed components built with Radix UI and Tailwind CSS.
             </p>
-        </a>
+        </Link>
       </CardContent>
     </Card>
     <Card className="p-4 border-none mt-4 w-[300px]">
@@ -102,9 +101,9 @@ export default function Blog(){
       <h1 className="display-1">The role of cyber security in the moder day</h1>
       <span className="mt-6 sm:float-right sm:mx-12"> WED 3 DEC, 2024 14:00:00 EAT</span>
       <p className="py-6">By WarrenMu</p>
-      <h6 className="text-wrap lh-1 mt-16">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
-      <h6 className="text-wrap lh-1 mt-6">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
-      <h6 className="text-wrap lh-1 mt-6">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap lh-1 mt-16">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap lh-1 mt-6">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap lh-1 mt-6">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <div className="flex flex-row mt-16">
       <Button variant="outline" className="">0 | <ThumbsUp width={14} height={14}/></Button><Button variant="outline" className="mx-2"><ThumbsDown width={14} height={14}/> | 0</Button>
       </div>

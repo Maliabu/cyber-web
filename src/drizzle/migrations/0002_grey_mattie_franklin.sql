@@ -1,0 +1,1 @@
+ALTER TABLE "currency_table" ALTER COLUMN "currency_name" SET NOT NULL;

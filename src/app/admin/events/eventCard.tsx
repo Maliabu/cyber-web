@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Delete } from "lucide-react"
 import Image from "next/image"
 
 // define custom props for userCard component
@@ -14,10 +13,8 @@ type EventcardProps = {
   }
   // one time usercard component with custom prop type
   export function EventCard({
-    id,
     title,
     description,
-    startDate,
     image,
     link
   }: EventcardProps){

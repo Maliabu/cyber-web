@@ -8,7 +8,6 @@ type EnrollCardProps = {
   }
   // one time usercard component with custom prop type
   export function EnrollCard({
-    id,
     courseId,
     userId,
   }: EnrollCardProps){

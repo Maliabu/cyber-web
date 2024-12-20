@@ -1,13 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { LoaderIcon, Lock, LockOpenIcon } from "lucide-react"
 import { redirect } from "next/navigation"
 
 export default function LogoutAdmin(){
     function logout(){
         setTimeout(() => {
-            let message = document.getElementById("submit1")
+            const message = document.getElementById("submit1")
             if(message !== null){
                 message.innerHTML = 'logging out...'
             }

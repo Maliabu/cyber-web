@@ -16,7 +16,9 @@ import {
 // will disturb on dialogs, drawers etc
 //popover component has a primitive portal tag that should
 // be removed to solve the issue
-export function DatePicker(field: any) {
+export function DatePicker(field: {
+  field: any
+}) {
 
   return (
     <Popover>

@@ -14,7 +14,7 @@ import { ReusableDrawer } from "../reusableDrawer"
 import { DatePicker } from "../datePicker"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-export default function AddCourse(props: { mentors: any[] , currency: any[]}) {
+export default function AddCourse(props: { mentors: {id: number, name: string}[] , currency: {id: number, currency: string}[]}) {
 
     const form = useForm<z.infer<typeof addCourseSchema>>({
       resolver: zodResolver(addCourseSchema),
@@ -179,7 +179,7 @@ export default function AddCourse(props: { mentors: any[] , currency: any[]}) {
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                  render={({ field: { onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl

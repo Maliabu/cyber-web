@@ -145,7 +145,7 @@ export default function AddEvents() {
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                  render={({ field: { onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl

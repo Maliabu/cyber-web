@@ -7,7 +7,7 @@ import {
     NavigationMenuLink
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Group, MessageCircle, PersonStanding } from "lucide-react";
+import { ChevronRight, Group } from "lucide-react";
 import Link from "next/link"
 import {
     CardDescription,
@@ -27,7 +27,6 @@ import {
   import Logo from '../images/logo.png'
   import Whatsapp from '../images/whatsapp.png'
 import { auth } from "@clerk/nextjs/server";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import BlogBottomAd from "../home/blogAd";
 
@@ -43,13 +42,13 @@ export default async function About(){
           <div className="grid justify-items-center py-8">
           <h1 className="display-1 hidden sm:block text-white">70+</h1>
           <h1 className="display-1 sm:hidden">70+</h1></div>
-          <a href="/">
+          <Link href="/">
       <Card className="sm:w-[350px] w-[320px]">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
-    </Card></a>
+    </Card></Link>
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
         {userId.userId !== null?<form>
@@ -70,7 +69,7 @@ export default async function About(){
       <Button className="my-4 text-white bg-primary">Send</Button>
     </form>}
     </div>
-    <a href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
+    <Link href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4 text-white sm:m-6">Join our whatsapp community</p>
         <Image
@@ -79,7 +78,7 @@ export default async function About(){
         height={70}
         width={90}
         />
-    </div></a>
+    </div></Link>
     </div>
       <div className="sm:p-16 p-6 bg-darker text-white">
       <NavigationMenu>
@@ -96,11 +95,11 @@ export default async function About(){
     </NavigationMenuList></NavigationMenu>
       <h1 className="display-1">Our Community</h1>
       <p className="py-6">The easy way!</p>
-      <h6 className="text-wrap lh-1 sm:w-[400px]">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap lh-1 sm:w-[400px]">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
       <div className="sm:p-16 p-6">
-        <a href="#subscribe">
-        <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button></a>
+        <Link href="#subscribe">
+        <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button></Link>
       </div>
       <div className="sm:px-16 px-6">
       <h3 className="text-4xl leading-6 mt-12">Meet Our Mentees</h3>
@@ -121,7 +120,7 @@ export default async function About(){
           <ul className="background-none">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
                     href="/">
                     <Image
@@ -137,7 +136,7 @@ export default async function About(){
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>
@@ -171,7 +170,7 @@ export default async function About(){
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/">
                     <Image
@@ -187,7 +186,7 @@ export default async function About(){
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>

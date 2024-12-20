@@ -36,9 +36,9 @@ import { usersTable } from "@/drizzle/schema";
 
 export default async function Services(){
   const courses = await db.query.courseTable.findMany()
-  let path = "/courses/"
+  const path = "/courses/"
   async function mentor(id: number | SQLWrapper){
-    let mentor = await db.query.usersTable.findMany({
+    const mentor = await db.query.usersTable.findMany({
       where: eq(usersTable.id, id)
     })
     return mentor
@@ -79,7 +79,7 @@ export default async function Services(){
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
                     href="/offers#courses">
                       <div className="grid justify-items-center">
@@ -108,7 +108,7 @@ export default async function Services(){
                     </div>
                     <Button className="text-white mt-4">See our Modules</Button>
                     </div>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>
@@ -125,7 +125,7 @@ export default async function Services(){
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
                     href="/">
                     <div className="grid justify-items-center">
@@ -153,7 +153,7 @@ export default async function Services(){
                       </div>
                     <Button className="text-white mt-4">Request a package</Button>
                     </div>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>
@@ -170,7 +170,7 @@ export default async function Services(){
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
                     href="/">
                     <div className="grid justify-items-center">
@@ -199,7 +199,7 @@ export default async function Services(){
                       </div>
                     <Button className="text-white mt-4">Request a package</Button>
                     </div>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>
@@ -216,7 +216,7 @@ export default async function Services(){
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
                     href="/">
                     <div className="grid justify-items-center">
@@ -244,7 +244,7 @@ export default async function Services(){
                       </div>
                     <Button className="text-white mt-4">Request a pakcage</Button>
                     </div>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>
@@ -278,8 +278,8 @@ export default async function Services(){
       <h1 className="display-1">Our Cyber Classes</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
-      <a href="/offers#courses">
-      <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></a>
+      <Link href="/offers#courses">
+      <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></Link>
       </div>
       </div>
       <div className="p-10 sm:p-12 bg-muted">
