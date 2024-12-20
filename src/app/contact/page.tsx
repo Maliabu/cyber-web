@@ -37,7 +37,7 @@ export default async function About(){
     return(
         <>
         <Menu/>
-        <div className="p-8 sm:p-16 items-center font-[family-name:var(--font-futura)] bg-gradient-to-r from-slate-800 to-sky-600 text-white">
+        <div className="p-8 sm:p-16 items-center bg-gradient-to-r from-slate-800 to-sky-600 text-white">
         <div className="sm:float-right">
           <div className="grid justify-items-center py-8">
           <h1 className="display-1">70+</h1></div>
@@ -94,7 +94,7 @@ export default async function About(){
     </NavigationMenuList></NavigationMenu>
       <h1 className="display-1">Our Community</h1>
       <p className="py-6">The easy way!</p>
-      <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap lh-1 sm:w-[400px]">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
       <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button>
       <h3 className="display-1 mt-12">What Our Mentees have to say</h3>

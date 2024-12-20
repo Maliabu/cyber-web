@@ -13,9 +13,9 @@ import { auth } from "@clerk/nextjs/server";
 export default async function Footer() {
   const userId = await auth()
   return (
-      <footer className="justify-center dark bg-gradient-to-r from-slate-800 to-slate-900 text-white font-[family-name:var(--font-futura)]">
-      <div className="px-8 py-6 border-t">
-                  <span className="w-full">
+      <footer className="justify-center dark bg-darker text-white">
+      <div className="px-8 py-6 border-t sm:flex sm:flex-row sm:justify-between">
+                  <span className="">
                       <p className="my-2">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></span>
                       <div>
                       {userId.userId === null?

@@ -42,7 +42,7 @@ export default function Services(){
     return(
         <>
         <Menu/>
-        <div className="sm:p-16 p-6 items-center font-[family-name:var(--font-futura)]">
+        <div className="sm:p-16 p-6 items-center">
         <div className=" sm:z-0 sm:absolute sm:-right-0">
             <TimerCountDown/>
     </div>
@@ -66,7 +66,7 @@ export default function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></a>
       </div>
       </div>
-      <div className="p-10 sm:p-16 back-classes font-[family-name:var(--font-futura)]">
+      <div className="p-10 sm:p-8 back-image">
       <Carousel
       opts={{
         align: "start",
@@ -74,7 +74,6 @@ export default function Services(){
       className="w-full"
     >
     <div className="sm:p-8" id="courses">
-    <h3 className="display-1">Our Classes</h3>
     <div className="flex flex-row mt-4">
     <Badge variant="outline">Hacking</Badge>
     <Badge variant="outline" className="mx-2">Cyber Security</Badge>
@@ -86,12 +85,12 @@ export default function Services(){
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
             <div className="p-1">
-              <Card className="background-none rounded-2xl backdrop">
+              <Card className="background-none text-white rounded-2xl backdrop">
                 <CardContent className="aspect-square sm:p-16">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
-                <Badge variant="outline" className="float-right text-white p-2 sm:-m-14 -m-4">Starting Soon</Badge>
+                <Badge variant="outline" className="float-right p-2 sm:-m-14 -m-4">Starting Soon</Badge>
                     <Image
                     aria-hidden
                     src={Logo}
@@ -99,7 +98,7 @@ export default function Services(){
                     width={60}
                     height={60}/>
                     <div className="py-4">
-                        <h3 className="text-white">Cyber Security in a Nutshell!</h3></div>
+                        <h3 className="">Cyber Security in a Nutshell!</h3></div>
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 outline-none border focus:shadow-sm my-4"
@@ -107,7 +106,7 @@ export default function Services(){
                     <div className="mb-2 mt-4 text-lg font-medium">
                       shadcn/ui
                     </div>
-                    <p className="text-white">
+                    <p className="">
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
