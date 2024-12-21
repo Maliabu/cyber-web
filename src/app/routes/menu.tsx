@@ -156,7 +156,7 @@ export default async function Menu() {
         </SheetFooter>
       </SheetContent>
     </Sheet></div></div>
-      <div>
+      <div> 
         <div className=" sm:py-2 flex flex-col bg-muted sm:flex-row sm:gap-4 p-6 sm:justify-center">
                 <div className="relative sm:mt-0">
                   <div className="absolute right-2 top-2.5 h-3 w-6 text-card-foreground">
