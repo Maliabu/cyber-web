@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, ChevronRight, HeartHandshakeIcon, ShieldCheckIcon, TrafficConeIcon } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -31,7 +31,7 @@ export default async function HomePage(){
             </div>
       <div className=" items-center">
         <div className=" sm:py-16 sm:px-0">
-        <div className="sm:float-right p-8">
+        <div className="sm:float-right p-6">
             <TimerCountDown userid={userId.userId}/>
     <div className="flex flex-row justify-between bg-darker rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
         <p className="text-white">See more Articles by WarrenMu and many of our experts onboard</p>
@@ -71,7 +71,7 @@ export default async function HomePage(){
           <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
             <div>
               <Card className="w-full p-0 rounded-2xl">
-                <CardContent className="flex p-4">
+                <CardContent className="flex p-6">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -83,7 +83,7 @@ export default async function HomePage(){
                         <TrafficConeIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-semibold leading-5">
+                      <div className=" text-3xl mt-4 text-dark font-semibold leading-6 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
@@ -102,7 +102,7 @@ export default async function HomePage(){
           <CarouselItem key="consultancy" className="md:basis-1/2 lg:basis-1/3">
             <div>
               <Card className="w-full p-0">
-                <CardContent className="flex p-4">
+              <CardContent className="flex p-6">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -114,7 +114,7 @@ export default async function HomePage(){
                         <HeartHandshakeIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-bold leading-5">
+                      <div className=" text-3xl mt-4 text-dark font-bold tracking-tight leading-6">
                       Consultancy and Managed Security Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     Offering: Security Policy Creation, Incident Response Planning ...
@@ -133,7 +133,7 @@ export default async function HomePage(){
           <CarouselItem key="pentesting" className="md:basis-1/2 lg:basis-1/3">
             <div>
               <Card className="w-full p-0">
-                <CardContent className="flex p-4">
+                <CardContent className="flex p-6">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -145,7 +145,7 @@ export default async function HomePage(){
                         <ShieldCheckIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-bold leading-5">
+                      <div className=" text-3xl mt-4 text-dark font-bold leading-6 tracking-tight">
                       Penetration Testing Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     Web Applications, Network Vulnerability Assessment, Mobile Applications...

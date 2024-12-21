@@ -71,7 +71,7 @@ export default function TimerCountDown(userId){
         <h6>Next Class In: </h6>
         <h5 className="mx-4">{result}</h5>
         </div>
-      <Card className="sm:w-[350px] w-[320px] dark ">
+      <Card className="sm:w-[350px] w-[330px] dark ">
       <CardHeader>
         <CardTitle>Hacking For You!</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
