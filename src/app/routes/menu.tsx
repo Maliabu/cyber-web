@@ -80,7 +80,7 @@ export default async function Menu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="">We Offer </NavigationMenuTrigger>
+          <NavigationMenuTrigger><div className="font-thin">Our Services</div> </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-2 p-6 md:w-[250px] md:grid-cols-1 lg:w-[200px] ">
               <p className="desc py-4 border-b">Services</p>
