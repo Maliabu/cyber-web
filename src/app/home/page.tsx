@@ -31,7 +31,7 @@ export default async function HomePage(){
             </div>
       <div className=" items-center">
         <div className=" sm:py-16 sm:px-0">
-        <div className="sm:float-right p-6">
+        <div className="sm:float-right p-8">
             <TimerCountDown userid={userId.userId}/>
     <div className="flex flex-row justify-between bg-darker rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
         <p className="text-white">See more Articles by WarrenMu and many of our experts onboard</p>
@@ -83,9 +83,9 @@ export default async function HomePage(){
                         <TrafficConeIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      <div className=" text-2xl mt-4 text-dark font-semibold leading-5">
                       Cyber Security Training</div>
-                    <p className="text-sm text-card-foreground mt-2">
+                    <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
                     </p>
                     <Button className="text-white mt-4">Learn More</Button>
@@ -114,9 +114,9 @@ export default async function HomePage(){
                         <HeartHandshakeIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      <div className=" text-2xl mt-4 text-dark font-bold leading-5">
                       Consultancy and Managed Security Services</div>
-                    <p className="text-sm text-card-foreground mt-2">
+                    <p className="text-sm text-card-foreground my-8">
                     Offering: Security Policy Creation, Incident Response Planning ...
                     </p>
                     <Button className="text-white mt-4">More Constultancy services</Button>
@@ -145,9 +145,9 @@ export default async function HomePage(){
                         <ShieldCheckIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                      <div className=" text-2xl mt-4 text-dark font-bold leading-5">
                       Penetration Testing Services</div>
-                    <p className="text-sm text-card-foreground mt-2">
+                    <p className="text-sm text-card-foreground my-8">
                     Web Applications, Network Vulnerability Assessment, Mobile Applications...
                     </p>
                     <Button className="text-white mt-4">See More Tests</Button>

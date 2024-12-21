@@ -46,6 +46,7 @@ export default async function Services(){
     return(
         <>
         <Menu/>
+        <div className="grid justify-items-center sm:p-16 p-6 bg-darker text-white">
         <div className="p-6 grid justify-items-center">
         <div className="hidden sm:flex h-5 items-center space-x-4 text-sm ml-4">
         <div>Cybersecurity Training</div>
@@ -56,19 +57,17 @@ export default async function Services(){
         <Separator orientation="vertical" />
         <div>Revenue-Generating Activities</div>
       </div>
-      <Separator orientation="horizontal" className="mt-4"/>
         </div>
-        <div className="grid justify-items-center p-6">
         <div className="text-5xl leading-10">Each of our services made for you!</div>
         <p className="my-2">Check our most affordable services</p>
         <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
         </div>
-    <div className="sm:px-16 p-6">
+    <div className="sm:px-16 bg-muted p-6">
       <Carousel
       opts={{
         align: "start",
       }}
-      className="w-full sm:mt-8 bg-muted rounded-lg"
+      className="w-full sm:mt-8 rounded-lg"
     >
       <CarouselContent className="py-8">
           <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
@@ -89,10 +88,10 @@ export default async function Services(){
                         className="object-cover h-48 rounded-t-lg"
                         />
                     </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                    <div className="p-6 sm:p-12 rounded-b-lg">
+                      <div className=" text-2xl mt-4 text-dark font-semibold leading-5">
                       Cyber Security Training</div>
-                    <p className="text-sm text-card-foreground mt-4">
+                    <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
                     </p>
                     <div>
@@ -135,10 +134,10 @@ export default async function Services(){
                       className="object-cover h-48 rounded-t-lg"
                       />
                   </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                    <div className="p-6 sm:p-12 rounded-b-lg">
+                      <div className=" text-2xl mt-4 text-dark font-bold leading-5">
                       Consultancy and Managed Security Services</div>
-                    <p className="text-sm text-card-foreground mt-4">
+                    <p className="text-sm text-card-foreground my-8">
                     For: Organizations without dedicated security teams.
                     </p>
                     <div>
@@ -180,10 +179,10 @@ export default async function Services(){
                       className="object-cover h-48 rounded-t-lg"
                       />
                   </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                    <div className="p-6 sm:p-12 rounded-b-xl">
+                      <div className=" text-2xl mt-4 text-dark leading-5 font-semibold">
                       Penetration Testing Services</div>
-                    <p className="text-sm text-card-foreground mt-4">
+                    <p className="text-sm text-card-foreground my-8">
                     For: SMBs, international tech startups, financial institutions, and e-commerce businesses.
                     </p>
                     <div>
@@ -226,10 +225,10 @@ export default async function Services(){
                       className="object-cover h-48 rounded-t-lg"
                       />
                   </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-2xl mt-4 text-dark font-large leading-5">
+                    <div className="p-6 sm:p-12 rounded-b-xl">
+                      <div className=" text-2xl mt-4 text-dark font-semibold leading-5">
                       Revenue-Generating Activities</div>
-                    <p className="text-sm text-card-foreground mt-4">
+                    <p className="text-sm text-card-foreground my-8">
                     Remote Partners: Freelancers for international projects (use platforms like Upwork).
                     </p>
                     <div>
@@ -282,7 +281,7 @@ export default async function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></Link>
       </div>
       </div>
-      <div className="p-10 sm:p-12 bg-muted">
+      <div className="p-12 sm:p-12 bg-muted">
       <Carousel
       opts={{
         align: "start",
@@ -304,13 +303,13 @@ export default async function Services(){
     </div>
       <CarouselContent className="sm:p-8 sm:mt-0 mt-8">
         {courses.map(async course => (
-          <CarouselItem key={course.id} className="md:basis-1/2 lg:basis-1/2">
+          <CarouselItem key={course.id} className="md:basis-1/2 lg:basis-1/3">
             <div className="bg-white rounded-2xl">
-            <Badge variant="outline" className="p-2 m-4">Starting {getMyDay(course.startDate.getDay())}, {getMyMonth(course.startDate.getMonth())} {course.startDate.getDate()}, {course.startDate.getFullYear()}</Badge>
+            <div className="p-8 rounded-t-lg">Starting {getMyDay(course.startDate.getDay())}, {getMyMonth(course.startDate.getMonth())} {course.startDate.getDate()}, {course.startDate.getFullYear()}</div>
           <NavigationMenu>
-          <ul className="">
-              <li className="row-span-3">
-                <div className="relative h-48 w-96">
+          <ul>
+              <li>
+                <div className="relative h-48 w-80">
                     <Image
                     aria-hidden
                     src={path+course.image}
@@ -322,15 +321,15 @@ export default async function Services(){
             </NavigationMenu>
             <div className="p-8">
                     <div className="py-4">
-                        <h3 className="text-4xl leading-8">{course.title}</h3></div>
+                        <h3 className="text-2xl leading-5 font-semibold">{course.title}</h3></div>
                     <p className="mt-4">
                       {course.description}
                     </p>
-                    <div className="mb-2 my-4 text-sm font-bold">
+                    <div className="mb-2 my-8 text-sm font-bold">
                       Ends: {getMyDay(course.endDate.getDay())}, {getMyMonth(course.endDate.getMonth())} {course.endDate.getDate()}, {course.endDate.getFullYear()}
                     </div>
                     <Button className="text-white">Enroll</Button></div>
-            <p className="mt-4 desc p-3 self-center border-t">Mentor: {(await mentor(course.mentor)).map(mentors => mentors.name)}</p>
+            <p className="bg-darker text-white p-8 self-center rounded-b-lg">Mentor: {(await mentor(course.mentor)).map(mentors => mentors.name)}</p>
             </div>
           </CarouselItem>
         ))}
