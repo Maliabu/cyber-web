@@ -12,7 +12,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { addArticles } from "@/server/fetch.actions"
 import { addArticleSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
-import { tokenise } from "@/app/services/services"
+// import { tokenise } from "@/app/services/services"
 // import { useRouter } from "next/navigation"
 
 
@@ -38,7 +38,7 @@ export default function AddArticle() {
           app.innerHTML = text;
         }
         values.image1?values.image=values.image1.name:null
-        values.writer = tokenise()[1]
+        // values.writer = tokenise()[1]
 
         const formData = new FormData()
         formData.append("file", values.image1)
@@ -131,7 +131,7 @@ export default function AddArticle() {
                       </FormItem>
                   )}
                   />
-                  <p className="desc">Your username will be attached to this article as <a>{tokenise()[1]}</a></p>
+                  {/* <p className="desc">Your username will be attached to this article as <a>{tokenise()[1]}</a></p> */}
               </div>
           </div>
         </div>
