@@ -23,7 +23,7 @@ export const togglePasswordVisibility = ()=>{
 
 export function tokenise(){
     let name = '',email = '',username = ''
-    if(window !== null){
+    if(window){
         name = localStorage.getItem("name") || ''
         username = localStorage.getItem("username") || ''
         email = localStorage.getItem("email") || ''
@@ -125,12 +125,12 @@ export const handleDecryption = async ( encryptedData: any, initVector: any) => 
 
 export function checkAdminLoginToken(){
   let token
-  if(window !== undefined){
+  if(window){
     // now access your localStorage
   token = localStorage.getItem("token")
   }
   if(token === ""){
     console.log(token)
-    redirect("/admin/auth")
+    // redirect("/admin/auth")
   }
 }

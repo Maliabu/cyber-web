@@ -18,7 +18,7 @@ export default async function Events(){
                 <h5>Check out whats happening</h5></div>
                     <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 p-6 sm:p-8 sm:admin bg-muted">
                         {events.map(event => (
-                            <div className="p-4 bg-white rounded-lg">
+                            <div key={event.id} className="p-4 bg-white rounded-lg">
                         <Card className="w-full background-none" key={event.id}>
                         <CardContent>
                         <p className="p-2 my-4 desc border rounded-md"> {event.startDate !== null?getMyDay(event.startDate.getDay()):null}, {event.startDate !== null?getMyMonth(event.startDate.getMonth()):null} {event.startDate !== null?event.startDate.getDate():null}, {event.startDate !== null?event.startDate.getFullYear():null}</p>
