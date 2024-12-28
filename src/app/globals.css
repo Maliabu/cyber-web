@@ -204,3 +204,6 @@ p.desc{
 .w-100{
   width: 34rem !important;
 }
+.pointer{
+  cursor: pointer !important;
+}

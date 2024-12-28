@@ -4,26 +4,26 @@ import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dr
 import { Button } from "@/components/ui/button"
 
 //reusable drawer
-type ReusableDrawerProps = {
+type NextDrawerProps = {
     page: string
     form: React.JSX.Element
   }
   
-  export function ReusableDrawer({
+  export function NextDrawer({
     page, 
     form,
-  }: ReusableDrawerProps){
+  }: NextDrawerProps){
     return (
       <div>
       <Drawer>
         <DrawerTrigger asChild>
-          <Button className="text-white">Add New {page}</Button>
+          <Button className="text-white">Add Next {page}</Button>
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm p-16">
             <DrawerHeader>
-              <DrawerTitle>Add New {page}</DrawerTitle>
-              <DrawerDescription>Add a New {page} to the table</DrawerDescription>
+              <DrawerTitle>Add Next {page}</DrawerTitle>
+              <DrawerDescription>Add a Next {page} to the table</DrawerDescription>
             </DrawerHeader>
             <div className="p-4 pb-0">
               {form}

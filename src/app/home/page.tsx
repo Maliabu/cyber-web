@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, ChevronRight, HeartHandshakeIcon, ShieldCheckIcon, TrafficConeIcon } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -17,22 +17,41 @@ import {
 import TimerCountDown from '../resources/timer'
 import { auth } from "@clerk/nextjs/server";
 import BlogBottomAd from "./blogAd";
+import Link from "next/link";
+import { db } from "@/drizzle/db";
+import { courseTable, nextCourseTable } from "@/drizzle/schema";
+import { desc, eq } from "drizzle-orm";
 
 export default async function HomePage(){
 
   const userId = await auth()
+  const nextCourse = await db.select().from(nextCourseTable).orderBy(desc(nextCourseTable.id)).limit(1).leftJoin(courseTable, eq(nextCourseTable.courseId, courseTable.id))
+  
+  function booking(){
+    if(userId.userId !== null){
+      return(
+        <Link href="https://calendar.app.google/fvWn27cUmcaMvW9G7">
+              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
+              </Link>
+      )
+    } else return(
+      <Link href="/sign-in">
+              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
+              </Link>
+    )
+  }
 
     return(
       <div className="">
             <div className="grid back-schedule justify-items-center sm:px-20 sm:pt-8 p-4">
-              <h5 className="text-5xl leading-10 text-center sm:w-[750px] ">Schedule an interview with our mentors!</h5>
+              <h5 className="text-5xl leading-10 text-center sm:w-[750px] tracking-tight font-bold">Schedule an interview with our mentors!</h5>
               Get started with a course in cybersecurity
-              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
+              {booking()}
             </div>
       <div className=" items-center">
         <div className=" sm:py-16 sm:px-0">
         <div className="sm:float-right p-6">
-            <TimerCountDown userid={userId.userId}/>
+            <TimerCountDown userid={userId.userId} nextCourse={nextCourse.map(course=>course.course_table)}/>
     <div className="flex flex-row justify-between bg-darker rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
         <p className="text-white">See more Articles by WarrenMu and many of our experts onboard</p>
         <a href="/blog" className="bg-primary text-white p-2 rounded-md w-1/2 h-1/2">Our Blog</a>
@@ -44,7 +63,7 @@ export default async function HomePage(){
             </div>
                 <div className="flex flex-row">
                 <ChevronRight width={15} height={15} className="pt-1"/> Get Started</div>
-      <h1 className="display-1 py-8">Learn Cyber Security</h1>
+      <h1 className="display-1 py-8 tracking-tight font-bold">Learn Cyber Security</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>
@@ -60,7 +79,7 @@ export default async function HomePage(){
       }}
       className="w-full"
     >
-    <h1 className="text-5xl leading-10">More to us and our offers for you!</h1>
+    <h1 className="text-5xl leading-10 tracking-tight font-bold">More to us and our offers for you!</h1>
     <p className="my-2">Check our most affordable services</p>
     <a href="/offers">
     <Button className="text-white mt-4">See all our services</Button></a>
@@ -83,7 +102,7 @@ export default async function HomePage(){
                         <TrafficConeIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-semibold leading-6 tracking-tight">
+                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
@@ -114,7 +133,7 @@ export default async function HomePage(){
                         <HeartHandshakeIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-bold tracking-tight leading-6">
+                      <div className=" text-3xl mt-4 text-dark font-bold tracking-tight leading-7">
                       Consultancy and Managed Security Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     Offering: Security Policy Creation, Incident Response Planning ...
@@ -145,7 +164,7 @@ export default async function HomePage(){
                         <ShieldCheckIcon className="size-20"/>
                     </div>
                     <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-bold leading-6 tracking-tight">
+                      <div className=" text-3xl mt-4 text-dark font-bold leading-7 tracking-tight">
                       Penetration Testing Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     Web Applications, Network Vulnerability Assessment, Mobile Applications...

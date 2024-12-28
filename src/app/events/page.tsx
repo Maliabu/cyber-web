@@ -14,7 +14,7 @@ export default async function Events(){
         <div>
             <div id="events">
                 <div className="sm:p-16 p-6 grid justify-items-center">
-                <h1 className="text-5xl leading-10">Events</h1>
+                <h1 className="text-5xl leading-10 tracking-tight font-bold">Events</h1>
                 <h5>Check out whats happening</h5></div>
                     <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 p-6 sm:p-8 sm:admin bg-muted">
                         {events.map(event => (
@@ -29,7 +29,7 @@ export default async function Events(){
                     alt="File icon"
                     className="object-cover"
                     fill/></div>
-                    <div className="mb-2 mt-4 text-3xl">
+                    <div className="mb-2 mt-4 text-3xl tracking-tight font-bold">
                       {event.title}
                     </div>
                     <p className="text-sm text-card-foreground">

@@ -16,7 +16,7 @@ import Image from "next/image";
 import Logo from '../images/logo.png'
 import Link from "next/link";
 
-export default function TimerCountDown(userId){
+export default function TimerCountDown(userId, nextCourse){
     const [result, setResult] = useState("00d 00h 00m 00s")
     // Set the date we're counting down to
     var countDownDate = new Date("dec 16, 2024 17:43:25").getTime();
@@ -26,6 +26,7 @@ export default function TimerCountDown(userId){
 
     // Get today's date and time
     var now = new Date().getTime();
+    // var now = nextCourse.courseTable.startDate.getTime()
         
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
@@ -67,13 +68,13 @@ export default function TimerCountDown(userId){
     }
     return(
         <div>
-        <div className="flex pb-4 items-center sm:-mr-8">
+        <div className="flex text-primary pb-4 justify-between border border-primary p-6 mb-2 rounded-md">
         <h6>Next Class In: </h6>
         <h5 className="mx-4">{result}</h5>
         </div>
       <Card className="sm:w-[350px] w-[330px] dark ">
       <CardHeader>
-        <CardTitle>Hacking For You!</CardTitle>
+        <CardTitle>Hacking For you</CardTitle>
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
       <CardContent>

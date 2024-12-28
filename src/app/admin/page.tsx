@@ -8,7 +8,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
-import { BugPlay, Calendar, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Paperclip, User, Users, Users2Icon, UsersIcon } from "lucide-react"
+import { BookCheckIcon, BugPlay, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Paperclip, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "./users/page"
 import Logo from '@/app/images/logo1.png'
 import Image from "next/image";
@@ -27,6 +27,9 @@ import { ArticlesCard } from "./articles/articlesCard"
 import AddArticle from "./articles/page"
 import { EnrollCard } from "./enrollment/enrollCard"
 import Enroll from "./enrollment/page"
+import { SubscriptionCard } from "./subscription/SubscriptionCard"
+import Subscribe from "./subscription/page"
+import NextCourse from "./courses/nextCourse"
 
 export default async function AdminPage() {
   
@@ -36,17 +39,16 @@ export default async function AdminPage() {
   })
   const events = await db.query.EventsTable.findMany()
   const articles = await db.query.articlesTable.findMany()
-  const schedules = await db.query.schedulesTable.findMany()
   const enrollments = await db.query.enrollmentsTable.findMany()
   const courses = await db.query.courseTable.findMany()
   const subscriptions = await db.query.subscriptionsTable.findMany()
   const currency = await db.query.currencyTable.findMany()
 
   return (
-    <div className="justify-stretch font-[family-name:var(--font-futura)]">
+    <div className="justify-stretch">
     <div className="px-8 py-4">
       <main className="flex flex-row">
-      <div className="flex flex-col justify-between rounded-lg bg-muted p-4">
+      <div className="flex flex-col justify-between rounded-lg bg-muted p-6">
         <div className="self-center">
         <a href="/">
             <Image
@@ -91,8 +93,8 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
-              { schedules.length}</h1><p className="desc mt-4">Schedules</p></div>
-              <Calendar className="w-10 h-10 text-primary"/>
+              { subscriptions.length}</h1><p className="desc mt-4">Subscriptions</p></div>
+              <BookCheckIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
             <div className="p-8 bg-muted rounded-2xl ">
@@ -153,11 +155,11 @@ export default async function AdminPage() {
                       <AddPage page={"Event"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
+                <div className="p-4 mt-1 flex flex-row justify-between">
                 <AddEvents/>
                 <p>{articles.length} Total Events</p>
                 </div>
-      </TabsContent>
+              </TabsContent>
                 <TabsContent value="courses">
                   {
                     courses.length > 0 ? (
@@ -170,8 +172,10 @@ export default async function AdminPage() {
                       <AddPage page={"Course"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
+                <div className="p-4 mt-1 flex flex-row justify-between">
+                  <div className="flex flex-row gap-2">
                   <AddCourse currency={currency} mentors={mentors}/>
+                  <NextCourse courses={courses} /></div>
                 <p>{courses.length} Total Courses</p>
                 </div>
                 </TabsContent>
@@ -187,7 +191,7 @@ export default async function AdminPage() {
                       <AddPage page={"Article"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
+                <div className="p-4 mt-1 flex flex-row justify-between">
                 <AddArticle/>
                 <p>{articles.length} Total Articles</p>
                 </div>
@@ -200,7 +204,6 @@ export default async function AdminPage() {
                     <TabsTrigger value="mentors"><p>Mentors</p></TabsTrigger>
                     <TabsTrigger value="subscriptions"><p>Subscriptions</p></TabsTrigger>
                     <TabsTrigger value="enrollments"><p>Enrollments</p></TabsTrigger>
-                    <TabsTrigger value="schedules"><p>Schedules</p></TabsTrigger>
                 </TabsList>
                 <TabsContent value="users">
                   {
@@ -214,7 +217,7 @@ export default async function AdminPage() {
                       <AddPage page={"User"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
+                <div className="p-4 mt-1 flex flex-row justify-between">
                 <AddUser/>
                 <p>{users.length} Total users</p>
                 </div>
@@ -239,15 +242,16 @@ export default async function AdminPage() {
                   {
                     subscriptions.length > 0 ? (
                       <div className="admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
+                        {subscriptions.map(subscription => (
+                          <SubscriptionCard key={subscription.id} {...subscription}/>
                         ))}
                       </div>
                     ) : (
                       <AddPage page={"Subscription"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-end">
+                <div className="p-4 mt-1 flex flex-row justify-between">
+                <Subscribe/>
                 <p>{subscriptions.length} Total Subscriptions</p>
                 </div>
                 </TabsContent>
@@ -263,26 +267,9 @@ export default async function AdminPage() {
                       <AddPage page={"Enrollment"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-between">
+                <div className="p-4 mt-1 flex flex-row justify-between">
                 <Enroll courses={courses} users={users}/>
                 <p>{enrollments.length} Total Enrollments</p>
-                </div>
-                </TabsContent>
-                <TabsContent value="schedules">
-                  {
-                    schedules.length > 0 ? (
-                      <div className="admin">
-                        {users.map(user => (
-                          <UserCard key={user.id} {...user}/>
-                        ))}
-                      </div>
-                    ) : (
-                      <AddPage page={"Schedule"} />
-                    )
-                  }
-                <div className="p-4 flex flex-row justify-between">
-                <AddUser/>
-                <p>{schedules.length} Total Schedules</p>
                 </div>
                 </TabsContent>
             </Tabs>

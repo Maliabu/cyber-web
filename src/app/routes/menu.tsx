@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link"
 import Logo from '../images/logo1.png'
 import { cn } from "@/lib/utils"
-import { Input } from "@/components/ui/input"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,6 +17,7 @@ import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator"
+import { SearchBar } from "./search";
  
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -72,6 +72,13 @@ export default async function Menu() {
           /></Link>
       <NavigationMenu className="rounded-sm">
       <NavigationMenuList>
+        <NavigationMenuItem>
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink className="nav-a">
+        <div className="mr-6">Home</div>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/blog" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
@@ -157,13 +164,8 @@ export default async function Menu() {
       </SheetContent>
     </Sheet></div></div>
       <div> 
-        <div className=" sm:py-2 flex flex-col bg-muted sm:flex-row sm:gap-4 p-6 sm:justify-center">
-                <div className="relative sm:mt-0">
-                  <div className="absolute right-2 top-2.5 h-3 w-6 text-card-foreground">
-                  <Search className="h-3 w-3 mt-1 size-8" />
-                  </div>
-                  <Input id="search" type="search" placeholder="searching for...?" className="w-full background-none rounded-lg" />
-                </div>
+        <div className=" flex flex-row bg-muted justify-center">
+        <SearchBar/>
           </div>
         </div>
     </div>

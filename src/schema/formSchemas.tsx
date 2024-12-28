@@ -84,3 +84,14 @@ export const addEnrollmentSchema = z.object({
     course1: z.string(),
     user1: z.string(),
 })
+
+export const addSubscriptionSchema = z.object({
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
+})
+
+export const addNextCourseSchema = z.object({
+    courseId: z.coerce.number({required_error: "Please provide a mentor.",}),
+    course1: z.string(),
+})

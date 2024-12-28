@@ -58,7 +58,7 @@ export default async function Services(){
         <div>Revenue-Generating Activities</div>
       </div>
         </div>
-        <div className="text-5xl leading-10">Each of our services made for you!</div>
+        <div className="text-5xl leading-10 tracking-tight font-bold">Each of our services made for you!</div>
         <p className="my-2">Check our most affordable services</p>
         <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
         </div>
@@ -89,7 +89,7 @@ export default async function Services(){
                         />
                     </div>
                     <div className="p-6 sm:p-12 rounded-b-lg">
-                      <div className=" text-3xl mt-4 text-dark font-semibold leading-6 tracking-tight">
+                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
@@ -135,7 +135,7 @@ export default async function Services(){
                       />
                   </div>
                     <div className="p-6 sm:p-12 rounded-b-lg">
-                      <div className=" text-3xl mt-4 text-dark font-bold leading-6 tracking-tight">
+                      <div className=" text-3xl mt-4 text-dark font-bold leading-7 tracking-tight">
                       Consultancy and Managed Security Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Organizations without dedicated security teams.
@@ -180,7 +180,7 @@ export default async function Services(){
                       />
                   </div>
                     <div className="p-6 sm:p-12 rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark leading-6 tracking-tight font-semibold">
+                      <div className=" text-3xl mt-4 text-dark leading-7 tracking-tight font-semibold">
                       Penetration Testing Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: SMBs, international tech startups, financial institutions, and e-commerce businesses.
@@ -226,7 +226,7 @@ export default async function Services(){
                       />
                   </div>
                     <div className="p-6 sm:p-12 rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-semibold leading-6 tracking-tight">
+                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
                       Revenue-Generating Activities</div>
                     <p className="text-sm text-card-foreground my-8">
                     Remote Partners: Freelancers for international projects (use platforms like Upwork).
@@ -274,7 +274,7 @@ export default async function Services(){
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
       <div className=" rounded-xl mt-4">
-      <h1 className="display-1">Our Cyber Classes</h1>
+      <h1 className="display-1 tracking-tight font-bold">Our Cyber Classes</h1>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <Link href="/offers#courses">
