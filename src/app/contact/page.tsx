@@ -101,7 +101,7 @@ export default async function About(){
         <Link href="#subscribe">
         <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button></Link>
       </div>
-      <div className="sm:px-16 px-6">
+      <div className="sm:px-16 p-6">
       <h3 className="text-4xl leading-6 mt-12">Meet Our Mentees</h3>
       </div>
       <div className="sm:px-8 p-6">
@@ -109,13 +109,12 @@ export default async function About(){
       opts={{
         align: "start",
       }}
-      className="w-full sm:px-16 bg-muted">
-      <CarouselContent className="sm:p-8 p-6 background-none">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+      className="w-full sm:px-14 bg-muted">
+      <CarouselContent className="sm:p-8 p-6">
+          <CarouselItem key="mentees" className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
               <Card className="background-none">
-                <CardContent className="flex aspect-square p-4">
+                <CardContent className="flex aspect-square p-4 bg-white">
           <NavigationMenu>
           <ul className="background-none">
               <li className="row-span-3">
@@ -145,7 +144,6 @@ export default async function About(){
               </Card>
             </div>
           </CarouselItem>
-        ))}
       </CarouselContent>
       <CarouselPrevious className="ml-6"/>
       <CarouselNext className="mr-6"/>
@@ -161,11 +159,10 @@ export default async function About(){
       }}
       className="w-full sm:px-14 bg-muted">
       <CarouselContent className="sm:p-8 p-6">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key="mentor" className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
               <Card className="background-none">
-                <CardContent className="flex aspect-square p-4">
+                <CardContent className="flex aspect-square p-4 bg-white">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -195,7 +192,6 @@ export default async function About(){
               </Card>
             </div>
           </CarouselItem>
-        ))}
       </CarouselContent>
       <CarouselPrevious className="ml-6"/>
       <CarouselNext className="mr-6"/>

@@ -80,21 +80,16 @@ export const enrollmentsTable = pgTable('enrollments_table', {
     updatedAt,
 });
 
-export const schedulesTable = pgTable('schedules_table', {
+export const nextCourseTable = pgTable('next_course_table', {
   id: serial('id').primaryKey(),
-  timezone: text('timezone').notNull(),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  courseId: integer('course_id').notNull().references(() => courseTable.id, { onDelete: 'cascade'}),
     createdAt,
     updatedAt,
 });
 
 export const subscriptionsTable = pgTable('subscriptions_table', {
   id: serial('id').primaryKey(),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  email: text('email').notNull().unique(),
     createdAt,
     updatedAt,
 });
@@ -156,8 +151,8 @@ export type SelectVote = typeof votesTable.$inferSelect;
 export type InsertReply = typeof replyTable.$inferInsert;
 export type SelectReply = typeof replyTable.$inferSelect;
 
-export type InsertSchedule = typeof schedulesTable.$inferInsert;
-export type SelectSchedule = typeof schedulesTable.$inferSelect;
+export type InsertSchedule = typeof nextCourseTable.$inferInsert;
+export type SelectSchedule = typeof nextCourseTable.$inferSelect;
 
 export type InsertEvent = typeof EventsTable.$inferInsert;
 export type SelectEvent = typeof EventsTable.$inferSelect;

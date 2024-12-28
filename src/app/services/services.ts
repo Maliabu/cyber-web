@@ -31,6 +31,12 @@ export function tokenise(){
     return [name, username, email]
 }
 
+export function nextCourse(){
+  if(window){
+      return localStorage.getItem("nextCourse") || ''
+  }
+}
+
 const encryptData = async (plainData: string, encryptionKey: string) => {
     // Generate a random 96-bit initialization vector (IV)
     const initVector = crypto.getRandomValues(new Uint8Array(12));

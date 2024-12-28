@@ -6,13 +6,15 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Heart, MailIcon } from "lucide-react";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { db } from "@/drizzle/db";
+import FooterSubscribe from "../admin/subscription/subscriptionFooter";
 
 export default async function Footer() {
   const userId = await auth()
+  const articles = (await db.query.articlesTable.findMany()).slice(1, 3)
   return (
       <footer className="justify-center dark bg-darker text-white">
       <div className="px-8 py-6 border-t sm:flex sm:flex-row sm:justify-between">
@@ -21,12 +23,8 @@ export default async function Footer() {
                       <div>
                       {userId.userId === null?
                       <div>
-                      <form>
-                      <div className="mb-2">
-                      <Input id="email" placeholder="Email address" />
+                        <FooterSubscribe/>
                       </div>
-                      </form>
-                <Button className="text-white"><Heart width={16} height={16}/> Subscribe</Button></div>
                 : 
           <Button className="text-white"><Heart width={16} height={16}/> Subscribe</Button>}
                   </div>
@@ -39,10 +37,10 @@ export default async function Footer() {
           <ListItem href="/blog" title="Blog">
                 Cyber Security Best Practices
               </ListItem>
-              <ListItem href="/docs/blog" title="Blog">
+              <ListItem href="/events" title="News | Events">
                 News and Trending
               </ListItem>
-              <ListItem href="/blog" title="Blog">
+              <ListItem href="/events" title="News | Events">
                 Event Recaps
               </ListItem> </ul>
             </NavigationMenu>
@@ -65,79 +63,51 @@ export default async function Footer() {
           Recommended
           <NavigationMenu>
             <ul>
-          <ListItem href="/offers" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/offers" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/offers" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem> </ul>
+              {
+                articles.map(article => (
+                  <ListItem href="/blog" title="Introduction" key={article.id}>
+                    {article.title}
+                  </ListItem> 
+                ))
+              }
+              </ul>
             </NavigationMenu>
         </div>
         <div className="sm:row-start-3">
           Articles
-          <NavigationMenu className="border-b">
-          <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-card-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-            </ul>
-            </NavigationMenu>
-            <NavigationMenu className="border-b">
-          <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-card-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-            </ul>
-            </NavigationMenu>
+          {
+            articles.map(article => (
+              <NavigationMenu className="border-b" key={article.id}>
+              <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <li className="row-span-3">
+                    <NavigationMenuLink asChild>
+                      <Link
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
+                        href="/blog"
+                      >
+                        <Image
+                aria-hidden
+                src="/file.svg"
+                alt="File icon"
+                width={16}
+                height={16}
+              />
+                        <div className="mb-2 mt-4 text-lg font-medium">
+                          {article.title}
+                        </div>
+                        <p className="text-sm leading-tight text-card-foreground">
+                          {article.title}
+                        </p>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                  <ListItem href="/blog" title="Introduction">
+                    {article.content}
+                  </ListItem>
+                </ul>
+                </NavigationMenu>
+            ))
+          }
         </div>
         </div>
         <div className=" p-16">
@@ -147,14 +117,7 @@ export default async function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/instagram.svg"
-            alt="instagram icon"
-            className="text-white"
-            width={16}
-            height={16}
-          />
+          <div className="border py-1 px-2 rounded-sm font-bold border-primary">in</div>
           Instagram
         </Link>
         <Link
@@ -163,14 +126,16 @@ export default async function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/x.svg"
-            alt="twitter icon"
-            width={16}
-            height={16}
-          />
+          <div className="py-2 px-3 font-bold">x</div>
           twitter
+        </Link> <Link
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
+          href="mailto:info@beerasafe.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MailIcon className="size-4 mx-2"/>
+          info@beerasafe
         </Link></div>
         <div className="sm:px-8 sm:py-4 p-6 flex sm:flex-row flex-col sm:justify-between border border-top">
           <div className="">

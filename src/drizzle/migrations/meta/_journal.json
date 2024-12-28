@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1734608802609,
-      "tag": "0000_flowery_mandarin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1734613201590,
-      "tag": "0001_overconfident_tombstone",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1734729276190,
-      "tag": "0002_grey_mattie_franklin",
+      "when": 1735405410509,
+      "tag": "0000_stormy_mauler",
       "breakpoints": true
     }
   ]

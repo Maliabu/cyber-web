@@ -1,10 +1,10 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, usersTable } from "@/drizzle/schema";
+import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, nextCourseTable, subscriptionsTable, usersTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
+import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
@@ -194,6 +194,37 @@ Promise<{error: boolean | undefined}> {
    data.userId = userid[0]
 
    await db.insert(enrollmentsTable).values({...data})
+
+   return {error: false}
+}
+
+export async function addSubscription(unsafeData: z.infer<typeof addSubscriptionSchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = addSubscriptionSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+
+   await db.insert(subscriptionsTable).values({...data})
+
+   return {error: false}
+}
+
+export async function nextCourse(unsafeData: z.infer<typeof addNextCourseSchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = addNextCourseSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+   const courseId = await db.query.courseTable.findMany({
+    where: eq(courseTable.title, data.course1)
+   })
+   const courseid = courseId.map(course=>course.id)
+   data.courseId = courseid[0]
+
+   await db.insert(nextCourseTable).values({...data})
 
    return {error: false}
 }

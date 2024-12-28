@@ -36,7 +36,6 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
 
     async function onSubmit(values: z.infer<typeof addCourseSchema>) {
         //create obj
-        console.log("CLICKED")
         const app = document.getElementById('submit2');
         const text = 'processing';
         if(app !== null){
@@ -127,7 +126,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
                               <SelectTrigger id="mentor1">
                               <SelectValue placeholder="Mentor"/>
                               </SelectTrigger>
-                              <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
+                              <SelectContent position="popper">
                                 {
                                   props.mentors.map((mentor) => (
                                     <SelectItem key={mentor.id} value={mentor.name}>{mentor.name}</SelectItem>

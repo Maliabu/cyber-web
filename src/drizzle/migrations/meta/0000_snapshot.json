@@ -1,5 +1,5 @@
 {
-  "id": "d3a68dd4-fdd0-4f22-96c0-6d3cc763c56d",
+  "id": "3c8f2053-b49f-45ce-9f49-fc84581314f0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -344,7 +344,7 @@
           "name": "currency_name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "name": {
           "name": "name",
@@ -390,8 +390,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "course": {
-          "name": "course",
+        "course_id": {
+          "name": "course_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -418,12 +418,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "enrollments_table_course_course_table_id_fk": {
-          "name": "enrollments_table_course_course_table_id_fk",
+        "enrollments_table_course_id_course_table_id_fk": {
+          "name": "enrollments_table_course_id_course_table_id_fk",
           "tableFrom": "enrollments_table",
           "tableTo": "course_table",
           "columnsFrom": [
-            "course"
+            "course_id"
           ],
           "columnsTo": [
             "id"
@@ -437,6 +437,58 @@
           "tableTo": "users_table",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.next_course_table": {
+      "name": "next_course_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "next_course_table_course_id_course_table_id_fk": {
+          "name": "next_course_table_course_id_course_table_id_fk",
+          "tableFrom": "next_course_table",
+          "tableTo": "course_table",
+          "columnsFrom": [
+            "course_id"
           ],
           "columnsTo": [
             "id"
@@ -528,64 +580,6 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.schedules_table": {
-      "name": "schedules_table",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "timezone": {
-          "name": "timezone",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "schedules_table_user_id_users_table_id_fk": {
-          "name": "schedules_table_user_id_users_table_id_fk",
-          "tableFrom": "schedules_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.subscriptions_table": {
       "name": "subscriptions_table",
       "schema": "",
@@ -596,9 +590,9 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "email": {
+          "name": "email",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -617,23 +611,17 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "subscriptions_table_user_id_users_table_id_fk": {
-          "name": "subscriptions_table_user_id_users_table_id_fk",
-          "tableFrom": "subscriptions_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "subscriptions_table_email_unique": {
+          "name": "subscriptions_table_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
