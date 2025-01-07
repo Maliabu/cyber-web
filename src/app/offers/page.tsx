@@ -155,10 +155,10 @@ export default async function Services(){
                       title = "Consultancy and Managed Security Services"
                       description = "Organizations without dedicated security teams."
                       results={
-                        <div className="p-6">
+                        <div className="sm:p-6">
                           <p>Select a package</p>
-                          <div className="grid sm:grid-cols-3 gap-2 p-6 mt-8 bg-muted rounded-lg">
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="grid sm:grid-cols-3 gap-2 p-2 sm:p-6 mt-8 bg-muted admin rounded-lg">
+                          <div className="p-4 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Security Policy Creation</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Project:</p>
@@ -229,10 +229,10 @@ export default async function Services(){
                       title = "Penetration Testing Services"
                       description = "SMBs, international tech startups, financial institutions, and e-commerce businesses."
                       results={
-                        <div className="p-6">
+                        <div className="sm:p-6">
                           <p>Packages</p>
-                          <div className="grid sm:grid-cols-2 gap-4 p-6 bg-muted mt-6 rounded-lg admin">
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="grid sm:grid-cols-2 gap-4 sm:p-6 p-2 bg-muted mt-6 rounded-lg admin">
+                          <div className="p-4 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Web Application Pentesting</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Project:</p>
@@ -306,13 +306,13 @@ export default async function Services(){
                       trigger={
                         <Button className="text-white mt-4">Request a package</Button>
                       }
-                      title = "Penetration Testing Services"
-                      description = "SMBs, international tech startups, financial institutions, and e-commerce businesses."
+                      title = "Revenue-Generating Activities"
+                      description = "Remote Partners: Freelancers for international projects (use platforms like Upwork)"
                       results={
-                        <div className="p-6">
+                        <div className="sm:p-6">
                           <p>Packages</p>
-                          <div className="grid sm:grid-cols-3 gap-2 p-6 mt-8 bg-muted rounded-lg">
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="grid sm:grid-cols-3 gap-2 sm:p-6 p-2 mt-8 bg-muted admin rounded-lg">
+                          <div className="p-4 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7 mb-4">Bug Bounty Management</div>
                             <p>Partner with local firms to manage bug bounty programs</p><div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing of Payouts:</p>
@@ -376,7 +376,7 @@ export default async function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></Link>
       </div>
       </div>
-      <div className="p-12 sm:p-12 bg-muted">
+      <div className="p-8 sm:p-12 bg-muted">
       <Carousel
       opts={{
         align: "start",
@@ -444,8 +444,8 @@ export default async function Services(){
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="ml-6"/>
+      <CarouselNext className="mr-6"/>
     </Carousel>
     </div>
     <BlogBottomAd/>
