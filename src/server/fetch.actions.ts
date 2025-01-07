@@ -1,14 +1,15 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, nextCourseTable, subscriptionsTable, usersTable } from "@/drizzle/schema";
+import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, loginUserSchema } from '@/schema/formSchemas'
+import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteSchema, loginUserSchema, messagesSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
 import { promises as fs } from "node:fs";
+import { sendEmail } from "@/nodemailer";
 
 
 export async function addUsers(unsafeData: z.infer<typeof addUserSchema>, formData: FormData) : 
@@ -55,6 +56,11 @@ export async function uploadEventFile(formData: FormData) {
         await fs.writeFile(`./public/events/${file.name}`, buffer);
     }
     revalidatePath("/");
+}
+
+export async function sendHtmlEmail(email: string, title:string){
+    sendEmail(email, title)
+    return true
 }
 
 export async function uploadCourseFile(formData: FormData) {
@@ -160,6 +166,19 @@ Promise<{error: boolean | undefined}> {
    return {error: false}
 }
 
+export async function deleteCourse(unsafeData: z.infer<typeof deleteSchema>): 
+Promise<{error: boolean | undefined}>{
+    const {success, data} = deleteSchema.safeParse(unsafeData)
+
+    if (!success){
+        return {error: true}
+    }
+
+    await db.delete(courseTable).where(eq(courseTable.id, data.courseId))
+
+    return {error: false}
+}
+
 export async function addArticles(unsafeData: z.infer<typeof addArticleSchema>, formData: FormData) : 
 Promise<{error: boolean | undefined}> {
    const {success, data} = addArticleSchema.safeParse(unsafeData)
@@ -207,6 +226,19 @@ Promise<{error: boolean | undefined}> {
    }
 
    await db.insert(subscriptionsTable).values({...data})
+
+   return {error: false}
+}
+
+export async function addMessages(unsafeData: z.infer<typeof messagesSchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = messagesSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+
+   await db.insert(messagesTable).values({...data})
 
    return {error: false}
 }

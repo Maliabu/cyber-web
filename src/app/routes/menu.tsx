@@ -63,7 +63,7 @@ export default async function Menu() {
 
   return (
     <div className="sm:p-0">
-      <main className="hidden sm:flex sm:flex-row justify-between px-8 items-center text-dark">
+      <main className="hidden sm:flex sm:flex-row justify-between px-8 sm:py-4 items-center text-dark">
         <Link href="/">
           <Image
             className="w-[120px]"
@@ -75,19 +75,19 @@ export default async function Menu() {
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div className="mr-6">Home</div>
+        <div className="mr-12 text-lg font-bold tracking-tight">Home</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/blog" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div>Blog</div>
+        <div className="mr-6 text-lg font-bold tracking-tight">Blog</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger><div className="font-thin">Our Services</div> </NavigationMenuTrigger>
+          <NavigationMenuTrigger><div className=" text-lg font-bold tracking-tight">Our Services</div> </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-2 p-6 md:w-[250px] md:grid-cols-1 lg:w-[200px] ">
               <p className="desc py-4 border-b">Services</p>
@@ -104,22 +104,26 @@ export default async function Menu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/events" className="nav-a mx-6">
+          <Link href="/events" legacyBehavior passHref>
+          <NavigationMenuLink className="nav-a">
+          <div className="mx-6">
           <div className="flex h-5 items-center space-x-4 text-sm">
-        <div>Events</div>
+        <div className="text-lg font-bold tracking-tight">Events</div>
         <Separator orientation="vertical" />
-        <div>News</div>
-      </div>
+        <div className="text-lg font-bold tracking-tight">News</div>
+      </div></div>
+      </NavigationMenuLink>
           </Link>
           </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
+            <div className="mx-6">
             <div className="flex h-5 items-center space-x-4 text-sm ml-4">
-        <div>Community</div>
+        <div className="text-lg font-bold tracking-tight">Community</div>
         <Separator orientation="vertical" />
-        <div>Contact</div>
-      </div>
+        <div className="text-lg font-bold tracking-tight">Contact</div>
+      </div></div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

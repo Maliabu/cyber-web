@@ -94,6 +94,14 @@ export const subscriptionsTable = pgTable('subscriptions_table', {
     updatedAt,
 });
 
+export const messagesTable = pgTable('messages_table', {
+  id: serial('id').primaryKey(),
+  email: text('email').notNull().unique(),
+  message: text('message'),
+    createdAt,
+    updatedAt,
+});
+
 export const commentsTable = pgTable('comments_table', {
   id: serial('id').primaryKey(),
   userId: integer('user_id')
@@ -159,3 +167,6 @@ export type SelectEvent = typeof EventsTable.$inferSelect;
 
 export type InsertCurrency = typeof currencyTable.$inferInsert;
 export type SelectCurrency = typeof currencyTable.$inferSelect;
+
+export type InsertMessage = typeof messagesTable.$inferInsert;
+export type SelectMessage = typeof messagesTable.$inferSelect
