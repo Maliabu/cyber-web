@@ -29,6 +29,7 @@ import {
 import { auth } from "@clerk/nextjs/server";
 import { Input } from "@/components/ui/input";
 import BlogBottomAd from "../home/blogAd";
+import SendMessage from "../admin/messages/page";
 
 export default async function About(){
 
@@ -51,23 +52,7 @@ export default async function About(){
     </Card></Link>
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
-        {userId.userId !== null?<form>
-      <div className="grid w-full items-center gap-4">
-        <div className="flex flex-col space-y-1.5 dark">
-          <Input type="text" placeholder="Message" />
-        </div>
-      </div>
-      <Button className="my-4 text-white bg-primary">Send</Button>
-    </form>
-      : <form>
-      <div className="grid w-full items-center gap-4">
-        <div className="flex flex-col space-y-1.5 dark">
-          <Input id="email" type="email" placeholder="Email address" />
-          <Input type="text" placeholder="Message" />
-        </div>
-      </div>
-      <Button className="my-4 text-white bg-primary">Send</Button>
-    </form>}
+        <SendMessage/>
     </div>
     <Link href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
