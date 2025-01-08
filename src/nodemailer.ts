@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   secure: true, // true for port 465, false for other ports
   auth: {
     user: "support@beerasafe.com",
-    // pass: "F1BhWQzi&)E{",5~R26v00(Yic
+    // pass: 5~R26v00(Yic
     pass: ")qj@a]ll8?(t"
   },
 });
