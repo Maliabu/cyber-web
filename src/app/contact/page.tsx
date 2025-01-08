@@ -24,16 +24,18 @@ import {
     CarouselNext,
     CarouselPrevious,
   } from "@/components/ui/carousel"
-  import Logo from '../images/logo.png'
-  import Whatsapp from '../images/whatsapp.png'
+import Whatsapp from '../images/whatsapp.png'
 import { auth } from "@clerk/nextjs/server";
-import { Input } from "@/components/ui/input";
 import BlogBottomAd from "../home/blogAd";
 import SendMessage from "../admin/messages/page";
+import { db } from "@/drizzle/db";
+import { messagesTable, usersTable } from "@/drizzle/schema";
+import { eq } from "drizzle-orm";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function About(){
 
-  const userId = await auth()
+  const messages = await db.select().from(messagesTable).limit(5).leftJoin(usersTable, eq(usersTable.email, messagesTable.email))
 
     return(
         <>
@@ -56,7 +58,7 @@ export default async function About(){
     </div>
     <Link href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
-        <p className="w-1/4 text-white sm:m-6">Join our whatsapp community</p>
+        <p className="w-1/4 text-white sm:m-6 m-4">Join our whatsapp community</p>
         <Image
         src={Whatsapp}
         alt="whatsapp logo"
@@ -96,48 +98,38 @@ export default async function About(){
       }}
       className="w-full sm:px-14 bg-muted">
       <CarouselContent className="sm:p-8 p-6">
-          <CarouselItem key="mentees" className="md:basis-1/2 lg:basis-1/3">
+                  {
+                    messages.map(message => (
+          <CarouselItem key={message.messages_table.id} className="md:basis-1/2 lg:basis-1/4">
             <div className="p-1">
-              <Card className="background-none">
-                <CardContent className="flex aspect-square p-4 bg-white">
-          <NavigationMenu>
-          <ul className="background-none">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md"
-                    href="/">
-                    <Image
-                    aria-hidden
-                    src={Logo}
-                    alt="File icon"
-                    width={16}
-                    height={16}/>
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-card-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-            </NavigationMenu>
+              <Card className="dark">
+                <CardContent className="flex aspect-square p-4">
+                      <div className="p-12 grid justify-center">
+                        <div>
+                        <Avatar>
+                          <AvatarImage src="" className="rounded-full w-30 h-30"/>
+                          <AvatarFallback className="rounded-full bg-darker text-white">{message.messages_table.email[0].toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        </div>
+                        <div className="text-lg tracking-tight leading-5 mt-4">"{message.messages_table.message}"
+                        <p className="desc">{message.users_table?.username}</p>
+                        </div>
+                      </div>
                 </CardContent>
               </Card>
             </div>
           </CarouselItem>
+            ))
+          }
       </CarouselContent>
       <CarouselPrevious className="ml-6"/>
       <CarouselNext className="mr-6"/>
     </Carousel>
     </div>
-      <div className="sm:px-16 p-6">
+      <div className="sm:px-16 p-6 hidden">
       <h3 className="text-4xl leading-8 sm:mt-12">Now Meet Our Mentors</h3>
       </div>
-      <div className="p-6">
+      <div className="p-6 hidden">
       <Carousel
       opts={{
         align: "start",
@@ -148,31 +140,13 @@ export default async function About(){
             <div className="p-1">
               <Card className="background-none">
                 <CardContent className="flex aspect-square p-4 bg-white">
-          <NavigationMenu>
-          <ul className="">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/">
-                    <Image
-                    aria-hidden
-                    src={Logo}
-                    alt="File icon"
-                    width={16}
-                    height={16}/>
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-card-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-            </NavigationMenu>
+                  {
+                    messages.map(message => (
+                      <div key={message.messages_table.id}>
+                        <div>{message.messages_table.message}</div>
+                      </div>
+                    ))
+                  }
                 </CardContent>
               </Card>
             </div>

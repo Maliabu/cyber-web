@@ -37,7 +37,6 @@ export function nextCourse(){
   }
 }
 
-
 const encryptData = async (plainData: string, encryptionKey: string) => {
     // Generate a random 96-bit initialization vector (IV)
     const initVector = crypto.getRandomValues(new Uint8Array(12));

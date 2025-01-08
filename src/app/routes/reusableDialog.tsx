@@ -22,7 +22,7 @@ type ReusableDialogProps = {
         <DialogTrigger asChild>
             {trigger}
         </DialogTrigger>
-      <DialogContent className="sm:max-w-[1000px] h-3/4">
+      <DialogContent className="sm:max-w-[1000px] h-5/6">
         <DialogHeader>
           <DialogTitle><div className="text-3xl text-bold leading-7">{title}</div></DialogTitle>
           <DialogDescription>

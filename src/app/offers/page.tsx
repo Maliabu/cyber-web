@@ -36,6 +36,7 @@ import { ReusableDialog } from "../routes/reusableDialog";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Form } from "@/components/ui/form";
 import ServiceForm from "./serviceForm";
+import ClassForm from "./classForm";
 
 export default async function Services(){
   const userId = await auth()
@@ -164,6 +165,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Project:</p>
                               <div className="text-2xl font-bold">$500 - $2,000</div>
                             </div>
+                            <ServiceForm email={email} title="Security Policy Creation" id="policy" id2="spc"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Incident Response Planning</div>
@@ -171,6 +173,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Scope:</p>
                               <div className="text-2xl font-bold">$2,500 - $10,000</div>
                             </div>
+                            <ServiceForm email={email} title="Incident Response Planning" id="incident" id2="planning"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Managed Security Operations Center (SOC)</div>
@@ -178,6 +181,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Month:</p>
                               <div className="text-2xl font-bold">$500 - $2,000</div>
                             </div>
+                            <ServiceForm email={email} title="Managed Security Operations Center (SOC)" id="managed" id2="soc"/>
                           </div>
                           </div>
                         </div>
@@ -238,6 +242,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Project:</p>
                               <div className="text-2xl font-bold">$1,000 - $5,000</div>
                             </div>
+                            <ServiceForm email={email} title="Web Application Pentesting" id="web" id2="application"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Network Vulnerability Assessment</div>
@@ -245,6 +250,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Project:</p>
                               <div className="text-2xl font-bold">$2,000 - $7,000</div>
                             </div>
+                            <ServiceForm email={email} title="Network Vulnerability Assessment" id="network" id2="vulnerability"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Mobile Application Security Testing</div>
@@ -252,6 +258,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Project:</p>
                               <div className="text-2xl font-bold">$2,500 - $8,000</div>
                             </div>
+                            <ServiceForm email={email} title="Mobile Application Security Testing" id="app" id2="security"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7">Red Team/Blue Team Exercises</div>
@@ -259,6 +266,7 @@ export default async function Services(){
                               <p className="desc">Pricing per Engagement:</p>
                               <div className="text-2xl font-bold">$10,000+</div>
                             </div>
+                            <ServiceForm email={email} title="Red Team/Blue Team Exercises" id="team" id2="exercises"/>
                           </div>
                           </div>
                         </div>
@@ -318,6 +326,7 @@ export default async function Services(){
                               <p className="desc">Pricing of Payouts:</p>
                               <div className="text-2xl font-bold">10% - 20%</div>
                             </div>
+                            <ServiceForm email={email} title="Bug Bounty Management" id="bug" id2="bounty"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7 mb-4">Software Development</div>
@@ -326,6 +335,7 @@ export default async function Services(){
                               <p className="desc">Pricing per License:</p>
                               <div className="text-2xl font-bold">$20 - $100</div>
                             </div>
+                            <ServiceForm email={email} title="Software Development" id="software" id2="dev"/>
                           </div>
                           <div className="p-6 sm:p-12 rounded-lg bg-white">
                             <div className="text-3xl font-bold tracking-tight leading-7 mb-4">Content Creation</div>
@@ -333,7 +343,7 @@ export default async function Services(){
                               <p className="desc">Pricing:</p>
                               <div className="text-2xl font-bold">Negotiable</div>
                             </div>
-                            <ServiceForm email={email} title="Content Creation"/>
+                            <ServiceForm email={email} title="Content Creation" id="content" id2="creation"/>
                           </div>
                           </div>
                         </div>
@@ -352,7 +362,7 @@ export default async function Services(){
       <CarouselNext className="mr-6"/>
     </Carousel>
     </div>
-        <div className="sm:p-16 p-10 items-center bg-darker text-white">
+        <div className="sm:p-16 p-6 items-center bg-darker text-white">
         <div className="sm:float-right">
             <TimerCountDown/>
     </div>
@@ -435,7 +445,7 @@ export default async function Services(){
                       <p className="desc">Pricing per person:</p>
                       <div className="text-2xl font-bold">{course.currency_table?.code} {course.course_table.amount}</div>
                     </div>}
-                    form={<></>}
+                    form={<ClassForm email={email} title={course.course_table.title} id={course.course_table.id.toString()} id2={course.course_table.title}/>}
                     />
                     :<Link href="/sign-in"><Button className="text-white">Enroll</Button></Link>}
                     </div>

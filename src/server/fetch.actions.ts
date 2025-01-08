@@ -218,16 +218,24 @@ Promise<{error: boolean | undefined}> {
 }
 
 export async function addSubscription(unsafeData: z.infer<typeof addSubscriptionSchema>) : 
-Promise<{error: boolean | undefined}> {
+Promise<{error: boolean | undefined, message: string}> {
    const {success, data} = addSubscriptionSchema.safeParse(unsafeData)
 
    if (!success){
-    return {error: true}
+    return {error: true, message: "successful"}
    }
-
-   await db.insert(subscriptionsTable).values({...data})
-
-   return {error: false}
+   // check email isnt repeated
+   let checkEmail = await db.query.subscriptionsTable.findMany(
+    {
+        where: eq(subscriptionsTable.email, data.email)
+    }
+   )
+   if(checkEmail.length === 0){
+    await db.insert(subscriptionsTable).values({...data})
+    return {error: false, message: "Subscription successful"}
+   } else {
+    return {error: true, message: "User already subscribed"}
+   }
 }
 
 export async function addMessages(unsafeData: z.infer<typeof messagesSchema>) : 

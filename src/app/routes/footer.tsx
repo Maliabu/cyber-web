@@ -5,15 +5,18 @@ import {
   NavigationMenu,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu"
-import { Button } from "@/components/ui/button";
-import { Heart, MailIcon } from "lucide-react";
-import { auth } from "@clerk/nextjs/server";
+import { MailIcon } from "lucide-react";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { db } from "@/drizzle/db";
 import FooterSubscribe from "../admin/subscription/subscriptionFooter";
+import AutoFooterSubscribe from "../admin/subscription/autoSubscribe";
 
 export default async function Footer() {
   const userId = await auth()
+  const user = await currentUser()
+  let email = ''
+  email = user?.primaryEmailAddress?.emailAddress || ''
   const articles = (await db.query.articlesTable.findMany()).slice(1, 3)
   return (
       <footer className="justify-center dark bg-darker text-white">
@@ -26,7 +29,7 @@ export default async function Footer() {
                         <FooterSubscribe/>
                       </div>
                 : 
-          <Button className="text-white"><Heart width={16} height={16}/> Subscribe</Button>}
+          <AutoFooterSubscribe email={email}/>}
                   </div>
               </div>
         <div className=" flex sm:flex-row flex-col gap-10 sm:px-24 p-12 justify-center">

@@ -54,7 +54,7 @@ export default async function Menu() {
     if(userId.userId !== null){
       return <div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /></div>
     } else {
-      return <div>
+      return <div className="flex flex-row">
         <Link href="/sign-in"><Button className="text-white">Sign In</Button></Link>
         <Link href="/sign-up"><Button className="bg-light ml-2">Sign Up</Button></Link>
       </div>
@@ -75,19 +75,19 @@ export default async function Menu() {
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div className="mr-12 text-lg font-bold tracking-tight">Home</div>
+        <div className="sm:mx-6 md:mx-6 lg:mx-12 text-md font-bold tracking-tight">Home</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/blog" legacyBehavior passHref>
+          <Link href="" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div className="mr-6 text-lg font-bold tracking-tight">Blog</div>
+        <div className="sm:mr-2 md:mr-2 lg:mr-6 text-md text-muted font-bold tracking-tight">Blog</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger><div className=" text-lg font-bold tracking-tight">Our Services</div> </NavigationMenuTrigger>
+          <NavigationMenuTrigger><div className=" text-md tracking-tight">Our Services</div> </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-2 p-6 md:w-[250px] md:grid-cols-1 lg:w-[200px] ">
               <p className="desc py-4 border-b">Services</p>
@@ -106,11 +106,11 @@ export default async function Menu() {
         <NavigationMenuItem>
           <Link href="/events" legacyBehavior passHref>
           <NavigationMenuLink className="nav-a">
-          <div className="mx-6">
+          <div className="sm:mx-2 md:mx-2 lg:mx-6">
           <div className="flex h-5 items-center space-x-4 text-sm">
-        <div className="text-lg font-bold tracking-tight">Events</div>
+        <div className="text-md font-bold tracking-tight">Events</div>
         <Separator orientation="vertical" />
-        <div className="text-lg font-bold tracking-tight">News</div>
+        <div className="text-md font-bold tracking-tight">News</div>
       </div></div>
       </NavigationMenuLink>
           </Link>
@@ -118,11 +118,11 @@ export default async function Menu() {
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-            <div className="mx-6">
+            <div className="sm:mx-2 md:mx-2 lg:mx-6">
             <div className="flex h-5 items-center space-x-4 text-sm ml-4">
-        <div className="text-lg font-bold tracking-tight">Community</div>
+        <div className="text-md font-bold tracking-tight">Community</div>
         <Separator orientation="vertical" />
-        <div className="text-lg font-bold tracking-tight">Contact</div>
+        <div className=" font-bold tracking-tight">Contact</div>
       </div></div>
             </NavigationMenuLink>
           </Link>

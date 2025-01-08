@@ -42,8 +42,8 @@ export default async function HomePage(){
   }
 
     return(
-      <div className="">
-            <div className="grid back-schedule justify-items-center sm:px-20 sm:pt-8 p-4">
+      <div className="sm:p-0">
+            <div className="grid back-schedule justify-items-center lg:px-20 sm:pt-8 p-4">
               <h5 className="text-5xl leading-10 text-center sm:w-[750px] tracking-tight font-bold">Schedule an interview with our mentors!</h5>
               Get started with a course in cybersecurity
               {booking()}
@@ -53,7 +53,7 @@ export default async function HomePage(){
         <div className="sm:float-right p-6">
             <TimerCountDown userid={userId.userId} nextCourse={nextCourse.map(course=>course.course_table)}/>
     <div className="flex flex-row justify-between bg-darker rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
-        <p className="text-white">See more Articles by WarrenMu and many of our experts onboard</p>
+        <p className="text-white">See Articles by many of our writers and authors onboard</p>
         <a href="/blog" className="bg-primary text-white p-2 rounded-md w-1/2 h-1/2">Our Blog</a>
     </div>
     </div>
