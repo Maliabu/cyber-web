@@ -41,7 +41,7 @@ export default function SendMessage() {
           window.location.reload()
         }
     }
-  return (<div className="p-4 pb-0 admin">
+  return (<div className="p-4 pb-0 admin dark">
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex flex-col space-y-1.5">
@@ -58,7 +58,7 @@ export default function SendMessage() {
                 )}
                 />
             </div>
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-col space-y-1.5 mt-1">
             <FormField
                 control={form.control}
                 name="message"

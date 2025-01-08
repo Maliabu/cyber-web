@@ -1,30 +1,31 @@
 const nodemailer = require("nodemailer");
 const fs = require('fs')
 const path = require('path')
-import {template} from './htmlTemplate'
 
 const transporter = nodemailer.createTransport({
-  host: "wascl.com",
+  host: "beerasafe.com",
   port: 465,
   secure: true, // true for port 465, false for other ports
   auth: {
-    user: "info@wascl.com",
-    pass: "F1BhWQzi&)E{",
+    user: "support@beerasafe.com",
+    // pass: "F1BhWQzi&)E{",
+    pass: ")qj@a]ll8?(t"
   },
 });
 
 
 // async..await is not allowed in global scope, must use a wrapper
 export async function sendEmail(email: string, title: string) {
-    // const filePath = path.resolve('./src', 'htmlTemplate.html')
-    // let htmlData = fs.readFileSync(filePath, 'utf8');
+    const filePath = path.resolve('./src', 'htmlTemplate.html')
+    let htmlData = fs.readFileSync(filePath, 'utf8');
+    htmlData = htmlData.replace('email', email)
 
     // let Obj = {
     //     email: email,
     //     title: title,
     // };
  
-    // // htmlData = htmlData.replaceAll('[email]', email).replaceAll('[title]', title);
+    // htmlData = htmlData.replaceAll('[email]', email).replaceAll('[title]', title);
     // htmlData = htmlData.replace(/email|title/gi, function(matched: {key: string}[]){
     //     return Obj[matched]
     // })
@@ -33,10 +34,10 @@ export async function sendEmail(email: string, title: string) {
   const info = await transporter.sendMail({
     from: "info@wascl.com", // sender address
     to: email, // list of receivers
-    subject: "Request For Service", // Subject line
+    subject: "Request For "+title, // Subject line
     text: "Services",
-    // html: htmlData, // html body
-    html: template(email, title)
+    html: htmlData, // html body
+    // html: JSON.stringify(template(email, title))
   });
 
 

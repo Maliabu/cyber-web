@@ -9,7 +9,7 @@ import {
 export default function Home() {
   return (
     <ClerkProvider>
-    <div className="container mx-auto">
+    <div>
       <Menu/>
       <HomePage/>
       <Footer/>

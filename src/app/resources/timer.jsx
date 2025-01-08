@@ -68,31 +68,25 @@ export default function TimerCountDown(userId, nextCourse){
     }
     return(
         <div>
-        <div className="flex text-primary pb-4 justify-between border border-primary p-6 mb-2 rounded-md">
+        <div className="flex hidden text-primary pb-4 justify-between border border-primary p-6 mb-2 rounded-md">
         <h6>Next Class In: </h6>
         <h5 className="mx-4">{result}</h5>
         </div>
-      <Card className="sm:w-[350px] w-[330px] dark ">
+      <Card className="sm:w-[450px] md:w-[350px] lg:w-[350px] w-[330px] dark ">
       <CardHeader>
-        <CardTitle>Hacking For you</CardTitle>
-        <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
+        <CardTitle>Join our Cyber Security Classes</CardTitle>
+        <CardDescription>Diving into the ethics of cyber security with our experts</CardDescription>
       </CardHeader>
       <CardContent>
       {nextClass()}
         <Link
             className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md p-6 outline focus:shadow-md"
-            href="/">
-            <Image
-                aria-hidden
-                src={Logo}
-                alt="File icon"
-                width={16}
-                height={16}/>
-            <div className="mb-2 mt-4 text-lg font-medium">
-                shadcn/ui
+            href="/offers#classes">
+            <div className="mb-2 text-lg font-medium">
+                Cyber security Training
             </div>
             <p className="text-sm leading-tight text-card-foreground">
-                Beautifully designed components built with Radix UI and Tailwind CSS.
+            Basic Cybersecurity Awareness, Intermediate Ethical Hacking Course, Advanced Cybersecurity Certification...
             </p>
         </Link>
       </CardContent>

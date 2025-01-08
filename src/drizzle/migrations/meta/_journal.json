@@ -8,6 +8,13 @@
       "when": 1735405410509,
       "tag": "0000_stormy_mauler",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1736341857205,
+      "tag": "0001_petite_mac_gargan",
+      "breakpoints": true
     }
   ]
 }
