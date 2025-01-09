@@ -33,7 +33,7 @@ export async function sendEmail(email: string, title: string) {
 
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: "info@wascl.com", // sender address
+    from: "support@beerasafe.com", // sender address
     to: email, // list of receivers
     subject: "Request For "+title, // Subject line
     text: "Services",
