@@ -49,7 +49,7 @@ export default async function Services(){
     return(
         <>
         <Menu/>
-        <div className="grid justify-items-center sm:p-16 p-6 bg-darker text-white">
+        <div className="grid justify-items-center sm:p-16 p-6 bg-gradient-to-r from-gray-900 to-sky-800 text-white">
         <div className="p-6 grid justify-items-center">
         <div className="hidden sm:flex h-5 items-center space-x-4 text-sm ml-4">
         <div>Cybersecurity Training</div>
@@ -63,8 +63,9 @@ export default async function Services(){
         </div>
         <div className="text-5xl leading-10 tracking-tight font-bold">Each of our services made for you!</div>
         <p className="my-2">Check our most affordable services</p>
+        <Link href="/offers#courses">
         <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
-        </div>
+        </Link></div>
     <div className="sm:px-16 bg-muted p-6">
       <Carousel
       opts={{
@@ -151,7 +152,9 @@ export default async function Services(){
                       </div>
                       <ReusableDialog 
                       trigger={
+                        userId.userId !== null?
                         <Button className="text-white mt-4">Request a package</Button>
+                        :<Link href="/sign-in"><Button className="text-white mt-4">Request a package</Button></Link>
                       }
                       title = "Consultancy and Managed Security Services"
                       description = "Organizations without dedicated security teams."
@@ -228,7 +231,9 @@ export default async function Services(){
                       </div>
                       <ReusableDialog 
                       trigger={
+                        userId.userId !== null?
                         <Button className="text-white mt-4">Request a package</Button>
+                        :<Link href="/sign-in"><Button className="text-white mt-4">Request a package</Button></Link>
                       }
                       title = "Penetration Testing Services"
                       description = "SMBs, international tech startups, financial institutions, and e-commerce businesses."
@@ -312,7 +317,9 @@ export default async function Services(){
                       </div>
                       <ReusableDialog 
                       trigger={
+                        userId.userId !== null?
                         <Button className="text-white mt-4">Request a package</Button>
+                        :<Link href="/sign-in"><Button className="text-white mt-4">Request a package</Button></Link>
                       }
                       title = "Revenue-Generating Activities"
                       description = "Remote Partners: Freelancers for international projects (use platforms like Upwork)"
@@ -362,7 +369,7 @@ export default async function Services(){
       <CarouselNext className="mr-6"/>
     </Carousel>
     </div>
-        <div className="sm:p-16 p-6 items-center bg-darker text-white">
+        <div className="sm:p-16 p-6 items-center bg-gradient-to-r from-gray-900 to-sky-800 text-white">
         <div className="sm:float-right">
             <TimerCountDown/>
     </div>
@@ -435,7 +442,7 @@ export default async function Services(){
                       <div className="text-2xl font-bold">{course.currency_table?.code} {course.course_table.amount}</div>
                       {/* Ends: {getMyDay(course.endDate.getDay())}, {getMyMonth(course.endDate.getMonth())} {course.endDate.getDate()}, {course.endDate.getFullYear()} */}
                     </div>
-                    {userId.userId !== undefined?
+                    {userId.userId !== null?
                     <ReusableDialog
                     trigger={<Button className="text-white">Enroll</Button>}
                     title={course.course_table.title}

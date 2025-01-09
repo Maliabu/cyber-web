@@ -31,13 +31,13 @@ export default function ClassForm(props: {email: string, title: string, id: stri
     return(
         <div>
         <form action={onSubmit} className="w-full flex flex-col">
-          <div className="flex sm:flex-row justify-between">
-            <div className="mt-6">
+          <div className="flex sm:flex-row justify-between rounded-lg p-8 bg-muted">
+            <div className="">
             <div className="text-3xl font-bold tracking-tight">User</div>
             <p>Request to be sent by: {props.email}</p>
-            <p className="desc p-2 bg-muted rounded-md mt-2">To edit your user email address, signin with a different email. Thank you</p>
+            <p className="p-2 bg-darker text-white text-sm rounded-md mt-2">To edit your user email address, signin with a different email. Thank you</p>
             </div>
-            <div><Button className="text-white" id={props.id} type="submit">Make Payment</Button>
+            <div><Button className="text-white" id={props.id} type="submit">Request to Enroll</Button>
             <div style={{"display": "none"}} className="border border-primary text-primary p-2 mt-1 rounded-md" id={props.id2}>Request status</div>
             </div>
           </div>
