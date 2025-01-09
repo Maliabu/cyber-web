@@ -3,13 +3,14 @@ const fs = require('fs')
 const path = require('path')
 
 const transporter = nodemailer.createTransport({
-  host: "mail.beerasafe.com",
+  // host: "mail.beerasafe.com", no ssl
+  host: "server336.web-hosting.com", //has ssl
   port: 465,
   secure: true, // true for port 465, false for other ports
   auth: {
     user: "support@beerasafe.com",
     // pass: 5~R26v00(Yic
-    pass: ")qj@a]ll8?(t"
+    pass: "fi(bO})$06&("
   },
 });
 
