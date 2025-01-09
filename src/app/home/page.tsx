@@ -57,7 +57,7 @@ export default async function HomePage(){
         <a href="/blog" className="bg-primary text-white p-2 rounded-md w-1/2 h-1/2">Our Blog</a>
     </div>
     </div>
-      <div className="sm:p-16 p-6 bg-darker text-white">
+      <div className="sm:p-16 p-6 bg-gradient-to-r from-gray-900 to-sky-800 text-white">
             <div className="mt-2">
               <p>Home</p>
             </div>

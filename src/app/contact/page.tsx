@@ -52,7 +52,7 @@ export default async function About(){
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card></Link>
-    <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
+    <div className="bg-gradient-to-r from-gray-900 to-sky-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
         <SendMessage/>
     </div>
@@ -67,7 +67,7 @@ export default async function About(){
         />
     </div></Link>
     </div>
-      <div className="sm:p-16 p-6 bg-darker text-white">
+      <div className="sm:p-16 p-6 bg-gradient-to-r from-slate-800 to-sky-900 text-white">
       <NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem>
@@ -89,7 +89,7 @@ export default async function About(){
         <Button className="text-white"><Group width={16} height={16}/> Join our Growing Community</Button></Link>
       </div>
       <div className="sm:px-16 p-6">
-      <h3 className="text-4xl leading-6 mt-12">Meet Our Mentees</h3>
+      <h3 className="text-4xl font-bold tracking-tight leading-7 mt-12">A few of our reviews</h3>
       </div>
       <div className="sm:px-8 p-6">
       <Carousel
@@ -127,7 +127,7 @@ export default async function About(){
     </Carousel>
     </div>
       <div className="sm:px-16 p-6 hidden">
-      <h3 className="text-4xl leading-8 sm:mt-12">Now Meet Our Mentors</h3>
+      <h3 className="text-4xl font-bold tracking-tight leading-8 sm:mt-12">Now Meet Our Mentors</h3>
       </div>
       <div className="p-6 hidden">
       <Carousel
