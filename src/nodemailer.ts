@@ -2,56 +2,31 @@ const nodemailer = require("nodemailer");
 const fs = require('fs')
 const path = require('path')
 
+const transporter = nodemailer.createTransport({
+  // host: "mail.beerasafe.com", no ssl
+  host: "server336.web-hosting.com", //has ssl
+  port: 465,
+  secure: true, // true for port 465, false for other ports
+  auth: {
+    user: "support@beerasafe.com",
+    // pass: 5~R26v00(Yic
+    pass: "fi(bO})$06&("
+  },
+});
+
 // async..await is not allowed in global scope, must use a wrapper
 export async function sendEmail(email: string, title: string) {
-  const transporter = nodemailer.createTransport({
-    // host: "mail.beerasafe.com", no ssl
-    host: "server336.web-hosting.com", //has ssl
-    port: 465,
-    secure: true, // true for port 465, false for other ports
-    auth: {
-      user: "support@beerasafe.com",
-      // pass: 5~R26v00(Yic
-      pass: "fi(bO})$06&("
-    },
-  });
-    
-  await new Promise((resolve, reject) => {
-    // verify connection configuration
-    transporter.verify(function (error: any, success: unknown) {
-        if (error) {
-            console.log(error);
-            reject(error);
-        } else {
-            console.log("Server is ready to take our messages");
-            resolve(success);
-        }
-    });
-});
     // const filePath = path.resolve('./src', 'htmlTemplate.html')
     // let htmlData = fs.readFileSync(filePath, 'utf8');
     // htmlData = htmlData.replace('email', email)
 
-    // let Obj = {
-    //     email: email,
-    //     title: title,
-    // };
- 
-    // htmlData = htmlData.replaceAll('[email]', email).replaceAll('[title]', title);
-    // htmlData = htmlData.replace(/email|title/gi, function(matched: {key: string}[]){
-    //     return Obj[matched]
-    // })
-
   // send mail with defined transport object
-  const info = {
+  const info = await transporter.sendMail({
     from: "support@beerasafe.com", // sender address
     to: email, // list of receivers
     subject: "Request For "+title, // Subject line
     text: "Services",
-    html: `
-    <!DOCTYPE html>
-    <html>
-    <head>
+    html: `<!DOCTYPE html><html><head>
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Request for Service</title>
@@ -70,22 +45,9 @@ export async function sendEmail(email: string, title: string) {
     </html>
     `, // html body
     // html: JSON.stringify(template(email, title))
-  };
-
-  await new Promise((resolve, reject) => {
-    // send mail
-    transporter.sendMail(info, (err: any, info: unknown) => {
-        if (err) {
-            console.error(err);
-            reject(err);
-        } else {
-            console.log(info);
-            resolve(info);
-        }
-    });
   });
 
-  console.log("Message sent");
+  console.log("Message sent: %s", info.messageId);
   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
 }
 
