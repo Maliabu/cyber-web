@@ -57,8 +57,8 @@ export async function uploadEventFile(formData: FormData) {
     revalidatePath("/");
 }
 
-export async function sendHtmlEmail(email: string, title:string){
-    sendEmail(email, title)
+export async function sendHtmlEmail(email: string, title:string, name:string){
+    sendEmail(email, title, name)
     return true
 }
 
