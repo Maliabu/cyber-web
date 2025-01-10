@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { sendHtmlEmail } from "@/server/fetch.actions";
 
-export default function ClassForm(props: {email: string, title: string, id: string, id2: string}){
+export default function ClassForm(props: {email: string, title: string, name: string, id: string, id2: string}){
     async function onSubmit(){
         const app = document.getElementById(props.id);
         const mess = document.getElementById(props.id2);
@@ -11,7 +11,7 @@ export default function ClassForm(props: {email: string, title: string, id: stri
         if(app !== null){
             app.innerHTML = text;
         }
-        const data = await sendHtmlEmail(props.email, props.title)
+        const data = await sendHtmlEmail(props.email, props.title, props.name)
         if(data === false){
             if(app !== null){
                 app.innerHTML = "Send Failed";
