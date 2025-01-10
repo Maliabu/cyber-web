@@ -28,9 +28,9 @@ export async function sendEmail(email: string, title: string) {
         }
     });
 });
-    const filePath = path.resolve('./src', 'htmlTemplate.html')
-    let htmlData = fs.readFileSync(filePath, 'utf8');
-    htmlData = htmlData.replace('email', email)
+    // const filePath = path.resolve('./src', 'htmlTemplate.html')
+    // let htmlData = fs.readFileSync(filePath, 'utf8');
+    // htmlData = htmlData.replace('email', email)
 
     // let Obj = {
     //     email: email,
@@ -48,7 +48,27 @@ export async function sendEmail(email: string, title: string) {
     to: email, // list of receivers
     subject: "Request For "+title, // Subject line
     text: "Services",
-    html: htmlData, // html body
+    html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Request for Service</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+        <script src='main.js'></script>
+    </head>
+    <body>
+        <div>
+            <p>Hello Beera Safe Team</p>
+            <p>A request for service has been sent with the following details: </p>
+            <p>Requesting Customer: ${email}</p>
+            <p>Regards<br/>Beera Safe automated @no-reply</p>
+        </div>
+    </body>
+    </html>
+    `, // html body
     // html: JSON.stringify(template(email, title))
   };
 
