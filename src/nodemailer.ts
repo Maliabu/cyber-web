@@ -38,7 +38,7 @@ export async function sendEmail(email: string, title: string) {
         <div>
             <p>Hello Beera Safe Team</p>
             <p>A request for service has been sent with the following details: </p>
-            <p>Requesting Customer: email</p>
+            <p>Requesting Customer: ${email}</p>
             <p>Regards<br/>Beera Safe automated @no-reply</p>
         </div>
     </body>
