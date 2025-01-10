@@ -63,7 +63,7 @@ export async function sendEmail(email: string, title: string) {
         <div>
             <p>Hello Beera Safe Team</p>
             <p>A request for service has been sent with the following details: </p>
-            <p>Requesting Customer: ${email}</p>
+            <p>Requesting Customer: email</p>
             <p>Regards<br/>Beera Safe automated @no-reply</p>
         </div>
     </body>
@@ -83,7 +83,7 @@ export async function sendEmail(email: string, title: string) {
             resolve(info);
         }
     });
-});
+  });
 
   console.log("Message sent");
   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
