@@ -11,7 +11,6 @@ import { File } from "node:buffer";
 import { promises as fs } from "node:fs";
 import { sendEmail } from "@/nodemailer";
 
-
 export async function addUsers(unsafeData: z.infer<typeof addUserSchema>, formData: FormData) : 
 Promise<{error: boolean | undefined}> {
    const {success, data} = addUserSchema.safeParse(unsafeData)
