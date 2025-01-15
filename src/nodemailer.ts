@@ -3,8 +3,8 @@ const fs = require('fs')
 const path = require('path')
 
 const transporter = nodemailer.createTransport({
-  // host: "mail.beerasafe.com", no ssl
-  host: "server336.web-hosting.com", //has ssl
+  host: "mail.beerasafe.com", // make sure to get ssl
+  // host: "server336.web-hosting.com", //has ssl
   port: 465,
   secure: true, // true for port 465, false for other ports
   auth: {

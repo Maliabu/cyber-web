@@ -12,9 +12,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { MenuIcon, Search } from "lucide-react";
+import { CalendarArrowDownIcon, HandshakeIcon, HomeIcon, MenuIcon, PaperclipIcon, Search, Users2Icon } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator"
 import { SearchBar } from "./search";
@@ -49,10 +49,12 @@ const components: { title: string; href: string; description: string }[] = [
 export default async function Menu() {
 
   const userId = await auth()
+  const name = await currentUser()
+  let user = name?.fullName || ""
 
   function display(){
     if(userId.userId !== null){
-      return <div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /></div>
+      return <div className="flex flex-row justify-between"><div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /> </div><p className="sm:hidden"><p className="desc mb-1">you are signed in as: </p>{user}</p></div>
     } else {
       return <div className="flex flex-row">
         <Link href="/sign-in"><Button className="text-white">Sign In</Button></Link>
@@ -86,8 +88,8 @@ export default async function Menu() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger><div className=" text-md tracking-tight">Our Services</div> </NavigationMenuTrigger>
+        <NavigationMenuItem className="text-white">
+          <NavigationMenuTrigger><div className=" text-md tracking-tight nav-a">Our Services</div> </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-2 p-6 md:w-[250px] md:grid-cols-1 lg:w-[200px] ">
               <p className="desc py-4 border-b">Services</p>
@@ -96,7 +98,7 @@ export default async function Menu() {
                   key={component.title}
                   title={component.title}
                   href={component.href}
-                  className="text-dark p-1"
+                  className="text-white hover:text-primary p-1"
                 >
                 </ListItem>
               ))}
@@ -143,32 +145,62 @@ export default async function Menu() {
       <SheetTrigger asChild>
       <MenuIcon className="size-8 mt-1 mr-2"/>
       </SheetTrigger>
-      <SheetContent className="h-[300px] rounded-lg">
+      <SheetContent className=" rounded-lg">
         <SheetHeader>
           <SheetTitle></SheetTitle>
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <div className="grid grid-cols-1 gap-4 py-4">
-          <Link href="/" className="text-dark hover:text-blue">
-          <p>Home</p></Link>
-          <Link href="/blog" className="text-dark my-2 hover:text-blue">
-          <p>Blog</p></Link>
-          <Link href="/offers" className="text-dark hover:text-blue">
-          <p>Services</p></Link>
-          <Link href="/contact" className="text-dark my-2 hover:text-blue">
-          <p>Community</p></Link>
-          <Link href="/events" className="text-dark hover:text-blue">
-          <p>News & Events</p></Link>
-          {display()}
+          <Link href="/" className="hover:text-muted text-white border-t">
+          <div className="flex flex-row mt-5">
+          <HomeIcon size="16"/> 
+          <p className="mx-5">Home</p></div></Link>
+          <Link href="/blog" className="my-3 hover:text-blue text-white">
+          <div className="flex flex-row">
+          <PaperclipIcon size="16"/> 
+          <p className="mx-5">Blog<p className="desc mt-1">Best Reads from the best</p></p></div></Link>
+          <Link href="/offers" className="hover:text-blue text-white">
+          <div className="flex flex-row">
+          <HandshakeIcon size="16"/> 
+          <p className="mx-5">Services<p className="desc mt-1">Training, consultancy, pentesting & more...</p></p></div></Link>
+          <Link href="/contact" className="my-3 hover:text-blue text-white">
+          <div className="flex flex-row">
+          <Users2Icon size="16"/> 
+          <p className="mx-5"> Our Community<p className="desc mt-1">Contacts and socials</p></p></div></Link>
+          <Link href="/events" className="hover:text-blue text-white border-b">
+          <div className="flex flex-row mb-5">
+          <CalendarArrowDownIcon size="16"/> 
+          <p className="mx-5">News & Events<p className="desc mt-1">All our events and happenings</p></p></div></Link>
         </div>
         <SheetFooter>
           <SheetClose asChild>
+          <div>
+          {display()}<p className="border-t border-b mt-5 py-5">AllRightsReserved@BeeraSafe<p className="desc mt-1">Terms & Conditions Apply</p></p>
+          <Link
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
+          href="https://www.instagram.com/beera_safe256/profilecard/?igsh=cTB2b2FuNXM0NjRv"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className=" py-1 px-2 text-white rounded-sm font-bold">in</div>
+          Instagram
+        </Link>
+        <Link
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 row-start-2"
+          href="https://x.com/beera_safe?t=_tgINtbfE8Ju0II3GGEtgw&s=09"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="py-2 px-3 font-bold text-white">x</div>
+          twitter
+        </Link>
+          </div>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet></div></div>
       <div> 
-        <div className=" flex flex-row bg-muted justify-center">
+        <div className=" flex flex-row bg-darker justify-center">
         <SearchBar/>
           </div>
         </div>

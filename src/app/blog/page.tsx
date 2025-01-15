@@ -16,11 +16,15 @@ import {
   CardHeader,
 } from "@/components/ui/card"
 import Image from "next/image";
+import { db } from "@/drizzle/db"
+import AppSidebar from "./reusableSideBar"
 
 export default function Blog(){
+  const articles = db.query.articlesTable.findMany()
     return(
         <div className="">
         <Menu/>
+        <AppSidebar/>
         <div className="sm:px-16 p-6">
         <div className="sm:float-right sm:-mt-12 sm:-mx-6">
       <Card className="w-[300px] border-none">
@@ -29,36 +33,6 @@ export default function Blog(){
       </CardHeader>
       <CardContent className="scroll-y-blog">
         <Link className="flex h-auto w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
-            href="/">
-            <Image
-                aria-hidden
-                src="/file.svg"
-                alt="File icon"
-                width={16}
-                height={16}/>
-            <div className="mb-2 mt-4 text-lg font-medium">
-                shadcn/ui
-            </div>
-            <p className="text-sm leading-tight text-card-foreground">
-                Beautifully designed components built with Radix UI and Tailwind CSS.
-            </p>
-        </Link>
-        <Link className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
-            href="/">
-            <Image
-                aria-hidden
-                src="/file.svg"
-                alt="File icon"
-                width={16}
-                height={16}/>
-            <div className="mb-2 mt-4 text-lg font-medium">
-                shadcn/ui
-            </div>
-            <p className="text-sm leading-tight text-card-foreground">
-                Beautifully designed components built with Radix UI and Tailwind CSS.
-            </p>
-        </Link>
-        <Link className="flex h-auto mt-6 w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md"
             href="/">
             <Image
                 aria-hidden

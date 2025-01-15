@@ -72,7 +72,8 @@ export default async function HomePage(){
       <Button variant="outline" className=" bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
     </div></div>
     </div>
-    <div className="sm:p-16 bg-muted p-6">
+    <div className="back-image">
+      <div className="backdrop sm:p-16 p-6">
       <Carousel
       opts={{
         align: "start",
@@ -101,8 +102,8 @@ export default async function HomePage(){
                       <div className="grid justify-items-center px-16 pt-16">
                         <TrafficConeIcon className="size-20"/>
                     </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
+                    <div className="p-6 sm:p-12  rounded-b-xl">
+                      <div className=" text-3xl mt-4  font-semibold leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
@@ -132,8 +133,8 @@ export default async function HomePage(){
                       <div className="grid justify-items-center px-16 pt-16">
                         <HeartHandshakeIcon className="size-20"/>
                     </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-bold tracking-tight leading-7">
+                    <div className="p-6 sm:p-12  rounded-b-xl">
+                      <div className=" text-3xl mt-4  font-bold tracking-tight leading-7">
                       Consultancy and Managed Security Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     Offering: Security Policy Creation, Incident Response Planning ...
@@ -163,8 +164,8 @@ export default async function HomePage(){
                       <div className="grid justify-items-center px-16 pt-16">
                         <ShieldCheckIcon className="size-20"/>
                     </div>
-                    <div className="p-6 sm:p-12 bg-white rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-bold leading-7 tracking-tight">
+                    <div className="p-6 sm:p-12  rounded-b-xl">
+                      <div className=" text-3xl mt-4  font-bold leading-7 tracking-tight">
                       Penetration Testing Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     Web Applications, Network Vulnerability Assessment, Mobile Applications...
@@ -184,6 +185,7 @@ export default async function HomePage(){
       <CarouselPrevious className="ml-6"/>
       <CarouselNext className="mr-6"/>
     </Carousel>
+    </div>
     </div>
     <BlogBottomAd/>
     </div>

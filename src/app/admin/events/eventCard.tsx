@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
+import DeletePage from "../courses/deletePage"
 
 // define custom props for userCard component
 type EventcardProps = {
     id: number
-    title: string | null
+    title: string
     description: string
     startDate: Date | null
     image: string
@@ -13,6 +14,7 @@ type EventcardProps = {
   }
   // one time usercard component with custom prop type
   export function EventCard({
+    id,
     title,
     description,
     image,
@@ -21,7 +23,7 @@ type EventcardProps = {
     const path = '/events/'+image
     return (
       <div className="flex flex-row justify-between">
-      <Card className="w-5/6 grid grid-cols-4 gap-4 p-6 mt-1 mr-4 dark ">
+      <Card className="w-5/6 grid grid-cols-4 gap-4 p-6 mt-1 mr-4">
         <div className="w-10 h-10">
             <Image src={path} width={80} height={80} alt="event image"/>
         </div>
@@ -35,8 +37,8 @@ type EventcardProps = {
         <p className="desc">Link</p>
         <p className="mt-2">{link}</p></div>
       </Card>
-      <Button variant="outline" className="">Edit</Button>
-        <Button variant="outline" className="">Delete</Button>
+      {/* <Button variant="outline" className="">Edit</Button> */}
+      <DeletePage id={id} submitId={title}/>
       </div>
     )
   }

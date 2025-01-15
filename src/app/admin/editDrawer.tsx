@@ -9,7 +9,7 @@ type ReusableDrawerProps = {
     form: React.JSX.Element
   }
   
-  export function ReusableDrawer({
+  export function EditDrawer({
     page, 
     form,
   }: ReusableDrawerProps){
@@ -17,12 +17,12 @@ type ReusableDrawerProps = {
       <div>
       <Drawer>
         <DrawerTrigger asChild>
-          <Button className="text-white">Add {page}</Button>
+          <Button className="text-white">Update</Button>
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm p-16">
             <DrawerHeader>
-              <DrawerTitle>Add New {page}</DrawerTitle>
+              <DrawerTitle>Edit this {page} and save changes to update</DrawerTitle>
               <DrawerDescription>Provide the details as required for {page}</DrawerDescription>
             </DrawerHeader>
             <div className="p-4 pb-0">

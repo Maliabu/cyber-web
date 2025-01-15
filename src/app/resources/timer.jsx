@@ -81,7 +81,7 @@ export default function TimerCountDown(userId, nextCourse){
       {nextClass()}
         <Link
             className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md p-6 outline focus:shadow-md"
-            href="/offers#classes">
+            href="/offers#courses">
             <div className="mb-2 text-lg font-medium">
                 Cyber security Training
             </div>
