@@ -163,8 +163,8 @@ export default async function Services(){
                       results={
                         <div className="sm:p-6">
                           <p>Select a package</p>
-                          <div className="grid sm:grid-cols-3 gap-2 p-2 sm:p-6 mt-8 bg-muted admin rounded-lg">
-                          <div className="p-4 sm:p-12 rounded-lg bg-white">
+                          <div className="grid sm:grid-cols-3 gap-2 p-2 sm:p-6 mt-8 bg-darker admin rounded-lg">
+                          <div className="p-4 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Security Policy Creation</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Project:</p>
@@ -172,7 +172,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Security Policy Creation" id="policy" id2="spc" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Incident Response Planning</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Scope:</p>
@@ -180,7 +180,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Incident Response Planning" id="incident" id2="planning" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Managed Security Operations Center (SOC)</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Month:</p>
@@ -242,8 +242,8 @@ export default async function Services(){
                       results={
                         <div className="sm:p-6">
                           <p>Packages</p>
-                          <div className="grid sm:grid-cols-2 gap-4 sm:p-6 p-2 bg-muted mt-6 rounded-lg admin">
-                          <div className="p-4 sm:p-12 rounded-lg bg-white">
+                          <div className="grid sm:grid-cols-2 gap-4 sm:p-6 p-2 bg-darker mt-6 rounded-lg admin">
+                          <div className="p-4 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Web Application Pentesting</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Project:</p>
@@ -251,7 +251,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Web Application Pentesting" id="web" id2="application" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Network Vulnerability Assessment</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Project:</p>
@@ -259,7 +259,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Network Vulnerability Assessment" id="network" id2="vulnerability" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Mobile Application Security Testing</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Project:</p>
@@ -267,7 +267,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Mobile Application Security Testing" id="app" id2="security" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7">Red Team/Blue Team Exercises</div>
                             <div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing per Engagement:</p>
@@ -328,8 +328,8 @@ export default async function Services(){
                       results={
                         <div className="sm:p-6">
                           <p>Packages</p>
-                          <div className="grid sm:grid-cols-3 gap-2 sm:p-6 p-2 mt-8 bg-muted admin rounded-lg">
-                          <div className="p-4 sm:p-12 rounded-lg bg-white">
+                          <div className="grid sm:grid-cols-3 gap-2 sm:p-6 p-2 mt-8 bg-darker admin rounded-lg">
+                          <div className="p-4 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7 mb-4">Bug Bounty Management</div>
                             <p>Partner with local firms to manage bug bounty programs</p><div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing of Payouts:</p>
@@ -337,7 +337,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Bug Bounty Management" id="bug" id2="bounty" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7 mb-4">Software Development</div>
                             <p>Develop and sell cybersecurity tools (e.g., vulnerability scanners, password managers)</p>
                             <div className="mb-2 my-8 py-4 border-t border-b">
@@ -346,7 +346,7 @@ export default async function Services(){
                             </div>
                             <ServiceForm email={email} title="Software Development" id="software" id2="dev" name={name}/>
                           </div>
-                          <div className="p-6 sm:p-12 rounded-lg bg-white">
+                          <div className="p-6 sm:p-12 rounded-lg ">
                             <div className="text-3xl font-bold tracking-tight leading-7 mb-4">Content Creation</div>
                             <p>Launch a subscription-based blog, webinars, or YouTube channel offering cybersecurity tips</p><div className="mb-2 my-8 py-4 border-t border-b">
                               <p className="desc">Pricing:</p>
