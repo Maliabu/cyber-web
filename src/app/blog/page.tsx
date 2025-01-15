@@ -24,7 +24,6 @@ export default function Blog(){
     return(
         <div className="">
         <Menu/>
-        <AppSidebar/>
         <div className="sm:px-16 p-6">
         <div className="sm:float-right sm:-mt-12 sm:-mx-6">
       <Card className="w-[300px] border-none">
