@@ -52,7 +52,7 @@ export default async function About(){
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card></Link>
-    <div className="bg-gradient-to-r from-gray-900 to-sky-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
+    <div className="bg-gradient-to-r from-sky-900 to-sky-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
         <SendMessage/>
     </div>
@@ -96,19 +96,19 @@ export default async function About(){
       opts={{
         align: "start",
       }}
-      className="w-full sm:px-14 bg-muted">
+      className="w-full sm:px-14 bg-darker">
       <CarouselContent className="sm:p-8 p-6">
                   {
                     messages.map(message => (
           <CarouselItem key={message.messages_table.id} className="md:basis-1/2 lg:basis-1/4">
             <div className="p-1">
-              <Card className="dark">
-                <CardContent className="flex aspect-square p-4">
+              <Card className="border-none rounded-lg">
+                <CardContent className="flex p-4">
                       <div className="p-12 grid justify-center">
                         <div>
                         <Avatar>
                           <AvatarImage src="" className="rounded-full w-30 h-30"/>
-                          <AvatarFallback className="rounded-full bg-darker text-white">{message.messages_table.email[0].toUpperCase()}</AvatarFallback>
+                          <AvatarFallback className="rounded-full bg-er text-white">{message.messages_table.email[0].toUpperCase()}</AvatarFallback>
                         </Avatar>
                         </div>
                         <div className="text-lg tracking-tight leading-5 mt-4">"{message.messages_table.message}"
@@ -139,7 +139,7 @@ export default async function About(){
           <CarouselItem key="mentor" className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
               <Card className="background-none">
-                <CardContent className="flex aspect-square p-4 bg-white">
+                <CardContent className="flex aspect-square p-4 ">
                   {
                     messages.map(message => (
                       <div key={message.messages_table.id}>

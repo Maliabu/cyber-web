@@ -8,7 +8,7 @@ body {
 }
 
 @layer base {
-  :root {
+  .light {
     --background: 0 0% 100%;
     --foreground: slate 800;
     --card: 0 0% 100%;
@@ -35,8 +35,16 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  .dark {
+  :root {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -61,6 +69,14 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -94,7 +110,7 @@ button{
   font-weight: 550 !important;
   /* border: 1px solid rgb(2, 165, 250) !important; */
   border-radius: 5px !important;
-  color: rgb(2, 2, 2) !important;
+  color: rgb(84, 84, 84) !important;
 }
 span{
   font-size: 16px !important;
@@ -115,13 +131,13 @@ a{
   backdrop-filter: blur(70px) !important;
 }
 .back-image{
-  background-image: url("images/_\ \(9\).jpeg") !important;
+  background-image: url("images/_\ \(3\).jpeg") !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: right;
   width: 100% !important;
   overflow-x: hidden !important;
-  color: rgb(7, 7, 7) !important;
+  color: rgb(247, 245, 245) !important;
 }
 .back-classes{
   background-image: url("images/hive.jpeg") !important;
@@ -132,19 +148,20 @@ a{
   color: rgb(255, 255, 255) !important;
 }
 .back-schedule{
-  background-image: url("images/box.jpeg") !important;
+  background-image: url("images/secure.jpeg") !important;
   background-size: 20% !important;
   background-repeat: no-repeat !important;
   background-position: right;
   overflow-x: hidden !important;
-  color: rgb(7, 6, 6) !important;
 }
 .bg-darker{
   background-color: rgb(30, 30, 30) !important;
+  color: white !important;
 }
 .nav-item{
   font-size: 16px !important;
   font-weight: 550 !important;
+  color: aliceblue !important
 }
 .bg-light{
   color: rgb(2, 165, 250) !important;
@@ -167,12 +184,12 @@ a{
 .background-none{
   background: none !important;
   border: none !important;
-  color: rgb(11, 11, 11) !important;
+  color: rgb(251, 249, 249) !important;
   padding: 0px !important;
   box-shadow: none !important;
 }
 .nav-a{
-  color: black !important;
+  color: rgb(249, 246, 246) !important;
 }
 .admin{
   overflow-x: hidden !important;

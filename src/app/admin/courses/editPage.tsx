@@ -8,19 +8,24 @@ import { useForm } from "react-hook-form"
 import z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { addCourse } from "@/server/fetch.actions"
-import { addCourseSchema } from '@/schema/formSchemas'
-import { ReusableDrawer } from "../reusableDrawer"
+import { updateCourse } from "@/server/fetch.actions"
+import { updateCourseSchema } from '@/schema/formSchemas'
 import { DatePicker } from "../datePicker"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { EditDrawer } from "../editDrawer"
 
-export default function AddCourse(props: { mentors: {id: number, name: string}[] , currency: {id: number, currency: string}[]}) {
+export default function EditCourse(
+    props: { 
+        mentors: {id: number, name: string}[] , 
+        currency: {id: number, currency: string}[], 
+        course: {title: string, id: number, description: string, courseOutline: string | null}}
+    ) {
 
-    const form = useForm<z.infer<typeof addCourseSchema>>({
-      resolver: zodResolver(addCourseSchema),
+    const form = useForm<z.infer<typeof updateCourseSchema>>({
+      resolver: zodResolver(updateCourseSchema),
         defaultValues: {
-          title: "",
-          description: "",
+          title: props.course.title,
+          description: props.course.description,
           courseOutline: "",
           image: "",
           mentor: 0,
@@ -33,8 +38,9 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
           mentor1: ""
       },
     })
+    console.log(form.getValues())
 
-    async function onSubmit(values: z.infer<typeof addCourseSchema>) {
+    async function onSubmit(values: z.infer<typeof updateCourseSchema>) {
         //create obj
         const app = document.getElementById('submit2');
         const text = 'processing';
@@ -46,8 +52,9 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
         const formData = new FormData()
         formData.append("file", values.image1)
 
-        const data = await addCourse(values, formData)
+        const data = await updateCourse(values, formData, props.course.id)
         if(data?.error){
+            console.log(data.error)
           form.setError("root", {
             "message": "Course not added"
           })
@@ -78,7 +85,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
                       <FormControl>
                           <Input 
                           type="text" 
-                          placeholder="Title" {...field} />
+                          placeholder={props.course.title} {...field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>
@@ -93,7 +100,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
                       <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                          <Input type="text" placeholder="Description" {...field} />
+                          <Input type="text" placeholder={props.course.description} {...field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>
@@ -108,7 +115,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
                       <FormItem>
                       <FormLabel>Course Outline</FormLabel>
                       <FormControl>
-                          <Input type="text" placeholder="Course Outline separated by commas" {...field} />
+                          <Input type="text" placeholder="Details about the course or course outline separated by commas" {...field} />
                       </FormControl>
                       <FormMessage />
                       </FormItem>
@@ -121,7 +128,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
                   name="mentor1"
                   render={({ field }) => (
                       <FormItem>
-                      <FormLabel>Mentor</FormLabel>
+                      <FormLabel>Mentor *</FormLabel>
                       <FormControl>
                           <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
                               <SelectTrigger id="mentor1">
@@ -240,12 +247,12 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
             </div>
           </div>
         </div>
-        <Button id="submit2" className="my-4 text-white" type="submit">Add Course</Button>
+        <Button id="submit2" className="my-4 text-white" type="submit">Save Changes</Button>
         {form.formState.errors.root && (
           <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Course added successfully </div>
+          <div className="bg-light p-2 text-center rounded-md"> Course updated successfully </div>
         )}
       </form>
       </Form>
@@ -253,8 +260,8 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
     }
 
   return (
-    <div className="font-[family-name:var(--font-futura)]">
-      <ReusableDrawer page="Course" form={formBuild()}/>
+    <div className="admin">
+      <EditDrawer page="Course" form={formBuild()}/>
     </div>
   )
 }

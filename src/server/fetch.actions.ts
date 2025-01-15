@@ -4,7 +4,7 @@ import { db } from "@/drizzle/db";
 import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteSchema, loginUserSchema, messagesSchema } from '@/schema/formSchemas'
+import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteSchema, loginUserSchema, messagesSchema, updateCourseSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
@@ -165,6 +165,33 @@ Promise<{error: boolean | undefined}> {
    return {error: false}
 }
 
+export async function updateCourse(unsafeData: z.infer<typeof updateCourseSchema>, formData: FormData, id:number) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = updateCourseSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+
+   uploadCourseFile(formData)
+   //mostly spell check n no of arguments in payload
+   // add currencies
+   const currencyId = await db.query.currencyTable.findMany({
+    where: eq(currencyTable.currency, data.currency1)
+   })
+   const mentorId = await db.query.usersTable.findMany({
+    where: eq(usersTable.name, data.mentor1)
+   })
+   const currencyid = currencyId.map(currency=>currency.id)
+   const mentorid = mentorId.map(mentor=>mentor.id)
+   data.currency = currencyid[0]
+   data.mentor = mentorid[0]
+
+   await db.update(courseTable).set({...data}).where(eq(courseTable.id, id))
+
+   return {error: false}
+}
+
 export async function deleteCourse(unsafeData: z.infer<typeof deleteSchema>): 
 Promise<{error: boolean | undefined}>{
     const {success, data} = deleteSchema.safeParse(unsafeData)
@@ -203,13 +230,25 @@ Promise<{error: boolean | undefined}> {
    const courseId = await db.query.courseTable.findMany({
     where: eq(courseTable.title, data.course1)
    })
-   const userId = await db.query.usersTable.findMany({
-    where: eq(usersTable.name, data.user1)
-   })
    const courseid = courseId.map(course=>course.id)
-   const userid = userId.map(user=>user.id)
    data.courseId = courseid[0]
-   data.userId = userid[0]
+   console.log({...data})
+
+   await db.insert(enrollmentsTable).values({...data})
+
+   return {error: false}
+}
+
+export async function addEnrollmentRequest(courseId: number, email: string) : 
+Promise<{error: boolean | undefined}> {
+
+   if (courseId === 0 && email === ""){
+    return {error: true}
+   }
+   const data = {
+    courseId: courseId,
+    email: email
+   }
 
    await db.insert(enrollmentsTable).values({...data})
 

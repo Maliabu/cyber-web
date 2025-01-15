@@ -11,16 +11,16 @@ import { addEnrollment } from "@/server/fetch.actions"
 import { addEnrollmentSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
 
-export default function Enroll(props: { courses: {id: number, title: string}[] , users: {id: number, name: string}[]}) {
+export default function Enroll(props: { courses: {id: number, title: string}[]}) {
 
     const form = useForm<z.infer<typeof addEnrollmentSchema>>({
       resolver: zodResolver(addEnrollmentSchema),
         defaultValues: {
           courseId: 0,
-          userId: 0,
+          email: '',
           course1: '',
-          user1: '',
       },
     })
 
@@ -35,7 +35,7 @@ export default function Enroll(props: { courses: {id: number, title: string}[] ,
         const data = await addEnrollment(values)
         if(data?.error){
           form.setError("root", {
-            "message": "Article not added"
+            "message": "Enrollment not added"
           })
         } else {
           if(app !== null){
@@ -60,8 +60,8 @@ export default function Enroll(props: { courses: {id: number, title: string}[] ,
                       <FormLabel>Course</FormLabel>
                       <FormControl>
                           <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
-                              <SelectTrigger id="mentor1">
-                              <SelectValue placeholder="Mentor"/>
+                              <SelectTrigger id="course1">
+                              <SelectValue placeholder="Course"/>
                               </SelectTrigger>
                               <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
                                 {
@@ -80,23 +80,12 @@ export default function Enroll(props: { courses: {id: number, title: string}[] ,
               <div className="flex flex-col w-1/2 ml-2 space-y-1.5">
               <FormField
                   control={form.control}
-                  name="user1"
+                  name="email"
                   render={({ field }) => (
                       <FormItem>
                       <FormLabel>User</FormLabel>
                       <FormControl>
-                          <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
-                              <SelectTrigger id="user1">
-                              <SelectValue placeholder="User"/>
-                              </SelectTrigger>
-                              <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
-                                {
-                                  props.users.map((user) => (
-                                    <SelectItem key={user.id} value={user.name}>{user.name}</SelectItem>
-                                  ))
-                                }
-                              </SelectContent>
-                          </Select>
+                          <Input type="email" placeholder="Email address" {...field}/>
                       </FormControl>
                       <FormMessage />
                       </FormItem>

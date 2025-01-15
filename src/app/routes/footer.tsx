@@ -19,8 +19,9 @@ export default async function Footer() {
   email = user?.primaryEmailAddress?.emailAddress || ''
   const articles = (await db.query.articlesTable.findMany()).slice(1, 3)
   return (
-      <footer className="justify-center dark bg-darker text-white">
-      <div className="px-8 py-6 border-t sm:flex sm:flex-row sm:justify-between">
+      <footer className="justify-center text-white">
+      <div className="px-8 py-6 sm:flex sm:flex-row bg-darker sm:justify-between">
+        <div className="text-3xl tracking-tight font-bold">Subscribe</div>
                   <span className="">
                       <p className="my-2">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></span>
                       <div>
@@ -36,7 +37,7 @@ export default async function Footer() {
         <div className="sm:row-start-3">
           Could be Helpful: Links
           <NavigationMenu>
-            <ul>
+            <ul className="text-white">
           <ListItem href="/blog" title="Blog">
                 Cyber Security Best Practices
               </ListItem>
@@ -80,7 +81,7 @@ export default async function Footer() {
           Articles
           {
             articles.map(article => (
-              <NavigationMenu className="border-b" key={article.id}>
+              <NavigationMenu key={article.id}>
               <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
@@ -120,7 +121,7 @@ export default async function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="border py-1 px-2 rounded-sm font-bold border-primary">in</div>
+          <div className=" py-1 px-2 rounded-sm font-bold">in</div>
           Instagram
         </Link>
         <Link
@@ -140,7 +141,7 @@ export default async function Footer() {
           <MailIcon className="size-4 mx-2"/>
           info@beerasafe
         </Link></div>
-        <div className="sm:px-8 sm:py-4 p-6 flex sm:flex-row flex-col sm:justify-between border border-top">
+        <div className="sm:px-8 sm:py-4 p-6 flex dark sm:flex-row flex-col sm:justify-between">
           <div className="">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>

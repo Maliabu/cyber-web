@@ -67,7 +67,8 @@ export default async function Services(){
         <Link href="/offers#courses">
         <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
         </Link></div>
-    <div className="sm:px-16 bg-muted p-6">
+        <div className="back-image">
+    <div className="sm:px-16 backdrop p-6">
       <Carousel
       opts={{
         align: "start",
@@ -94,14 +95,14 @@ export default async function Services(){
                         />
                     </div>
                     <div className="p-6 sm:p-12 rounded-b-lg">
-                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
+                      <div className=" text-3xl mt-4  font-semibold leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
                     </p>
                     <div>
                       <p className="desc py-4">Modules</p>
-                      <div className="text-dark">
+                      <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Basic Cybersecurity Awareness</li>
                         <li className="leading-4 mt-2">Intermediate Ethical Hacking Course</li>
@@ -136,14 +137,14 @@ export default async function Services(){
                       />
                   </div>
                     <div className="p-6 sm:p-12 rounded-b-lg">
-                      <div className=" text-3xl mt-4 text-dark font-bold leading-7 tracking-tight">
+                      <div className=" text-3xl mt-4  font-bold leading-7 tracking-tight">
                       Consultancy and Managed Security Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Organizations without dedicated security teams.
                     </p>
                     <div>
                       <p className="desc py-4">Packages</p>
-                      <div className="text-dark">
+                      <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Security Policy Creation</li>
                         <li className="leading-4 mt-2">Incident Response Planning</li>
@@ -214,14 +215,14 @@ export default async function Services(){
                       />
                   </div>
                     <div className="p-6 sm:p-12 rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark leading-7 tracking-tight font-semibold">
+                      <div className=" text-3xl mt-4  leading-7 tracking-tight font-semibold">
                       Penetration Testing Services</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: SMBs, international tech startups, financial institutions, and e-commerce businesses.
                     </p>
                     <div>
                       <p className="desc py-4">Packages</p>
-                      <div className="text-dark">
+                      <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Web Application Pentesting</li>
                         <li className="leading-4 mt-2">Network Vulnerability Assessment</li>
@@ -301,14 +302,14 @@ export default async function Services(){
                       />
                   </div>
                     <div className="p-6 sm:p-12 rounded-b-xl">
-                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
+                      <div className=" text-3xl mt-4  font-semibold leading-7 tracking-tight">
                       Revenue-Generating Activities</div>
                     <p className="text-sm text-card-foreground my-8">
                     Remote Partners: Freelancers for international projects (use platforms like Upwork).
                     </p>
                     <div>
                       <p className="desc py-4">Packages</p>
-                      <div className="text-dark">
+                      <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Bug Bounty Management</li>
                         <li className="leading-4 mt-2">Software Development</li>
@@ -370,6 +371,7 @@ export default async function Services(){
       <CarouselNext className="mr-6"/>
     </Carousel>
     </div>
+    </div>
         <div className="sm:p-16 p-6 items-center bg-gradient-to-r from-gray-900 to-sky-800 text-white">
         <div className="sm:float-right">
             <TimerCountDown/>
@@ -394,7 +396,8 @@ export default async function Services(){
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></Link>
       </div>
       </div>
-      <div className="p-8 sm:p-12 bg-muted">
+      <div className="">
+      <div className="p-8 sm:p-12">
       <Carousel
       opts={{
         align: "start",
@@ -417,7 +420,7 @@ export default async function Services(){
       <CarouselContent className="sm:p-8 sm:mt-0 mt-8">
         {courses.map(async course => (
           <CarouselItem key={course.course_table.id} className="md:basis-1/2 lg:basis-1/3">
-            <div className="bg-white rounded-2xl">
+            <div className="bg-darker rounded-2xl">
             {/* <div className="p-8 rounded-t-lg">Starting {getMyDay(course.startDate.getDay())}, {getMyMonth(course.startDate.getMonth())} {course.startDate.getDate()}, {course.startDate.getFullYear()}</div> */}
           <NavigationMenu>
           <ul>
@@ -453,7 +456,7 @@ export default async function Services(){
                       <p className="desc">Pricing per person:</p>
                       <div className="text-2xl font-bold">{course.currency_table?.code} {course.course_table.amount}</div>
                     </div>}
-                    form={<ClassForm email={email} title={course.course_table.title} id={course.course_table.id.toString()} id2={course.course_table.title} name={name}/>}
+                    form={<ClassForm email={email} title={course.course_table.title} id={course.course_table.id.toString()} id2={course.course_table.title} name={name} courseid={course.course_table.id}/>}
                     />
                     :<Link href="/sign-in"><Button className="text-white">Enroll</Button></Link>}
                     </div>
@@ -465,6 +468,7 @@ export default async function Services(){
       <CarouselPrevious className="ml-6"/>
       <CarouselNext className="mr-6"/>
     </Carousel>
+    </div>
     </div>
     <BlogBottomAd/>
         <Footer/>

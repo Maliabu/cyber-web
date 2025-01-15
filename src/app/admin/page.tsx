@@ -30,6 +30,7 @@ import Enroll from "./enrollment/page"
 import { SubscriptionCard } from "./subscription/SubscriptionCard"
 import Subscribe from "./subscription/page"
 import NextCourse from "./courses/nextCourse"
+import DeletePage from "./courses/deletePage"
 
 export default async function AdminPage() {
   
@@ -101,13 +102,13 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
-              { enrollments.length}</h1><p className="desc mt-4">Enrollments</p></div>
+              { enrollments.length}</h1><p className="desc mt-4">Enrollment requests</p></div>
               <GraduationCapIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
         </div>
         <div>
-            <div className=" rounded-2xl p-6 bg-muted">
+            <div className=" rounded-2xl p-6">
             <h5>Statistics Analysis</h5>
               <Chart/>
             </div>
@@ -203,7 +204,7 @@ export default async function AdminPage() {
                     <TabsTrigger value="users"><p>Users</p></TabsTrigger>
                     <TabsTrigger value="mentors"><p>Mentors</p></TabsTrigger>
                     <TabsTrigger value="subscriptions"><p>Subscriptions</p></TabsTrigger>
-                    <TabsTrigger value="enrollments"><p>Enrollments</p></TabsTrigger>
+                    <TabsTrigger value="enrollments"><p>Enrollment Requests</p></TabsTrigger>
                 </TabsList>
                 <TabsContent value="users">
                   {
@@ -268,7 +269,7 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-4 mt-1 flex flex-row justify-between">
-                <Enroll courses={courses} users={users}/>
+                <Enroll courses={courses}/>
                 <p>{enrollments.length} Total Enrollments</p>
                 </div>
                 </TabsContent>
@@ -306,7 +307,8 @@ function UserCard({
 }: UsercardProps){
   const path = "/profilePictures/"+profilePicture
   return (
-    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 dark ">
+    <div className="flex flex-row justify-between">
+    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 ">
       <div className="w-10 h-10 mt-2">
       <Avatar>
         <AvatarImage src={path} className="rounded-full w-10 h-10"/>
@@ -323,5 +325,7 @@ function UserCard({
       <p className="desc">id</p>
       <p className="mt-2">{id}</p></div>
     </Card>
+    <DeletePage id={id} submitId={username}/>
+    </div>
   )
 }

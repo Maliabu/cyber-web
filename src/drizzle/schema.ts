@@ -73,9 +73,8 @@ export const EventsTable = pgTable('events_table', {
 export const enrollmentsTable = pgTable('enrollments_table', {
   id: serial('id').primaryKey(),
   courseId: integer('course_id').notNull().references(() => courseTable.id, { onDelete: 'cascade'}),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  email: varchar('email')
+    .notNull(),
     createdAt,
     updatedAt,
 });

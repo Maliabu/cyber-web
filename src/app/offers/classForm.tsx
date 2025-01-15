@@ -1,9 +1,17 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { sendHtmlEmail } from "@/server/fetch.actions";
+import { addEnrollment, addEnrollmentRequest, sendHtmlEmail } from "@/server/fetch.actions";
 
-export default function ClassForm(props: {email: string, title: string, name: string, id: string, id2: string}){
+export default function ClassForm(
+    props: {
+        email: string, 
+        title: string, 
+        name: string, 
+        id: string, 
+        id2: string,
+        courseid: number
+    }){
     async function onSubmit(){
         const app = document.getElementById(props.id);
         const mess = document.getElementById(props.id2);
@@ -11,6 +19,7 @@ export default function ClassForm(props: {email: string, title: string, name: st
         if(app !== null){
             app.innerHTML = text;
         }
+        const enroll = await addEnrollmentRequest(props.courseid, props.email)
         const data = await sendHtmlEmail(props.email, props.title, props.name)
         if(data === false){
             if(app !== null){

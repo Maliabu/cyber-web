@@ -66,6 +66,20 @@ export const addCourseSchema = z.object({
     currency1: z.string(),
     mentor1: z.string(),
 })
+export const updateCourseSchema = z.object({
+    title: z.string(),
+    description: z.string({required_error: "Please enter a description.",}),
+    courseOutline: z.string(),
+    image: z.string(),
+    mentor: z.coerce.number({required_error: "Please provide a mentor.",}),
+    startDate: z.date({required_error: "Please enter a date.",}),
+    endDate: z.date({required_error: "Please enter a date.",}),
+    currency: z.coerce.number({required_error: "Please enter a currency.",}),
+    amount: z.coerce.number({required_error: "Please enter a pricing for this course.",}),
+    image1: z.any(),
+    currency1: z.string(),
+    mentor1: z.string(),
+})
 
 export const addArticleSchema = z.object({
     title: z.string({required_error: "Please enter a title.",}).min(2, {
@@ -80,9 +94,10 @@ export const addArticleSchema = z.object({
 
 export const addEnrollmentSchema = z.object({
     courseId: z.coerce.number({required_error: "Please provide a mentor.",}),
-    userId: z.coerce.number({required_error: "Please provide a mentor.",}),
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
     course1: z.string(),
-    user1: z.string(),
 })
 
 export const addSubscriptionSchema = z.object({
