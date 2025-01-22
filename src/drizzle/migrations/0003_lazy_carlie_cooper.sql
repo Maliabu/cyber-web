@@ -1,1 +1,0 @@
-ALTER TABLE "enrollments_table" DROP CONSTRAINT "enrollments_table_email_unique";

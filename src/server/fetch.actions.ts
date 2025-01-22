@@ -1,10 +1,10 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable } from "@/drizzle/schema";
+import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable, votesTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteSchema, loginUserSchema, messagesSchema, updateCourseSchema } from '@/schema/formSchemas'
+import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteSchema, loginUserSchema, messagesSchema, updateCourseSchema, voteSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
@@ -213,7 +213,7 @@ Promise<{error: boolean | undefined}> {
     return {error: true}
    }
 
-   uploadEventFile(formData)
+   uploadArticleFile(formData)
 
    await db.insert(articlesTable).values({...data})
 
@@ -240,7 +240,7 @@ Promise<{error: boolean | undefined}> {
 }
 
 export async function addEnrollmentRequest(courseId: number, email: string) : 
-Promise<{error: boolean | undefined}> {
+Promise<{error: boolean}> {
 
    if (courseId === 0 && email === ""){
     return {error: true}
@@ -249,10 +249,16 @@ Promise<{error: boolean | undefined}> {
     courseId: courseId,
     email: email
    }
-
-   await db.insert(enrollmentsTable).values({...data})
-
-   return {error: false}
+   // user cannot enroll more than once for each course
+   let checkEnrollment = await db.query.enrollmentsTable.findMany({
+    where: eq(enrollmentsTable.email, data.email) && eq(enrollmentsTable.courseId, data.courseId)
+   })
+   if(checkEnrollment.length === 0){
+        await db.insert(enrollmentsTable).values({...data})
+        return {error: false}
+    } else{
+        return {error: true}
+    }
 }
 
 export async function addSubscription(unsafeData: z.infer<typeof addSubscriptionSchema>) : 
@@ -287,6 +293,26 @@ Promise<{error: boolean | undefined}> {
    await db.insert(messagesTable).values({...data})
 
    return {error: false}
+}
+
+export async function upvote(unsafeData: z.infer<typeof voteSchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = voteSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+   // no 2 same upvotes for same article and email
+   let checkEmail = await db.query.votesTable.findMany({
+    where: eq(votesTable.article, data.article) && eq(votesTable.email, data.email)
+   })
+   if(checkEmail.length === 0)
+    {
+    await db.insert(votesTable).values({...data})
+    return {error: false}
+    } else{
+        return {error: true}
+    }
 }
 
 export async function nextCourse(unsafeData: z.infer<typeof addNextCourseSchema>) : 

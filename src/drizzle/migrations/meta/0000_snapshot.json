@@ -1,5 +1,5 @@
 {
-  "id": "3c8f2053-b49f-45ce-9f49-fc84581314f0",
+  "id": "e9e9274b-cec7-41ba-b1d2-fc0b2b69790d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -144,9 +144,9 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "email": {
+          "name": "email",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -178,19 +178,6 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "comments_table_user_id_users_table_id_fk": {
-          "name": "comments_table_user_id_users_table_id_fk",
-          "tableFrom": "comments_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
         "comments_table_article_id_articles_table_id_fk": {
           "name": "comments_table_article_id_articles_table_id_fk",
           "tableFrom": "comments_table",
@@ -206,7 +193,15 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "comments_table_email_unique": {
+          "name": "comments_table_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -396,9 +391,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "email": {
+          "name": "email",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -430,23 +425,62 @@
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
-        },
-        "enrollments_table_user_id_users_table_id_fk": {
-          "name": "enrollments_table_user_id_users_table_id_fk",
-          "tableFrom": "enrollments_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.messages_table": {
+      "name": "messages_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "messages_table_email_unique": {
+          "name": "messages_table_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -513,9 +547,9 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "email": {
+          "name": "email",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -524,6 +558,12 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "comment_id": {
+          "name": "comment_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
         },
         "article_id": {
           "name": "article_id",
@@ -547,17 +587,17 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "reply_table_user_id_users_table_id_fk": {
-          "name": "reply_table_user_id_users_table_id_fk",
+        "reply_table_comment_id_comments_table_id_fk": {
+          "name": "reply_table_comment_id_comments_table_id_fk",
           "tableFrom": "reply_table",
-          "tableTo": "users_table",
+          "tableTo": "comments_table",
           "columnsFrom": [
-            "user_id"
+            "comment_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         },
         "reply_table_article_id_articles_table_id_fk": {
@@ -575,7 +615,15 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "reply_table_email_unique": {
+          "name": "reply_table_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -746,9 +794,9 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "email": {
+          "name": "email",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -780,19 +828,6 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "votes_table_user_id_users_table_id_fk": {
-          "name": "votes_table_user_id_users_table_id_fk",
-          "tableFrom": "votes_table",
-          "tableTo": "users_table",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
         "votes_table_article_id_articles_table_id_fk": {
           "name": "votes_table_article_id_articles_table_id_fk",
           "tableFrom": "votes_table",

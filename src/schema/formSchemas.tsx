@@ -93,7 +93,7 @@ export const addArticleSchema = z.object({
 })
 
 export const addEnrollmentSchema = z.object({
-    courseId: z.coerce.number({required_error: "Please provide a mentor.",}),
+    courseId: z.coerce.number({required_error: "Please provide a course.",}),
     email: z.string({required_error: "Please enter your email.",}).min(5, {
         message: "email too short"
     }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
@@ -124,4 +124,29 @@ export const addNextCourseSchema = z.object({
 
 export const deleteSchema = z.object({
     courseId: z.coerce.number({required_error: "Please provide a course to delete.",}),
+})
+
+export const voteSchema = z.object({
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
+    vote: z.coerce.number({required_error: "Please vote.",}),
+    article: z.coerce.number({required_error: "Please provide an article.",}),
+})
+
+export const commentsSchema = z.object({
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
+    comments: z.string(),
+    article: z.coerce.number({required_error: "Please provide an article.",}),
+})
+
+export const replySchema = z.object({
+    email: z.string({required_error: "Please enter your email.",}).min(5, {
+        message: "email too short"
+    }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
+    reply: z.string(),
+    article: z.coerce.number({required_error: "Please provide an article.",}),
+    comment: z.coerce.number({required_error: "Please provide an article.",}),
 })

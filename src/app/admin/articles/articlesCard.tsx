@@ -22,7 +22,7 @@ type ArticlecardProps = {
     image,
     link
   }: ArticlecardProps){
-    const path = '/events/'+image
+    const path = '/articles/'+image
     return (
       <div className="flex flex-row justify-between">
       <Card className="w-5/6 grid grid-cols-4 gap-4 p-6 mt-1 ">

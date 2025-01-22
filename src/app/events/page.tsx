@@ -16,9 +16,9 @@ export default async function Events(){
                 <div className="sm:p-16 p-6 grid justify-items-center">
                 <h1 className="text-5xl leading-10 tracking-tight font-bold">Events</h1>
                 <h5>Check out whats happening</h5></div>
-                    <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 p-6 sm:p-8 sm:admin">
+                    <div className="grid sm:grid-cols-3 grid-cols-1 bg-muted gap-4 p-6 sm:p-8 sm:admin">
                         {events.map(event => (
-                            <div key={event.id} className="p-4 bg-darker rounded-lg">
+                            <div key={event.id} className="p-4 bg-white rounded-lg">
                         <Card className="w-full background-none" key={event.id}>
                         <CardContent>
                         <p className="p-2 my-4 desc border rounded-md"> {event.startDate !== null?getMyDay(event.startDate.getDay()):null}, {event.startDate !== null?getMyMonth(event.startDate.getMonth()):null} {event.startDate !== null?event.startDate.getDate():null}, {event.startDate !== null?event.startDate.getFullYear():null}</p>

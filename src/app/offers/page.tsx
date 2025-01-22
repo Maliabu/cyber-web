@@ -7,7 +7,7 @@ import {
   NavigationMenuLink
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { BookHeart, ChevronRight } from "lucide-react";
+import { BookHeart, ChevronRight, GraduationCapIcon, LucideGraduationCap, VerifiedIcon } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -67,8 +67,8 @@ export default async function Services(){
         <Link href="/offers#courses">
         <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
         </Link></div>
-        <div className="back-image">
-    <div className="sm:px-16 backdrop p-6">
+        <div className="bg-muted sm:p-0">
+    <div className="sm:px-16 p-6">
       <Carousel
       opts={{
         align: "start",
@@ -95,14 +95,14 @@ export default async function Services(){
                         />
                     </div>
                     <div className="p-6 sm:p-12 rounded-b-lg">
-                      <div className=" text-3xl mt-4  font-semibold leading-7 tracking-tight">
+                      <div className=" text-3xl mt-4 text-dark font-semibold leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
                     </p>
                     <div>
-                      <p className="desc py-4">Modules</p>
-                      <div className="">
+                      <p className="desc p-2 bg-muted rounded-md mb-4">Modules</p>
+                      <div className="text-dark">
                         <ul className="w-[200px]">
                         <li className="leading-4">Basic Cybersecurity Awareness</li>
                         <li className="leading-4 mt-2">Intermediate Ethical Hacking Course</li>
@@ -143,7 +143,7 @@ export default async function Services(){
                     For: Organizations without dedicated security teams.
                     </p>
                     <div>
-                      <p className="desc py-4">Packages</p>
+                      <p className="desc p-2 bg-muted rounded-md mb-4">Packages</p>
                       <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Security Policy Creation</li>
@@ -221,7 +221,7 @@ export default async function Services(){
                     For: SMBs, international tech startups, financial institutions, and e-commerce businesses.
                     </p>
                     <div>
-                      <p className="desc py-4">Packages</p>
+                      <p className="desc p-2 bg-muted rounded-md mb-4">Packages</p>
                       <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Web Application Pentesting</li>
@@ -308,7 +308,7 @@ export default async function Services(){
                     Remote Partners: Freelancers for international projects (use platforms like Upwork).
                     </p>
                     <div>
-                      <p className="desc py-4">Packages</p>
+                      <p className="desc p-2 bg-muted rounded-md mb-4">Packages</p>
                       <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Bug Bounty Management</li>
@@ -397,7 +397,7 @@ export default async function Services(){
       </div>
       </div>
       <div className="">
-      <div className="p-8 sm:p-12">
+      <div className="p-6 sm:p-12">
       <Carousel
       opts={{
         align: "start",
@@ -417,11 +417,16 @@ export default async function Services(){
       </div>
         </div>
     </div>
-      <CarouselContent className="sm:p-8 sm:mt-0 mt-8">
+      <CarouselContent className="sm:p-8 sm:mt-0 mt-8 bg-muted p-6">
         {courses.map(async course => (
           <CarouselItem key={course.course_table.id} className="md:basis-1/2 lg:basis-1/3">
-            <div className="bg-darker rounded-2xl">
-            {/* <div className="p-8 rounded-t-lg">Starting {getMyDay(course.startDate.getDay())}, {getMyMonth(course.startDate.getMonth())} {course.startDate.getDate()}, {course.startDate.getFullYear()}</div> */}
+            <div className="bg-white rounded-2xl">
+            <div className="pt-8 px-8">
+              <div className="flex flex-row">
+              <VerifiedIcon className="text-primary"/>
+              <p className="mx-3 desc mt-1">Verified</p></div><div className="flex flex-row">
+              <LucideGraduationCap className="text-primary"/>
+              <p className="mx-3 desc mt-1">Offers Certification</p></div></div>
           <NavigationMenu>
           <ul>
               <li>

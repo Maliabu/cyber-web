@@ -8,7 +8,7 @@ body {
 }
 
 @layer base {
-  .light {
+  :root {
     --background: 0 0% 100%;
     --foreground: slate 800;
     --card: 0 0% 100%;
@@ -44,7 +44,7 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  :root {
+  .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -140,7 +140,7 @@ a{
   color: rgb(247, 245, 245) !important;
 }
 .back-classes{
-  background-image: url("images/hive.jpeg") !important;
+  background-image: url("images/hive.png") !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: right;
@@ -148,8 +148,8 @@ a{
   color: rgb(255, 255, 255) !important;
 }
 .back-schedule{
-  background-image: url("images/secure.jpeg") !important;
-  background-size: 20% !important;
+  background-image: url("images/orbs.png") !important;
+  background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: right;
   overflow-x: hidden !important;
@@ -161,7 +161,7 @@ a{
 .nav-item{
   font-size: 16px !important;
   font-weight: 550 !important;
-  color: aliceblue !important
+  color: rgb(7, 8, 8) !important
 }
 .bg-light{
   color: rgb(2, 165, 250) !important;
@@ -174,7 +174,7 @@ a{
   color: rgb(0, 0, 0) !important;
 }
 .scroll-y-blog{
-  height: 50vh !important;
+  height: 60vh !important;
   scroll-behavior: smooth !important;
   overflow-x: hidden !important;
 }
@@ -184,12 +184,12 @@ a{
 .background-none{
   background: none !important;
   border: none !important;
-  color: rgb(251, 249, 249) !important;
+  color: rgb(7, 7, 7) !important;
   padding: 0px !important;
   box-shadow: none !important;
 }
 .nav-a{
-  color: rgb(249, 246, 246) !important;
+  color: rgb(8, 8, 8) !important;
 }
 .admin{
   overflow-x: hidden !important;
@@ -197,7 +197,7 @@ a{
 }
 .tabs{
   overflow-x: hidden !important;
-  max-height: 75vh !important;
+  max-height: 80vh !important;
 }
 p.desc{
   font-size: 13px !important;
@@ -223,4 +223,10 @@ p.desc{
 }
 .pointer{
   cursor: pointer !important;
+}
+.wrap{
+  text-wrap: wrap !important;
+}
+.blog:hover{
+  color: #02a5fa !important;
 }

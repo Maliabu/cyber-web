@@ -28,7 +28,6 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
           endDate: new Date(),
           currency: 0,
           amount: 0,
-          image1: '',
           currency1: "",
           mentor1: ""
       },
@@ -62,7 +61,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
     function formBuild(){
 
       return(
-      <div className="p-4 mb-2 bg-muted">
+      <div className="p-4 mb-2 bg-darker">
         <p className="desc my-4">Required fields are marked with an asterik *</p>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -179,7 +178,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { onChange, ...fieldProps } }) => (
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl
