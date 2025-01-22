@@ -61,7 +61,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
     function formBuild(){
 
       return(
-      <div className="p-4 mb-2 bg-darker">
+      <div className="p-4 mb-2 bg-muted rounded-lg">
         <p className="desc my-4">Required fields are marked with an asterik *</p>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

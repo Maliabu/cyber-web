@@ -140,8 +140,8 @@ a{
   color: rgb(247, 245, 245) !important;
 }
 .back-classes{
-  background-image: url("images/hive.png") !important;
-  background-size: cover !important;
+  background-image: url("images/box.jpeg") !important;
+  background-size: 20% !important;
   background-repeat: no-repeat !important;
   background-position: right;
   overflow-x: hidden !important;

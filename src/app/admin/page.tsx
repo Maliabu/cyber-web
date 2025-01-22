@@ -31,6 +31,7 @@ import { SubscriptionCard } from "./subscription/SubscriptionCard"
 import Subscribe from "./subscription/page"
 import NextCourse from "./courses/nextCourse"
 import DeletePage from "./courses/deletePage"
+import { auth } from "@clerk/nextjs/server"
 
 export default async function AdminPage() {
   
@@ -46,10 +47,10 @@ export default async function AdminPage() {
   const currency = await db.query.currencyTable.findMany()
 
   return (
-    <div className="justify-stretch">
+    <div className="justify-stretch dark bg-darker">
     <div className="px-8 py-4">
       <main className="flex flex-row">
-      <div className="flex flex-col justify-between rounded-lg p-6">
+      <div className="flex flex-col justify-between bg-muted rounded-lg p-6">
         <div className="self-center">
         <a href="/">
             <Image
@@ -75,14 +76,14 @@ export default async function AdminPage() {
       </TabsList>
       <TabsContent value="dashboard" className="tabs">
         <div className="pt-4 w-full grid grid-cols-4 gap-4">
-            <div className="p-8 bg-darker rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
               <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
               { users.length}</h1><p className="desc mt-4">Users</p></div>
               <UsersIcon className="w-10 h-10 text-primary"/>
               </div></div>
-            <div className="p-8 bg-darker rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -90,7 +91,7 @@ export default async function AdminPage() {
               <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-darker rounded-2xl ">
+            <div className="p-8 bg-muted rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -98,7 +99,7 @@ export default async function AdminPage() {
               <BookCheckIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-darker rounded-2xl ">
+            <div className="p-8 bg-muted rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -108,7 +109,7 @@ export default async function AdminPage() {
             </div>
         </div>
         <div className="py-4 w-full grid grid-cols-3 gap-2">
-            <div className="p-8 bg-darker rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -116,7 +117,7 @@ export default async function AdminPage() {
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-darker rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -124,7 +125,7 @@ export default async function AdminPage() {
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-darker rounded-2xl">
+            <div className="p-8 bg-muted rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -133,7 +134,7 @@ export default async function AdminPage() {
               </div></div>
         </div>
         <div>
-            <div className=" rounded-2xl p-6 bg-darker">
+            <div className=" rounded-2xl p-6">
             <h5>Statistics Analysis</h5>
               <Chart/>
             </div>
@@ -279,7 +280,7 @@ export default async function AdminPage() {
     </Tabs>
         </div>
         </main>
-        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between bg-darker-t">
+        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between bg-muted-t">
           <div className="row-start-4">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>
@@ -312,7 +313,7 @@ function UserCard({
       <div className="w-10 h-10 mt-2">
       <Avatar>
         <AvatarImage src={path} className="rounded-full w-10 h-10"/>
-        <AvatarFallback className="rounded-full bg-darker py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
+        <AvatarFallback className="rounded-full bg-muted py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
       </Avatar>
       </div>
       <div className="items-start">

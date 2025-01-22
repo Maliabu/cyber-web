@@ -12,6 +12,7 @@ export default function LogoutAdmin(){
             }
         })
         window.localStorage.setItem("token", '')
+        console.log(window.localStorage.getItem("token"))
         redirect("/admin/auth")
     }
     return(
