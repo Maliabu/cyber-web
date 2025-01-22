@@ -12,11 +12,11 @@ export default function Layout({
     const router = useRouter()
 
     useEffect(() => {
-        const token = window.localStorage.getItem("token")        
+        const token = window.localStorage.getItem("token")
+        console.log(token)        
 
-        if(!token) return router.push("/admin/auth")
+        if(token == "") return router.push("/admin/auth")
     }, [])
-    
     return (
       <>
         <main>
