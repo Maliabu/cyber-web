@@ -60,7 +60,7 @@ export default function LoginAdmin(){
                 localStorage.setItem("name", name)
                 localStorage.setItem("username", username)
                 localStorage.setItem("email", email)
-                redirect("/admin")
+                redirect("/admin/dashboard")
             } 
             else if(res.toString() !== values.password){
                 form.setError("root", {
