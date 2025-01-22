@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
 const createdAt = timestamp('created_at').notNull().defaultNow()
@@ -73,8 +74,7 @@ export const EventsTable = pgTable('events_table', {
 export const enrollmentsTable = pgTable('enrollments_table', {
   id: serial('id').primaryKey(),
   courseId: integer('course_id').notNull().references(() => courseTable.id, { onDelete: 'cascade'}),
-  email: varchar('email')
-    .notNull(),
+  email: text('email').notNull(),
     createdAt,
     updatedAt,
 });
@@ -103,9 +103,7 @@ export const messagesTable = pgTable('messages_table', {
 
 export const commentsTable = pgTable('comments_table', {
   id: serial('id').primaryKey(),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  email: text('email').notNull().unique(),
   comment: varchar('comment'),
   article: integer('article_id').notNull().references(() => articlesTable.id),
   createdAt,
@@ -114,10 +112,9 @@ export const commentsTable = pgTable('comments_table', {
 
 export const replyTable = pgTable('reply_table', {
   id: serial('id').primaryKey(),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  email: text('email').notNull().unique(),
   reply: varchar('comment'),
+  comment: integer('comment_id').notNull().references(() => commentsTable.id),
   article: integer('article_id').notNull().references(() => articlesTable.id),
   createdAt,
   updatedAt,
@@ -125,14 +122,13 @@ export const replyTable = pgTable('reply_table', {
 
 export const votesTable = pgTable('votes_table', {
   id: serial('id').primaryKey(),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  email: text('email').notNull(),
   vote: integer('vote'),
   article: integer('article_id').notNull().references(() => articlesTable.id),
   createdAt,
   updatedAt,
 });
+
 
 export type InsertUser = typeof usersTable.$inferInsert;
 export type SelectUser = typeof usersTable.$inferSelect;

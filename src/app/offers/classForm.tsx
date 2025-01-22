@@ -20,27 +20,33 @@ export default function ClassForm(
             app.innerHTML = text;
         }
         const enroll = await addEnrollmentRequest(props.courseid, props.email)
-        const data = await sendHtmlEmail(props.email, props.title, props.name)
-        if(data === false){
+        if(enroll?.error){
             if(app !== null){
-                app.innerHTML = "Send Failed";
+                app.innerHTML = "You already enrolled for this course";
             }
         } else {
-            if(app !== null && mess !== null){
-            app.innerHTML = "Email Sent";
-            mess.style.display = "block";
-            mess.innerHTML = "Thank you for your request to enroll, we will get back to you";
+            const data = await sendHtmlEmail(props.email, props.title, props.name)
+            if(data === false){
+                if(app !== null){
+                    app.innerHTML = "Send Failed";
+                }
+            } else {
+                if(app !== null && mess !== null){
+                app.innerHTML = "Email Sent";
+                mess.style.display = "block";
+                mess.innerHTML = "Thank you for your request to enroll, we will get back to you";
+                }
+                setTimeout(() => {
+                    window.location.reload()
+                }, 3000);
+                
             }
-            setTimeout(() => {
-                window.location.reload()
-            }, 3000);
-            
         }
     }
     return(
         <div>
         <form action={onSubmit} className="">
-          <div className="sm:flex sm:flex-row justify-between rounded-lg p-8 bg-darker">
+          <div className="sm:flex sm:flex-row justify-between gap-4 rounded-lg p-8 bg-muted">
             <div className="">
             <div className="text-3xl font-bold tracking-tight">User</div>
             <p>Request to be sent by: {props.email}</p>

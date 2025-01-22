@@ -41,7 +41,15 @@ export default function LoginAdmin(){
         // decrypt password n compare
         const dec = handleDecryption(second, third)
         dec.then((res) => {
-            if(res.toString() === values.password && forth === 'admin'){
+            if(res === undefined){
+                if(app !== null){
+                    app.innerHTML = "Login";
+                }
+                form.setError("root", {
+                    "message": "Invalid login credentails"
+                })
+            }
+            else if(res.toString() === values.password && forth === 'admin'){
                 if(app !== null){
                     app.innerHTML = "Successful";
                 }
@@ -75,7 +83,7 @@ export default function LoginAdmin(){
                 <div>
                     <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="grid w-full items-center gap-4">
+                    <div className="grid w-full items-center">
                         <div>
                             <div className="">
                             <FormField

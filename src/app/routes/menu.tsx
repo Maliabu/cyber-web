@@ -54,7 +54,7 @@ export default async function Menu() {
 
   function display(){
     if(userId.userId !== null){
-      return <div className="flex flex-row justify-between"><div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /> </div><p className="sm:hidden"><p className="desc mb-1">you are signed in as: </p>{user}</p></div>
+      return <div className="flex flex-row justify-between"><div className="sm:size-10 size-10"><UserButton appearance={{elements: { userButtonAvatarBox: "size-full"}}} /> </div><div className="sm:hidden"><p className="desc mb-1">you are signed in as: </p>{user}</div></div>
     } else {
       return <div className="flex flex-row">
         <Link href="/sign-in"><Button className="text-white">Sign In</Button></Link>
@@ -82,9 +82,9 @@ export default async function Menu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="" legacyBehavior passHref>
+          <Link href="/blog" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div className="sm:mr-2 md:mr-2 lg:mr-6 text-md text-muted font-bold tracking-tight">Blog</div>
+        <div className="sm:mr-2 md:mr-2 lg:mr-6 text-md font-bold tracking-tight">Blog</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -98,7 +98,7 @@ export default async function Menu() {
                   key={component.title}
                   title={component.title}
                   href={component.href}
-                  className="text-white hover:text-primary p-1"
+                  className="text-dark hover:text-primary p-1"
                 >
                 </ListItem>
               ))}
@@ -151,23 +151,23 @@ export default async function Menu() {
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <div className="grid grid-cols-1 gap-4 py-4">
-          <Link href="/" className="hover:text-muted text-white border-t">
+          <Link href="/" className="hover:text-muted text-dark border-t">
           <div className="flex flex-row mt-5">
           <HomeIcon size="16"/> 
           <p className="mx-5">Home</p></div></Link>
-          <Link href="/blog" className="my-3 hover:text-blue text-white">
+          <Link href="/blog" className="my-3 hover:text-blue text-dark">
           <div className="flex flex-row">
           <PaperclipIcon size="16"/> 
           <p className="mx-5">Blog<p className="desc mt-1">Best Reads from the best</p></p></div></Link>
-          <Link href="/offers" className="hover:text-blue text-white">
+          <Link href="/offers" className="hover:text-blue text-dark">
           <div className="flex flex-row">
           <HandshakeIcon size="16"/> 
           <p className="mx-5">Services<p className="desc mt-1">Training, consultancy, pentesting & more...</p></p></div></Link>
-          <Link href="/contact" className="my-3 hover:text-blue text-white">
+          <Link href="/contact" className="my-3 hover:text-blue text-dark">
           <div className="flex flex-row">
           <Users2Icon size="16"/> 
           <p className="mx-5"> Our Community<p className="desc mt-1">Contacts and socials</p></p></div></Link>
-          <Link href="/events" className="hover:text-blue text-white border-b">
+          <Link href="/events" className="hover:text-blue text-dark border-b">
           <div className="flex flex-row mb-5">
           <CalendarArrowDownIcon size="16"/> 
           <p className="mx-5">News & Events<p className="desc mt-1">All our events and happenings</p></p></div></Link>
@@ -182,7 +182,7 @@ export default async function Menu() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className=" py-1 px-2 text-white rounded-sm font-bold">in</div>
+          <div className=" py-1 px-2 text-dark rounded-sm font-bold">in</div>
           Instagram
         </Link>
         <Link
@@ -191,7 +191,7 @@ export default async function Menu() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="py-2 px-3 font-bold text-white">x</div>
+          <div className="py-2 px-3 font-bold text-dark">x</div>
           twitter
         </Link>
           </div>
@@ -200,8 +200,14 @@ export default async function Menu() {
       </SheetContent>
     </Sheet></div></div>
       <div> 
-        <div className=" flex flex-row bg-darker justify-center">
+        <div className=" sm:flex sm:flex-row bg-muted justify-between p-2">
         <SearchBar/>
+        <div className="sm:flex sm:flex-row hidden">
+              <div className="border p-2 text-sm rounded-lg mx-2">Students</div>
+              <div className="border p-2 text-sm rounded-lg">IT Professionals</div>
+              <div className="border p-2 text-sm rounded-lg mx-2">Startups</div>
+              <div className="border p-2 text-sm rounded-lg">Fintechs</div>
+            </div>
           </div>
         </div>
     </div>

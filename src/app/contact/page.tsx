@@ -96,7 +96,7 @@ export default async function About(){
       opts={{
         align: "start",
       }}
-      className="w-full sm:px-14 bg-darker">
+      className="w-full sm:px-14 bg-muted">
       <CarouselContent className="sm:p-8 p-6">
                   {
                     messages.map(message => (
@@ -108,7 +108,7 @@ export default async function About(){
                         <div>
                         <Avatar>
                           <AvatarImage src="" className="rounded-full w-30 h-30"/>
-                          <AvatarFallback className="rounded-full bg-er text-white">{message.messages_table.email[0].toUpperCase()}</AvatarFallback>
+                          <AvatarFallback className="rounded-full dark text-white">{message.messages_table.email[0].toUpperCase()}</AvatarFallback>
                         </Avatar>
                         </div>
                         <div className="text-lg tracking-tight leading-5 mt-4">"{message.messages_table.message}"

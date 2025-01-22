@@ -19,8 +19,8 @@ export default async function Footer() {
   email = user?.primaryEmailAddress?.emailAddress || ''
   const articles = (await db.query.articlesTable.findMany()).slice(1, 3)
   return (
-      <footer className="justify-center text-white">
-      <div className="px-8 py-6 sm:flex sm:flex-row bg-darker sm:justify-between">
+      <footer className="justify-center text-white bg-darker dark">
+      <div className="px-8 py-6 sm:flex bg-muted sm:flex-row sm:justify-between">
         <div className="text-3xl tracking-tight font-bold">Subscribe</div>
                   <span className="">
                       <p className="my-2">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></span>

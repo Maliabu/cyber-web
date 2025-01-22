@@ -29,7 +29,8 @@ type EventcardProps = {
         </div>
         <div className="items-start">
           <p className="desc">Title</p>
-        <p className="mt-2">{title}</p></div>
+        <p className="mt-2">{title}</p>
+        </div>
         <div>
         <p className="desc">Description</p>
         <p className="mt-2">{description}</p></div>

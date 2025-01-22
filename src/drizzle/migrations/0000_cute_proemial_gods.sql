@@ -23,11 +23,12 @@ CREATE TABLE IF NOT EXISTS "articles_table" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "comments_table" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_id" integer NOT NULL,
+	"email" text NOT NULL,
 	"comment" varchar,
 	"article_id" integer NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"updated_at" timestamp NOT NULL,
+	CONSTRAINT "comments_table_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "course_table" (
@@ -58,9 +59,18 @@ CREATE TABLE IF NOT EXISTS "currency_table" (
 CREATE TABLE IF NOT EXISTS "enrollments_table" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"course_id" integer NOT NULL,
-	"user_id" integer NOT NULL,
+	"email" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "messages_table" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"email" text NOT NULL,
+	"message" text,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL,
+	CONSTRAINT "messages_table_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "next_course_table" (
@@ -72,11 +82,13 @@ CREATE TABLE IF NOT EXISTS "next_course_table" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "reply_table" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_id" integer NOT NULL,
+	"email" text NOT NULL,
 	"comment" varchar,
+	"comment_id" integer NOT NULL,
 	"article_id" integer NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"updated_at" timestamp NOT NULL,
+	CONSTRAINT "reply_table_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "subscriptions_table" (
@@ -107,18 +119,12 @@ CREATE TABLE IF NOT EXISTS "users_table" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "votes_table" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_id" integer NOT NULL,
+	"email" text NOT NULL,
 	"vote" integer,
 	"article_id" integer NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL
 );
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "comments_table" ADD CONSTRAINT "comments_table_user_id_users_table_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users_table"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "comments_table" ADD CONSTRAINT "comments_table_article_id_articles_table_id_fk" FOREIGN KEY ("article_id") REFERENCES "public"."articles_table"("id") ON DELETE no action ON UPDATE no action;
@@ -145,31 +151,19 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "enrollments_table" ADD CONSTRAINT "enrollments_table_user_id_users_table_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users_table"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  ALTER TABLE "next_course_table" ADD CONSTRAINT "next_course_table_course_id_course_table_id_fk" FOREIGN KEY ("course_id") REFERENCES "public"."course_table"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "reply_table" ADD CONSTRAINT "reply_table_user_id_users_table_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users_table"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "reply_table" ADD CONSTRAINT "reply_table_comment_id_comments_table_id_fk" FOREIGN KEY ("comment_id") REFERENCES "public"."comments_table"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "reply_table" ADD CONSTRAINT "reply_table_article_id_articles_table_id_fk" FOREIGN KEY ("article_id") REFERENCES "public"."articles_table"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "votes_table" ADD CONSTRAINT "votes_table_user_id_users_table_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users_table"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

@@ -5,7 +5,7 @@ import {
     NavigationMenuLink
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, ChevronRight, HeartHandshakeIcon, ShieldCheckIcon, TrafficConeIcon } from "lucide-react";
+import { ArrowRight, BookAIcon, Calendar, ChevronRight, HeartHandshakeIcon, ShieldCheckIcon, TrafficConeIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -43,17 +43,17 @@ export default async function HomePage(){
 
     return(
       <div className="sm:p-0">
-            <div className="grid back-schedule justify-items-center lg:px-20 sm:pt-8 p-4">
+            <div className="grid justify-items-center sm:p-20 sm:pt-8 text-white p-4 bg-gradient-to-r from-sky-300 to-sky-600">
               <h5 className="text-5xl leading-10 text-center sm:w-[750px] tracking-tight font-bold">Schedule an interview with our mentors!</h5>
               Get started with a course in cybersecurity
               {booking()}
             </div>
       <div className=" items-center">
-        <div className=" sm:py-16 sm:px-0">
+        <div className=" sm:pb-16 sm:px-0">
         <div className="sm:float-right p-6">
             <TimerCountDown userid={userId.userId} nextCourse={nextCourse.map(course=>course.course_table)}/>
-    <div className="flex flex-row justify-between bg-darker rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
-        <p className="text-white">See Articles by many of our writers and authors onboard</p>
+    <div className="flex flex-row justify-between bg-muted rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
+        <p className="text-dark">See Articles by many of our writers and authors onboard</p>
         <a href="/blog" className="bg-primary text-white p-2 rounded-md w-1/2 h-1/2">Our Blog</a>
     </div>
     </div>
@@ -72,8 +72,14 @@ export default async function HomePage(){
       <Button variant="outline" className=" bg-light">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
     </div></div>
     </div>
-    <div className="back-image">
-      <div className="backdrop sm:p-16 p-6">
+    <div className="grid justify-items-center sm:p-20 sm:mt-8 text-white p-4 bg-gradient-to-r from-sky-300 to-sky-600">
+              <h5 className="text-5xl leading-10 text-center sm:w-[750px] tracking-tight font-bold">Get Certified in our courses today!</h5>
+              Get started with a course in cybersecurity, our courses now offer certification.
+              <a href="/offers#courses">
+              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><BookAIcon className="size-6"/> Enroll for Certification</Button></a>
+            </div>
+    <div className="bg-muted">
+      <div className="sm:p-16 p-6">
       <Carousel
       opts={{
         align: "start",
@@ -97,13 +103,14 @@ export default async function HomePage(){
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
+                    className="flex h-full text-dark w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
                     href="/offers#courses">
+                      <p className="desc bg-muted p-2 rounded-xl">For: Students, IT professionals, and organizations</p>
                       <div className="grid justify-items-center px-16 pt-16">
-                        <TrafficConeIcon className="size-20"/>
+                        <TrafficConeIcon className="size-40 text-white bg-primary p-8 rounded-full"/>                      
                     </div>
-                    <div className="p-6 sm:p-12  rounded-b-xl">
-                      <div className=" text-3xl mt-4  font-semibold leading-7 tracking-tight">
+                    <div className="p-6 sm:p-12 rounded-b-xl">
+                      <div className=" text-3xl mt-4 font-semibold leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
                     For: Students, IT professionals, and organizations
@@ -122,16 +129,17 @@ export default async function HomePage(){
           <CarouselItem key="consultancy" className="md:basis-1/2 lg:basis-1/3">
             <div>
               <Card className="w-full p-0">
-              <CardContent className="flex p-6">
+              <CardContent className="flex p-6 ">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
+                    className="flex h-full w-full text-dark rounded-lg select-none flex-col justify-end no-underline outline-none"
                     href="/offers">
+                    <p className="desc bg-muted p-2 rounded-xl">For: Organizations without dedicated security teams</p>
                       <div className="grid justify-items-center px-16 pt-16">
-                        <HeartHandshakeIcon className="size-20"/>
+                        <HeartHandshakeIcon className="size-40 text-white bg-primary p-8 rounded-full"/>
                     </div>
                     <div className="p-6 sm:p-12  rounded-b-xl">
                       <div className=" text-3xl mt-4  font-bold tracking-tight leading-7">
@@ -153,16 +161,17 @@ export default async function HomePage(){
           <CarouselItem key="pentesting" className="md:basis-1/2 lg:basis-1/3">
             <div>
               <Card className="w-full p-0">
-                <CardContent className="flex p-6">
+                <CardContent className="flex p-6 ">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full rounded-lg select-none flex-col justify-end no-underline outline-none"
+                    className="flex h-full w-full text-dark rounded-lg select-none flex-col justify-end no-underline outline-none"
                     href="/offers">
+                      <p className="desc bg-muted p-2 rounded-xl">For: SMBs, international tech startups, financial institutions, and e-commerce businesses</p>
                       <div className="grid justify-items-center px-16 pt-16">
-                        <ShieldCheckIcon className="size-20"/>
+                        <ShieldCheckIcon className="size-40 text-white bg-primary p-8 rounded-full"/>
                     </div>
                     <div className="p-6 sm:p-12  rounded-b-xl">
                       <div className=" text-3xl mt-4  font-bold leading-7 tracking-tight">

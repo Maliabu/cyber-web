@@ -29,7 +29,6 @@ export default function AddUser() {
           confirmPassword: "",
           decInit: "",
           encrPass: "",
-          image: ''
       },
     })
 
@@ -166,7 +165,7 @@ export default function AddUser() {
               <FormField
                   control={form.control}
                   name="image"
-                  render={({ field: { onChange, ...fieldProps } }) => (
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Profile Picture</FormLabel>
                       <FormControl

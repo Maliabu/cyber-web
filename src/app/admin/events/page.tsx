@@ -24,7 +24,6 @@ export default function AddEvents() {
           image: "",
           startDate: new Date(),
           endDate: new Date(),
-          image1: ''
       },
     })
 
@@ -145,7 +144,7 @@ export default function AddEvents() {
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { onChange, ...fieldProps } }) => (
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl

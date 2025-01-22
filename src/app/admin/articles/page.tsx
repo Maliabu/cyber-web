@@ -5,7 +5,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
-import z from 'zod'
+import z, { any } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Textarea } from '@/components/ui/textarea'
@@ -26,7 +26,6 @@ export default function AddArticle() {
           link: "",
           writer: '',
           image: "",
-          image1: ''
       },
     })
 
@@ -52,6 +51,7 @@ export default function AddArticle() {
           if(app !== null){
             app.innerHTML = "Successful";
           }
+          window.location.reload()
           // useRouter().refresh()
         }
     }
@@ -100,7 +100,7 @@ export default function AddArticle() {
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { onChange, ...fieldProps } }) => (
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl

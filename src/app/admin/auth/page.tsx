@@ -4,8 +4,8 @@ import LoginAdmin from "./loginAdmin"
 
 export default async function Login(){
     return(
-    <div className=" font-[family-name:var(--font-futura)]">
-            <div className="grid justify-center mt-16">
+    <div className="">
+            <div className="grid justify-center mt-16 bg-muted p-6">
                 <div className="grid justify-items-center">
                     <Image
                     alt="logo"
@@ -13,7 +13,7 @@ export default async function Login(){
                     width={100}
                     height={100}
                     />
-                    <h5 className="p-4">Admin Login Panel</h5>
+                    <div className="p-4 text-3xl tracking-tight font-bold">Admin Login Panel</div>
                 </div>
                 <LoginAdmin/>
             </div>
