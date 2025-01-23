@@ -13,11 +13,15 @@ export function token(){
 }
 export const togglePasswordVisibility = ()=>{
     let pass = document.getElementById("password")
-    if(pass !== null){
+    let see = document.getElementById("see")
+
+    if(pass !== null && see !== null){
     if(pass.getAttribute('type') === "password"){
         pass.setAttribute('type', 'text')
+        see.innerHTML = "Password: Now you see me"
     } else{
         pass.setAttribute('type', 'password')
+        see.innerHTML = "Password: Now you dont"
     }}
 }
 

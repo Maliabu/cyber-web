@@ -55,11 +55,11 @@ body {
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 3.7% 15.9%;
+    --muted: 0 0% 15.9%;
     --muted-foreground: 0 0% 98%;
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72.8% 50.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
@@ -110,7 +110,7 @@ button{
   font-weight: 550 !important;
   /* border: 1px solid rgb(2, 165, 250) !important; */
   border-radius: 5px !important;
-  color: rgb(84, 84, 84) !important;
+  color: rgb(103, 103, 103) !important;
 }
 span{
   font-size: 16px !important;
@@ -128,10 +128,10 @@ a{
   max-width: 80% !important;
 }
 .backdrop{
-  backdrop-filter: blur(70px) !important;
+  backdrop-filter: blur(0px) !important;
 }
 .back-image{
-  background-image: url("images/_\ \(3\).jpeg") !important;
+  background-image: url("images/orbs.png") !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: right;
@@ -193,7 +193,7 @@ a{
 }
 .admin{
   overflow-x: hidden !important;
-  max-height: 55vh !important;
+  max-height: 75vh !important;
 }
 .tabs{
   overflow-x: hidden !important;
@@ -229,4 +229,8 @@ p.desc{
 }
 .blog:hover{
   color: #02a5fa !important;
+}
+.transparent-dark{
+  background-color: rgba(0, 0, 0, 0.336) !important;
+  color: aliceblue !important;
 }

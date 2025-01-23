@@ -67,7 +67,7 @@ export function SearchBar() {
     <Dialog>
       <DialogTrigger asChild>
         <div className="pointer sm:w-1/2">
-          <div className="bg-white p-2 px-4 flex flex-row justify-between rounded-lg">
+          <div className="bg-white p-5 sm:p-2 px-4 flex flex-row justify-between rounded-lg">
             <p>looking for?... search here... </p>
             <Search className="h-3 w-3 mx-4 size-8" /></div>
         </div>
