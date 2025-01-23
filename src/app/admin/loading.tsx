@@ -4,7 +4,7 @@ import Logo from '@/app/images/logo1.png'
 
 export default function Loading() {
   return (
-    <div className="grid justify-items-center p-60">
+    <div className="grid justify-items-center p-60 max-h-full">
     <Image
     alt="logo"
     src={Logo}

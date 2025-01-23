@@ -25,7 +25,7 @@ type ArticlecardProps = {
     const path = '/articles/'+image
     return (
       <div className="flex flex-row justify-between">
-      <Card className="w-5/6 grid grid-cols-4 gap-4 p-6 mt-1 ">
+      <Card className="w-5/6 grid grid-cols-5 gap-4 p-6 mt-1 ">
         <div className="w-10 h-10">
             <Image src={path} width={80} height={80} alt="article image"/>
         </div>
@@ -38,7 +38,7 @@ type ArticlecardProps = {
         </div>
         <div>
         <p className="desc">Link</p>
-        <p className="mt-2">{link}</p></div>
+        <p className="mt-2 desc">{link}</p></div>
       </Card>
       <DeletePage id={id} submitId={title}/>      
       </div>

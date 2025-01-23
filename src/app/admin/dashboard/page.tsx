@@ -33,6 +33,8 @@ import NextCourse from "../courses/nextCourse"
 import DeletePage from "../courses/deletePage"
 import { auth } from "@clerk/nextjs/server"
 import Logged from "../auth/loggedIn"
+import { getMyDay, getMyMonth } from "@/app/services/success"
+import { groupBy, grouping } from "@/app/services/services"
 
 export default async function AdminPage() {
   
@@ -47,7 +49,6 @@ export default async function AdminPage() {
   const subscriptions = await db.query.subscriptionsTable.findMany()
   const currency = await db.query.currencyTable.findMany()
   const messages = await db.query.messagesTable.findMany()
-
 
   return (
     <div className="justify-stretch dark bg-darker max-h-full">
@@ -69,7 +70,7 @@ export default async function AdminPage() {
         <div className="flex flex-row hidden justify-between border-b py-3 mt-2 rounded-sm">
           <Sun className="mr-2"/> Light Mode</div>
           <div className="flex flex-row justify-between border-b py-3 rounded-sm">
-          <Moon className="mr-2" size={16}/> <p className="desc">Dark Mode</p></div>
+          <Moon className="mr-2 text-primary" size={16}/> <p className="desc">Dark Mode</p></div>
         <div className="self-center mt-72">
           <LogoutAdmin/>
         </div>
@@ -90,70 +91,72 @@ export default async function AdminPage() {
         <TabsTrigger value="articles"><Paperclip className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
         <TabsTrigger value="courses"><BugPlay className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
         <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
-        <TabsTrigger value="account"><Bell className="mx-3 w-4 h-4"/>{messages.length}</TabsTrigger>
+        <TabsTrigger value="messages"><Bell className="mx-3 w-4 h-4"/><p className="border-l transparent-dark">{messages.length}</p></TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard" className="tabs bg-darker px-2 rounded-lg">
-        <div className="pt-4 w-full grid grid-cols-4 gap-4">
-            <div className="p-8 transparent-dark rounded-2xl">
+        <div className="pt-6 text-xl font-bold tracking-tight">User Related data</div>
+        <div className="pt-2 w-full grid grid-cols-4 gap-2">
+            <div className="p-8 bg-bluey rounded-2xl">
               <div className="flex flex-row justify-between">
                 <div>
-              <h1 className="display-1">
-              { users.length}</h1><p className="desc mt-4">Users</p></div>
-              <UsersIcon className="w-10 h-10 text-primary"/>
+              <div className="text-4xl font-bold tracking-tight">
+              { users.length}</div><p className=" pt-4 border-t mt-4 border-light">Users</p></div>
+              <UsersIcon className="w-10 h-10"/>
               </div></div>
-            <div className="p-8 transparent-dark rounded-2xl">
+            <div className="p-8 bg-bluey rounded-2xl">
             <div className="flex flex-row justify-between">
-                <div>
-              <h1 className="display-1">
-              { mentors.length}</h1><p className="desc mt-4">Mentors</p></div>
-              <Users2Icon className="w-10 h-10 text-primary"/>
+            <div>
+              <div className="text-4xl font-bold tracking-tight">
+              { mentors.length}</div><p className=" pt-4 mt-4 border-t border-light">Mentors</p></div>
+              <Users2Icon className="w-10 h-10"/>
               </div>
             </div>
-            <div className="p-8 transparent-dark rounded-2xl ">
+            <div className="p-8 bg-bluey rounded-2xl ">
             <div className="flex flex-row justify-between">
-                <div>
-              <h1 className="display-1">
-              { subscriptions.length}</h1><p className="desc mt-4">Subscriptions</p></div>
-              <BookCheckIcon className="w-10 h-10 text-primary"/>
+            <div>
+              <div className="text-4xl font-bold tracking-tight">
+              { subscriptions.length}</div><p className=" pt-4 mt-4 border-t border-light">Subscriptions</p></div>
+              <BookCheckIcon className="w-10 h-10"/>
               </div>
             </div>
-            <div className="p-8 transparent-dark rounded-2xl ">
+            <div className="p-8 bg-bluey rounded-2xl ">
             <div className="flex flex-row justify-between">
-                <div>
-              <h1 className="display-1">
-              { enrollments.length}</h1><p className="desc mt-4">Enrollment requests</p></div>
-              <GraduationCapIcon className="w-10 h-10 text-primary"/>
+            <div>
+              <div className="text-4xl font-bold tracking-tight">
+              { enrollments.length}</div><p className=" pt-4 mt-4 border-t border-light">Enrollment<br/> requests</p></div>
+              <GraduationCapIcon className="w-10 h-10"/>
               </div>
             </div>
         </div>
-        <div className="py-4 w-full grid grid-cols-3 gap-2">
+        <div className="pt-6 text-xl font-bold tracking-tight">Service Data</div>
+        <div className="py-2 w-full grid grid-cols-3 gap-2">
             <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
-                <div>
-              <h1 className="display-1">
-              { courses.length}</h1><p className="desc mt-4">Courses</p></div>
+            <div>
+              <div className="text-4xl font-bold tracking-tight">
+              { courses.length}</div><p className="desc pt-4 mt-4 border-t">Courses</p></div>
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
             <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
-                <div>
-              <h1 className="display-1">
-              { events.length}</h1><p className="desc mt-4">Events</p></div>
+            <div>
+              <div className="text-4xl font-bold tracking-tight">
+              { events.length}</div><p className="desc pt-4 mt-4 border-t">Events</p></div>
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
             <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
-                <div>
-              <h1 className="display-1">
-              { articles.length}</h1><p className="desc mt-4">Articles</p></div>
+            <div>
+              <div className="text-4xl font-bold tracking-tight">
+              { articles.length}</div><p className="desc pt-4 mt-4 border-t">Articles</p></div>
               <Paperclip className="w-10 h-10 text-primary"/>
               </div></div>
         </div>
         <div>
-            <div className=" rounded-2xl p-6">
-            <h5>Statistics Analysis</h5>
+            <div className=" rounded-2xl p-8 transparent-dark">
+            <div className="text-3xl leading-5 font-bold tracking-tight">Statistics Analysis</div>
               <Chart/>
             </div>
         </div>
@@ -163,10 +166,39 @@ export default async function AdminPage() {
           <Admin {...messages}/>
         </div>
       </TabsContent>
+      <TabsContent value="messages" className="tabs">
+        <div>
+        <div className="transparent-dark p-8 rounded-lg">
+            <div className="flex flex-row justify-between">
+                <div className="flex text-2xl tracking-tight font-bold"><Bell className="mr-5 mt-1"/> Your Messages</div>
+                <div className="h-10 w-10 grid justify-center items-center rounded-full bg-primary">{messages.length}</div>
+            </div>
+            <div className="p-4 bg-darker mt-6 rounded-lg w-3/4 admin">
+            {
+                messages.map((message:{id: number, email: string, message: string | null, updatedAt: Date}) => (
+                    <div className="py-8 border-b flex flex-row" key={message.id}>
+                        {/* <div className="h-10 w-10 transparent-dark grid rounded-full justify-center items-center mr-5">{message.email[0].toUpperCase()}</div> */}
+                        <Avatar>
+                          <AvatarImage src="" className="rounded-full w-30 h-30"/>
+                          <AvatarFallback className="rounded-full bg-primary">{message.email[0].toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        <div className="mx-10">
+                        <p className="desc">{message.email}</p>
+                        <div className="py-2 leading-4">{message.message}</div>
+                        <p className="desc float-right mt-2">{getMyDay(message.updatedAt.getDay())}, {getMyMonth(message.updatedAt.getMonth())} {message.updatedAt.getDate()}, {message.updatedAt.getFullYear()
+                        }</p></div>
+                    </div>
+                ))
+            }
+            </div>
+        </div>
+        </div>
+      </TabsContent>
+
       <TabsContent value="events">
                   {
                     events.length > 0 ? (
-                      <div className="flex flex-col admin">
+                      <div className="flex flex-col admin p-6">
                         {events.map(event => (
                           <EventCard key={event.id} {...event}/>
                         ))}
@@ -175,7 +207,7 @@ export default async function AdminPage() {
                       <AddPage page={"Event"} />
                     )
                   }
-                <div className="p-4 mt-1 flex flex-row justify-between">
+                <div className="p-6 mt-1 flex flex-row justify-between">
                 <AddEvents/>
                 <p>{articles.length} Total Events</p>
                 </div>
@@ -183,7 +215,7 @@ export default async function AdminPage() {
                 <TabsContent value="courses">
                   {
                     courses.length > 0 ? (
-                      <div className="flex flex-col admin">
+                      <div className="flex flex-col admin p-6">
                         {courses.map(course => (
                           <CourseCard key={course.id} {...course}/>
                         ))}
@@ -192,7 +224,7 @@ export default async function AdminPage() {
                       <AddPage page={"Course"} />
                     )
                   }
-                <div className="p-4 mt-1 flex flex-row justify-between">
+                <div className="p-6 mt-1 flex flex-row justify-between">
                   <div className="flex flex-row gap-2">
                   <AddCourse currency={currency} mentors={mentors}/>
                   <NextCourse courses={courses} /></div>
@@ -202,7 +234,7 @@ export default async function AdminPage() {
                 <TabsContent value="articles">
                   {
                     articles.length > 0 ? (
-                      <div className="flex flex-col admin">
+                      <div className="flex flex-col admin p-6">
                         {articles.map(article => (
                           <ArticlesCard key={article.id} {...article}/>
                         ))}
@@ -211,7 +243,7 @@ export default async function AdminPage() {
                       <AddPage page={"Article"} />
                     )
                   }
-                <div className="p-4 mt-1 flex flex-row justify-between">
+                <div className="p-6 mt-1 flex flex-row justify-between">
                 <AddArticle/>
                 <p>{articles.length} Total Articles</p>
                 </div>
@@ -228,7 +260,7 @@ export default async function AdminPage() {
                 <TabsContent value="users">
                   {
                     users.length > 0 ? (
-                      <div className="flex flex-col admin">
+                      <div className="flex flex-col admin p-6">
                         {users.map(user => (
                           <UserCard key={user.id} {...user}/>
                         ))}
@@ -237,7 +269,7 @@ export default async function AdminPage() {
                       <AddPage page={"User"} />
                     )
                   }
-                <div className="p-4 mt-1 flex flex-row justify-between">
+                <div className="p-6 mt-1 flex flex-row justify-between">
                 <AddUser/>
                 <p>{users.length} Total users</p>
                 </div>
@@ -245,7 +277,7 @@ export default async function AdminPage() {
                 <TabsContent value="mentors">
                   {
                     mentors.length > 0 ? (
-                      <div className=" admin">
+                      <div className=" admin p-6">
                         {mentors.map(user => (
                           <UserCard {...user} key={user.id} />
                         ))}
@@ -254,14 +286,14 @@ export default async function AdminPage() {
                       <AddPage page={"Mentor"} />
                     )
                   }
-                <div className="p-4 flex flex-row justify-end">
+                <div className="p-6 flex flex-row justify-end">
                 <p>{mentors.length} Total Mentors</p>
                 </div>
                 </TabsContent>
                 <TabsContent value="subscriptions">
                   {
                     subscriptions.length > 0 ? (
-                      <div className="admin">
+                      <div className="admin p-6">
                         {subscriptions.map(subscription => (
                           <SubscriptionCard key={subscription.id} {...subscription}/>
                         ))}
@@ -270,7 +302,7 @@ export default async function AdminPage() {
                       <AddPage page={"Subscription"} />
                     )
                   }
-                <div className="p-4 mt-1 flex flex-row justify-between">
+                <div className="p-6 mt-1 flex flex-row justify-between">
                 <Subscribe/>
                 <p>{subscriptions.length} Total Subscriptions</p>
                 </div>
@@ -278,7 +310,7 @@ export default async function AdminPage() {
                 <TabsContent value="enrollments">
                   {
                     enrollments.length > 0 ? (
-                      <div className="admin">
+                      <div className="admin p-6">
                         {enrollments.map(enrollment => (
                           <EnrollCard key={enrollment.id} {...enrollment}/>
                         ))}
@@ -287,7 +319,7 @@ export default async function AdminPage() {
                       <AddPage page={"Enrollment"} />
                     )
                   }
-                <div className="p-4 mt-1 flex flex-row justify-between">
+                <div className="p-6 mt-1 flex flex-row justify-between">
                 <Enroll courses={courses}/>
                 <p>{enrollments.length} Total Enrollments</p>
                 </div>
@@ -324,7 +356,7 @@ function UserCard({
       <div className="w-10 h-10 mt-2">
       <Avatar>
         <AvatarImage src={path} className="rounded-full w-10 h-10"/>
-        <AvatarFallback className="rounded-full transparent-dark border">{name[0].toUpperCase()}</AvatarFallback>
+        <AvatarFallback className="rounded-full bg-primary">{name[0].toUpperCase()}</AvatarFallback>
       </Avatar>
       </div>
       <div className="items-start">

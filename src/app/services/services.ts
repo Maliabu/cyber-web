@@ -144,3 +144,28 @@ export function checkAdminLoginToken(){
     // redirect("/admin/auth")
   }
 }
+export function grouping(arrObj: {key1: string}[]){
+  const result = Object.groupBy(arrObj, ({ key1 }) => key1);
+  return result
+}
+
+
+interface IObjectKeys {
+  [key: string]: string[];
+}
+interface IObject {
+  name: string, datas: string, date: string
+}
+
+export const groupBy = (by: string, arr: IObject[]) => {
+  // group by date, reduce new arr
+  return arr.reduce((accumulatedObject: IObjectKeys, arr: IObject) => {
+
+    // key returns every type in the object
+    // had a datas: [] causing errors
+    const key = arr[by as keyof IObject]
+    accumulatedObject[key] = accumulatedObject[key] || []
+    accumulatedObject[key].push(`${arr.name} / ${arr.datas} / ${arr.date}`)
+    return accumulatedObject
+  }, {} as IObjectKeys)
+}
