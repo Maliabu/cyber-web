@@ -55,7 +55,7 @@ body {
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15.9%;
+    --muted: 0 0% 12.9%;
     --muted-foreground: 0 0% 98%;
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
@@ -155,7 +155,7 @@ a{
   overflow-x: hidden !important;
 }
 .bg-darker{
-  background-color: rgb(30, 30, 30) !important;
+  background-color: rgb(26, 26, 26) !important;
   color: white !important;
 }
 .nav-item{
@@ -193,11 +193,11 @@ a{
 }
 .admin{
   overflow-x: hidden !important;
-  max-height: 75vh !important;
+  max-height: 70vh !important;
 }
 .tabs{
   overflow-x: hidden !important;
-  max-height: 80vh !important;
+  max-height: 100vh !important;
 }
 p.desc{
   font-size: 13px !important;
