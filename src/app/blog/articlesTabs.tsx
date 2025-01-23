@@ -74,9 +74,9 @@ export default function ArticlesTabs(
     
     return(
         <div>
-        <div className=" p-6">
+        <div className="sm:p-6">
         <div className="sm:float-right sm:-mx-6">
-      <Card className="w-[300px] border-none bg-muted p-2">
+      <Card className="w-[320px] border-none bg-muted p-2">
       <CardHeader>
         <div className="text-2xl font-bold tracking-tight leading-6">Recommended Articles</div>
       </CardHeader>
@@ -87,7 +87,7 @@ export default function ArticlesTabs(
             votes_table: {id: number, vote: number | null, email: string, article: number}
           }) => (
             <CardContent className="" key={article.articles_table.id}>
-            <div className="mt-1 px-6 pb-4 border-b" 
+            <div className="mt-1 sm:px-6 pb-4 border-b" 
             onClick={() => getContent(article)}>
               <TabNavItem id="tab1" activeTab={activeTab} setActiveTab={setActiveTab} 
               title={<div><div className="text-lg font-bold tracking-tight leading-5 pointer blog">
@@ -103,7 +103,7 @@ export default function ArticlesTabs(
                 Leave us a message or comment on any of the articles we have and lets keep the discussion flowing
             </p>
     </Card>
-    <Card className="p-4 border-none mt-4 w-[300px]">
+    <Card className="p-4 border-none mt-4 w-[320px]">
       <h5>Comments</h5>
     </Card>
     </div>

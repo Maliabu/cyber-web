@@ -8,12 +8,12 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { db } from "@/drizzle/db"
-import { BookCheckIcon, BugPlay, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Paperclip, User, Users, Users2Icon, UsersIcon } from "lucide-react"
+import { Bell, BookCheckIcon, BugPlay, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Moon, Paperclip, Sun, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "../users/page"
-import Logo from '@/app/images/logo1.png'
+import Logo from '@/app/images/logo2.png'
 import Image from "next/image";
 import AddPage from "../addPage"
-import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar"
+import { AvatarFallback, AvatarImage, Avatar } from "@/components/ui/avatar"
 import {Chart} from "../chart"
 import { eq } from "drizzle-orm"
 import { usersTable } from "@/drizzle/schema"
@@ -32,6 +32,7 @@ import Subscribe from "../subscription/page"
 import NextCourse from "../courses/nextCourse"
 import DeletePage from "../courses/deletePage"
 import { auth } from "@clerk/nextjs/server"
+import Logged from "../auth/loggedIn"
 
 export default async function AdminPage() {
   
@@ -45,12 +46,14 @@ export default async function AdminPage() {
   const courses = await db.query.courseTable.findMany()
   const subscriptions = await db.query.subscriptionsTable.findMany()
   const currency = await db.query.currencyTable.findMany()
+  const messages = await db.query.messagesTable.findMany()
+
 
   return (
-    <div className="justify-stretch dark bg-darker">
-    <div className="px-8 py-4">
-      <main className="flex flex-row">
-      <div className="flex flex-col justify-between bg-muted rounded-lg p-6">
+    <div className="justify-stretch dark bg-darker max-h-full">
+    <div className="">
+      <main className="sm:flex sm:flex-row">
+      <div className="grid grid-cols-1 justify-between p-8 w-[250px] transparent-dark">
         <div className="self-center">
         <a href="/">
             <Image
@@ -60,9 +63,23 @@ export default async function AdminPage() {
                 width={100}
                 height={100}/></a>
         </div>
-        <div className="self-center mt-96">
+        <div className="my-10 p-3 border rounded-full w-full">
+        <Logged/>
+        </div>
+        <div className="flex flex-row hidden justify-between border-b py-3 mt-2 rounded-sm">
+          <Sun className="mr-2"/> Light Mode</div>
+          <div className="flex flex-row justify-between border-b py-3 rounded-sm">
+          <Moon className="mr-2" size={16}/> <p className="desc">Dark Mode</p></div>
+        <div className="self-center mt-72">
           <LogoutAdmin/>
         </div>
+        <footer className="py-4 mt-4">
+          <div className="">
+          <p className="desc">&copy;copyright.cybersecurity<br/>@{new Date().getFullYear()}</p>
+          </div>
+          <div className="my-4">
+          <p className="desc">Privacy Policy | T&Cs</p>
+        </div></footer>
       </div>
         <div className="w-full h-full ml-2 rounded-lg">
     <Tabs defaultValue="dashboard" className="">
@@ -73,17 +90,18 @@ export default async function AdminPage() {
         <TabsTrigger value="articles"><Paperclip className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
         <TabsTrigger value="courses"><BugPlay className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
         <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
+        <TabsTrigger value="account"><Bell className="mx-3 w-4 h-4"/>{messages.length}</TabsTrigger>
       </TabsList>
-      <TabsContent value="dashboard" className="tabs">
+      <TabsContent value="dashboard" className="tabs bg-darker px-2 rounded-lg">
         <div className="pt-4 w-full grid grid-cols-4 gap-4">
-            <div className="p-8 bg-muted rounded-2xl">
+            <div className="p-8 transparent-dark rounded-2xl">
               <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
               { users.length}</h1><p className="desc mt-4">Users</p></div>
               <UsersIcon className="w-10 h-10 text-primary"/>
               </div></div>
-            <div className="p-8 bg-muted rounded-2xl">
+            <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -91,7 +109,7 @@ export default async function AdminPage() {
               <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-muted rounded-2xl ">
+            <div className="p-8 transparent-dark rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -99,7 +117,7 @@ export default async function AdminPage() {
               <BookCheckIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-muted rounded-2xl ">
+            <div className="p-8 transparent-dark rounded-2xl ">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -109,7 +127,7 @@ export default async function AdminPage() {
             </div>
         </div>
         <div className="py-4 w-full grid grid-cols-3 gap-2">
-            <div className="p-8 bg-muted rounded-2xl">
+            <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -117,7 +135,7 @@ export default async function AdminPage() {
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-muted rounded-2xl">
+            <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -125,7 +143,7 @@ export default async function AdminPage() {
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-muted rounded-2xl">
+            <div className="p-8 transparent-dark rounded-2xl">
             <div className="flex flex-row justify-between">
                 <div>
               <h1 className="display-1">
@@ -142,7 +160,7 @@ export default async function AdminPage() {
       </TabsContent>
       <TabsContent value="account" className="tabs">
         <div>
-          <Admin/>
+          <Admin {...messages}/>
         </div>
       </TabsContent>
       <TabsContent value="events">
@@ -280,13 +298,6 @@ export default async function AdminPage() {
     </Tabs>
         </div>
         </main>
-        <footer className="px-8 py-4 grid flex flex-row mt-4 justify-between bg-muted-t">
-          <div className="row-start-4">
-          <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
-          </div>
-          <div className="row-start-4">
-          <p>Privacy Policy | T&Cs</p>
-        </div></footer>
     </div></div>
   )
 }
@@ -313,7 +324,7 @@ function UserCard({
       <div className="w-10 h-10 mt-2">
       <Avatar>
         <AvatarImage src={path} className="rounded-full w-10 h-10"/>
-        <AvatarFallback className="rounded-full bg-muted py-3 px-4">{name[0].toUpperCase()}</AvatarFallback>
+        <AvatarFallback className="rounded-full transparent-dark border">{name[0].toUpperCase()}</AvatarFallback>
       </Avatar>
       </div>
       <div className="items-start">

@@ -50,7 +50,7 @@ export default async function HomePage(){
             </div>
       <div className=" items-center">
         <div className=" sm:pb-16 sm:px-0">
-        <div className="sm:float-right p-6">
+        <div className="sm:float-right p-4">
             <TimerCountDown userid={userId.userId} nextCourse={nextCourse.map(course=>course.course_table)}/>
     <div className="flex flex-row justify-between bg-muted rounded-lg p-6 mt-2 w-[320px] sm:w-[350px] hidden sm:flex">
         <p className="text-dark">See Articles by many of our writers and authors onboard</p>

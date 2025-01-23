@@ -1,11 +1,12 @@
 import Image from "next/image"
-import Logo from '@/app/images/logo1.png'
+import Logo from '@/app/images/logo2.png'
 import LoginAdmin from "./loginAdmin"
 
 export default async function Login(){
     return(
-    <div className="">
-            <div className="grid justify-center mt-16 bg-muted p-6">
+        <div className="back-image">
+    <div className=" sm:py-20 pt-16 backdrop">
+            <div className="grid justify-center py-8 dark">
                 <div className="grid justify-items-center">
                     <Image
                     alt="logo"
@@ -17,14 +18,15 @@ export default async function Login(){
                 </div>
                 <LoginAdmin/>
             </div>
-            <footer className="fixed bottom-0 p-8 border-t w-full flex flex-row justify-between">
+        <footer className=" bottom-0 p-8 py-12 sm:flex sm:flex-row sm:justify-between">
             <div className="row-start-4">
-          <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
-          </div>
-          <div className="row-start-4">
-          <p>Privacy Policy | T&Cs</p>
-        </div>
-            </footer>
+                <p>&copy;copyright.beerasafe@{new Date().getFullYear()}</p>
+            </div>
+            <div className="row-start-4 sm:py-0 py-2">
+                <p>Privacy Policy | T&Cs</p>
+            </div>
+        </footer>
+    </div>
     </div>
     )
 }

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod"
 import { redirect } from "next/navigation"
 import { handleDecryption, togglePasswordVisibility } from "@/app/services/services"
-import { Eye } from "lucide-react"
+import { Eye, EyeOff } from "lucide-react"
 import { loginUserSchema } from "@/schema/formSchemas"
 
 export default function LoginAdmin(){
@@ -79,7 +79,7 @@ export default function LoginAdmin(){
         })
         }
     return(
-            <div className="my-12">
+            <div className="sm:my-8 transparent-dark p-4 shadow-lg rounded-lg">
                 <div>
                     <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -117,12 +117,12 @@ export default function LoginAdmin(){
                                 )}
                                 />
                                 <div className="flex justify-between">
-                                <Eye className="h-4 w-4 hidden" /><p className="desc mt-2" onClick={() => togglePasswordVisibility()}>Toggle password</p>
+                                <p className="desc mt-2" id="see" onClick={() => togglePasswordVisibility()}><EyeOff/> Toggle password</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <Button className="my-4 text-white" id="submit" type="submit">Login</Button>
+                    <Button className="my-4 text-white w-full" id="submit" type="submit">Login</Button>
                     {form.formState.errors.root && (
                         <div className="bg-light p-2 text-center rounded-md">{form.formState.errors.root.message}</div>
                     )}
