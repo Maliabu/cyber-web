@@ -167,8 +167,15 @@ a{
   color: rgb(2, 165, 250) !important;
   border: 1px solid rgb(2,165, 250);
 }
+.bg-bluey{
+  background-color: rgba(2, 163, 250, 0.487) !important;
+  color: white !important;
+}
 .text-white{
   color: aliceblue !important;
+}
+.border-light{
+  border-color: white !important;
 }
 .text-dark{
   color: rgb(0, 0, 0) !important;

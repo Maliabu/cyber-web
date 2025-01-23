@@ -23,7 +23,7 @@ export default function Admin(messages:{id: number, email: string, message: stri
         <div className="transparent-dark p-8 ml-4 rounded-lg">
             <div className="flex flex-row justify-between">
                 <div className="flex text-2xl tracking-tight font-bold"><Bell className="mr-5 mt-1"/> Your Messages</div>
-                <div className="h-10 w-10 grid justify-center items-center rounded-full bg-darker">{allMessages.length}</div>
+                <div className="h-10 w-10 grid justify-center items-center rounded-full bg-primary">{allMessages.length}</div>
             </div>
             <div className="p-4 bg-darker mt-6 rounded-lg w-3/4 admin">
             {
@@ -32,7 +32,7 @@ export default function Admin(messages:{id: number, email: string, message: stri
                         {/* <div className="h-10 w-10 transparent-dark grid rounded-full justify-center items-center mr-5">{message.email[0].toUpperCase()}</div> */}
                         <Avatar>
                           <AvatarImage src="" className="rounded-full w-30 h-30"/>
-                          <AvatarFallback className="rounded-full dark text-white">{message.email[0].toUpperCase()}</AvatarFallback>
+                          <AvatarFallback className="rounded-full bg-primary">{message.email[0].toUpperCase()}</AvatarFallback>
                         </Avatar>
                         <div className="mx-5">
                         <p className="desc">{message.email}</p>
