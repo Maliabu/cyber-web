@@ -12,7 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
-import { CalendarArrowDownIcon, HandshakeIcon, HomeIcon, MenuIcon, PaperclipIcon, Search, Users2Icon } from "lucide-react";
+import { Calendar, CalendarArrowDownIcon, HandshakeIcon, HomeIcon, MenuIcon, PaperclipIcon, Search, Users2Icon } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -45,6 +45,26 @@ const components: { title: string; href: string; description: string }[] = [
       "",
   },
 ]
+const students: {title: string; href: string; description: string}[] = [
+  {
+    title: "Basic Cyber Security Awareness",
+    href: "/offers#courses",
+    description:
+      "",
+  },
+  {
+    title: "Intermediate Ethical Hacking",
+    href: "/offers#courses",
+    description:
+      "",
+  },
+  {
+    title: "Advanced CyberSecurity Certification",
+    href: "/offers#courses",
+    description:
+      "",
+  },
+]
 
 export default async function Menu() {
 
@@ -62,10 +82,23 @@ export default async function Menu() {
       </div>
     }
   }
+  function booking(){
+    if(userId.userId !== null){
+      return(
+        <Link href="https://calendar.app.google/fvWn27cUmcaMvW9G7">
+              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
+              </Link>
+      )
+    } else return(
+      <Link href="/sign-in">
+              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
+              </Link>
+    )
+  }
 
   return (
     <div className="sm:p-0">
-      <main className="hidden sm:flex sm:flex-row justify-between px-8 sm:py-4 items-center text-dark">
+      <main className="hidden sm:flex sm:flex-row justify-between px-8 sm:py-4 items-center">
         <Link href="/">
           <Image
             className="w-[120px]"
@@ -77,19 +110,19 @@ export default async function Menu() {
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div className="sm:mx-6 md:mx-6 lg:mx-12 text-md font-bold tracking-tight">Home</div>
+        <div className="sm:mx-6 md:mx-6 lg:mx-12 text-md text-foreground font-bold tracking-tight">Home</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/blog" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
-        <div className="sm:mr-2 md:mr-2 lg:mr-6 text-md font-bold tracking-tight">Blog</div>
+        <div className="sm:mr-2 md:mr-2 lg:mr-6 text-md text-foreground font-bold tracking-tight">Blog</div>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem className="text-white">
-          <NavigationMenuTrigger><div className=" text-md tracking-tight nav-a">Our Services</div> </NavigationMenuTrigger>
+        <NavigationMenuItem className="">
+          <NavigationMenuTrigger><div className=" text-md tracking-tight font-bold">Services</div> </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-2 p-6 md:w-[250px] md:grid-cols-1 lg:w-[200px] ">
               <p className="desc py-4 border-b">Services</p>
@@ -110,9 +143,9 @@ export default async function Menu() {
           <NavigationMenuLink className="nav-a">
           <div className="sm:mx-2 md:mx-2 lg:mx-6">
           <div className="flex h-5 items-center space-x-4 text-sm">
-        <div className="text-md font-bold tracking-tight">Events</div>
+        <div className="text-md text-foreground font-bold tracking-tight">Events</div>
         <Separator orientation="vertical" />
-        <div className="text-md font-bold tracking-tight">News</div>
+        <div className="text-md text-foreground font-bold tracking-tight">News</div>
       </div></div>
       </NavigationMenuLink>
           </Link>
@@ -121,10 +154,10 @@ export default async function Menu() {
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className="nav-a">
             <div className="sm:mx-2 md:mx-2 lg:mx-6">
-            <div className="flex h-5 items-center space-x-4 text-sm ml-4">
-        <div className="text-md font-bold tracking-tight">Community</div>
+            <div className="flex h-5 items-center space-x-4 text-sm">
+        <div className="text-md text-foreground font-bold tracking-tight">Community</div>
         <Separator orientation="vertical" />
-        <div className=" font-bold tracking-tight">Contact</div>
+        <div className="text-foreground font-bold tracking-tight">Contact</div>
       </div></div>
             </NavigationMenuLink>
           </Link>
@@ -151,23 +184,23 @@ export default async function Menu() {
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <div className="grid grid-cols-1 gap-4 py-4">
-          <Link href="/" className="hover:text-muted text-dark border-t">
+          <Link href="/" className="hover:text-muted  border-t">
           <div className="flex flex-row mt-5">
           <HomeIcon size="16"/> 
           <p className="mx-5">Home</p></div></Link>
-          <Link href="/blog" className="my-3 hover:text-blue text-dark">
+          <Link href="/blog" className="my-3 hover:text-blue ">
           <div className="flex flex-row">
           <PaperclipIcon size="16"/> 
           <p className="mx-5">Blog<p className="desc mt-1">Best Reads from the best</p></p></div></Link>
-          <Link href="/offers" className="hover:text-blue text-dark">
+          <Link href="/offers" className="hover:text-blue ">
           <div className="flex flex-row">
           <HandshakeIcon size="16"/> 
           <p className="mx-5">Services<p className="desc mt-1">Training, consultancy, pentesting & more...</p></p></div></Link>
-          <Link href="/contact" className="my-3 hover:text-blue text-dark">
+          <Link href="/contact" className="my-3 hover:text-blue ">
           <div className="flex flex-row">
           <Users2Icon size="16"/> 
           <p className="mx-5"> Our Community<p className="desc mt-1">Contacts and socials</p></p></div></Link>
-          <Link href="/events" className="hover:text-blue text-dark border-b">
+          <Link href="/events" className="hover:text-blue  border-b">
           <div className="flex flex-row mb-5">
           <CalendarArrowDownIcon size="16"/> 
           <p className="mx-5">News & Events<p className="desc mt-1">All our events and happenings</p></p></div></Link>
@@ -182,7 +215,7 @@ export default async function Menu() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className=" py-1 px-2 text-dark rounded-sm font-bold">in</div>
+          <div className=" py-1 px-2  rounded-sm ">in</div>
           Instagram
         </Link>
         <Link
@@ -191,7 +224,7 @@ export default async function Menu() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="py-2 px-3 font-bold text-dark">x</div>
+          <div className="py-2 px-3  ">x</div>
           twitter
         </Link>
           </div>
@@ -200,15 +233,47 @@ export default async function Menu() {
       </SheetContent>
     </Sheet></div></div>
       <div> 
-        <div className=" sm:flex sm:flex-row bg-muted justify-between p-2">
+        <div className=" sm:flex sm:flex-row bg-muted justify-between p-2 px-8">
         <SearchBar/>
         <div className="sm:flex sm:flex-row hidden">
-              <div className="border p-2 text-sm rounded-lg mx-2">Students</div>
-              <div className="border p-2 text-sm rounded-lg">IT Professionals</div>
-              <div className="border p-2 text-sm rounded-lg mx-2">Startups</div>
-              <div className="border p-2 text-sm rounded-lg">Fintechs</div>
+          <NavigationMenu>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger><div className=" text-md tracking-tight">Students</div> </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[200px] gap-2 p-6 md:w-[250px] md:grid-cols-1 lg:w-[200px] ">
+              <p className="desc py-4 border-b">Courses / Classes</p>
+              {students.map((component) => (
+                <ListItem
+                  key={component.title}
+                  title={component.title}
+                  href={component.href}
+                  className=" hover:text-primary text-dark p-1"
+                >
+                </ListItem>
+              ))}
+              <p className="desc py-4 border-b">Training / Workshops</p>
+              <ListItem
+                  key={1}
+                  title="Coporate Training Workshops"
+                  href="/offers#courses"
+                  className=" hover:text-primary text-dark p-1"
+                >
+                </ListItem>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        </NavigationMenu>
+              <div className=" p-2 text-sm font-bold rounded-lg">IT Professionals</div>
+              <div className=" p-2 text-sm font-bold rounded-lg mx-2">Startups</div>
+              <div className=" p-2 text-sm font-bold rounded-lg">Fintechs</div>
             </div>
           </div>
+        </div>
+
+<div className="grid justify-items-center sm:px-20 sm:pt-8 p-8">
+          <h5 className="text-5xl text-center leading-10 sm:w-[750px] tracking-tight font-bold">Schedule an interview with our mentors!</h5>
+          Get started with a course in cybersecurity
+          {booking()}
         </div>
     </div>
   );

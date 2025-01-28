@@ -33,7 +33,7 @@ type ArticlecardProps = {
     console.log(votes)
     return (
       <div>
-      <Card className="sm:p-6 mt-1 background-none">
+      <Card className="sm:p-6 mt-1 mr-6 background-none">
       <div className="relative h-80 sm:w-92">
         <Image
             aria-hidden

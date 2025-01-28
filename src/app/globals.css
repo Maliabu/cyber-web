@@ -140,12 +140,11 @@ a{
   color: rgb(247, 245, 245) !important;
 }
 .back-classes{
-  background-image: url("images/box.jpeg") !important;
-  background-size: 20% !important;
+  background-image: url("images/laptop.png") !important;
+  background-size: 15% !important;
   background-repeat: no-repeat !important;
-  background-position: right;
+  background-position: 92%;
   overflow-x: hidden !important;
-  color: rgb(255, 255, 255) !important;
 }
 .back-schedule{
   background-image: url("images/orbs.png") !important;

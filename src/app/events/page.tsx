@@ -12,10 +12,10 @@ export default async function Events(){
     return <div>
         <Menu/>
         <div>
-            <div id="events">
-                <div className="sm:p-16 p-6 grid justify-items-center">
-                <h1 className="text-5xl leading-10 tracking-tight font-bold">Events</h1>
-                <h5>Check out whats happening</h5></div>
+            <div id="events" className="">
+                <div className="sm:px-16 p-6 grid justify-items-center">
+                <h1 className="text-5xl leading-10 tracking-tight font-bold hidden">Events</h1>
+                <h5 className="hidden">Check out whats happening</h5></div>
                     <div className="grid sm:grid-cols-3 grid-cols-1 bg-muted gap-4 p-6 sm:p-8 sm:admin">
                         {events.map(event => (
                             <div key={event.id} className="p-4 bg-white rounded-lg">

@@ -165,7 +165,8 @@ export const groupBy = (by: string, arr: IObject[]) => {
     // had a datas: [] causing errors
     const key = arr[by as keyof IObject]
     accumulatedObject[key] = accumulatedObject[key] || []
-    accumulatedObject[key].push(`${arr.name} / ${arr.datas} / ${arr.date}`)
+    // accumulatedObject[key].push(`${arr.name} / ${arr.datas} / ${arr.date}`)
+    accumulatedObject[key].push(arr.name)
     return accumulatedObject
   }, {} as IObjectKeys)
 }
