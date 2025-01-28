@@ -78,17 +78,9 @@ export default function TimerCountDown(userId, nextCourse){
         <CardDescription>Diving into the ethics of cyber security with our experts</CardDescription>
       </CardHeader>
       <CardContent>
-      {nextClass()}
-        <Link
-            className="flex h-full mt-6 w-full select-none flex-col justify-end rounded-md p-6 outline focus:shadow-md"
-            href="/offers#courses">
-            <div className="mb-2 text-lg font-medium">
-                Cyber security Training
-            </div>
-            <p className="text-sm leading-tight">
-            Basic Cybersecurity Awareness, Intermediate Ethical Hacking Course, Advanced Cybersecurity Certification...
-            </p>
-        </Link>
+      <div>
+        <div>{nextCourse}</div>
+      </div>
       </CardContent>
       <CardFooter>
         {userId.userid !== null?

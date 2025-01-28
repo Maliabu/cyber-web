@@ -94,8 +94,7 @@ export function Chart() {
             right: 30,
             left: 0,
             bottom: 0,
-          }}
-        >
+          }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#00000000" />
           <XAxis dataKey="name" className="text-md" />
           <YAxis />

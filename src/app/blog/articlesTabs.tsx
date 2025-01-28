@@ -74,7 +74,7 @@ export default function ArticlesTabs(
     
     return(
         <div>
-        <div className="sm:p-6">
+        <div className="sm:p-6 border-t">
         <div className="sm:float-right sm:-mx-6">
       <Card className="w-[320px] border-none bg-muted p-2">
       <CardHeader>
@@ -107,7 +107,7 @@ export default function ArticlesTabs(
       <h5>Comments</h5>
     </Card>
     </div>
-      <NavigationMenu>
+      <NavigationMenu className="hidden">
     <NavigationMenuList>
       <NavigationMenuItem>
       <Link href="/" legacyBehavior passHref className="page-link">

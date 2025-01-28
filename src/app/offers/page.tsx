@@ -101,7 +101,7 @@ export default async function Services(){
                     For: Students, IT professionals, and organizations
                     </p>
                     <div>
-                      <p className="desc p-2 bg-muted rounded-md mb-4">Modules</p>
+                      <p className="desc p-2 border-b mb-4">Modules</p>
                       <div className="text-dark">
                         <ul className="w-[200px]">
                         <li className="leading-4">Basic Cybersecurity Awareness</li>
@@ -143,7 +143,7 @@ export default async function Services(){
                     For: Organizations without dedicated security teams.
                     </p>
                     <div>
-                      <p className="desc p-2 bg-muted rounded-md mb-4">Packages</p>
+                      <p className="desc p-2 border-b mb-4">Packages</p>
                       <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Security Policy Creation</li>
@@ -221,7 +221,7 @@ export default async function Services(){
                     For: SMBs, international tech startups, financial institutions, and e-commerce businesses.
                     </p>
                     <div>
-                      <p className="desc p-2 bg-muted rounded-md mb-4">Packages</p>
+                      <p className="desc p-2 border-b mb-4">Packages</p>
                       <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Web Application Pentesting</li>
@@ -308,7 +308,7 @@ export default async function Services(){
                     Remote Partners: Freelancers for international projects (use platforms like Upwork).
                     </p>
                     <div>
-                      <p className="desc p-2 bg-muted rounded-md mb-4">Packages</p>
+                      <p className="desc p-2 border-b mb-4">Packages</p>
                       <div className="">
                         <ul className="w-[200px]">
                         <li className="leading-4">Bug Bounty Management</li>
