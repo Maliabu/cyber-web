@@ -2,7 +2,7 @@
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "./app-sidebar"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { useRouter, redirect } from "next/navigation";
 
 

@@ -52,7 +52,7 @@ export default async function AdminPage() {
   const messages = await db.query.messagesTable.findMany()
 
   return (
-    <div className="px-8" id="dashboard">
+    <div className="sm:px-8">
     <Tabs defaultValue="dashboard">
       <TabsList className="flex flex-row justify-between">
       <TabsTrigger value="dashboard"><LayoutDashboardIcon /> Dashboard</TabsTrigger>
@@ -98,7 +98,7 @@ export default async function AdminPage() {
               </div>
             </div>
         </div>
-        <div className="pt-6 text-xl font-bold tracking-tight">Service Data</div>
+        <div className="pt-2 text-xl font-bold tracking-tight">Service Data</div>
         <div className="py-2 w-full grid grid-cols-3 gap-2">
             <div className="p-8  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
