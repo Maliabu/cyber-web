@@ -82,19 +82,6 @@ export default async function Menu() {
       </div>
     }
   }
-  function booking(){
-    if(userId.userId !== null){
-      return(
-        <Link href="https://calendar.app.google/fvWn27cUmcaMvW9G7">
-              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
-              </Link>
-      )
-    } else return(
-      <Link href="/sign-in">
-              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><Calendar className="size-6"/> Schedule an Interview Asap</Button>
-              </Link>
-    )
-  }
 
   return (
     <div className="sm:p-0">
@@ -233,7 +220,7 @@ export default async function Menu() {
       </SheetContent>
     </Sheet></div></div>
       <div> 
-        <div className=" sm:flex sm:flex-row bg-muted justify-between p-2 px-8">
+        <div className=" sm:flex sm:flex-row bg-muted justify-between p-2 sm:px-8 px-6">
         <SearchBar/>
         <div className="sm:flex sm:flex-row hidden">
           <NavigationMenu>
@@ -263,17 +250,11 @@ export default async function Menu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         </NavigationMenu>
-              <div className=" p-2 text-sm font-bold rounded-lg">IT Professionals</div>
-              <div className=" p-2 text-sm font-bold rounded-lg mx-2">Startups</div>
-              <div className=" p-2 text-sm font-bold rounded-lg">Fintechs</div>
+              <div className=" p-2 text-sm font-medium rounded-lg">IT Professionals</div>
+              <div className=" p-2 text-sm font-medium rounded-lg mx-2">Startups</div>
+              <div className=" p-2 text-sm font-medium rounded-lg">Fintechs</div>
             </div>
           </div>
-        </div>
-
-<div className="grid justify-items-center sm:px-20 sm:pt-8 p-8">
-          <h5 className="text-5xl text-center leading-10 sm:w-[750px] tracking-tight font-bold">Schedule an interview with our mentors!</h5>
-          Get started with a course in cybersecurity
-          {booking()}
         </div>
     </div>
   );

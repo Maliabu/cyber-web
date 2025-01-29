@@ -125,6 +125,15 @@ export const addNextCourseSchema = z.object({
 export const deleteSchema = z.object({
     courseId: z.coerce.number({required_error: "Please provide a course to delete.",}),
 })
+export const deleteEventSchema = z.object({
+    eventId: z.coerce.number({required_error: "Please provide an event to delete.",}),
+})
+export const deleteUserSchema = z.object({
+    userId: z.coerce.number({required_error: "Please provide a user to delete.",}),
+})
+export const deleteArticleSchema = z.object({
+    articleId: z.coerce.number({required_error: "Please provide an article to delete.",}),
+})
 
 export const voteSchema = z.object({
     email: z.string({required_error: "Please enter your email.",}).min(5, {

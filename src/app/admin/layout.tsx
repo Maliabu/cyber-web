@@ -2,6 +2,7 @@
 
 import { useRouter, redirect } from "next/navigation";
 import { useEffect } from "react";
+import { ThemeProvider } from "../themeProvider";
 
 export default function Layout({
     children,
@@ -21,7 +22,14 @@ export default function Layout({
     return (
       <>
         <main>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
           {children}
+          </ThemeProvider>
         </main>
       </>
     );

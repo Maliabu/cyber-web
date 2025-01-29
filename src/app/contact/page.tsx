@@ -52,13 +52,13 @@ export default async function About(){
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card></Link>
-    <div className="bg-gradient-to-r from-sky-900 to-sky-900 text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
+    <div className="bg-darker flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
         <p className="w-1/4">You can Leave a Message</p>
         <SendMessage/>
     </div>
     <Link href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
-    <div className="bg-gradient-to-r from-slate-800 to-slate-900 flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
-        <p className="w-1/4 text-white sm:m-6 m-4">Join our whatsapp community</p>
+    <div className="bg-darker flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
+        <p className="w-1/4 sm:m-6 m-4">Join our whatsapp community</p>
         <Image
         src={Whatsapp}
         alt="whatsapp logo"
