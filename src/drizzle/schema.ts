@@ -105,7 +105,7 @@ export const commentsTable = pgTable('comments_table', {
   id: serial('id').primaryKey(),
   email: text('email').notNull().unique(),
   comment: varchar('comment'),
-  article: integer('article_id').notNull().references(() => articlesTable.id),
+  article: integer('article_id').notNull().references(() => articlesTable.id, { onDelete: 'cascade'}),
   createdAt,
   updatedAt,
 });
@@ -114,8 +114,8 @@ export const replyTable = pgTable('reply_table', {
   id: serial('id').primaryKey(),
   email: text('email').notNull().unique(),
   reply: varchar('comment'),
-  comment: integer('comment_id').notNull().references(() => commentsTable.id),
-  article: integer('article_id').notNull().references(() => articlesTable.id),
+  comment: integer('comment_id').notNull().references(() => commentsTable.id, { onDelete: 'cascade'}),
+  article: integer('article_id').notNull().references(() => articlesTable.id, { onDelete: 'cascade'}),
   createdAt,
   updatedAt,
 });
@@ -124,7 +124,7 @@ export const votesTable = pgTable('votes_table', {
   id: serial('id').primaryKey(),
   email: text('email').notNull(),
   vote: integer('vote'),
-  article: integer('article_id').notNull().references(() => articlesTable.id),
+  article: integer('article_id').notNull().references(() => articlesTable.id, { onDelete: 'cascade'}),
   createdAt,
   updatedAt,
 });

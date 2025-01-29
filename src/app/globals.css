@@ -180,7 +180,7 @@ a{
   color: rgb(0, 0, 0) !important;
 }
 .scroll-y-blog{
-  height: 60vh !important;
+  height: 70vh !important;
   scroll-behavior: smooth !important;
   overflow-x: hidden !important;
 }
@@ -239,4 +239,7 @@ p.desc{
 .transparent-dark{
   background-color: rgba(0, 0, 0, 0.336) !important;
   color: aliceblue !important;
+}
+.filled{
+  width: 80vw !important;
 }

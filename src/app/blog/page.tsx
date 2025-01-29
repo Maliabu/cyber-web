@@ -15,7 +15,7 @@ export default async function Blog(){
     return(
         <div>
         <Menu/>
-        <div className="p-6">
+        <div className="sm:p-6">
           <ArticlesTabs {...votes}/>
         </div>
         <Footer/>

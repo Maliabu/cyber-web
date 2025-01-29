@@ -4,7 +4,7 @@ import { db } from "@/drizzle/db";
 import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable, votesTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteSchema, loginUserSchema, messagesSchema, updateCourseSchema, voteSchema } from '@/schema/formSchemas'
+import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteArticleSchema, deleteEventSchema, deleteSchema, deleteUserSchema, loginUserSchema, messagesSchema, updateCourseSchema, voteSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
@@ -201,6 +201,43 @@ Promise<{error: boolean | undefined}>{
     }
 
     await db.delete(courseTable).where(eq(courseTable.id, data.courseId))
+
+    return {error: false}
+}
+
+export async function deleteEvent(unsafeData: z.infer<typeof deleteEventSchema>): 
+Promise<{error: boolean | undefined}>{
+    const {success, data} = deleteEventSchema.safeParse(unsafeData)
+
+    if (!success){
+        return {error: true}
+    }
+
+    await db.delete(EventsTable).where(eq(EventsTable.id, data.eventId))
+
+    return {error: false}
+}
+export async function deleteUser(unsafeData: z.infer<typeof deleteUserSchema>): 
+Promise<{error: boolean | undefined}>{
+    const {success, data} = deleteUserSchema.safeParse(unsafeData)
+
+    if (!success){
+        return {error: true}
+    }
+
+    await db.delete(usersTable).where(eq(usersTable.id, data.userId))
+
+    return {error: false}
+}
+export async function deleteArticle(unsafeData: z.infer<typeof deleteArticleSchema>): 
+Promise<{error: boolean | undefined}>{
+    const {success, data} = deleteArticleSchema.safeParse(unsafeData)
+
+    if (!success){
+        return {error: true}
+    }
+
+    await db.delete(articlesTable).where(eq(articlesTable.id, data.articleId))
 
     return {error: false}
 }

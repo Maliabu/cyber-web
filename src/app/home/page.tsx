@@ -22,6 +22,7 @@ import { db } from "@/drizzle/db";
 import { courseTable, currencyTable, nextCourseTable } from "@/drizzle/schema";
 import { desc, eq } from "drizzle-orm";
 import CourseAd from "../resources/courseAd";
+import NullAd from "../resources/nullAd";
 
 export default async function HomePage(){
 
@@ -41,14 +42,26 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
               </Link>
     )
   }
+  function courseAd(){
+    if(course.length > 0){
+      return <CourseAd nextCourse={course[0]}/>
+
+    } else {
+      return <NullAd/>
+    }
+  }
 
     return(
       <div className="sm:p-0">
       <div className=" items-center">
+          <div className="grid justify-items-center sm:px-20 sm:pt-8 p-8">
+          <h5 className="text-5xl text-center leading-10 sm:w-[750px] tracking-tight font-bold">Schedule an interview with our mentors!</h5>
+          Get started with a course in cybersecurity
+          {booking()}
+        </div>
         <div className=" sm:pb-16 sm:px-0">
         <div className="sm:float-right bg-muted p-4">
-            {/* <TimerCountDown userid={userId.userId} nextCourse={course[0]}/> */}
-            <CourseAd nextCourse={course[0]}/>
+            {courseAd()}
     <div className="flex flex-row justify-between bg-white rounded-lg p-6 mt-2 w-[320px] sm:w-[400px] hidden">
         <div className="text-2xl tracking-tight font-bold leading-6">Blog with us. <br/>Read our best Articles<p className="font-medium mt-4">See Articles by many of our writers and authors onboard</p></div>
         <Link href="/blog" className=""><Button className="text-white">Our Blog</Button></Link>
@@ -104,10 +117,10 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
                     className="flex h-full text-dark w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
                     href="/offers#courses">
                       <p className="desc bg-muted p-2">For: Students, IT professionals, and organizations</p>
-                      <div className="grid justify-items-center px-16 pt-16">
+                      <div className="grid justify-items-center px-12 pt-16">
                         <TrafficConeIcon className="size-40 text-white bg-primary p-8 rounded-full"/>                      
                     </div>
-                    <div className="p-6 sm:p-12 rounded-b-xl">
+                    <div className="p-6 sm:p-8 rounded-b-xl">
                       <div className=" text-3xl mt-4 font-bold text-card-foreground leading-7 tracking-tight">
                       Cyber Security Training</div>
                     <p className="text-sm text-card-foreground my-8">
@@ -139,7 +152,7 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
                       <div className="grid justify-items-center px-16 pt-16">
                         <HeartHandshakeIcon className="size-40 text-white bg-primary p-8 rounded-full"/>
                     </div>
-                    <div className="p-6 sm:p-12  rounded-b-xl">
+                    <div className="p-6 sm:p-8  rounded-b-xl">
                       <div className=" text-3xl mt-4 font-bold text-card-foreground tracking-tight leading-7">
                       Consultancy and Managed Security Services</div>
                     <p className="text-sm text-card-foreground my-8">
@@ -171,7 +184,7 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
                       <div className="grid justify-items-center px-16 pt-16">
                         <ShieldCheckIcon className="size-40 text-white bg-primary p-8 rounded-full"/>
                     </div>
-                    <div className="p-6 sm:p-12  rounded-b-xl">
+                    <div className="p-6 sm:p-8  rounded-b-xl">
                       <div className=" text-3xl mt-4 text-card-foreground font-bold leading-7 tracking-tight">
                       Penetration Testing Services</div>
                     <p className="text-sm text-card-foreground my-8">

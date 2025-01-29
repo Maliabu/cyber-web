@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
-import DeletePage from "../courses/deletePage"
+import DeletePage from "./deletePage"
 
 // define custom props for userCard component
 type EventcardProps = {
@@ -23,7 +23,7 @@ type EventcardProps = {
     const path = '/events/'+image
     return (
       <div className="flex flex-row justify-between">
-      <Card className="w-5/6 grid grid-cols-5 gap-4 p-6 mt-1 mr-4">
+      <Card className="w-5/6 grid grid-cols-5 gap-4 p-6 mt-1 mr-4 border-none bg-muted">
         <div className="w-10 h-10">
             <Image src={path} width={80} height={80} alt="event image"/>
         </div>

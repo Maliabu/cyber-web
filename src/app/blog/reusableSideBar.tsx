@@ -1,6 +1,6 @@
 import * as Tabs from "@radix-ui/react-tabs";
 
-export default function AppSidebar() {
+export default function ReUsableSidebar() {
     return(
 	<Tabs.Root defaultValue="tab1" orientation="horizontal">
 		<Tabs.List aria-label="tabs example">

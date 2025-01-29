@@ -12,7 +12,7 @@ type EnrollCardProps = {
     email,
   }: EnrollCardProps){
     return (
-      <Card className="w-5/6 grid grid-cols-2 gap-4 p-6 mt-1 dark ">
+      <Card className="w-5/6 grid grid-cols-2 gap-4 p-6 mt-1  border-none bg-muted">
         <div className="items-start">
           <p className="desc">Course</p>
         <p className="mt-2">{courseId}</p></div>

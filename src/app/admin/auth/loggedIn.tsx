@@ -30,9 +30,10 @@ export default function Logged(){
 
   const data = groupBy('name', datas)
     return(
-          <div className="flex flex-row justify-between items-center">
-            <div className="h-10 w-10 bg-primary grid rounded-full justify-center items-center">{token.toUpperCase()}</div>
-            Hi, {name}
+          <div className="flex flex-row justify-between">
+            <div className="h-10 w-10 bg-primary text-white grid font-bold rounded-full justify-center items-center">{token.toUpperCase()}</div>
+            <div className=" leading-4 w-2/3">
+            Hi, {name}. Welcome to the dashboard!</div>
         </div>
     )
 }

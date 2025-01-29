@@ -10,7 +10,6 @@ import {
 import { db } from "@/drizzle/db"
 import { Bell, BookCheckIcon, BugPlay, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Moon, Paperclip, Sun, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "../users/page"
-import Logo from '@/app/images/logo2.png'
 import Image from "next/image";
 import AddPage from "../addPage"
 import { AvatarFallback, AvatarImage, Avatar } from "@/components/ui/avatar"
@@ -35,6 +34,8 @@ import { auth } from "@clerk/nextjs/server"
 import Logged from "../auth/loggedIn"
 import { getMyDay, getMyMonth } from "@/app/services/success"
 import { groupBy, grouping } from "@/app/services/services"
+import Messages from "../messages/messages"
+import {UserCard} from "../users/userCard"
 
 export default async function AdminPage() {
   
@@ -51,111 +52,80 @@ export default async function AdminPage() {
   const messages = await db.query.messagesTable.findMany()
 
   return (
-    <div className="justify-stretch dark bg-darker max-h-full">
-    <div className="">
-      <main className="sm:flex sm:flex-row">
-      <div className="grid grid-cols-1 justify-between p-8 w-[250px] transparent-dark">
-        <div className="self-center">
-        <a href="/">
-            <Image
-                aria-hidden
-                src={Logo}
-                alt="File icon"
-                width={100}
-                height={100}/></a>
-        </div>
-        <div className="my-10 p-3 border rounded-full w-full">
-        <Logged/>
-        </div>
-        <div className="flex flex-row hidden justify-between border-b py-3 mt-2 rounded-sm">
-          <Sun className="mr-2"/> Light Mode</div>
-          <div className="flex flex-row justify-between border-b py-3 rounded-sm">
-          <Moon className="mr-2 text-primary" size={16}/> <p className="desc">Dark Mode</p></div>
-        <div className="self-center mt-72">
-          <LogoutAdmin/>
-        </div>
-        <footer className="py-4 mt-4">
-          <div className="">
-          <p className="desc">&copy;copyright.cybersecurity<br/>@{new Date().getFullYear()}</p>
-          </div>
-          <div className="my-4">
-          <p className="desc">Privacy Policy | T&Cs</p>
-        </div></footer>
-      </div>
-        <div className="w-full h-full ml-2 rounded-lg">
-    <Tabs defaultValue="dashboard" className="">
-      <TabsList>
-      <TabsTrigger value="dashboard"><LayoutDashboardIcon className="mx-2 w-4 h-4"/> Dashboard</TabsTrigger>
-        <TabsTrigger value="user"><Users className="mx-2 w-4 h-4"/> Users</TabsTrigger>
-        <TabsTrigger value="events"><CalendarCheck2 className="mx-2 w-4 h-4"/> Events</TabsTrigger>
-        <TabsTrigger value="articles"><Paperclip className="mx-2 w-4 h-4"/> Articles</TabsTrigger>
-        <TabsTrigger value="courses"><BugPlay className="mx-2 w-4 h-4"/> Courses</TabsTrigger>
-        <TabsTrigger value="account"><User className="mx-2 w-4 h-4"/>Admin Account</TabsTrigger>
-        <TabsTrigger value="messages"><Bell className="mx-3 w-4 h-4"/><p className="border-l transparent-dark">{messages.length}</p></TabsTrigger>
+    <div className="px-8" id="dashboard">
+    <Tabs defaultValue="dashboard">
+      <TabsList className="flex flex-row justify-between">
+      <TabsTrigger value="dashboard"><LayoutDashboardIcon /> Dashboard</TabsTrigger>
+        <TabsTrigger value="user" className="sm:px-14"><Users /> Users</TabsTrigger>
+        <TabsTrigger value="events"><CalendarCheck2 /> Events</TabsTrigger>
+        <TabsTrigger value="articles" className="sm:px-14"><Paperclip /> Articles</TabsTrigger>
+        <TabsTrigger value="courses"><BugPlay /> Courses</TabsTrigger>
+        <TabsTrigger value="account" className="sm:px-14"><User />Admin Account</TabsTrigger>
+        <TabsTrigger value="messages"><Bell /><p className="border-l border">{messages.length}</p></TabsTrigger>
       </TabsList>
-      <TabsContent value="dashboard" className="tabs bg-darker px-2 rounded-lg">
-        <div className="pt-6 text-xl font-bold tracking-tight">User Related data</div>
-        <div className="pt-2 w-full grid grid-cols-4 gap-2">
-            <div className="p-8 bg-bluey rounded-2xl">
+      <TabsContent value="dashboard" className=" p-4 bg-muted rounded-lg sm:tabs">
+        <div className=" text-xl font-bold tracking-tight">User Related data</div>
+        <div className="pt-2 grid grid-cols-4 gap-2">
+            <div className="p-4  bg-background rounded-2xl">
               <div className="flex flex-row justify-between">
-                <div>
+                <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { users.length}</div><p className=" pt-4 border-t mt-4 border-light">Users</p></div>
-              <UsersIcon className="w-10 h-10"/>
+              { users.length}</div><p className=" mt-2">Users</p></div>
+              <UsersIcon className="w-10 h-10 text-primary"/>
               </div></div>
-            <div className="p-8 bg-bluey rounded-2xl">
+            <div className="p-4  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
-            <div>
+            <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { mentors.length}</div><p className=" pt-4 mt-4 border-t border-light">Mentors</p></div>
-              <Users2Icon className="w-10 h-10"/>
+              { mentors.length}</div><p className="mt-2">Mentors</p></div>
+              <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-bluey rounded-2xl ">
+            <div className="p-4  bg-background rounded-2xl ">
             <div className="flex flex-row justify-between">
-            <div>
+            <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { subscriptions.length}</div><p className=" pt-4 mt-4 border-t border-light">Subscriptions</p></div>
-              <BookCheckIcon className="w-10 h-10"/>
+              { subscriptions.length}</div><p className="mt-2">Subscriptions</p></div>
+              <BookCheckIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 bg-bluey rounded-2xl ">
+            <div className="p-4  bg-background rounded-2xl ">
             <div className="flex flex-row justify-between">
-            <div>
+            <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { enrollments.length}</div><p className=" pt-4 mt-4 border-t border-light">Enrollment<br/> requests</p></div>
-              <GraduationCapIcon className="w-10 h-10"/>
+              { enrollments.length}</div><p className="mt-2">Enrollment<br/> requests</p></div>
+              <GraduationCapIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
         </div>
         <div className="pt-6 text-xl font-bold tracking-tight">Service Data</div>
         <div className="py-2 w-full grid grid-cols-3 gap-2">
-            <div className="p-8 transparent-dark rounded-2xl">
+            <div className="p-8  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { courses.length}</div><p className="desc pt-4 mt-4 border-t">Courses</p></div>
+              { courses.length}</div><p className="mt-2">Courses</p></div>
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 transparent-dark rounded-2xl">
+            <div className="p-8  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { events.length}</div><p className="desc pt-4 mt-4 border-t">Events</p></div>
+              { events.length}</div><p className="mt-2">Events</p></div>
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
-            <div className="p-8 transparent-dark rounded-2xl">
+            <div className="p-8  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { articles.length}</div><p className="desc pt-4 mt-4 border-t">Articles</p></div>
+              { articles.length}</div><p className="mt-2">Articles</p></div>
               <Paperclip className="w-10 h-10 text-primary"/>
               </div></div>
         </div>
         <div>
-            <div className=" rounded-2xl p-8 transparent-dark">
+            <div className=" rounded-2xl p-8  bg-background">
             <div className="text-3xl leading-5 font-bold tracking-tight">Statistics Analysis</div>
               <Chart/>
             </div>
@@ -168,30 +138,7 @@ export default async function AdminPage() {
       </TabsContent>
       <TabsContent value="messages" className="tabs">
         <div>
-        <div className="transparent-dark p-8 rounded-lg">
-            <div className="flex flex-row justify-between">
-                <div className="flex text-2xl tracking-tight font-bold"><Bell className="mr-5 mt-1"/> Your Messages</div>
-                <div className="h-10 w-10 grid justify-center items-center rounded-full bg-primary">{messages.length}</div>
-            </div>
-            <div className="p-4 bg-darker mt-6 rounded-lg w-3/4 admin">
-            {
-                messages.map((message:{id: number, email: string, message: string | null, updatedAt: Date}) => (
-                    <div className="py-8 border-b flex flex-row" key={message.id}>
-                        {/* <div className="h-10 w-10 transparent-dark grid rounded-full justify-center items-center mr-5">{message.email[0].toUpperCase()}</div> */}
-                        <Avatar>
-                          <AvatarImage src="" className="rounded-full w-30 h-30"/>
-                          <AvatarFallback className="rounded-full bg-primary">{message.email[0].toUpperCase()}</AvatarFallback>
-                        </Avatar>
-                        <div className="mx-10">
-                        <p className="desc">{message.email}</p>
-                        <div className="py-2 leading-4">{message.message}</div>
-                        <p className="desc float-right mt-2">{getMyDay(message.updatedAt.getDay())}, {getMyMonth(message.updatedAt.getMonth())} {message.updatedAt.getDate()}, {message.updatedAt.getFullYear()
-                        }</p></div>
-                    </div>
-                ))
-            }
-            </div>
-        </div>
+          <Messages {...messages}/>
         </div>
       </TabsContent>
 
@@ -328,48 +275,7 @@ export default async function AdminPage() {
         </div>
       </TabsContent>
     </Tabs>
-        </div>
-        </main>
-    </div></div>
-  )
-}
-
-// define custom props for userCard component
-type UsercardProps = {
-  id: number
-  isActive: boolean
-  name: string
-  username: string
-  profilePicture: string | null
-}
-// one time usercard component with custom prop type
-function UserCard({
-  id, 
-  name,
-  username,
-  profilePicture
-}: UsercardProps){
-  const path = "/profilePictures/"+profilePicture
-  return (
-    <div className="flex flex-row justify-between">
-    <Card className="w-3/4 flex flex-row justify-between items-start p-3 mt-1 ">
-      <div className="w-10 h-10 mt-2">
-      <Avatar>
-        <AvatarImage src={path} className="rounded-full w-10 h-10"/>
-        <AvatarFallback className="rounded-full bg-primary">{name[0].toUpperCase()}</AvatarFallback>
-      </Avatar>
-      </div>
-      <div className="items-start">
-        <p className="desc">Name</p>
-      <p className="mt-2">{name}</p></div>
-      <div>
-      <p className="desc">username</p>
-      <p className="mt-2">{username}</p></div>
-      <div>
-      <p className="desc">id</p>
-      <p className="mt-2">{id}</p></div>
-    </Card>
-    <DeletePage id={id} submitId={username}/>
     </div>
   )
 }
+

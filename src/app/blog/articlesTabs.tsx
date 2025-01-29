@@ -17,6 +17,8 @@ import {
 import {ArticlesCard} from "./articlesCard"
 import TabNavItem from "../routes/tabItem"
 import { useState } from "react"
+import Image from "next/image"
+import { getMyDay, getMyMonth } from "../services/success"
 
 export default function ArticlesTabs(
     articles: { articles_table:
@@ -70,12 +72,17 @@ export default function ArticlesTabs(
     }
     const allArticles = Object.values(articles);
     const justArticles = Object.values(allArticles.map(articles=>articles.articles_table))
-    console.log(articles)
+    function path(image: string | null){
+      return '/articles/'+ image
+    }
+    function ref(link: string){
+      return '#'+ link
+    }
     
     return(
         <div>
         <div className="sm:p-6 border-t">
-        <div className="sm:float-right sm:-mx-6">
+        <div className="sm:float-right hidden sm:block sm:-mx-6">
       <Card className="w-[320px] border-none bg-muted p-2">
       <CardHeader>
         <div className="text-2xl font-bold tracking-tight leading-6">Recommended Articles</div>
@@ -87,11 +94,21 @@ export default function ArticlesTabs(
             votes_table: {id: number, vote: number | null, email: string, article: number}
           }) => (
             <CardContent className="" key={article.articles_table.id}>
-            <div className="mt-1 sm:px-6 pb-4 border-b" 
+            <div className="mt-1 pb-4 border-b" 
             onClick={() => getContent(article)}>
               <TabNavItem id="tab1" activeTab={activeTab} setActiveTab={setActiveTab} 
-              title={<div><div className="text-lg font-bold tracking-tight leading-5 pointer blog">
-              {article.articles_table.title}</div>
+              title={<div>
+                <div className="relative h-36 sm:w-92">
+                <Image
+                    aria-hidden
+                    alt="article image"
+                    src={path(article.articles_table.image)}
+                    fill
+                    className="object-cover"/>
+                  </div>
+                  <Link href={ref(article.articles_table.title)}>
+                <div className="text-lg font-bold tracking-tight mt-4 leading-5 text-dark pointer blog">
+              {article.articles_table.title}</div></Link>
               <div className="line-clamp-4 text-sm leading-4 mt-2">
               {article.articles_table.content}
               </div></div>}/>
@@ -102,9 +119,6 @@ export default function ArticlesTabs(
             <p className="desc p-6">
                 Leave us a message or comment on any of the articles we have and lets keep the discussion flowing
             </p>
-    </Card>
-    <Card className="p-4 border-none mt-4 w-[320px]">
-      <h5>Comments</h5>
     </Card>
     </div>
       <NavigationMenu className="hidden">
@@ -130,6 +144,52 @@ export default function ArticlesTabs(
       updatedAt={contents.articles_table.updatedAt}
       votes={contents.votes_table}
     />
+    </div>
+    <div className="sm:hidden mt-12">
+      <Card className="border-none">
+      <CardHeader>
+        <div className="text-3xl font-bold tracking-tight leading-6">Recommended Articles</div>
+      </CardHeader>
+      <div className="scroll-y-blog bg-white py-4">
+        {
+          allArticles.map((article: {
+            articles_table: { id: number; title: string; content: string; writer: string, image: string | null, updatedAt: Date},
+            votes_table: {id: number, vote: number | null, email: string, article: number}
+          }) => (
+            <CardContent className="" key={article.articles_table.id}>
+            <div className="mt-1 pb-4" 
+            onClick={() => getContent(article)}>
+              <TabNavItem id="tab1" activeTab={activeTab} setActiveTab={setActiveTab} 
+              title={<div>
+                <div className="relative h-36 sm:w-92">
+                <Image
+                    aria-hidden
+                    alt="article image"
+                    src={path(article.articles_table.image)}
+                    fill
+                    className="object-cover"/>
+                  </div>
+                  <Link href={ref(article.articles_table.title)}>
+                <div className="text-3xl font-bold tracking-tight mt-4 leading-7 text-dark pointer blog">
+              {article.articles_table.title}</div></Link>
+              <div className="line-clamp-4 text-md leading-5 mt-2">
+              {article.articles_table.content}
+              </div>
+              <div className="py-8 border-b">
+              <p className="desc float-right"> {
+              getMyDay(article.articles_table.updatedAt.getDay())}, {getMyMonth(article.articles_table.updatedAt.getMonth())} {article.articles_table.updatedAt.getDate()}, {article.articles_table.updatedAt.getFullYear()
+              }</p>
+              </div>
+              </div>
+            }/>
+              </div>
+              </CardContent>
+          ))
+        }</div>
+            <p className="desc p-6">
+                Leave us a message or comment on any of the articles we have and lets keep the discussion flowing
+            </p>
+    </Card>
     </div>
         </div>
         </div>

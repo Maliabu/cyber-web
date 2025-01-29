@@ -33,7 +33,7 @@ type ArticlecardProps = {
     console.log(votes)
     return (
       <div>
-      <Card className="sm:p-6 mt-1 mr-6 background-none">
+      <Card className="sm:p-6 mt-1 sm:mr-6 background-none" id={title}>
       <div className="relative h-80 sm:w-92">
         <Image
             aria-hidden
@@ -41,8 +41,8 @@ type ArticlecardProps = {
             alt="article image"
             fill
             className="object-cover"/></div>
-      <div className="">
-      <div className="text-5xl tracking-tight font-bold leading-9 mt-6">{title}</div>
+      <div className="p-6">
+      <div className="text-5xl tracking-tight font-bold leading-10 mt-6">{title}</div>
       <span className="mt-6 sm:float-right sm:mx-12"> {}</span>
       <p className="py-6 border-b">By {writer}</p>
       <p className="py-6 float-right"> {

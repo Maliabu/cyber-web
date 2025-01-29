@@ -37,7 +37,7 @@ type CoursecardProps = {
     const path = '/courses/'+image
     return (
       <div className="flex flex-row justify-between">
-      <Card className="grid grid-cols-3 gap-2 p-2 mt-1 w-3/4">
+      <Card className="grid grid-cols-3 gap-2 p-2 mt-1 w-3/4 border-none bg-muted">
         <div className="w-10 h-10">
             <Image src={path} width={80} height={80} alt="course image"/>
         </div>
