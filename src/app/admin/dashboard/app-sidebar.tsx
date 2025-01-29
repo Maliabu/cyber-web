@@ -23,16 +23,15 @@ import ThemeLogo from "@/app/themeLogo"
 const items = [
   {
     title: "Dashboard",
-    url: "#dashboard",
+    url: "#",
     icon: Home,
   }
 ]
 
-export function AppSidebar(_props: any) {
-    console.log(_props)
+export function AppSidebar() {
   return (
-    <Sidebar className="">
-      <SidebarContent className="">
+    <Sidebar>
+      <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel><div className="self-center">
             <ThemeLogo/>
