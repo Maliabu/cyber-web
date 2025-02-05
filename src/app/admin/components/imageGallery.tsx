@@ -42,7 +42,7 @@ export default function ImageGallery({visible, onClose, onSelect, onDelete}:Prop
     return (
         <div tabIndex={-1} onKeyDown={({key}) => {
             if(key === "Escape") handleClose()
-        }} className="fixed inset-0 bg-black bg-opacty-40 backdrop-blur-sm z-50 flex items-center justify-center">
+        }} className="fixed inset-0 bg-opacty-40 backdrop-blur-sm z-50 flex items-center justify-center">
             <div className="md:w-[760px] relative w-[80%] h-[80%] bg-background border text-foreground p-4 rounded-md overflow-y-auto">
                 <div className="absolute top-0 right-0">
                     <Button onClick={() => handleClose()} variant="ghost"><X/></Button>
