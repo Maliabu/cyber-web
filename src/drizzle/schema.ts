@@ -129,6 +129,15 @@ export const votesTable = pgTable('votes_table', {
   updatedAt,
 });
 
+export const editorImagesTable = pgTable('editor_images', {
+  id: serial('id').primaryKey(),
+  image: text('image').notNull().unique(),
+  createdAt,
+  updatedAt,
+})
+
+export type InsertEditorImage = typeof editorImagesTable.$inferInsert;
+export type SelectEditorImage = typeof editorImagesTable.$inferSelect;
 
 export type InsertUser = typeof usersTable.$inferInsert;
 export type SelectUser = typeof usersTable.$inferSelect;

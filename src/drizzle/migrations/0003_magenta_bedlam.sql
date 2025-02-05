@@ -1,0 +1,1 @@
+ALTER TABLE "editor_images" ADD CONSTRAINT "editor_images_image_unique" UNIQUE("image");

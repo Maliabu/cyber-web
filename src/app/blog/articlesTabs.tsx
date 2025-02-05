@@ -19,6 +19,7 @@ import TabNavItem from "../routes/tabItem"
 import { useState } from "react"
 import Image from "next/image"
 import { getMyDay, getMyMonth } from "../services/success"
+import parse from 'html-react-parser'
 
 export default function ArticlesTabs(
     articles: { articles_table:
@@ -110,7 +111,7 @@ export default function ArticlesTabs(
                 <div className="text-lg font-bold tracking-tight mt-4 leading-5 text-dark pointer blog">
               {article.articles_table.title}</div></Link>
               <div className="line-clamp-4 text-sm leading-4 mt-2">
-              {article.articles_table.content}
+              {parse(article.articles_table.content)}
               </div></div>}/>
               </div>
               </CardContent>

@@ -243,3 +243,77 @@ p.desc{
 .filled{
   width: 80vw !important;
 }
+pre {
+  background: #0D0D0D;
+  color: #FFF;
+  font-family: 'JetBrainsMono', monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+
+  code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+      color: #616161;
+  }
+
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-attribute,
+  .hljs-tag,
+  .hljs-name,
+  .hljs-regexp,
+  .hljs-link,
+  .hljs-name,
+  .hljs-selector-id,
+  .hljs-selector-class {
+      color: #fc7676;
+  }
+
+  .hljs-number,
+  .hljs-meta,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-literal,
+  .hljs-type,
+  .hljs-params {
+      color: #f9ae00;
+  }
+
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-bullet {
+      color: #23fa01;
+  }
+
+  .hljs-title,
+  .hljs-section {
+      color: #fbf46b;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag {
+      color: #00cef7;
+  }
+
+  .hljs-emphasis {
+      font-style: italic;
+  }
+
+  .hljs-strong {
+      font-weight: 700;
+  }
+}
+.editor {
+  blockquote{
+    color: var(--foreground) !important;
+  }
+  p, strong, h1, h2, h3, h4, h5, h6{
+    color: var(--foreground) !important;
+  }
+}

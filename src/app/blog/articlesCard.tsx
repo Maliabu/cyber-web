@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import AutoUpVote from "./autoVote"
 import { getMyDay, getMyMonth } from "../services/success"
+import parse from 'html-react-parser'
 
 // define custom props for userCard component
 type ArticlecardProps = {
@@ -30,7 +31,6 @@ type ArticlecardProps = {
     var upvotes
     votes!==null?upvotes=Object.values({votes}):upvotes=[]
     const path = '/articles/'+image
-    console.log(votes)
     return (
       <div>
       <Card className="sm:p-6 mt-1 sm:mr-6 background-none" id={title}>
@@ -48,7 +48,7 @@ type ArticlecardProps = {
       <p className="py-6 float-right"> {
       getMyDay(updatedAt.getDay())}, {getMyMonth(updatedAt.getMonth())} {updatedAt.getDate()}, {updatedAt.getFullYear()
       }</p>
-      <h6 className="text-wrap lh-1 mt-20">{content}</h6>
+      <div className="text-wrap lh-1 mt-20 prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none">{parse(content)}</div>
       <div className="flex flex-row mt-16 hidden">
         <AutoUpVote id={id} upvotes={upvotes.length}/>
       </div>
