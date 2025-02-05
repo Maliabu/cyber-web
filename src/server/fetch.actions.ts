@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { EventsTable, articlesTable, courseTable, currencyTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable, votesTable } from "@/drizzle/schema";
+import { EventsTable, articlesTable, courseTable, currencyTable, editorImagesTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable, votesTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
 import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteArticleSchema, deleteEventSchema, deleteSchema, deleteUserSchema, loginUserSchema, messagesSchema, updateCourseSchema, voteSchema } from '@/schema/formSchemas'
@@ -90,6 +90,36 @@ export async function uploadArticleFile(formData: FormData) {
         await fs.writeFile(`./public/articles/${file.name}`, buffer);
     }
     revalidatePath("/");
+}
+
+export async function  uploadEditorFile(formData: FormData) {
+    const file = formData.get("file") as unknown as File;
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+    const data = {
+        "image": file.name
+    }        
+
+    try {
+        await fs.writeFile(`./public/editor/${file.name}`, buffer);
+        await db.insert(editorImagesTable).values(data)
+        return {"image": data.image}
+    }
+    catch{
+        await fs.mkdir('./public/editor')
+        await fs.writeFile(`./public/editor/${file.name}`, buffer);
+    }
+}
+
+export async function readEditorFiles(){
+    try{
+        const res = await db.query.editorImagesTable.findMany()
+        const images = res.map((image) => image.image)
+        const ids = res.map((ids) => ids.id)
+        return images
+    } catch{
+        return []
+    }
 }
 
 export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
@@ -240,6 +270,20 @@ Promise<{error: boolean | undefined}>{
     await db.delete(articlesTable).where(eq(articlesTable.id, data.articleId))
 
     return {error: false}
+}
+
+export async function deleteEditorFile(image: string): 
+Promise<{error: boolean | undefined}>{
+    const imageToDelete = await db.query.editorImagesTable.findFirst({
+        where: eq(editorImagesTable.image, image)
+    })
+    if(imageToDelete !== undefined){
+        const imageId = imageToDelete?.id
+        await db.delete(editorImagesTable).where(eq(editorImagesTable.id, imageId))
+        return {error: false}
+    }
+
+    return {error: true}
 }
 
 export async function addArticles(unsafeData: z.infer<typeof addArticleSchema>, formData: FormData) : 

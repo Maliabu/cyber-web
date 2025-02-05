@@ -4,6 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "./app-sidebar"
 import React, { useEffect } from "react"
 import { useRouter, redirect } from "next/navigation";
+import Providers from "../providers";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -21,7 +22,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AppSidebar />
       <main>
         <SidebarTrigger />
+        <Providers>
         {children}
+        </Providers>
       </main>
     </SidebarProvider>
   )

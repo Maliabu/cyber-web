@@ -12,11 +12,22 @@ import { Textarea } from '@/components/ui/textarea'
 import { addArticles } from "@/server/fetch.actions"
 import { addArticleSchema } from '@/schema/formSchemas'
 import { ReusableDrawer } from "../reusableDrawer"
-// import { tokenise } from "@/app/services/services"
 // import { useRouter } from "next/navigation"
+import Tiptap from '../components/tipTap'
+import { tokenise } from "@/app/services/services"
+import Editor from "../components/editor"
+import ImageGallery from "../components/imageGallery"
 
 
 export default function AddArticle() {
+  const [value, setValue] = React.useState("")
+  const [name, setName] = React.useState("")
+
+  React.useEffect(() => {
+    setName(tokenise()[0])
+  }, [])
+  // let language = ""
+  // language = value.split("language-")[1].split('"')[0]
 
     const form = useForm<z.infer<typeof addArticleSchema>>({
       resolver: zodResolver(addArticleSchema),
@@ -24,12 +35,13 @@ export default function AddArticle() {
           title: "",
           content: "",
           link: "",
-          writer: '',
+          writer: name,
           image: "",
       },
     })
 
     async function onSubmit(values: z.infer<typeof addArticleSchema>) {
+      values.content = value
         //create obj
         const app = document.getElementById('submit');
         const text = 'processing';
@@ -37,7 +49,7 @@ export default function AddArticle() {
           app.innerHTML = text;
         }
         values.image1?values.image=values.image1.name:null
-        // values.writer = tokenise()[1]
+        // values.writer = tokenise()[0]
 
         const formData = new FormData()
         formData.append("file", values.image1)
@@ -58,13 +70,12 @@ export default function AddArticle() {
 
     function formBuild(){
       return(
-      <div className="p-4 pb-0 admin">
+      <div className=" pb-0 admin">
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-2 w-full items-center gap-4">
-          <div>
-            <div className="flex flex-row">
-              <div className="flex flex-col w-1/2 space-y-1.5">
+        <div className="grid grid-cols-3 w-full gap-4">
+          <div className="col-span-1">
+              <div className="flex flex-col space-y-1.5">
               <FormField
                   control={form.control}
                   name="title"
@@ -81,7 +92,7 @@ export default function AddArticle() {
                   )}
                   />
               </div>
-              <div className="flex flex-col w-1/2 ml-2 space-y-1.5">
+              <div className="flex flex-col ml-2 space-y-1.5">
               <FormField
                   control={form.control}
                   name="link"
@@ -95,7 +106,7 @@ export default function AddArticle() {
                       </FormItem>
                   )}
                   />
-              </div></div>
+              </div>
               <div className="flex flex-col mt-2 space-y-1.5">
               <FormField
                   control={form.control}
@@ -114,26 +125,32 @@ export default function AddArticle() {
                   )}
                   />
               </div>
+          </div>
+          <div className="col-span-2">
               <div className="flex flex-col mt-2 space-y-1.5">
               <FormField
                   control={form.control}
                   name="content"
-                  render={({ field }) => (
+                  render={({ field: { value, onChange, ...fieldProps }  }) => (
                       <FormItem>
                       <FormLabel>Content</FormLabel>
                       <FormControl>
-                      <Textarea
+                      <Editor
+                      content={value}
+                      onChange={setValue}
+                      placeholder="Write your article here..."
+                       />
+                      {/* <Textarea
                   placeholder="Write your article, editing will happen automatically at submission..."
                   {...field}
-                />
+                /> */}
                       </FormControl>
                       <FormMessage />
                       </FormItem>
                   )}
                   />
-                  {/* <p className="desc">Your username will be attached to this article as <a>{tokenise()[1]}</a></p> */}
-              </div>
-          </div>
+                  <p className="desc">Your username will be attached to this article as <a>{name}</a></p>
+              </div></div>
         </div>
         <Button id="submit" className="my-4 text-white" type="submit">Add Article</Button>
         {form.formState.errors.root && (
