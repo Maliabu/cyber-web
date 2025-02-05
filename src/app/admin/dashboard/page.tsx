@@ -64,20 +64,20 @@ export default async function AdminPage() {
         <TabsTrigger value="messages"><Bell /><p className="border-l border">{messages.length}</p></TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard" className=" p-4 bg-muted rounded-lg sm:tabs">
-        <div className=" text-xl font-bold tracking-tight">User Related data</div>
+        <div className=" text-xl font-bold hidden tracking-tight">User Related data</div>
         <div className="pt-2 grid grid-cols-4 gap-2">
             <div className="p-4  bg-background rounded-2xl">
               <div className="flex flex-row justify-between">
                 <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { users.length}</div><p className=" mt-2">Users</p></div>
+              { users.length}</div><p className="desc mt-2">Users</p></div>
               <UsersIcon className="w-10 h-10 text-primary"/>
               </div></div>
             <div className="p-4  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
             <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { mentors.length}</div><p className="mt-2">Mentors</p></div>
+              { mentors.length}</div><p className="mt-2 desc">Mentors</p></div>
               <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -85,7 +85,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { subscriptions.length}</div><p className="mt-2">Subscriptions</p></div>
+              { subscriptions.length}</div><p className="mt-2 desc">Subscriptions</p></div>
               <BookCheckIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -93,18 +93,18 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { enrollments.length}</div><p className="mt-2">Enrollment<br/> requests</p></div>
+              { enrollments.length}</div><p className="mt-2 desc">Enrollment<br/> requests</p></div>
               <GraduationCapIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
         </div>
-        <div className="pt-2 text-xl font-bold tracking-tight">Service Data</div>
+        <div className="pt-2 text-xl font-bold hidden tracking-tight">Service Data</div>
         <div className="py-2 w-full grid grid-cols-3 gap-2">
             <div className="p-8  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { courses.length}</div><p className="mt-2">Courses</p></div>
+              { courses.length}</div><p className="mt-2 desc">Courses</p></div>
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { events.length}</div><p className="mt-2">Events</p></div>
+              { events.length}</div><p className="mt-2 desc">Events</p></div>
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { articles.length}</div><p className="mt-2">Articles</p></div>
+              { articles.length}</div><p className="mt-2 desc">Articles</p></div>
               <Paperclip className="w-10 h-10 text-primary"/>
               </div></div>
         </div>

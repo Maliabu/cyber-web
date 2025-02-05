@@ -74,8 +74,8 @@ export function Chart() {
 
   return (
           <div className="pb-12 border-t mt-6">
-            <p className="my-6 desc">Statistics of users activity over time(on a monthly basis)</p>
-            <div className="mt-10 h-[250px]">
+            <p className="my-4 desc">Statistics of users activity over time(on a monthly basis)</p>
+            <div className="mt-12 h-[250px]">
               {/* <ResponsiveContainer width="100%" height="100%">
               <LineChart width={400} height={400} data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
               <XAxis dataKey="name" />
@@ -96,8 +96,8 @@ export function Chart() {
             bottom: 0,
           }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#00000000" />
-          <XAxis dataKey="name" className="text-md" />
-          <YAxis />
+          {/* <XAxis dataKey="name" className="text-md" /> */}
+          {/* <YAxis /> */}
           <Tooltip content={<CustomTooltip/>}/>
           <Legend onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
           <Area type="monotone" dataKey="uv" stroke="#02a5fa" fill="#02a5fa" />
