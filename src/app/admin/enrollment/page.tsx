@@ -95,10 +95,10 @@ export default function Enroll(props: { courses: {id: number, title: string}[]})
         </div>
         <Button id="submit" className="my-4 text-white" type="submit">Enroll</Button>
         {form.formState.errors.root && (
-          <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+          <div className="border-1 border-destructive text-destructive p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Enrolled successfully </div>
+          <div className="border-1 border-primary text-primary p-2 text-center rounded-md"> Enrolled successfully </div>
         )}
       </form>
       </Form>

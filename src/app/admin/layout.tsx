@@ -14,14 +14,14 @@ export default function Layout({
     useEffect(() => {
 
         const token = window.localStorage.getItem("token")
-        console.log(token)        
 
         if(token == "") return router.push("/admin/auth")
     }, [])
 
     return (
       <>
-        <main>
+        <main
+            suppressHydrationWarning={true}>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"

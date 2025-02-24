@@ -15,8 +15,8 @@ type SubscribeCardProps = {
       <div className="flex flex-row justify-between">
       <Card className="w-5/6 grid grid-cols-2 gap-4 p-6 mt-1 border-none bg-muted ">
         <div>
-        <p className="desc">User</p>
-        <p className="mt-2">{email}</p></div>
+        <p className="text-sm">User</p>
+        <p className="text-sm">{email}</p></div>
         <div></div>
       </Card>
       <DeletePage id={id} submitId={email}/>

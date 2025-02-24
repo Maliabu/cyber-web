@@ -9,7 +9,7 @@ import {
 export default function Home() {
   return (
     <ClerkProvider>
-    <div>
+    <div className="">
       <Menu/>
       <HomePage/>
       <Footer/>

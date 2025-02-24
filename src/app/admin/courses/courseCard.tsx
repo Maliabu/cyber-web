@@ -1,57 +1,71 @@
+"use client"
+
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
 import DeletePage from "./deletePage"
 import EditCourse from "./editPage"
-import { db } from "@/drizzle/db"
-import { eq } from "drizzle-orm"
-import { courseTable, usersTable } from "@/drizzle/schema"
+import { UserType, courseType, currencyType } from "../dashboard/types"
+import useSWR from "swr"
+import { fetcher } from "@/app/services/services"
 
-// define custom props for userCard component
-type CoursecardProps = {
-    id: number
-    title: string
-    description: string
-    image: string | null
-  }
-  // one time usercard component with custom prop type
-  export async function CourseCard({
+  export function CourseCard({
     id,
     title,
     description,
+    courseOutline,
     image,
-  }: CoursecardProps){
-    const currency = await db.query.currencyTable.findMany()
-    const mentors  =  await db.query.usersTable.findMany({
-      where: eq(usersTable.userType, "mentor")
-    })
-    async function selected(id: number){
-      const course = await db.query.courseTable.findFirst(
-        {
-          where: eq(courseTable.id, id)
-        }
-      )
-      let courseSelect = course || {title: '', id: 0, description: '', courseOutline: ''}
-      return <EditCourse currency={currency} mentors={mentors} course={courseSelect}/>
+    mentor,
+    startDate,
+    endDate,
+    currency,
+    amount,
+    createdAt,
+    updatedAt
+  }: courseType){
+    let curr: currencyType[] = []
+    const { data: currencies, error: currencyError } = useSWR("/api/currency", fetcher)
+    if(currencies){
+        curr = currencies
     }
 
-    const path = '/courses/'+image
+    let mentors: UserType[] = []
+    const { data: data1, error: error1 } = useSWR("/api/mentors", fetcher)
+    if(data1){
+        mentors = data1
+    }
+
+
+    let courseId = id
+    let course: courseType[] = []
+    const { data: courses, error: courseError } = useSWR(
+      courseId ? `/api/courses/${courseId}` : null, fetcher)
+    if(!courses){
+      return <div>Loading courses...</div>
+    }
+    if(course){
+        course = courses
+        // return <div>Loading courses...</div>
+      }
+    let courseSelect = course[0]
+
+    // const path = '/courses/'+image
     return (
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between h-20">
       <Card className="grid grid-cols-3 gap-2 p-2 mt-1 w-3/4 border-none bg-muted">
         <div className="w-10 h-10">
-            <Image src={path} width={80} height={80} alt="course image"/>
+            <Image src={image} width={200} height={100} alt="course image" unoptimized/>
         </div>
-        <div className="items-start">
+        <div className="items-start text-sm">
           <p className="desc">Title</p>
-        <p className="mt-2">{title}</p></div>
-        <div>
+        <p className="">{title}</p></div>
+        <div className="text-sm">
         <p className="desc">Description</p>
-        <p className="mt-2">{description}</p></div>
+        <p className="">{description}</p></div>
         <div></div>
       </Card>
       <div className="flex flex-row gap-1">
         <DeletePage id={id} submitId={title}/>
-        {selected(id)}
+        <EditCourse currency={curr} mentors={mentors} course={courseSelect}/>        
         </div>
       </div>
     )

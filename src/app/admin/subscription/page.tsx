@@ -66,10 +66,10 @@ export default function Subscribe() {
         </div>
         <Button id="submit" className="my-4 text-white" type="submit">Subscribe</Button>
         {form.formState.errors.root && (
-          <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+          <div className="border-1 border-destructive text-destructive p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Subscribed successfully </div>
+          <div className="border-1 border-primary text-primary p-2 text-center rounded-md"> Subscribed successfully </div>
         )}
       </form>
       </Form>
@@ -77,7 +77,7 @@ export default function Subscribe() {
     }
 
   return (
-    <div className="font-[family-name:var(--font-futura)]">
+    <div>
       <ReusableDrawer page="Subscription" form={formBuild()}/>
     </div>
   )

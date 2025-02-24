@@ -11,28 +11,19 @@ import Link from "next/link";
 import { db } from "@/drizzle/db";
 import FooterSubscribe from "../admin/subscription/subscriptionFooter";
 import AutoFooterSubscribe from "../admin/subscription/autoSubscribe";
+import parse from 'html-react-parser'
 
 export default async function Footer() {
   const userId = await auth()
   const user = await currentUser()
   let email = ''
   email = user?.primaryEmailAddress?.emailAddress || ''
-  const articles = (await db.query.articlesTable.findMany()).slice(1, 3)
+
+  const articles = await db.query.articlesTable.findMany()
+  articles.slice(1, 3)
+
   return (
-      <footer className="justify-center text-white bg-darker dark">
-      <div className="px-8 py-6 sm:flex bg-muted sm:flex-row sm:justify-between">
-        <div className="text-3xl tracking-tight font-bold">Subscribe</div>
-                  <span className="">
-                      <p className="my-2">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></span>
-                      <div>
-                      {userId.userId === null?
-                      <div>
-                        <FooterSubscribe/>
-                      </div>
-                : 
-          <AutoFooterSubscribe email={email}/>}
-                  </div>
-              </div>
+      <footer className="dark text-white bg-black">
         <div className=" flex sm:flex-row flex-col gap-10 sm:px-24 p-12 justify-center">
         <div className="sm:row-start-3">
           Could be Helpful: Links
@@ -48,7 +39,9 @@ export default async function Footer() {
                 Event Recaps
               </ListItem> </ul>
             </NavigationMenu>
-            <h6 className="pt-6">
+        </div>
+        <div>
+        <h6 className="">
             Try these here:</h6>
           <NavigationMenu>
             <ul>
@@ -90,7 +83,6 @@ export default async function Footer() {
                         href="/blog"
                       >
                         <Image
-                aria-hidden
                 src="/file.svg"
                 alt="File icon"
                 width={16}
@@ -99,14 +91,14 @@ export default async function Footer() {
                         <div className="mb-2 mt-4 text-lg font-medium">
                           {article.title}
                         </div>
-                        <p className="text-sm leading-tight text-card-foreground">
+                        <div className="text-sm leading-tight text-card-foreground">
                           {article.title}
-                        </p>
+                        </div>
                       </Link>
                     </NavigationMenuLink>
                   </li>
                   <ListItem href="/blog" title="Introduction">
-                    {article.content}
+                    {parse(article.content)}
                   </ListItem>
                 </ul>
                 </NavigationMenu>
@@ -141,7 +133,17 @@ export default async function Footer() {
           <MailIcon className="size-4 mx-2"/>
           info@beerasafe
         </Link></div>
-        <div className="sm:px-8 sm:py-4 p-6 flex dark sm:flex-row flex-col sm:justify-between">
+
+        <div className="px-8 py-6 sm:flex sm:flex-row sm:justify-between">
+          <div className="text-3xl tracking-tight font-bold">Subscribe</div>
+                  <div className="">
+                      <p className="my-2 text-sm">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></div>
+                      {userId.userId === null?
+                        <FooterSubscribe/>
+                : 
+          <AutoFooterSubscribe email={email}/>}
+              </div>
+        <div className="sm:px-8 sm:py-4 p-6 flex text-sm sm:flex-row flex-col sm:justify-between">
           <div className="">
           <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
           </div>

@@ -21,10 +21,10 @@ export default async function Events(){
                     <div className="grid sm:grid-cols-3 grid-cols-1 bg-muted gap-4 p-6 sm:admin">
                         {events.map(event => (
                         <div key={event.id} className="">
-                            <div className="bg-darker text-background float-right -mt-4 p-2 rounded-tr-3xl rounded-bl-3xl">
-                        <p className="p-2"> {event.startDate !== null?getMyDay(event.startDate.getDay()):null}, {event.startDate !== null?getMyMonth(event.startDate.getMonth()):null} {event.startDate !== null?event.startDate.getDate():null}, {event.startDate !== null?event.startDate.getFullYear():null}</p>
+                            <div className="bg-black text-background float-right -mt-4 p-1 rounded-tr-3xl rounded-bl-3xl">
+                        <p className="p-2 text-sm"> {event.startDate !== null?getMyDay(event.startDate.getDay()):null}, {event.startDate !== null?getMyMonth(event.startDate.getMonth()):null} {event.startDate !== null?event.startDate.getDate():null}, {event.startDate !== null?event.startDate.getFullYear():null}</p>
                         </div>
-                        <Card className="w-full background-none py-4 px-0" key={event.id}>
+                        <Card className="w-full background-none px-0" key={event.id}>
                         <CardContent>
                             <div className="bg-white py-6 rounded-lg">
                     <div className="mb-2 p-6 text-3xl tracking-tight font-bold">
@@ -32,16 +32,16 @@ export default async function Events(){
                     </div>
                         <div className="relative h-64 w-92">
                     <Image
-                    aria-hidden
-                    src={"/events/"+event.image}
+                    src={event.image}
                     alt="File icon"
+                    unoptimized
                     className="object-cover"
                     fill/></div>
                     <p className="text-sm text-card-foreground p-6">
                       {event.description}
                     </p>
-                    <p className="p-6 my-4 border-b border-t desc"> Ends: {event.endDate !== null?getMyDay(event.endDate.getDay()):null}, {event.endDate !== null?getMyMonth(event.endDate.getMonth()):null} {event.endDate !== null?event.endDate.getDate():null}, {event.endDate !== null?event.endDate.getFullYear():null}</p>
-                    <Link href={event.link !== null?event.link:"/"}><div className="px-6"><MapPinHouseIcon/> Ticket</div></Link>
+                    <p className="p-6 my-4 border-b border-t text-sm"> Ends: {event.endDate !== null?getMyDay(event.endDate.getDay()):null}, {event.endDate !== null?getMyMonth(event.endDate.getMonth()):null} {event.endDate !== null?event.endDate.getDate():null}, {event.endDate !== null?event.endDate.getFullYear():null}</p>
+                    <Link href={event.link !== null?event.link:"/"}><div className="px-6 text-primary"><MapPinHouseIcon/> Ticket</div></Link>
                     </div>
                 </CardContent>
               </Card>
@@ -53,8 +53,8 @@ export default async function Events(){
         } return (
             <div className="">
                     <Image
-                    aria-hidden
                     src={nullEvent}
+                    unoptimized
                     alt="File icon"/></div>
         )
     }

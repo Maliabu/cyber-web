@@ -74,7 +74,7 @@ export function Chart() {
 
   return (
           <div className="pb-12 border-t mt-6">
-            <p className="my-4 desc">Statistics of users activity over time(on a monthly basis)</p>
+            <p className="my-4 text-sm">Statistics of users activity over time(on a monthly basis)</p>
             <div className="mt-12 h-[250px]">
               {/* <ResponsiveContainer width="100%" height="100%">
               <LineChart width={400} height={400} data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>

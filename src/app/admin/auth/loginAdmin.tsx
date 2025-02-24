@@ -37,6 +37,7 @@ export default function LoginAdmin(){
           const name = data[6]
           const email = data[4]
           const username = data[5]
+          const profile = data[7]
 
         // decrypt password n compare
         const dec = handleDecryption(second, third)
@@ -60,6 +61,7 @@ export default function LoginAdmin(){
                 localStorage.setItem("name", name)
                 localStorage.setItem("username", username)
                 localStorage.setItem("email", email)
+                localStorage.setItem("profile", profile)
                 redirect("/admin/dashboard")
             } 
             else if(res.toString() !== values.password){
@@ -79,7 +81,7 @@ export default function LoginAdmin(){
         })
         }
     return(
-            <div className="sm:my-8 transparent-dark p-4 shadow-lg rounded-lg">
+            <div className="sm:my-8 p-4 shadow-lg rounded-lg">
                 <div>
                     <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -117,14 +119,14 @@ export default function LoginAdmin(){
                                 )}
                                 />
                                 <div className="flex justify-between">
-                                <p className="desc mt-2" id="see" onClick={() => togglePasswordVisibility()}><EyeOff/> Toggle password</p>
+                                <p className="text-sm mt-2" id="see" onClick={() => togglePasswordVisibility()}><EyeOff/> Toggle password</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <Button className="my-4 text-white w-full" id="submit" type="submit">Login</Button>
                     {form.formState.errors.root && (
-                        <div className="bg-light p-2 text-center rounded-md">{form.formState.errors.root.message}</div>
+                        <div className="border-1 p-2 text-center rounded-md border-primary text-primary">{form.formState.errors.root.message}</div>
                     )}
                     </form>
                     </Form>

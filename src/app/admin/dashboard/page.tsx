@@ -1,22 +1,15 @@
-import {
-  Card,
-} from "@/components/ui/card"
+"use client"
+
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { db } from "@/drizzle/db"
 import { Bell, BookCheckIcon, BugPlay, CalendarCheck2, GraduationCapIcon, LayoutDashboardIcon, Moon, Paperclip, Sun, User, Users, Users2Icon, UsersIcon } from "lucide-react"
 import AddUser from "../users/page"
-import Image from "next/image";
 import AddPage from "../addPage"
-import { AvatarFallback, AvatarImage, Avatar } from "@/components/ui/avatar"
 import {Chart} from "../chart"
-import { eq } from "drizzle-orm"
-import { usersTable } from "@/drizzle/schema"
-import LogoutAdmin from "../auth/logoutAdmin"
 import Admin from "../auth/admin"
 import AddEvents from "../events/page"
 import { EventCard } from "../events/eventCard"
@@ -29,27 +22,66 @@ import Enroll from "../enrollment/page"
 import { SubscriptionCard } from "../subscription/SubscriptionCard"
 import Subscribe from "../subscription/page"
 import NextCourse from "../courses/nextCourse"
-import DeletePage from "../courses/deletePage"
-import { auth } from "@clerk/nextjs/server"
-import Logged from "../auth/loggedIn"
-import { getMyDay, getMyMonth } from "@/app/services/success"
-import { groupBy, grouping } from "@/app/services/services"
 import Messages from "../messages/messages"
 import {UserCard} from "../users/userCard"
+import useSWR from "swr"
+import { ArticleType, EnrollmentType, EventType, UserType, courseType, currencyType, messagesType, subscriptionsType } from "./types"
+import { fetcher } from "@/app/services/services"
 
-export default async function AdminPage() {
-  
-  const users  =  await db.query.usersTable.findMany()
-  const mentors  =  await db.query.usersTable.findMany({
-    where: eq(usersTable.userType, "mentor")
-  })
-  const events = await db.query.EventsTable.findMany()
-  const articles = await db.query.articlesTable.findMany()
-  const enrollments = await db.query.enrollmentsTable.findMany()
-  const courses = await db.query.courseTable.findMany()
-  const subscriptions = await db.query.subscriptionsTable.findMany()
-  const currency = await db.query.currencyTable.findMany()
-  const messages = await db.query.messagesTable.findMany()
+export default function AdminPage() {
+  let users: UserType[] = []
+  const { data, error } = useSWR("/api/users", fetcher);
+  if(data){
+      users = data
+  }
+
+  let mentors: UserType[] = []
+  const { data: data1, error: error1 } = useSWR("/api/mentors", fetcher);
+  if(data1){
+      mentors = data1
+  }
+
+  let event: EventType[] = []
+  const { data: events, error: eventsError } = useSWR("/api/events", fetcher);
+  if(events){
+      event = events
+  }
+
+  let article: ArticleType[] = []
+  const { data: articles, error: articleError } = useSWR("/api/articles", fetcher);
+  if(articles){
+      article = articles
+  }
+
+  let enroll: EnrollmentType[] = []
+  const { data: enrollment, error: enrollError } = useSWR("/api/enrollments", fetcher);
+  if(enrollment){
+      enroll = enrollment
+  }
+
+  let course: courseType[] = []
+  const { data: courses, error: courseError } = useSWR("/api/courses", fetcher);
+  if(courses){
+      course = courses
+  }
+
+  let subscription: subscriptionsType[] = []
+  const { data: subscriptions, error: subError } = useSWR("/api/subscriptions", fetcher);
+  if(subscriptions){
+      subscription = subscriptions
+  }
+
+  let currency: currencyType[] = []
+  const { data: currencies, error: currencyError } = useSWR("/api/currency", fetcher);
+  if(currencies){
+      currency = currencies
+  }
+
+  let message: messagesType[] = []
+  const { data: messages, error: messageError } = useSWR("/api/messages", fetcher);
+  if(messages){
+      message = messages
+  }
 
   return (
     <div className="sm:px-8">
@@ -61,7 +93,7 @@ export default async function AdminPage() {
         <TabsTrigger value="articles" className="sm:px-14"><Paperclip /> Articles</TabsTrigger>
         <TabsTrigger value="courses"><BugPlay /> Courses</TabsTrigger>
         <TabsTrigger value="account" className="sm:px-14"><User />Admin Account</TabsTrigger>
-        <TabsTrigger value="messages"><Bell /><p className="border-l border">{messages.length}</p></TabsTrigger>
+        <TabsTrigger value="messages"><Bell /><p className="border-l border">{message.length}</p></TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard" className=" p-4 bg-muted rounded-lg sm:tabs">
         <div className=" text-xl font-bold hidden tracking-tight">User Related data</div>
@@ -70,14 +102,14 @@ export default async function AdminPage() {
               <div className="flex flex-row justify-between">
                 <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { users.length}</div><p className="desc mt-2">Users</p></div>
+              { users.length}</div><p className="text-sm mt-2">Users</p></div>
               <UsersIcon className="w-10 h-10 text-primary"/>
               </div></div>
             <div className="p-4  bg-background rounded-2xl">
             <div className="flex flex-row justify-between">
             <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { mentors.length}</div><p className="mt-2 desc">Mentors</p></div>
+              { mentors.length}</div><p className="mt-2 text-sm">Mentors</p></div>
               <Users2Icon className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -85,7 +117,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { subscriptions.length}</div><p className="mt-2 desc">Subscriptions</p></div>
+              { subscription.length}</div><p className="mt-2 text-sm">Subscriptions</p></div>
               <BookCheckIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -93,7 +125,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div className="rounded-md">
               <div className="text-4xl font-bold tracking-tight">
-              { enrollments.length}</div><p className="mt-2 desc">Enrollment<br/> requests</p></div>
+              { enroll.length}</div><p className="mt-2 text-sm">Enrollment<br/> requests</p></div>
               <GraduationCapIcon className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -104,7 +136,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { courses.length}</div><p className="mt-2 desc">Courses</p></div>
+              { course.length}</div><p className="mt-2 text-sm">Courses</p></div>
               <BugPlay className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -112,7 +144,7 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { events.length}</div><p className="mt-2 desc">Events</p></div>
+              { event.length}</div><p className="mt-2 text-sm">Events</p></div>
               <CalendarCheck2 className="w-10 h-10 text-primary"/>
               </div>
             </div>
@@ -120,69 +152,69 @@ export default async function AdminPage() {
             <div className="flex flex-row justify-between">
             <div>
               <div className="text-4xl font-bold tracking-tight">
-              { articles.length}</div><p className="mt-2 desc">Articles</p></div>
+              { article.length}</div><p className="mt-2 text-sm">Articles</p></div>
               <Paperclip className="w-10 h-10 text-primary"/>
               </div></div>
         </div>
         <div>
             <div className=" rounded-2xl p-8  bg-background">
-            <div className="text-3xl leading-5 font-bold tracking-tight">Statistics Analysis</div>
+            <div className="text-2xl leading-5 font-bold tracking-tight">Statistics Analysis</div>
               <Chart/>
             </div>
         </div>
       </TabsContent>
       <TabsContent value="account" className="tabs">
         <div>
-          <Admin {...messages}/>
+          <Admin {...message}/>
         </div>
       </TabsContent>
       <TabsContent value="messages" className="tabs">
         <div>
-          <Messages {...messages}/>
+          <Messages {...message}/>
         </div>
       </TabsContent>
-
       <TabsContent value="events">
-                  {
-                    events.length > 0 ? (
-                      <div className="flex flex-col admin p-6">
-                        {events.map(event => (
-                          <EventCard key={event.id} {...event}/>
-                        ))}
-                      </div>
-                    ) : (
-                      <AddPage page={"Event"} />
-                    )
-                  }
-                <div className="p-6 mt-1 flex flex-row justify-between">
-                <AddEvents/>
-                <p>{articles.length} Total Events</p>
-                </div>
-              </TabsContent>
-                <TabsContent value="courses">
-                  {
-                    courses.length > 0 ? (
-                      <div className="flex flex-col admin p-6">
-                        {courses.map(course => (
-                          <CourseCard key={course.id} {...course}/>
-                        ))}
-                      </div>
-                    ) : (
-                      <AddPage page={"Course"} />
-                    )
-                  }
-                <div className="p-6 mt-1 flex flex-row justify-between">
-                  <div className="flex flex-row gap-2">
-                  <AddCourse currency={currency} mentors={mentors}/>
-                  <NextCourse courses={courses} /></div>
-                <p>{courses.length} Total Courses</p>
-                </div>
-                </TabsContent>
+        {
+          event.length > 0 ? (
+            <div className="flex flex-col admin p-6">
+              {event.map(event => (
+                <EventCard key={event.id} {...event}/>
+              ))}
+            </div>
+          ) : (
+            <AddPage page={"Event"} />
+          )
+        }
+        <div className="p-6 mt-1 flex flex-row justify-between">
+          <AddEvents/>
+          <p>{event.length} Total Events</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="courses">
+        {
+          course.length > 0 ? (
+            <div className="flex flex-col admin p-6">
+              {course.map(course => (
+                <CourseCard key={course.id} {...course}/>
+              ))}
+            </div>
+          ) : (
+            <AddPage page={"Course"} />
+          )
+        }
+        <div className="p-6 mt-1 flex flex-row justify-between">
+          <div className="flex flex-row gap-2">
+            <AddCourse currency={currency} mentors={mentors}/>
+            <NextCourse courses={course} />
+          </div>
+          <p>{course.length} Total Courses</p>
+        </div>
+      </TabsContent>
                 <TabsContent value="articles">
                   {
-                    articles.length > 0 ? (
+                    article.length > 0 ? (
                       <div className="flex flex-col admin p-6">
-                        {articles.map(article => (
+                        {article.map(article => (
                           <ArticlesCard key={article.id} {...article}/>
                         ))}
                       </div>
@@ -192,11 +224,10 @@ export default async function AdminPage() {
                   }
                 <div className="p-6 mt-1 flex flex-row justify-between">
                 <AddArticle/>
-                <p>{articles.length} Total Articles</p>
+                <p>{article.length} Total Articles</p>
                 </div>
-                </TabsContent>
+      </TabsContent>
       <TabsContent value="user">
-        <div>
             <Tabs defaultValue="users">
                 <TabsList className="flex flex-row justify-between">
                     <TabsTrigger value="users"><p>Users</p></TabsTrigger>
@@ -204,7 +235,7 @@ export default async function AdminPage() {
                     <TabsTrigger value="subscriptions"><p>Subscriptions</p></TabsTrigger>
                     <TabsTrigger value="enrollments"><p>Enrollment Requests</p></TabsTrigger>
                 </TabsList>
-                <TabsContent value="users">
+                <TabsContent value="users" className="admin">
                   {
                     users.length > 0 ? (
                       <div className="flex flex-col admin p-6">
@@ -239,9 +270,9 @@ export default async function AdminPage() {
                 </TabsContent>
                 <TabsContent value="subscriptions">
                   {
-                    subscriptions.length > 0 ? (
+                    subscription.length > 0 ? (
                       <div className="admin p-6">
-                        {subscriptions.map(subscription => (
+                        {subscription.map(subscription => (
                           <SubscriptionCard key={subscription.id} {...subscription}/>
                         ))}
                       </div>
@@ -251,14 +282,14 @@ export default async function AdminPage() {
                   }
                 <div className="p-6 mt-1 flex flex-row justify-between">
                 <Subscribe/>
-                <p>{subscriptions.length} Total Subscriptions</p>
+                <p>{subscription.length} Total Subscriptions</p>
                 </div>
                 </TabsContent>
                 <TabsContent value="enrollments">
                   {
-                    enrollments.length > 0 ? (
+                    enroll.length > 0 ? (
                       <div className="admin p-6">
-                        {enrollments.map(enrollment => (
+                        {enroll.map(enrollment => (
                           <EnrollCard key={enrollment.id} {...enrollment}/>
                         ))}
                       </div>
@@ -267,12 +298,11 @@ export default async function AdminPage() {
                     )
                   }
                 <div className="p-6 mt-1 flex flex-row justify-between">
-                <Enroll courses={courses}/>
-                <p>{enrollments.length} Total Enrollments</p>
+                <Enroll courses={course}/>
+                <p>{enroll.length} Total Enrollments</p>
                 </div>
                 </TabsContent>
             </Tabs>
-        </div>
       </TabsContent>
     </Tabs>
     </div>

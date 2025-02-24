@@ -34,10 +34,11 @@ export default function AddEvents() {
         if(app !== null){
           app.innerHTML = text;
         }
-        values.image1?values.image=values.image1.name:null
+        const file = values.image1
 
         const formData = new FormData()
-        formData.append("file", values.image1)
+        formData.append("file", file)
+        formData.append('folder', 'events')
 
         const data = await addEvents(values, formData)
         if(data?.error){
@@ -108,7 +109,7 @@ export default function AddEvents() {
               </div>
           </div>
           <div>
-              <div className="flex flex-col space-y-1.5 mt-6">
+              <div className="flex flex-col space-y-1.5">
               <p className="desc">Start Date</p>
               <FormField
                   control={form.control}
@@ -162,10 +163,10 @@ export default function AddEvents() {
         </div>
         <Button id="submit" className="my-4 text-white" type="submit">Add Event</Button>
         {form.formState.errors.root && (
-          <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+          <div className="border-1 border-destructive text-destructive p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Event added successfully </div>
+          <div className="border-1 border-primary text-primary p-2 text-center rounded-md"> Event added successfully </div>
         )}
       </form>
       </Form>
@@ -173,7 +174,7 @@ export default function AddEvents() {
     }
 
   return (
-    <div className="font-[family-name:var(--font-futura)]">
+    <div>
       <ReusableDrawer page="Event" form={formBuild()}/>
     </div>
   )

@@ -50,7 +50,7 @@ export default function ImageGallery({visible, onClose, onSelect, onDelete}:Prop
                 <div className="text-2xl font-bold tracking-tight leading-5">
                     Image Upload
                 </div>
-                <p className="desc">Select an image or images to upload to your article. These images are all images available to the editor uplaoded from previous articles</p>
+                <p className="text-sm">Select an image or images to upload to your article. These images are all images available to the editor uplaoded from previous articles</p>
                 <div className="border rounded-md p-8">
                     <div className="bg-muted rounded-md p-8 flex flex-col items-center">
                     <div className="rounded-md p-4 border-2 border-primary">
@@ -93,14 +93,14 @@ export default function ImageGallery({visible, onClose, onSelect, onDelete}:Prop
                         </FileUploader>
                     </div>
                     <div className="mt-4 leading-3">Click or Drag&Drop to upload an image</div>
-                    <p className="desc">audio (mp3) and large video (mp4) files may not be supported yet. Supported formats are images of *png, *jpg, *jpeg.</p>
+                    <p className="text-sm">audio (mp3) and large video (mp4) files may not be supported yet. Supported formats are images of *png, *jpg, *jpeg.</p>
                     <p id="err" className="p-2">Upload Size Limit: 1 MB/image (~1000000 bytes)</p>
                     </div>
                     {
                         !images?.length ? <div className="p-8 flex flex-col items-center">
                             <Image className="text-gray-500 p-3" size={100}/>
                             <div className="leading-3">No images to render</div>
-                            <p className="desc">all images from your previous article uploads are rendered here for reference</p>
+                            <p className="text-sm">all images from your previous article uploads are rendered here for reference</p>
                         </div>
                         : null
                     }

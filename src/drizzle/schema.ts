@@ -15,8 +15,10 @@ export const usersTable = pgTable('users_table', {
   username: varchar('username').notNull().unique(),
   profilePicture: varchar('profile_picture'),
   userType: text('type').notNull().default("user"),
-  isActive: boolean("is_active").notNull().default(true),
   decInit: varchar('decInitVector').notNull(),
+  isActive: boolean("is_active").notNull().default(true),
+  isLoggedIn: boolean("is_logged_in").notNull().default(false),
+  lastLogin: timestamp('last_login'),
   createdAt,
   updatedAt,
 });

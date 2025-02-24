@@ -74,7 +74,8 @@ export default function ArticlesTabs(
     const allArticles = Object.values(articles);
     const justArticles = Object.values(allArticles.map(articles=>articles.articles_table))
     function path(image: string | null){
-      return '/articles/'+ image
+      if(image !== null){
+      return image} else{return ''}
     }
     function ref(link: string){
       return '#'+ link
@@ -101,10 +102,10 @@ export default function ArticlesTabs(
               title={<div>
                 <div className="relative h-36 sm:w-92">
                 <Image
-                    aria-hidden
                     alt="article image"
                     src={path(article.articles_table.image)}
                     fill
+                    unoptimized
                     className="object-cover"/>
                   </div>
                   <Link href={ref(article.articles_table.title)}>
@@ -117,7 +118,7 @@ export default function ArticlesTabs(
               </CardContent>
           ))
         }</div>
-            <p className="desc p-6">
+            <p className="text-sm p-6">
                 Leave us a message or comment on any of the articles we have and lets keep the discussion flowing
             </p>
     </Card>
@@ -164,10 +165,10 @@ export default function ArticlesTabs(
               title={<div>
                 <div className="relative h-36 sm:w-92">
                 <Image
-                    aria-hidden
                     alt="article image"
                     src={path(article.articles_table.image)}
                     fill
+                    unoptimized
                     className="object-cover"/>
                   </div>
                   <Link href={ref(article.articles_table.title)}>

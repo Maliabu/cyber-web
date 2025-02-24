@@ -43,7 +43,7 @@ export default function FooterSubscribe() {
           window.location.reload()
         }
     }
-  return (<div className="p-4 pb-0 admin">
+  return (<div className="p-4 pb-0">
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex flex-col space-y-1.5">
@@ -62,10 +62,10 @@ export default function FooterSubscribe() {
             </div>
       <Button id="submit" className="my-4 text-white" type="submit">Subscribe</Button>
       {form.formState.errors.root && (
-        <div className="bg-light p-2 mt-1 rounded-md">{form.formState.errors.root.message}</div>
+        <div className="text-primary p-2 mt-1 rounded-md">{form.formState.errors.root.message}</div>
       )}
       {form.formState.isSubmitSuccessful && (
-        <div className="bg-light p-2 text-center rounded-md"> Subscribed successfully </div>
+        <div className="text-primary p-2 text-center rounded-md"> Subscribed successfully </div>
       )}
     </form>
     </Form>

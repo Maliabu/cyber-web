@@ -1,3 +1,4 @@
+import { date } from "@/app/services/services";
 import { getMyDay, getMyMonth } from "@/app/services/success";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell } from "lucide-react";
@@ -22,8 +23,7 @@ export default function Messages(messages: {id: number, email: string, message: 
                     <div className="mx-10">
                     <p className="desc">{message.email}</p>
                     <div className="py-2 leading-4">{message.message}</div>
-                    <p className="desc float-right mt-2">{getMyDay(message.updatedAt.getDay())}, {getMyMonth(message.updatedAt.getMonth())} {message.updatedAt.getDate()}, {message.updatedAt.getFullYear()
-                    }</p></div>
+                    <p className="text-sm float-right mt-2">{date(message.updatedAt.toString())}</p></div>
                 </div>
             ))
         }

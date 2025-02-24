@@ -40,10 +40,11 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
         if(app !== null){
           app.innerHTML = text;
         }
-        values.image1?values.image=values.image1.name:null
+        const file = values.image1
 
         const formData = new FormData()
-        formData.append("file", values.image1)
+        formData.append("file", file)
+        formData.append('folder', 'courses')
 
         const data = await addCourse(values, formData)
         if(data?.error){
@@ -62,7 +63,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
 
       return(
       <div className="p-4 mb-2 bg-muted rounded-lg">
-        <p className="desc my-4">Required fields are marked with an asterik *</p>
+        <p className="text-sm my-4">Required fields are marked with an asterik *</p>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 w-full items-center gap-4">
@@ -143,7 +144,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
           </div>
           <div>
               <div className="flex flex-col space-y-1.5 mt-6">
-              <p className="desc">Start Date</p>
+              <p className="text-sm">Start Date</p>
               <FormField
                   control={form.control}
                   name="startDate"
@@ -159,7 +160,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
                   />
               </div>
               <div className="flex flex-col space-y-1.5 mt-6">
-              <p className="desc">End Date</p>
+              <p className="text-sm">End Date</p>
               <FormField
                   control={form.control}
                   name="endDate"
@@ -241,10 +242,10 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
         </div>
         <Button id="submit2" className="my-4 text-white" type="submit">Add Course</Button>
         {form.formState.errors.root && (
-          <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+          <div className="border-1 border-destructive text-destructive p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> Course added successfully </div>
+          <div className="border-1 border-primary text-primary p-2 text-center rounded-md"> Course added successfully </div>
         )}
       </form>
       </Form>
@@ -252,7 +253,7 @@ export default function AddCourse(props: { mentors: {id: number, name: string}[]
     }
 
   return (
-    <div className="font-[family-name:var(--font-futura)]">
+    <div>
       <ReusableDrawer page="Course" form={formBuild()}/>
     </div>
   )
