@@ -3,7 +3,7 @@ import Logo from "./images/logo1.png"
 import Logo2 from "./images/logo2.png"
 
 
-export default async function ThemeLogo() {
+export default function ThemeLogo() {
 
   return (
     <>
@@ -13,6 +13,7 @@ export default async function ThemeLogo() {
         width={100}
         height={100}
         alt="Icon"
+        unoptimized
         className="block dark:hidden"
         />
         <Image
@@ -20,6 +21,7 @@ export default async function ThemeLogo() {
         width={100}
         height={100}
         alt="Icon"
+        unoptimized
         className="hidden dark:block"
         /> 
    </div>

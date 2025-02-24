@@ -42,8 +42,8 @@ export default async function About(){
         <Menu/>
         <div className=" sm:p-0 items-center">
         <div className="sm:float-right sm:p-8 p-6">
-          <div className="grid justify-items-center py-8">
-          <h1 className="display-1 hidden sm:block text-white">70+</h1>
+          <div className="grid justify-items-center py-8 bg-black">
+          <div className="text-5xl font-bold tracking-tight hidden sm:block text-white">70+</div>
           <h1 className="display-1 sm:hidden">70+</h1></div>
           <Link href="/">
       <Card className="sm:w-[350px] w-[320px]">
@@ -52,22 +52,23 @@ export default async function About(){
         <CardDescription>Diving into the hack ethics of cyber security with WarrenMu</CardDescription>
       </CardHeader>
     </Card></Link>
-    <div className="bg-darker flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
-        <p className="w-1/4">You can Leave a Message</p>
+    <div className="bg-black text-white flex flex-row justify-between rounded-lg p-6 mt-2 w-[320px] sm:w-[350px]">
+        <p className="w-1/4 text-sm">You can Leave a Message</p>
         <SendMessage/>
     </div>
     <Link href="https://chat.whatsapp.com/JXO95zzynMN3Qlirewfzzk">
-    <div className="bg-darker flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
-        <p className="w-1/4 sm:m-6 m-4">Join our whatsapp community</p>
+    <div className="bg-muted flex flex-row justify-between rounded-lg p-4 mt-2 w-[320px] sm:w-[350px]">
+        <p className="w-1/4 sm:m-6 m-4 text-sm">Join our whatsapp community</p>
         <Image
         src={Whatsapp}
         alt="whatsapp logo"
         height={70}
-        width={90}
+        unoptimized
+        width={100}
         />
     </div></Link>
     </div>
-      <div className="sm:p-16 p-6 bg-gradient-to-r from-slate-800 to-sky-900 text-white">
+      <div className="sm:p-16 p-6 bg-black text-white">
       <NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem>
@@ -80,7 +81,7 @@ export default async function About(){
                 <ChevronRight width={15} height={15} className="pt-1"/> Community</div>
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
-      <h1 className="display-1">Our Community</h1>
+      <div className="text-5xl font-bold tracking-tight">Our Community</div>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1 sm:w-[400px]">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       </div>

@@ -11,19 +11,36 @@ import { File } from "node:buffer";
 import { promises as fs } from "node:fs";
 import { sendEmail } from "@/nodemailer";
 
+const today = new Date()
+
+function env(){
+    if(process.env.NODE_ENV == "development" || process.env.NODE_ENV == "test"){
+        return 'http://localhost:3000'
+    } else if(process.env.NODE_ENV == 'production'){
+        return 'https://beerasafe.com'
+    } else {
+        return 'http://localhost:3000'
+    }
+}
+
 export async function addUsers(unsafeData: z.infer<typeof addUserSchema>, formData: FormData) : 
 Promise<{error: boolean | undefined}> {
-   const {success, data} = addUserSchema.safeParse(unsafeData)
+    const {success, data} = addUserSchema.safeParse(unsafeData)
 
-   if (!success){
-    return {error: true}
-   }
+    if (!success){
+        return {error: true}
+    }
 
-   uploadFile(formData)
+    const profile = await uploadCloudinaryFile(formData)
 
-   await db.insert(usersTable).values({...data})
-
-   return {error: false}
+    if(profile !== null){
+        const profileUrl = profile.toString()
+        data.profilePicture = profileUrl
+        await db.insert(usersTable).values({...data})
+        return {error: false}
+    } else {
+        return {error: true}       
+    }
 //    redirect("/admin/dashboard")
 }
 
@@ -40,6 +57,26 @@ export async function uploadFile(formData: FormData) {
         await fs.writeFile(`./public/profilePictures/${file.name}`, buffer);
     }
     revalidatePath("/");
+}
+
+export async function uploadCloudinaryFile(formData: FormData) {
+    try {
+        const response = await fetch(`${env()}/api/upload`, {
+          method: 'POST',
+          body: formData,
+        });
+        const contentType = response.headers.get('Content-Type');
+  
+        const result = await response.json();
+  
+        if (response.ok) {
+          return result.fileUrl// Set the image URL from the response
+        } else {
+          return null
+        }
+      } catch (error) {
+        return error
+      }
 }
 
 export async function uploadEventFile(formData: FormData) {
@@ -137,6 +174,7 @@ export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
    let email = ''
    let username = ''
    let name = ''
+   let profile = ''
 
    const checkEmail = await db.query.usersTable.findFirst({
     where: eq(usersTable.email, data.email)
@@ -149,8 +187,17 @@ export async function loginUser(unsafeData: z.infer<typeof loginUserSchema>){
     email = checkEmail.email
     username = checkEmail.username
     name = checkEmail.name
+    profile = checkEmail.profilePicture!==null?checkEmail.profilePicture:""
+
+    // before login, update isloggedin and lastlogin
+    await db.update(usersTable).set({
+            isLoggedIn: true,
+            lastLogin: today
+        }).where(
+            eq(usersTable.email, data.email)
+        )
    }
-   return [token, encrPass, initVector, usertype, email, username, name]
+   return [token, encrPass, initVector, usertype, email, username, name, profile]
 }
 
 export async function addEvents(unsafeData: z.infer<typeof addEventSchema>, formData: FormData) : 
@@ -161,11 +208,16 @@ Promise<{error: boolean | undefined}> {
     return {error: true}
    }
 
-   uploadEventFile(formData)
-
-   await db.insert(EventsTable).values({...data})
-
-   return {error: false}
+//    uploadEventFile(formData)
+    const profile = await uploadCloudinaryFile(formData)
+    if(profile !== null){
+        const profileUrl = profile.toString()
+        data.image = profileUrl
+        await db.insert(EventsTable).values({...data})
+        return {error: false}
+    } else {
+        return {error: true}       
+    }
 }
 
 export async function addCourse(unsafeData: z.infer<typeof addCourseSchema>, formData: FormData) : 
@@ -176,23 +228,30 @@ Promise<{error: boolean | undefined}> {
     return {error: true}
    }
 
-   uploadCourseFile(formData)
+//    uploadCourseFile(formData)
    //mostly spell check n no of arguments in payload
    // add currencies
-   const currencyId = await db.query.currencyTable.findMany({
-    where: eq(currencyTable.currency, data.currency1)
-   })
-   const mentorId = await db.query.usersTable.findMany({
-    where: eq(usersTable.name, data.mentor1)
-   })
-   const currencyid = currencyId.map(currency=>currency.id)
-   const mentorid = mentorId.map(mentor=>mentor.id)
-   data.currency = currencyid[0]
-   data.mentor = mentorid[0]
+   const profile = await uploadCloudinaryFile(formData)
+   if(profile !== null){
+        const profileUrl = profile.toString()
+        data.image = profileUrl
+          
+        const currencyId = await db.query.currencyTable.findMany({
+            where: eq(currencyTable.currency, data.currency1)
+        })
+        const mentorId = await db.query.usersTable.findMany({
+            where: eq(usersTable.name, data.mentor1)
+        })
+        const currencyid = currencyId.map(currency=>currency.id)
+        const mentorid = mentorId.map(mentor=>mentor.id)
+        data.currency = currencyid[0]
+        data.mentor = mentorid[0]
 
-   await db.insert(courseTable).values({...data})
-
-   return {error: false}
+        await db.insert(courseTable).values({...data})
+       return {error: false}
+   } else {
+       return {error: true}       
+   }
 }
 
 export async function updateCourse(unsafeData: z.infer<typeof updateCourseSchema>, formData: FormData, id:number) : 
@@ -203,23 +262,30 @@ Promise<{error: boolean | undefined}> {
     return {error: true}
    }
 
-   uploadCourseFile(formData)
+//    uploadCourseFile(formData)
    //mostly spell check n no of arguments in payload
    // add currencies
-   const currencyId = await db.query.currencyTable.findMany({
-    where: eq(currencyTable.currency, data.currency1)
-   })
-   const mentorId = await db.query.usersTable.findMany({
-    where: eq(usersTable.name, data.mentor1)
-   })
-   const currencyid = currencyId.map(currency=>currency.id)
-   const mentorid = mentorId.map(mentor=>mentor.id)
-   data.currency = currencyid[0]
-   data.mentor = mentorid[0]
+   const profile = await uploadCloudinaryFile(formData)
+   if(profile !== null){
+        const profileUrl = profile.toString()
+        data.image = profileUrl
 
-   await db.update(courseTable).set({...data}).where(eq(courseTable.id, id))
+        const currencyId = await db.query.currencyTable.findMany({
+            where: eq(currencyTable.currency, data.currency1)
+        })
+        const mentorId = await db.query.usersTable.findMany({
+            where: eq(usersTable.name, data.mentor1)
+        })
+        const currencyid = currencyId.map(currency=>currency.id)
+        const mentorid = mentorId.map(mentor=>mentor.id)
+        data.currency = currencyid[0]
+        data.mentor = mentorid[0]
 
-   return {error: false}
+        await db.update(courseTable).set({...data}).where(eq(courseTable.id, id))
+       return {error: false}
+   } else {
+       return {error: true}       
+   }
 }
 
 export async function deleteCourse(unsafeData: z.infer<typeof deleteSchema>): 
@@ -294,11 +360,18 @@ Promise<{error: boolean | undefined}> {
     return {error: true}
    }
 
-   uploadArticleFile(formData)
+//    uploadArticleFile(formData)
+    const profile = await uploadCloudinaryFile(formData)
 
-   await db.insert(articlesTable).values({...data})
+    if(profile !== null){
+        const profileUrl = profile.toString()
+        data.image = profileUrl
+        await db.insert(articlesTable).values({...data})
+        return {error: false}
+    } else {
+        return {error: true}       
+    }
 
-   return {error: false}
 }
 
 export async function addEnrollment(unsafeData: z.infer<typeof addEnrollmentSchema>) : 

@@ -14,13 +14,13 @@ type ReusableDrawerProps = {
     form,
   }: ReusableDrawerProps){
     return (
-      <div>
+      <div className="w-full">
       <Drawer>
         <DrawerTrigger asChild>
           <Button className="text-white">Add {page}</Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="mx-auto w-full max-w-sm p-16">
+          <div className=" p-16">
             <DrawerHeader>
               <DrawerTitle>Add New {page}</DrawerTitle>
               <DrawerDescription>Provide the details as required for {page}</DrawerDescription>

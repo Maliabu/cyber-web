@@ -78,7 +78,7 @@ export default async function Menu() {
     } else {
       return <div className="flex flex-row">
         <Link href="/sign-in"><Button className="text-white">Sign In</Button></Link>
-        <Link href="/sign-up"><Button className="bg-light ml-2">Sign Up</Button></Link>
+        <Link href="/sign-up"><Button className=" border-2 text-primary bg-background border-primary ml-2">Sign Up</Button></Link>
       </div>
     }
   }
@@ -91,6 +91,7 @@ export default async function Menu() {
             className="w-[120px]"
             src={Logo}
             alt="logo"
+            unoptimized
           /></Link>
       <NavigationMenu className="rounded-sm">
       <NavigationMenuList>
@@ -277,9 +278,9 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-card-foreground">
+          <div className="line-clamp-2 text-sm leading-snug text-card-foreground">
             {children}
-          </p>
+          </div>
         </Link>
       </NavigationMenuLink>
     </li>

@@ -51,8 +51,11 @@ export default function AddUser() {
           app.innerHTML = text;
         }
 
+        const file = values.image
+
         const formData = new FormData()
-        formData.append("file", values.image)
+        formData.append("file", file)
+        formData.append('folder', 'profiles')
 
         const data = await addUsers(values, formData)
         if(data?.error){
@@ -118,7 +121,7 @@ export default function AddUser() {
                               <SelectTrigger id="userType">
                               <SelectValue placeholder="User"/>
                               </SelectTrigger>
-                              <SelectContent position="popper" className=" font-[family-name:var(--font-futura)]">
+                              <SelectContent>
                               <SelectItem value="user">Normal User</SelectItem>
                               <SelectItem value="admin">Admin User</SelectItem>
                               <SelectItem value="mentor">Mentor</SelectItem>
@@ -183,10 +186,10 @@ export default function AddUser() {
         </div>
         <Button id="submit" className="my-4 text-white" type="submit">Sign Up User</Button>
         {form.formState.errors.root && (
-          <div className="bg-light p-2 rounded-md">{form.formState.errors.root.message}</div>
+          <div className="border-1 border-destructive text-destructive p-2 rounded-md">{form.formState.errors.root.message}</div>
         )}
         {form.formState.isSubmitSuccessful && (
-          <div className="bg-light p-2 text-center rounded-md"> User added successfully </div>
+          <div className="border-1 border-primary text-primary p-2 text-center rounded-md"> User added successfully </div>
         )}
       </form>
       </Form>
@@ -194,7 +197,7 @@ export default function AddUser() {
     }
 
   return (
-    <div className="font-[family-name:var(--font-futura)]">
+    <div>
       <ReusableDrawer page="User" form={formBuild()}/>
     </div>
   )

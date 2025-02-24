@@ -1,5 +1,6 @@
 "use client"
-import { tokenise } from "@/app/services/services";
+
+import { date, tokenise } from "@/app/services/services";
 import { getMyDay, getMyMonth } from "@/app/services/success";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, UserCircle } from "lucide-react";
@@ -13,11 +14,11 @@ export default function Admin(messages:{id: number, email: string, message: stri
         </div>
         <div className="p-8 w-1/3">
         <div className="text-2xl tracking-tight font-bold leading-6 mb-8">Admin User</div>
-          <p className="desc">Name</p>
+          <p className="text-sm">Name</p>
           <p>{tokenise()[0]}</p>
-          <p className="desc mt-6">Username</p>
+          <p className="text-sm mt-6">Username</p>
           <p>{tokenise()[1]}</p>
-          <p className="desc mt-6">email</p>
+          <p className="text-sm mt-6">email</p>
           <p>{tokenise()[2]}</p>
         </div>
         <div className="bg-muted p-8 ml-4 rounded-lg">
@@ -35,10 +36,9 @@ export default function Admin(messages:{id: number, email: string, message: stri
                           <AvatarFallback className="rounded-full bg-primary text-white">{message.email[0].toUpperCase()}</AvatarFallback>
                         </Avatar>
                         <div className="mx-5">
-                        <p className="desc">{message.email}</p>
+                        <p className="text-sm">{message.email}</p>
                         <div className="py-2 leading-4">{message.message}</div>
-                        <p className="desc float-right mt-2">{getMyDay(message.updatedAt.getDay())}, {getMyMonth(message.updatedAt.getMonth())} {message.updatedAt.getDate()}, {message.updatedAt.getFullYear()
-                        }</p></div>
+                        <p className="text-sm float-right mt-2">{date(message.updatedAt.toString())}</p></div>
                     </div>
                 ))
             }

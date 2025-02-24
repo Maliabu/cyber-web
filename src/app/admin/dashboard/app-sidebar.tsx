@@ -58,13 +58,13 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
         <SidebarFooter>
+        <footer className="py-2 mt-4">
         <LogoutAdmin/>
-        <footer className="py-4 mt-4">
-          <div className="">
-          <p className="desc">&copy;copyright.cybersecurity<br/>@{new Date().getFullYear()}</p>
+          <div className="my-2">
+          <p className="text-sm">&copy;copyright.cybersecurity<br/>@{new Date().getFullYear()}</p>
           </div>
-          <div className="my-4">
-          <p className="desc">Privacy Policy | T&Cs</p>
+          <div className="">
+          <p className="text-sm">Privacy Policy | T&Cs</p>
         </div></footer>
         </SidebarFooter>
     </Sidebar>

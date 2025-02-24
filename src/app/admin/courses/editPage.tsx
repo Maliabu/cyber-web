@@ -13,12 +13,15 @@ import { updateCourseSchema } from '@/schema/formSchemas'
 import { DatePicker } from "../datePicker"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { EditDrawer } from "../editDrawer"
+import { UserType, courseType, currencyType } from "../dashboard/types"
+import useSWR from "swr"
+import { fetcher } from "@/app/services/services"
 
 export default function EditCourse(
     props: { 
-        mentors: {id: number, name: string}[] , 
-        currency: {id: number, currency: string}[], 
-        course: {title: string, id: number, description: string, courseOutline: string | null}}
+        mentors: UserType[] , 
+        currency: currencyType[], 
+        course: courseType}
     ) {
 
     const form = useForm<z.infer<typeof updateCourseSchema>>({
@@ -26,19 +29,17 @@ export default function EditCourse(
         defaultValues: {
           title: props.course.title,
           description: props.course.description,
-          courseOutline: "",
-          image: "",
-          mentor: 0,
-          startDate: new Date(),
-          endDate: new Date(),
-          currency: 0,
-          amount: 0,
-          image1: '',
+          courseOutline: props.course.courseOutline,
+          image: props.course.image,
+          mentor: props.course.mentor,
+          startDate: props.course.startDate,
+          endDate: props.course.endDate,
+          currency: props.course.currency,
+          amount: props.course.amount,
           currency1: "",
           mentor1: ""
       },
     })
-    console.log(form.getValues())
 
     async function onSubmit(values: z.infer<typeof updateCourseSchema>) {
         //create obj
@@ -47,10 +48,11 @@ export default function EditCourse(
         if(app !== null){
           app.innerHTML = text;
         }
-        values.image1?values.image=values.image1.name:null
+        const file = values.image1
 
         const formData = new FormData()
-        formData.append("file", values.image1)
+        formData.append("file", file)
+        formData.append('folder', 'courses')
 
         const data = await updateCourse(values, formData, props.course.id)
         if(data?.error){
@@ -69,8 +71,8 @@ export default function EditCourse(
     function formBuild(){
 
       return(
-      <div className="p-4 mb-2 bg-muted">
-        <p className="desc my-4">Required fields are marked with an asterik *</p>
+      <div className="p-4 mb-2 bg-muted w-full">
+        <p className="text-sm my-4">Required fields are marked with an asterik *</p>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 w-full items-center gap-4">
@@ -151,7 +153,7 @@ export default function EditCourse(
           </div>
           <div>
               <div className="flex flex-col space-y-1.5 mt-6">
-              <p className="desc">Start Date</p>
+              <p className="text-sm">Start Date</p>
               <FormField
                   control={form.control}
                   name="startDate"
@@ -167,7 +169,7 @@ export default function EditCourse(
                   />
               </div>
               <div className="flex flex-col space-y-1.5 mt-6">
-              <p className="desc">End Date</p>
+              <p className="text-sm">End Date</p>
               <FormField
                   control={form.control}
                   name="endDate"
@@ -186,7 +188,7 @@ export default function EditCourse(
               <FormField
                   control={form.control}
                   name="image1"
-                  render={({ field: { onChange, ...fieldProps } }) => (
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
                       <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl

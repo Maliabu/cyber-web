@@ -67,30 +67,51 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
         <Link href="/blog" className=""><Button className="text-white">Our Blog</Button></Link>
     </div>
     </div>
-      <div className="sm:p-16 p-6 bg-gradient-to-r from-gray-900 to-sky-900 text-white">
-            <div className="mt-2">
-              <p>Home</p>
-            </div>
-                <div className="flex flex-row">
-                <ChevronRight width={15} height={15} className="pt-1"/> Get Started</div>
-      <h1 className="display-1 py-8 tracking-tight font-bold">Learn Cyber Security</h1>
+      <div className="sm:p-16 p-6 bg-black text-white">
+        <div className="">
+      <div className="text-5xl py-8 tracking-tight font-bold">Learn Cyber Security</div>
       <p className="py-6">The easy way!</p>
-      <p className="text-wrap lh-1">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</p>
-      <p className="mt-6">Users must understand and comply with basic data protection and privacy security principles like choosing strong passwords, being wary of attachments in email, and backing up data.</p>
+      <p className="sm:w-[500px] lh-1">Cyber security&lsquo;s core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</p>
+      <p className="mt-6 hidden">Users must understand and comply with basic data protection and privacy security principles like choosing strong passwords, being wary of attachments in email, and backing up data.</p>
+      </div>
       </div>
       <div className="sm:px-16 sm:pt-16 p-6 bg-muted">
       <a href="/contact">
       <Button className="text-white">Why ours are the best <ArrowRight width={16} height={16}/> </Button></a>
     </div></div>
     </div>
-    <div className="grid justify-items-center sm:p-16 p-4">
-              <h5 className="text-5xl leading-10 sm:w-[750px] tracking-tight font-bold">Get Certified in our courses today!</h5>
-              <div className="text-center leading-4 py-4">Get started with a course in cybersecurity, our courses now offer certification.</div>
-              <a href="/offers#courses">
-              <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><BookAIcon className="size-6"/> Enroll for Certification</Button></a>
-            </div>
+    <div className="grid justify-items-center sm:px-16 p-4">
+      <div className="grid sm:grid-cols-4 gap-4 pb-16">
+        <div className="basic rounded-lg">
+          <div className="p-6">
+          <div className="text-2xl font-bold tracking-tight leading-5">Basic Cyber Security Awareness</div>
+          </div>
+        </div>
+        <div className="hacking rounded-lg">
+          <div className="p-6">
+          <div className="text-2xl font-bold tracking-tight leading-5">Intermediate Ethical Hacking</div>
+          </div>
+        </div>
+        <div className="advanced rounded-lg">
+          <div className="p-6">
+          <div className="text-2xl font-bold tracking-tight leading-5">Advanced Cyber Security Certification</div>
+          </div>
+        </div>
+        <div className="workshop rounded-lg">
+          <div className="p-6">
+          <div className="text-2xl font-bold tracking-tight leading-5">Trainings and Workshops</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="hidden">
+      <div className="text-5xl leading-10 sm:w-[750px] tracking-tight font-bold">Get Certified in our courses today!</div>
+      <div className="text-center leading-4 py-4">Get started with a course in cybersecurity, our courses now offer certification.</div>
+      <a href="/offers#courses">
+      <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><BookAIcon className="size-6"/> Enroll for Certification</Button></a>
+    </div>
     <div className="">
-      <div className="sm:p-16 bg-gradient-to-r from-gray-900 to-sky-900 text-white p-6">
+      <div className="sm:p-16 bg-muted p-6">
       <Carousel
       opts={{
         align: "start",
@@ -102,7 +123,7 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
     <a href="/offers">
     <Button className="text-white mt-4">See all our services</Button></a>
     <a href="/offers#courses">
-    <Button className="bg-light mt-4 mx-2">Our Classes, Trainings and Courses</Button>
+    <Button className="border-2 border-primary text-primary bg-transparent mt-4 mx-2">Our Classes, Trainings and Courses</Button>
     </a>
       <CarouselContent className="py-8 bg-wite">
           <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
@@ -116,9 +137,9 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
                   <a
                     className="flex h-full text-dark w-full select-none flex-col justify-end rounded-md no-underline outline-none focus:shadow-md"
                     href="/offers#courses">
-                      <p className="desc bg-muted p-2">For: Students, IT professionals, and organizations</p>
+                      <p className="text-sm bg-muted p-2">For: Students, IT professionals, and organizations</p>
                       <div className="grid justify-items-center px-12 pt-16">
-                        <TrafficConeIcon className="size-40 text-white bg-primary p-8 rounded-full"/>                      
+                        <TrafficConeIcon className="size-40 text-white bg-black p-8 rounded-full"/>                      
                     </div>
                     <div className="p-6 sm:p-8 rounded-b-xl">
                       <div className=" text-3xl mt-4 font-bold text-card-foreground leading-7 tracking-tight">
@@ -148,9 +169,9 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
                   <a
                     className="flex h-full w-full text-dark rounded-lg  select-none flex-col justify-end no-underline outline-none"
                     href="/offers">
-                    <p className="desc bg-muted p-2">For: Organizations without dedicated security teams</p>
+                    <p className="text-sm bg-muted p-2">For: Organizations without dedicated security teams</p>
                       <div className="grid justify-items-center px-16 pt-16">
-                        <HeartHandshakeIcon className="size-40 text-white bg-primary p-8 rounded-full"/>
+                        <HeartHandshakeIcon className="size-40 text-white bg-black p-8 rounded-full"/>
                     </div>
                     <div className="p-6 sm:p-8  rounded-b-xl">
                       <div className=" text-3xl mt-4 font-bold text-card-foreground tracking-tight leading-7">
@@ -180,9 +201,9 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
                   <a
                     className="flex h-full w-full  text-dark rounded-lg select-none flex-col justify-end no-underline outline-none"
                     href="/offers">
-                      <p className="desc bg-muted p-2">For: SMBs, international tech startups, financial institutions, and e-commerce businesses</p>
+                      <p className="text-sm bg-muted p-2">For: SMBs, international tech startups, financial institutions, and e-commerce businesses</p>
                       <div className="grid justify-items-center px-16 pt-16">
-                        <ShieldCheckIcon className="size-40 text-white bg-primary p-8 rounded-full"/>
+                        <ShieldCheckIcon className="size-40 text-white bg-black p-8 rounded-full"/>
                     </div>
                     <div className="p-6 sm:p-8  rounded-b-xl">
                       <div className=" text-3xl mt-4 text-card-foreground font-bold leading-7 tracking-tight">

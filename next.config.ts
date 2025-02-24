@@ -12,6 +12,12 @@ typescript: {
   // !! WARN !!
   ignoreBuildErrors: true,
 },
+images: {
+  loader: "cloudinary",
+  // path: "https://res.cloudinary.com/dwklt6k9c/image/upload",
+  path: '',
+  domains: ["res.cloudinary.com"], // Ensure the domain is allowed
+},
 };
 
 export default nextConfig;

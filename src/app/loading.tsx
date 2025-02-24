@@ -10,6 +10,7 @@ export default function Loading() {
     src={Logo}
     width={200}
     height={200}
+    unoptimized
     />
       <Loader2 className="animate-spin" />
     </div>

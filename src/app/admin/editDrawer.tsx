@@ -20,7 +20,7 @@ type ReusableDrawerProps = {
           <Button className="text-white">Update</Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="mx-auto w-full max-w-sm p-16">
+          <div className="w-full p-16">
             <DrawerHeader>
               <DrawerTitle>Edit this {page} and save changes to update</DrawerTitle>
               <DrawerDescription>Provide the details as required for {page}</DrawerDescription>

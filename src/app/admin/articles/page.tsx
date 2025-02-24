@@ -26,8 +26,6 @@ export default function AddArticle() {
   React.useEffect(() => {
     setName(tokenise()[0])
   }, [])
-  // let language = ""
-  // language = value.split("language-")[1].split('"')[0]
 
     const form = useForm<z.infer<typeof addArticleSchema>>({
       resolver: zodResolver(addArticleSchema),
@@ -42,17 +40,18 @@ export default function AddArticle() {
 
     async function onSubmit(values: z.infer<typeof addArticleSchema>) {
       values.content = value
+      values.writer = name
         //create obj
         const app = document.getElementById('submit');
         const text = 'processing';
         if(app !== null){
           app.innerHTML = text;
         }
-        values.image1?values.image=values.image1.name:null
-        // values.writer = tokenise()[0]
+        const file = values.image1
 
         const formData = new FormData()
-        formData.append("file", values.image1)
+        formData.append("file", file)
+        formData.append('folder', 'articles')
 
         const data = await addArticles(values, formData)
         if(data?.error){
@@ -149,7 +148,7 @@ export default function AddArticle() {
                       </FormItem>
                   )}
                   />
-                  <p className="desc">Your username will be attached to this article as <a>{name}</a></p>
+                  <p className="text-sm">Your username will be attached to this article as <a>{name}</a></p>
               </div></div>
         </div>
         <Button id="submit" className="my-4 text-white" type="submit">Add Article</Button>

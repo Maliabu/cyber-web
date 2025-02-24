@@ -29,6 +29,13 @@
       "when": 1738699718338,
       "tag": "0003_magenta_bedlam",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1740059034313,
+      "tag": "0004_sharp_shaman",
+      "breakpoints": true
     }
   ]
 }

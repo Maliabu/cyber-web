@@ -41,7 +41,7 @@ export default function AutoFooterSubscribe(props: {email: string}) {
           window.location.reload()
         }
     }
-  return (<div className="px-4 pb-0 admin">
+  return (<div className="px-4 pb-0">
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Button id="submit2" className="text-white" type="submit">Subscribe</Button>

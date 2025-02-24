@@ -50,7 +50,7 @@ export default async function Services(){
     return(
         <>
         <Menu/>
-        <div className="grid justify-items-center sm:p-16 p-6 bg-gradient-to-r from-gray-900 to-sky-800 text-white">
+        <div className="grid justify-items-center sm:p-16 p-6 bg-black text-white">
         <div className="p-6 grid justify-items-center">
         <div className="hidden sm:flex h-5 items-center space-x-4 text-sm ml-4">
         <div>Cybersecurity Training</div>
@@ -65,7 +65,7 @@ export default async function Services(){
         <div className="text-5xl leading-10 tracking-tight font-bold">Each of our services made for you!</div>
         <p className="my-2">Check our most affordable services</p>
         <Link href="/offers#courses">
-        <Button className="bg-light hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
+        <Button className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-muted mt-4">Go to our Classes, Trainings and Courses</Button>
         </Link></div>
         <div className="bg-muted sm:p-0">
     <div className="sm:px-16 p-6">
@@ -91,6 +91,7 @@ export default async function Services(){
                         <Image
                         src={Training}
                         alt="training"
+                        unoptimized
                         className="object-cover h-48 rounded-t-lg"
                         />
                     </div>
@@ -133,6 +134,7 @@ export default async function Services(){
                       <Image
                       src={Consultancy}
                       alt="training"
+                      unoptimized
                       className="object-cover h-48 rounded-t-lg"
                       />
                   </div>
@@ -211,6 +213,7 @@ export default async function Services(){
                       <Image
                       src={Pentesting}
                       alt="training"
+                      unoptimized
                       className="object-cover h-48 rounded-t-lg"
                       />
                   </div>
@@ -298,6 +301,7 @@ export default async function Services(){
                       <Image
                       src={Revenue}
                       alt="training"
+                      unoptimized
                       className="object-cover h-48 rounded-t-lg"
                       />
                   </div>
@@ -389,7 +393,7 @@ export default async function Services(){
     </NavigationMenuItem>
     </NavigationMenuList></NavigationMenu>
       <div className=" rounded-xl mt-4">
-      <h1 className="display-1 tracking-tight font-bold">Our Cyber Classes</h1>
+      <div className="text-5xl tracking-tight font-bold">Our Cyber Classes</div>
       <p className="py-6">The easy way!</p>
       <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
       <Link href="/offers#courses">
@@ -432,10 +436,10 @@ export default async function Services(){
               <li>
                 <div className="relative h-48 w-80 hidden">
                     <Image
-                    aria-hidden
                     src={path+course.course_table.image}
                     alt="course image"
                     fill
+                    unoptimized
                     className="object-cover"/></div>
               </li>
             </ul>

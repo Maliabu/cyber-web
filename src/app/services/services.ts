@@ -5,6 +5,8 @@ export function username(name: string){
     return name.split(" ").concat(String(Math.floor((Math.random() * 10) + 1)))
 }
 
+export const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export function token(){
     function rand(){
         return String((Math.random().toString(36).substring(2)))
@@ -26,13 +28,15 @@ export const togglePasswordVisibility = ()=>{
 }
 
 export function tokenise(){
-    let name = '',email = '',username = ''
+    let name = '',email = '',username = '', profile = ''
     if(window){
         name = localStorage.getItem("name") || ''
         username = localStorage.getItem("username") || ''
         email = localStorage.getItem("email") || ''
+        profile = localStorage.getItem("profile") || ''
+
     }
-    return [name, username, email]
+    return [name, username, email, profile]
 }
 
 export function nextCourse(){
@@ -169,4 +173,9 @@ export const groupBy = (by: string, arr: IObject[]) => {
     accumulatedObject[key].push(arr.name)
     return accumulatedObject
   }, {} as IObjectKeys)
+}
+
+export function date(dateString: string){
+  const date = new Date(dateString)
+  return date.toDateString()
 }
