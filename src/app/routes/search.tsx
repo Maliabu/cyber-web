@@ -69,7 +69,7 @@ export function SearchBar() {
         <div className="pointer sm:w-1/2 bg-background rounded-md">
           <div className=" p-5 sm:p-2 px-4 flex flex-row justify-between">
             <p>looking for?... search here... </p>
-            <Search className="h-3 w-3 mx-4 size-8" /></div>
+            <Search className="h-4 w-4 mx-4 size-8" /></div>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">

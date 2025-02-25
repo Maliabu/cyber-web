@@ -36,6 +36,13 @@
       "when": 1740059034313,
       "tag": "0004_sharp_shaman",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1740495427013,
+      "tag": "0005_silent_leader",
+      "breakpoints": true
     }
   ]
 }

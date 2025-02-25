@@ -31,11 +31,65 @@ export type ArticleType = {
     id: number
     title: string
     content: string
-    link: string
-    image: string
+    link: string | null
+    image: string | null
     writer: string
     createdAt: Date
     updatedAt: Date
+}
+
+export type ArticleVotesComments = {
+    id: number
+    title: string
+    content: string
+    link: string | null
+    image: string | null
+    writer: string
+    createdAt: Date
+    updatedAt: Date
+    votes: {
+        id: number;
+        email: string;
+        createdAt: Date;
+        updatedAt: Date;
+        article: number;
+        vote: number | null;
+    }[]
+    comments: {
+        id: number
+        email: string
+        comment: string
+        article: number
+        createdAt: Date
+        updatedAt: Date
+        replies: {
+            id: number
+            email: string
+            article: number
+            comment: number
+            reply: string
+            createdAt: Date
+            updatedAt: Date
+        }[]
+    }[]
+}
+
+export type Comments = {
+    id: number
+    email: string
+    comment: string
+    article: number
+    createdAt: Date
+    updatedAt: Date
+}
+
+export type Votes = {
+    id: number;
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
+    article: number;
+    vote: number | null;
 }
 
 export type EnrollmentType = {

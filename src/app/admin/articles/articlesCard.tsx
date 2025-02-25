@@ -15,11 +15,14 @@ import { ArticleType } from "../dashboard/types"
     link
   }: ArticleType){
     // const path = '/articles/'+image
+    let path = ''
+    image!==null?path=image:''
+
     return (
       <div className="flex flex-row justify-between">
       <Card className="w-5/6 grid grid-cols-5 gap-4 p-6 mt-1 border-none bg-muted ">
         <div className="w-10 h-10">
-            <Image src={image} width={80} height={80} alt="article image" unoptimized/>
+            <Image src={path} width={80} height={80} alt="article image" unoptimized/>
         </div>
         <div className="items-start">
           <p className="text-sm">Title</p>

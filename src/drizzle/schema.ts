@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { comment } from 'postcss';
 
 const createdAt = timestamp('created_at').notNull().defaultNow()
 const updatedAt = timestamp('updated_at')
@@ -105,22 +106,32 @@ export const messagesTable = pgTable('messages_table', {
 
 export const commentsTable = pgTable('comments_table', {
   id: serial('id').primaryKey(),
-  email: text('email').notNull().unique(),
+  email: text('email').notNull(),
   comment: varchar('comment'),
   article: integer('article_id').notNull().references(() => articlesTable.id, { onDelete: 'cascade'}),
   createdAt,
   updatedAt,
 });
 
+
+export const commentRelations = relations(commentsTable, ({one, many}) => ({
+  article: one(articlesTable, {fields: [commentsTable.article], references: [articlesTable.id]}),
+  replies: many(replyTable)
+}))
+
 export const replyTable = pgTable('reply_table', {
   id: serial('id').primaryKey(),
-  email: text('email').notNull().unique(),
+  email: text('email').notNull(),
   reply: varchar('comment'),
   comment: integer('comment_id').notNull().references(() => commentsTable.id, { onDelete: 'cascade'}),
   article: integer('article_id').notNull().references(() => articlesTable.id, { onDelete: 'cascade'}),
   createdAt,
   updatedAt,
 });
+
+export const replyRelations = relations(replyTable, ({one}) => ({
+  comment: one(commentsTable, {fields: [replyTable.comment], references: [commentsTable.id]})
+}))
 
 export const votesTable = pgTable('votes_table', {
   id: serial('id').primaryKey(),
@@ -130,6 +141,15 @@ export const votesTable = pgTable('votes_table', {
   createdAt,
   updatedAt,
 });
+
+export const articleRelations = relations(articlesTable, ({many}) => ({
+  votes: many(votesTable),
+  comments: many(commentsTable)
+}))
+
+export const votesRelations = relations(votesTable, ({one}) => ({
+  article: one(articlesTable, {fields: [votesTable.article], references: [articlesTable.id]})
+}))
 
 export const editorImagesTable = pgTable('editor_images', {
   id: serial('id').primaryKey(),
