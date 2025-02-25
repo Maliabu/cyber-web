@@ -1,7 +1,7 @@
 import * as React from "react"
 import Image from "next/image";
 import Link from "next/link"
-import Logo from '../images/logo1.png'
+import Logo from '../images/logo2.png'
 import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
@@ -84,7 +84,7 @@ export default async function Menu() {
   }
 
   return (
-    <div className="sm:p-0">
+    <div className="sm:p-0 bg-black text-white dark">
       <main className="hidden sm:flex sm:flex-row justify-between px-8 sm:py-4 items-center">
         <Link href="/">
           <Image
@@ -119,7 +119,7 @@ export default async function Menu() {
                   key={component.title}
                   title={component.title}
                   href={component.href}
-                  className="text-dark hover:text-primary p-1"
+                  className=" hover:text-primary p-1"
                 >
                 </ListItem>
               ))}
@@ -160,6 +160,7 @@ export default async function Menu() {
             className="w-[120px]"
             src={Logo}
             alt="logo"
+            unoptimized
           /></Link>
           <div className="flex flex-row">
             <Sheet>
@@ -235,7 +236,7 @@ export default async function Menu() {
                   key={component.title}
                   title={component.title}
                   href={component.href}
-                  className=" hover:text-primary text-dark p-1"
+                  className=" hover:text-primary  p-1"
                 >
                 </ListItem>
               ))}
@@ -244,7 +245,7 @@ export default async function Menu() {
                   key={1}
                   title="Coporate Training Workshops"
                   href="/offers#courses"
-                  className=" hover:text-primary text-dark p-1"
+                  className=" hover:text-primary  p-1"
                 >
                 </ListItem>
             </ul>

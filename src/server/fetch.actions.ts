@@ -1,10 +1,10 @@
 "use server"
 
 import { db } from "@/drizzle/db";
-import { EventsTable, articlesTable, courseTable, currencyTable, editorImagesTable, enrollmentsTable, messagesTable, nextCourseTable, subscriptionsTable, usersTable, votesTable } from "@/drizzle/schema";
+import { EventsTable, articlesTable, commentsTable, courseTable, currencyTable, editorImagesTable, enrollmentsTable, messagesTable, nextCourseTable, replyTable, subscriptionsTable, usersTable, votesTable } from "@/drizzle/schema";
 import "use-server"
 import { z } from "zod";
-import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, deleteArticleSchema, deleteEventSchema, deleteSchema, deleteUserSchema, loginUserSchema, messagesSchema, updateCourseSchema, voteSchema } from '@/schema/formSchemas'
+import { addArticleSchema, addCourseSchema, addEnrollmentSchema, addEventSchema, addNextCourseSchema, addSubscriptionSchema, addUserSchema, commentsSchema, deleteArticleSchema, deleteEventSchema, deleteSchema, deleteUserSchema, loginUserSchema, messagesSchema, replySchema, updateCourseSchema, voteSchema } from '@/schema/formSchemas'
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { File } from "node:buffer";
@@ -218,6 +218,32 @@ Promise<{error: boolean | undefined}> {
     } else {
         return {error: true}       
     }
+}
+
+export async function addComment(unsafeData: z.infer<typeof commentsSchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = commentsSchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+        
+   await db.insert(commentsTable).values({...data})
+
+   return {error: false}
+}
+
+export async function reply(unsafeData: z.infer<typeof replySchema>) : 
+Promise<{error: boolean | undefined}> {
+   const {success, data} = replySchema.safeParse(unsafeData)
+
+   if (!success){
+    return {error: true}
+   }
+        
+   await db.insert(replyTable).values({...data})
+
+   return {error: false}
 }
 
 export async function addCourse(unsafeData: z.infer<typeof addCourseSchema>, formData: FormData) : 

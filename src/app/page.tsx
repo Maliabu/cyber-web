@@ -11,9 +11,9 @@ export default function Home() {
     <ClerkProvider>
     <div className="">
       <Menu/>
+      </div>
       <HomePage/>
       <Footer/>
-    </div>
     </ClerkProvider>
   )
 }

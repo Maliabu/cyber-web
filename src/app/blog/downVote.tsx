@@ -14,7 +14,7 @@ import { ThumbsUp } from "lucide-react"
 import Vote, { UpVotes } from "./vote"
 import { auth } from "@clerk/nextjs/server"
 
-export default function AutoUpVote(props: {id: number, upvotes: number, email: string}) {
+export default function DownVote(props: {id: number, upvotes: number, email: string}) {
     async function voting(id: number){
         let votes = await UpVotes(id)
         return votes
@@ -43,7 +43,7 @@ export default function AutoUpVote(props: {id: number, upvotes: number, email: s
         let email = await Vote()
         //create obj
         values.email = email
-        values.vote = 1
+        values.vote = 2 // downvote
 
         const data = await upvote(values)
         console.log(data)
@@ -62,7 +62,7 @@ export default function AutoUpVote(props: {id: number, upvotes: number, email: s
         }
       }
     }
-  return (<div className="pb-0">
+  return (<div className="px-4 pb-0">
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)}>
     <Toaster/>

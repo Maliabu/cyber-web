@@ -111,7 +111,8 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
       <Button size="lg" className="bg-primary text-white mt-4 sm:w-[550px] self-center"><BookAIcon className="size-6"/> Enroll for Certification</Button></a>
     </div>
     <div className="">
-      <div className="sm:p-16 bg-muted p-6">
+      <div className="bg-muted">
+        <div className="backdrop-blur-sm p-6 sm:p-16">
       <Carousel
       opts={{
         align: "start",
@@ -128,8 +129,8 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
       <CarouselContent className="py-8 bg-wite">
           <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0 rounded-2xl">
-                <CardContent className="flex p-6">
+              <Card className="w-full p-0 background-none">
+                <CardContent className="flex p-6 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -160,8 +161,8 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
           </CarouselItem>
           <CarouselItem key="consultancy" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0">
-              <CardContent className="flex p-6 ">
+              <Card className="w-full p-0 background-none">
+              <CardContent className="flex p-6 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -192,8 +193,8 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
           </CarouselItem>
           <CarouselItem key="pentesting" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0">
-                <CardContent className="flex p-6 ">
+              <Card className="w-full p-0 background-none">
+                <CardContent className="flex p-6 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -226,6 +227,7 @@ const course = await db.select().from(courseTable).leftJoin(currencyTable, eq(co
       <CarouselPrevious className="ml-6"/>
       <CarouselNext className="mr-6"/>
     </Carousel>
+    </div>
     </div>
     </div>
     <BlogBottomAd/>

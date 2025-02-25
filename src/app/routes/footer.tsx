@@ -88,10 +88,7 @@ export default async function Footer() {
                 width={16}
                 height={16}
               />
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          {article.title}
-                        </div>
-                        <div className="text-sm leading-tight text-card-foreground">
+                        <div className="mb-2 mt-4 text-lg text-sm">
                           {article.title}
                         </div>
                       </Link>
@@ -134,10 +131,10 @@ export default async function Footer() {
           info@beerasafe
         </Link></div>
 
-        <div className="px-8 py-6 sm:flex sm:flex-row sm:justify-between">
+        <div className="px-8 py-6 sm:flex sm:flex-row sm:justify-between bg-muted">
           <div className="text-3xl tracking-tight font-bold">Subscribe</div>
-                  <div className="">
-                      <p className="my-2 text-sm">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space</p></div>
+                  <div className="sm:w-[500px] bg-black p-4 rounded-md">
+                      <p className="my-2 text-sm">Subscribe and we shall keep you up to date with new classes and whats going on in the cyber space, our classes and more services plus all the best packages for you. shhh! (you will be the first to know!).</p></div>
                       {userId.userId === null?
                         <FooterSubscribe/>
                 : 
@@ -145,7 +142,7 @@ export default async function Footer() {
               </div>
         <div className="sm:px-8 sm:py-4 p-6 flex text-sm sm:flex-row flex-col sm:justify-between">
           <div className="">
-          <p>&copy;copyright.cybersecurity@{new Date().getFullYear()}</p>
+          <p>&copy;copyright.beerasafe.com@{new Date().getFullYear()}</p>
           </div>
           <div className="">
           <div className="flex d-flex">
@@ -177,9 +174,9 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-card-foreground">
+          <div className="line-clamp-2 text-sm leading-snug text-card-foreground">
             {children}
-          </p>
+          </div>
         </Link>
       </NavigationMenuLink>
     </li>

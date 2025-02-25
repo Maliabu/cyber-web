@@ -78,8 +78,8 @@ export default async function Services(){
       <CarouselContent className="py-8">
           <CarouselItem key="training" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0 rounded-2xl">
-                <CardContent className="flex p-4">
+              <Card className="w-full p-0 background-none">
+                <CardContent className="flex p-4 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -125,8 +125,8 @@ export default async function Services(){
           </CarouselItem>
           <CarouselItem key="consultancy" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0">
-                <CardContent className="flex p-4">
+              <Card className="w-full p-0 background-none">
+                <CardContent className="flex p-4 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -204,8 +204,8 @@ export default async function Services(){
           </CarouselItem>
           <CarouselItem key="pentesting" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0">
-                <CardContent className="flex p-4">
+              <Card className="w-full p-0 background-none">
+                <CardContent className="flex p-4 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -292,8 +292,8 @@ export default async function Services(){
           </CarouselItem>
           <CarouselItem key="revenue" className="md:basis-1/2 lg:basis-1/3">
             <div>
-              <Card className="w-full p-0">
-                <CardContent className="flex p-4">
+              <Card className="w-full p-0 background-none">
+                <CardContent className="flex p-4 bg-white rounded-lg">
           <NavigationMenu>
           <ul className="">
               <li className="row-span-3">
@@ -376,8 +376,8 @@ export default async function Services(){
     </Carousel>
     </div>
     </div>
-        <div className="sm:p-16 p-6 items-center bg-gradient-to-r from-gray-900 to-sky-800 text-white">
-        <div className="sm:float-right">
+        <div className="sm:p-16 p-6 items-center advanced1">
+        <div className="sm:float-right bg-muted rounded-lg">
             <TimerCountDown/>
     </div>
       <NavigationMenu>
@@ -394,8 +394,7 @@ export default async function Services(){
     </NavigationMenuList></NavigationMenu>
       <div className=" rounded-xl mt-4">
       <div className="text-5xl tracking-tight font-bold">Our Cyber Classes</div>
-      <p className="py-6">The easy way!</p>
-      <h6 className="text-wrap lh-1">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - <br/>both online and at work - from theft or damage.</h6>
+      <h6 className="text-wrap sm:w-[400px] leading-5 mt-6">Cyber security's core function is to protect the devices we all use (smartphones, <br/>laptops, tablets and computers), and the services we access - both online and at work - from theft or damage.</h6>
       <Link href="/offers#courses">
       <Button className="mt-8 text-white"><BookHeart width={16} height={16}/> Take a look at our courses</Button></Link>
       </div>

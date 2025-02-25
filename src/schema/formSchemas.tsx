@@ -147,7 +147,7 @@ export const commentsSchema = z.object({
     email: z.string({required_error: "Please enter your email.",}).min(5, {
         message: "email too short"
     }).max(75).regex(/^([a-z]|[0-9])+[\.]*[\@]{1}[a-z]+[\.]{1}[a-z]{2,3}$/, {message: "please enter a correct email"}),
-    comments: z.string(),
+    comment: z.string(),
     article: z.coerce.number({required_error: "Please provide an article.",}),
 })
 

@@ -11,6 +11,7 @@ export default function SignIn(){
             alt="logo"
             src={Logo}
             width={150}
+            unoptimized
             height={150}
             className="mb-2"
             />
