@@ -26,11 +26,11 @@ export default function NullAd(){
       </CardHeader>
       <CardContent>
         <div className="mt-12">
-        <div className="rounded-full bg-darker grid justify-center items-center w-32 h-32 float-right -mt-16">
-          <div className="text-2xl font-bold"><p className="font-bold">Training </p>Courses</div></div>
-      <div className="border rounded-lg sm:p-10 p-4 w-5/6">
-        <div className="text-4xl tracking-tight font-bold leading-8">Cyber Security Training, Workshops and Courses</div>
-        <p className="mt-4 py-4 border-t">All our courses, classes and workshops both online and in-person to get you comfortable with your online security</p>
+        <div className="rounded-full bg-primary text-white grid justify-center items-center w-32 h-32 float-right -mt-16">
+          <div className="text-xl font-bold tracking-tight leading-4"><p className="font-bold">Training </p>Courses</div></div>
+      <div className="bg-black text-white rounded-lg sm:p-10 p-4 w-5/6">
+        <div className="text-3xl tracking-tight font-bold leading-8"> Trainings | Workshops | Courses</div>
+        <p className="mt-4 py-4 border-t text-sm">All our courses, classes and workshops both online and in-person to get you comfortable with your online security</p>
         <Link href="/offers#courses"><Button className="text-white">See our Training/Courses</Button></Link>
       </div>
       </div>
